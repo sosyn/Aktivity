@@ -376,7 +376,16 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
     public boolean editCesta(Cesta cesta) {
         this.setMode(CestaForm.MODE_EDIT);
         this.setCesta(cesta);
-        // ToDO: naplnit proměnné a pole
+        ucastnikList = new ArrayList<>();
+        rezervaceList = new ArrayList<>();
+        // Naplnit ucastniky
+        for (Ucastnik ucastnikLocal : cesta.getUcastnikList()) {
+            ucastnikList.add(ucastnikLocal);
+        }
+        // Naplnit rezervace
+        for (Rezervace rezervaceLocal : cesta.getRezervaceList()) {
+            rezervaceList.add(rezervaceLocal);
+        }
         return true;
     }
 
