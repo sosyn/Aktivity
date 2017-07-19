@@ -60,8 +60,6 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
     private HelperZdroj helperZdroj;
     @Inject
     LoginUser loginUser;
-    @Inject
-    Cesty cesty;
 
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
     private Date platiOd = new Date();
@@ -75,7 +73,6 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
     private Ucastnik ucastnik = null;
     private ArrayList<Rezervace> rezervaceList = null;
     private Rezervace rezervace = null;
-    private ArrayList<Cesta> aListCesty = new ArrayList<>();
 
     @PostConstruct
     void init() {
@@ -344,7 +341,7 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
 // ====
 // Zalozeni nove cesty
 //=====
-    public String newCesta() {
+    public boolean newCesta() {
         this.mode = CestaForm.MODE_NEW;
 
         this.cesta = new Cesta();
@@ -373,17 +370,14 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
         this.ucastnik.setIdtypucast(this.ejbTypUcastFacade.findPopis("Spolujezdec"));
         this.ucastnikList.add(ucastnik);
 
-        return "/cesty/cestaForm";
+        return true;
     }
 
-    public String editCesta(Cesta cesta) {
-        if (cesta == null) {
-            newCesta();
-        } else {
-            this.setMode(CestaForm.MODE_EDIT);
-            this.setCesta(cesta);
-        }
-        return "cestaForm";
+    public boolean editCesta(Cesta cesta) {
+        this.setMode(CestaForm.MODE_EDIT);
+        this.setCesta(cesta);
+        // ToDO: naplnit proměnné a pole
+        return true;
     }
 
     public String saveCesta() {
@@ -406,10 +400,6 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
                 this.ejbRezervaceFacade.edit(reze);
             }
         }
-        cesty.setCesta(this.cesta);
-        aListCesty = cesty.getCesty();
-        aListCesty.add(this.cesta);
-        cesty.setCesty(aListCesty);
         return "/cesty/cesty";
     }
 
