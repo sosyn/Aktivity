@@ -46,9 +46,15 @@
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Důvod"/>
+                                        <h:outputText value="Místo"/>
                                     </f:facet>
                                     <h:outputText value="#{itemCesta.popis}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Účel:"/>
+                                    </f:facet>
+                                    <h:outputText value="#{itemCesta.komentar}"/>
                                 </p:column>
                             </p:dataTable>
                         </h:form>
