@@ -373,17 +373,17 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
         return true;
     }
 
-    public boolean editCesta(Cesta cesta) {
+    public boolean editCesta(Cesta cestaLocal) {
         this.setMode(CestaForm.MODE_EDIT);
-        this.setCesta(cesta);
+        this.setCesta(ejbCestaFacade.find(cestaLocal.getId()));
         ucastnikList = new ArrayList<>();
         rezervaceList = new ArrayList<>();
         // Naplnit ucastniky
-        for (Ucastnik ucastnikLocal : cesta.getUcastnikList()) {
+        for (Ucastnik ucastnikLocal : this.cesta.getUcastnikList()) {
             ucastnikList.add(ucastnikLocal);
         }
         // Naplnit rezervace
-        for (Rezervace rezervaceLocal : cesta.getRezervaceList()) {
+        for (Rezervace rezervaceLocal : this.cesta.getRezervaceList()) {
             rezervaceList.add(rezervaceLocal);
         }
         return true;
