@@ -44,6 +44,8 @@ public class Cesty implements Serializable {
     @Inject
     LoginUser loginUser;
     Osoba osoba = null;
+    @Inject
+    CestaForm cestaForm;
 
     private Cesta cesta = null;
     private ArrayList<Cesta> cesty = new ArrayList<>();
@@ -182,6 +184,20 @@ public class Cesty implements Serializable {
         } catch (IOException e) {
             Logger.getLogger(Cesty.class.getName()).log(Level.SEVERE, null, e);
         }
+    }
+
+    public String newCesta() {
+        if (cestaForm.newCesta()) {
+            return "/cesty/cestaForm";
+        }
+        return null;
+    }
+
+    public String editCesta() {
+        if (cestaForm.editCesta(this.cesta)) {
+            return "/cesty/cestaForm";
+        }
+        return null;
     }
 
 }
