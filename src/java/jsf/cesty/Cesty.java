@@ -138,9 +138,10 @@ public class Cesty implements Serializable {
      * @return the cesty
      */
     public ArrayList<Cesta> getCesty() {
-        if (this.cesty.isEmpty()) {
-            this.cesty = new ArrayList<>(ejbCestaFacade.findOsoba(this.osoba));
-        }
+        this.cesty = new ArrayList<>(ejbCestaFacade.findOsoba(this.osoba));
+//        if (this.cesty.isEmpty()) {
+//            
+//        }
         return cesty;
     }
 
