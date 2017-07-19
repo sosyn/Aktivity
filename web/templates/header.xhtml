@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition > 
+            <p:layout>
+                <p:layoutUnit position="west" size="100">
+                    <p:graphicImage  value="/images/logotyp_obecny_bar.jpg" alt="Znak Krnova" width="80"/>
+                </p:layoutUnit>
+                <p:layoutUnit position="center">
+                    <h:form id="FormMenu" >
+                        <p:megaMenu orientation="horizontal" >
+                            <p:submenu label="Cesty" icon="fa fa-road">
+                                <p:column>
+                                    <p:submenu label="Služební cesty">
+                                        <p:menuitem value="Moje vlastní" url="/faces/cesty/cesty.xhtml" icon="fa fa-user"  title="Cesty, kterých se účastním"/>
+                                        <p:menuitem value="Schvalování" url="#" icon="fa fa-check-square-o" title="Schvalování cest podřízeným"/>
+                                        <p:menuitem value="Rezervace" url="#" icon="fa fa-car"  title="Přímá rezervace vozidla" />
+                                    </p:submenu>
+                                </p:column>
+                            </p:submenu>               
+                            <p:submenu label="Cestovní příkazy" icon="fa fa-money"></p:submenu>               
+                            <p:submenu label="Zdroje" icon="fa fa-university"></p:submenu>               
+                            <p:submenu label="Správce" icon="fa fa-list-ol" rendered="true"  >
+                                <p:column>
+                                    <p:submenu label="Seznamy" >
+                                        <p:menuitem value="Osoby" url="/faces/spravce/osoby.xhtml" title="Číselník osob-uživatelů" />
+                                        <p:menuitem value="Zdroje" url="/faces/spravce/zdroje.xhtml" title="Číselník zdrojů" />
+                                    </p:submenu>
+                                    <p:submenu label="Typové číselníky" >
+                                        <p:menuitem value="Aktivita" url="/faces/spravce/typAktivity.xhtml" title="Číselník aktivit" />
+                                        <p:menuitem value="Zdroj" url="/faces/spravce/typZdroje.xhtml" title="Číselník typů zdrojů" />
+                                        <p:menuitem value="Účastník " url="/faces/spravce/typUcast.xhtml" title="Číselník typů účastníků" />
+                                        <p:menuitem value="Schvalovatel" url="/faces/spravce/typSchv.xhtml" title="Číselník typů schválení"  />
+                                    </p:submenu>
+                                </p:column>
+                            </p:submenu>               
+                        </p:megaMenu>
+                    </h:form>
+
+                </p:layoutUnit>
+            </p:layout>
+        </ui:composition>	
+    </body>
+</html>
+

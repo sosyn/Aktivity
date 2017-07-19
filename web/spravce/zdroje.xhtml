@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Zdroje(materiální)</title>
+    </h:head>
+    <h:body>
+        <ui:composition template = "/templates/templateMain.xhtml">	
+            <ui:define name="contens">
+                <p:layout fullPage="false">
+                    <p:layoutUnit position="center">
+                        <h:form id="FormZdroje">
+                            <p:dataTable value="#{zdroje.zdrojList}" var="item" selectionMode="single" selection="#{zdroje.zdroj}" rowKey="#{item.id}" >
+
+                                <p:ajax event="rowSelect" update=":FormZdrojeDetail" listener="#{zdroje.rowSelected}" />
+
+                                <p:column sortBy="#{item.spz}"  filterBy="#{item.spz}" filterMatchMode="contains">
+                                    <f:facet name="header" >
+                                        <h:outputText value="SPZ"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.spz}"/>
+                                </p:column>
+
+                                <p:column sortBy="#{item.popis}"  filterBy="#{item.popis}" filterMatchMode="contains">
+                                    <f:facet name="header" >
+                                        <h:outputText value="Popis"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.popis}"/>
+                                </p:column>
+
+                                <p:column sortBy="#{item.idtypzdr.popis}"  filterBy="#{item.idtypzdr.popis}" filterMatchMode="contains">
+                                    <f:facet name="header" >
+                                        <h:outputText value="Typ zdroje"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idtypzdr.popis}"/>
+                                </p:column>
+
+                                <p:column sortBy="#{item.idoso.popis}"  filterBy="#{item.idoso.popis}" filterMatchMode="contains">
+                                    <f:facet name="header" >
+                                        <h:outputText value="Přiřazená osoba"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idoso.popis}"/>
+                                </p:column>
+
+                                <p:column sortBy="#{item.kapacita}"  filterBy="#{item.kapacita}" filterMatchMode="contains">
+                                    <f:facet name="header" >
+                                        <h:outputText value="Max. kapacita"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.kapacita}"/>
+                                </p:column>
+
+                                <p:column sortBy="#{item.platiod}">
+                                    <f:facet name="header">
+                                        <h:outputText value="Platí Od"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.platiod}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                                    </h:outputText>
+                                </p:column>
+
+                                <p:column sortBy="#{item.platido}">
+                                    <f:facet name="header" >
+                                        <h:outputText value="Do"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.platido}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                                    </h:outputText>
+                                </p:column>
+
+                            </p:dataTable>
+                        </h:form>
+                    </p:layoutUnit>
+                    <p:layoutUnit position="east" size="30%">
+                        <h:form id="FormZdrojeDetail">
+                            <p>
+                                <p:outputLabel for="typZdr" value="Typ zdroje:" /><br/>
+                                <p:selectOneMenu id="typZdr" value="#{zdroje.zdroj.idtypzdr}" converter="JSFConverterTypZdr" >
+                                    <f:selectItems value="#{zdroje.typZdrList}" var="item" itemLabel="#{item.popis}" itemValue="#{item}"  />      
+                                </p:selectOneMenu>
+                            </p>
+                            <p>
+                                <p:outputLabel  for="zdrojSPZ" value="          SPZ:"/><br/>
+                                <p:inputText id="zdrojSPZ" value="#{zdroje.zdroj.spz}"/>
+                                <p:message for="zdrojSPZ" />
+                            </p>
+
+                            <p>
+                                <p:outputLabel for="zdrojPopis" value="Popis zdroje:"  /><br/>
+                                <p:inputText id="zdrojPopis" value="#{zdroje.zdroj.popis}" />
+                                <p:message for="zdrojPopis" />
+                            </p>
+                            <p>
+                                <p:outputLabel  for="zdrojOso" value="Osoba přiřazená ke zdroji:" /><br/>
+                                <p:inputText id="zdrojOso"  value="#{zdroje.helperOsoba.selectedOsoba.popis}" disabled="true" />
+                                <p:message for="zdrojOso" />
+                                <p:commandButton id="cmdBtnHelperOsoba" value="Číselník osob" actionListener="#{zdroje.prepareHelperOsoba(osoba)}" oncomplete="PF('ViewDlghelperOsoba').show()" update=":growl,:FormZdroje,:FormZdrojeDetail" icon="fa-list-ul" />
+                            </p>
+                            <p>
+                                <p:outputLabel  for="kapacita" value="Max. kapacita:" /><br/>
+                                <p:inputNumber id="kapacita"  value="#{zdroje.zdroj.kapacita}" minValue="0" maxValue="100" emptyValue="0"  />
+                                <p:message for="kapacita" />
+                            </p>
+                            <p>
+                                <p:outputLabel  for="zdrojKoment" value="Komentář:" /><br/>
+                                <p:inputTextarea id="zdrojKoment" value="#{zdroje.zdroj.komentar}"  rows="5" cols="30" />
+                                <p:message for="zdrojKoment" />
+                            </p>
+
+                            <h:outputFormat value="Platí"  />
+                            <p>
+                                <p:outputLabel for="typAktOd" value="OD:"  />
+                                <p:calendar id="typAktOd" value="#{zdroje.zdroj.platiod}" mode="popup" showOn="button" required="true" pattern="dd.MM.yyyy" locale="cs_CZ" navigator="true" showButtonPanel="true">
+                                    <f:validator validatorId="Aktivity.jsf.OdDoValidator" />
+                                </p:calendar>
+                                <p:message for="typAktOd" />
+                            </p>
+                            <p>
+                                <p:outputLabel for="typAktDo" value="DO:"  />
+                                <p:calendar id="typAktDo" value="#{zdroje.zdroj.platido}" mode="popup" showOn="button" required="true"  pattern="dd.MM.yyyy" locale="cs_CZ"  navigator="true" showButtonPanel="true">
+                                    <f:validator validatorId="Aktivity.jsf.OdDoValidator" />
+                                </p:calendar>
+                                <p:message for="typAktDo" />
+                            </p>
+                            <p>
+                                <p:commandButton id="TypAktNew" value="Nová" action="#{zdroje.prepareCreate}" disabled="#{!zdroje.isButtonEnabled('new')}" update=":growl,:FormZdroje,:FormZdrojeDetail,zdrojOso" icon="fa fa-file-o" />
+                                <p:commandButton id="TypAktSave" value="Ulož" action="#{zdroje.save}" disabled="#{!zdroje.isButtonEnabled('save')}" update=":growl,:FormZdroje,:FormZdrojeDetail"  icon="fa fa-check "/>
+                                <p:commandButton id="TypAktDel" value="Smazat záznam"  action="#{zdroje.delete}" disabled="#{!zdroje.isButtonEnabled('delete')}"  update=":growl,:FormZdroje,:FormZdrojeDetail"  icon="fa fa-remove">
+                                    <p:confirm  header="Confirmation" message="Opravdu smazat položku číselníku ?" icon="ui-icon-alert" />
+                                </p:commandButton>
+                            </p>
+                            <p:confirmDialog header="Potvrďte volbu:" global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Ano" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="Ne" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>                            
+
+                        </h:form>
+                    </p:layoutUnit>
+                </p:layout>
+                <ui:include src="/helper/helperOsoba.xhtml"/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

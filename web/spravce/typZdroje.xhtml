@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Typy zdroje</title>
+    </h:head>
+    <h:body>
+        <ui:composition template = "/templates/templateMain.xhtml">	
+            <ui:define name="contens">
+                <p:layout fullPage="false">
+                    <p:layoutUnit position="center">
+                        <h:form id="FormTypZdr">
+                            <p:dataTable value="#{typZdr.typZdrList}" var="item" selectionMode="single" selection="#{typZdr.typZdr}" rowKey="#{item.id}" sortMode="multiple" >
+                                <p:ajax event="rowSelect" update=":FormTypZdrDetail" />
+                                <p:column  sortBy="#{item.popis}">
+                                    <f:facet name="header">
+                                        <h:outputText value="Popis"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.popis}"/>
+                                </p:column>
+                                <p:column sortBy="#{typZdr.getTypZdrCisNazev(item.typzdr)}">
+                                    <f:facet name="header">
+                                        <h:outputText value="Typ zdroje"/>
+                                    </f:facet>
+                                    <h:outputText value="#{typZdr.getTypZdrCisNazev(item.typzdr)}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Rezervovatelný zdroj"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.rezervace==0?'Ano':'Ne'}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Dopravní zdroj"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.cesta==0?'Ano':'Ne'}"/>
+                                </p:column>                                
+                                <p:column  sortBy="#{item.platiod}">
+                                    <f:facet name="header">
+                                        <h:outputText value="Platí Od"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.platiod}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column sortBy="#{item.platido}">
+                                    <f:facet name="header">
+                                        <h:outputText value="Do"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.platido}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                                    </h:outputText>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </p:layoutUnit>
+                    <p:layoutUnit position="east" size="30%">
+                        <h:form id="FormTypZdrDetail">
+                            <p>
+                                <p:outputLabel for="typZdrCis" value="Typ zdroje:" />
+                                <p:selectOneMenu id="typZdrCis" value="#{typZdr.typZdr.typzdr}">
+                                    <f:selectItems value="#{typZdr.typZdrCis}" var="typZdrCis" itemLabel="#{typZdrCis[0]}" itemValue="#{typZdrCis[1]}"  />
+                                </p:selectOneMenu>
+                            </p>
+                            <p>
+                                <p:outputLabel for="typZdrRezervace" value="Zdroj lze rezervovat:"  />
+                                <p:selectOneMenu id="typZdrRezervace" value="#{typZdr.typZdr.rezervace}">
+                                    <f:selectItem  itemLabel="Ano" itemValue="0" />
+                                    <f:selectItem itemLabel="Ne" itemValue="1"  />
+                                </p:selectOneMenu>
+                                <p:message for="typZdrRezervace" />
+                            </p>
+                            <p>
+                                <p:outputLabel for="typZdrCesta" value="Zdroj je dopravní prostředek:"  />
+                                <p:selectOneMenu id="typZdrCesta" value="#{typZdr.typZdr.cesta}">
+                                    <f:selectItem  itemLabel="Ano" itemValue="0" />
+                                    <f:selectItem itemLabel="Ne" itemValue="1"  />
+                                </p:selectOneMenu>
+                                <p:message for="typZdrCesta" />
+                            </p>
+                            <p>
+                                <p:outputLabel for="typZdrPopis" value="Popis:" title="Název typu zdroje"  />
+                                <p:inputText id="typZdrPopis" value="#{typZdr.typZdr==null?'?':typZdr.typZdr.popis}" />
+                                <p:message for="typZdrPopis" />
+                            </p>
+
+                            <p>
+                                <h:outputFormat value="Platí" />
+                                <br/>
+
+                                <p:outputLabel for="typZdrOd" value="OD:"  />
+                                <p:calendar id="typZdrOd" value="#{typZdr.typZdr==null?null:typZdr.typZdr.platiod}" mode="popup" showOn="button" required="true" pattern="dd.MM.yyyy" locale="cs_CZ" navigator="true" showButtonPanel="true">
+                                    <f:validator validatorId="Aktivity.jsf.OdDoValidator" />
+                                </p:calendar>
+                                <p:message for="typZdrOd" />
+                                <br/>
+                                <p:outputLabel for="typZdrDo" value="DO:"  />
+                                <p:calendar id="typZdrDo" value="#{typZdr.typZdr==null?null:typZdr.typZdr.platido}" mode="popup" showOn="button" required="true"  pattern="dd.MM.yyyy" locale="cs_CZ"  navigator="true" showButtonPanel="true">
+                                    <f:validator validatorId="Aktivity.jsf.OdDoValidator" />
+                                </p:calendar>
+                                <p:message for="typZdrDo" />
+                            </p>
+                            <p>
+                                <p:commandButton id="TypZdrNew" value="Nová" action="#{typZdr.prepareCreate}" disabled="#{!typZdr.isButtonEnabled('new')}" update=":growl,:FormTypZdr,:FormTypZdrDetail" icon="fa fa-file-o" />
+                                <p:commandButton id="TypZdrSave" value="Ulož" action="#{typZdr.save}" disabled="#{!typZdr.isButtonEnabled('save')}" update=":growl,:FormTypZdr,:FormTypZdrDetail"  icon="fa fa-check "/>
+                                <p:commandButton id="TypZdrDel" value="Smazat záznam"  action="#{typZdr.delete}" disabled="#{!typZdr.isButtonEnabled('delete')}"  update=":growl,:FormTypZdr,:FormTypZdrDetail"  icon="fa fa-remove">
+                                    <p:confirm  header="Confirmation" message="Opravdu smazat položku číselníku ?" icon="ui-icon-alert" />
+                                </p:commandButton>
+                            </p>
+                            <p:confirmDialog header="Potvrďte volbu:" global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Ano" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="Ne" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>                            
+
+                        </h:form>
+                    </p:layoutUnit>
+                </p:layout>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

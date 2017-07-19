@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Typy schvalovatelů</title>
+    </h:head>
+    <h:body>
+        <ui:composition template = "/templates/templateMain.xhtml">	
+            <ui:define name="contens">
+                <p:layout fullPage="false">
+                    <p:layoutUnit position="center">
+                        <h:form id="FormTypSchv">
+                            <p:dataTable value="#{typSchv.typSchvList}" var="item" selectionMode="single" selection="#{typSchv.typSchv}" rowKey="#{item.id}" sortMode="multiple" >
+                                <p:ajax event="rowSelect" update=":FormTypSchvDetail" />
+                                <p:column  sortBy="#{item.popis}">
+                                    <f:facet name="header">
+                                        <h:outputText value="Popis"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.popis}"/>
+                                </p:column>
+                                <p:column sortBy="#{typSchv.getTypSchvCisNazev(item.typschv)}">
+                                    <f:facet name="header">
+                                        <h:outputText value="Role schvalovatele"/>
+                                    </f:facet>
+                                    <h:outputText value="#{typSchv.getTypSchvCisNazev(item.typschv)}"/>
+                                </p:column>
+                                <p:column  sortBy="#{item.platiod}">
+                                    <f:facet name="header">
+                                        <h:outputText value="Platí Od"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.platiod}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column sortBy="#{item.platido}">
+                                    <f:facet name="header">
+                                        <h:outputText value="Do"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.platido}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                                    </h:outputText>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </p:layoutUnit>
+                    <p:layoutUnit position="east" size="30%">
+                        <h:form id="FormTypSchvDetail">
+                            <p>
+                                <p:outputLabel for="typSchvCis" value="Role schvalovatele:" />
+                                <p:selectOneMenu id="typSchvCis" value="#{typSchv.typSchv.typschv}">
+                                    <f:selectItems value="#{typSchv.typSchvCis}" var="typSchvCis" itemLabel="#{typSchvCis[0]}" itemValue="#{typSchvCis[1]}"  />
+                                </p:selectOneMenu>
+                            </p>
+                            <p>
+                                <p:outputLabel for="typSchvPopis" value="Popis:" title="Popis schvalovatele"  />
+                                <p:inputText id="typSchvPopis" value="#{typSchv.typSchv==null?'?':typSchv.typSchv.popis}" />
+                                <p:message for="typSchvPopis" />
+                            </p>
+
+                            <p>
+                                <h:outputFormat value="Platí" />
+                                <br/>
+
+                                <p:outputLabel for="typSchvOd" value="OD:"  />
+                                <p:calendar id="typSchvOd" value="#{typSchv.typSchv==null?null:typSchv.typSchv.platiod}" mode="popup" showOn="button" required="true" pattern="dd.MM.yyyy" locale="cs_CZ" navigator="true" showButtonPanel="true">
+                                    <f:validator validatorId="Aktivity.jsf.OdDoValidator" />
+                                </p:calendar>
+                                <p:message for="typSchvOd" />
+                                <br/>
+                                <p:outputLabel for="typSchvDo" value="DO:"  />
+                                <p:calendar id="typSchvDo" value="#{typSchv.typSchv==null?null:typSchv.typSchv.platido}" mode="popup" showOn="button" required="true"  pattern="dd.MM.yyyy" locale="cs_CZ"  navigator="true" showButtonPanel="true">
+                                    <f:validator validatorId="Aktivity.jsf.OdDoValidator" />
+                                </p:calendar>
+                                <p:message for="typSchvDo" />
+                            </p>
+                            <p>
+                                <p:commandButton id="TypSchvNew" value="Nová" action="#{typSchv.prepareCreate}" disabled="#{!typSchv.isButtonEnabled('new')}" update=":growl,:FormTypSchv,:FormTypSchvDetail" icon="fa fa-file-o" />
+                                <p:commandButton id="TypSchvSave" value="Ulož" action="#{typSchv.save}" disabled="#{!typSchv.isButtonEnabled('save')}" update=":growl,:FormTypSchv,:FormTypSchvDetail"  icon="fa fa-check "/>
+                                <p:commandButton id="TypSchvDel" value="Smazat záznam"  action="#{typSchv.delete}" disabled="#{!typSchv.isButtonEnabled('delete')}"  update=":growl,:FormTypSchv,:FormTypSchvDetail"  icon="fa fa-remove">
+                                    <p:confirm  header="Confirmation" message="Opravdu smazat položku číselníku ?" icon="ui-icon-alert" />
+                                </p:commandButton>
+                            </p>
+                            <p:confirmDialog header="Potvrďte volbu:" global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Ano" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="Ne" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>                            
+
+                        </h:form>
+                    </p:layoutUnit>
+                </p:layout>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

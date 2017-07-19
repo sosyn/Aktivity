@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Typy účatníků akce</title>
+    </h:head>
+    <h:body>
+        <ui:composition template = "/templates/templateMain.xhtml">	
+            <ui:define name="contens">
+                <p:layout fullPage="false">
+                    <p:layoutUnit position="center">
+                        <h:form id="FormTypUcast">
+                            <p:dataTable value="#{typUcast.typUcastList}" var="item" selectionMode="single" selection="#{typUcast.typUcast}" rowKey="#{item.id}" sortMode="multiple" >
+                                <p:ajax event="rowSelect" update=":FormTypUcastDetail" />
+                                <p:column  sortBy="#{item.popis}">
+                                    <f:facet name="header">
+                                        <h:outputText value="Popis"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.popis}"/>
+                                </p:column>
+                                <p:column sortBy="#{typUcast.getTypUcastCisNazev(item.typucast)}">
+                                    <f:facet name="header">
+                                        <h:outputText value="Role účastníka"/>
+                                    </f:facet>
+                                    <h:outputText value="#{typUcast.getTypUcastCisNazev(item.typucast)}"/>
+                                </p:column>
+                                <p:column  sortBy="#{item.platiod}">
+                                    <f:facet name="header">
+                                        <h:outputText value="Platí Od"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.platiod}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column sortBy="#{item.platido}">
+                                    <f:facet name="header">
+                                        <h:outputText value="Do"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.platido}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                                    </h:outputText>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </p:layoutUnit>
+                    <p:layoutUnit position="east" size="30%">
+                        <h:form id="FormTypUcastDetail">
+                            <p>
+                                <p:outputLabel for="typUcastCis" value="Role účastníka akce:" />
+                                <p:selectOneMenu id="typUcastCis" value="#{typUcast.typUcast.typucast}">
+                                    <f:selectItems value="#{typUcast.typUcastCis}" var="typUcastCis" itemLabel="#{typUcastCis[0]}" itemValue="#{typUcastCis[1]}"  />
+                                </p:selectOneMenu>
+                            </p>
+                            <p>
+                                <p:outputLabel for="typZdrPopis" value="Popis:" title="Název typu zdroje"  />
+                                <p:inputText id="typZdrPopis" value="#{typUcast.typUcast==null?'?':typUcast.typUcast.popis}" />
+                                <p:message for="typZdrPopis" />
+                            </p>
+
+                            <p>
+                                <h:outputFormat value="Platí" />
+                                <br/>
+
+                                <p:outputLabel for="typUcastOd" value="OD:"  />
+                                <p:calendar id="typUcastOd" value="#{typUcast.typUcast==null?null:typUcast.typUcast.platiod}" mode="popup" showOn="button" required="true" pattern="dd.MM.yyyy" locale="cs_CZ" navigator="true" showButtonPanel="true">
+                                    <f:validator validatorId="Aktivity.jsf.OdDoValidator" />
+                                </p:calendar>
+                                <p:message for="typUcastOd" />
+                                <br/>
+                                <p:outputLabel for="typUcastDo" value="DO:"  />
+                                <p:calendar id="typUcastDo" value="#{typUcast.typUcast==null?null:typUcast.typUcast.platido}" mode="popup" showOn="button" required="true"  pattern="dd.MM.yyyy" locale="cs_CZ"  navigator="true" showButtonPanel="true">
+                                    <f:validator validatorId="Aktivity.jsf.OdDoValidator" />
+                                </p:calendar>
+                                <p:message for="typUcastDo" />
+                            </p>
+                            <p>
+                                <p:commandButton id="TypUcastNew" value="Nová" action="#{typUcast.prepareCreate}" disabled="#{!typUcast.isButtonEnabled('new')}" update=":growl,:FormTypUcast,:FormTypUcastDetail" icon="fa fa-file-o" />
+                                <p:commandButton id="TypUcastSave" value="Ulož" action="#{typUcast.save}" disabled="#{!typUcast.isButtonEnabled('save')}" update=":growl,:FormTypUcast,:FormTypUcastDetail"  icon="fa fa-check "/>
+                                <p:commandButton id="TypUcastDel" value="Smazat záznam"  action="#{typUcast.delete}" disabled="#{!typUcast.isButtonEnabled('delete')}"  update=":growl,:FormTypUcast,:FormTypUcastDetail"  icon="fa fa-remove">
+                                    <p:confirm  header="Confirmation" message="Opravdu smazat položku číselníku ?" icon="ui-icon-alert" />
+                                </p:commandButton>
+                            </p>
+                            <p:confirmDialog header="Potvrďte volbu:" global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Ano" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="Ne" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>                            
+
+                        </h:form>
+                    </p:layoutUnit>
+                </p:layout>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
