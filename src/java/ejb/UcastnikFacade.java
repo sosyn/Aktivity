@@ -32,7 +32,7 @@ public class UcastnikFacade extends AbstractFacade<Ucastnik> {
         super(Ucastnik.class);
     }
 
-    public List<Ucastnik> findUcastniky(Cesta cesta) {
+    public List<Ucastnik> findUcastnikyWhereCesta(Cesta cesta) {
         javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         javax.persistence.criteria.CriteriaQuery cq = cb.createQuery();
         javax.persistence.criteria.Root<Ucastnik> rt = cq.from(Ucastnik.class);

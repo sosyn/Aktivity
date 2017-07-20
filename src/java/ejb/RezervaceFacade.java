@@ -5,7 +5,10 @@
  */
 package ejb;
 
+import entity.Cesta;
 import entity.Rezervace;
+import entity.Rezervace_;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +31,18 @@ public class RezervaceFacade extends AbstractFacade<Rezervace> {
     public RezervaceFacade() {
         super(Rezervace.class);
     }
+    
+        public List<Rezervace> findRezervaceWhereCesta(Cesta cesta) {
+        javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+        javax.persistence.criteria.CriteriaQuery cq = cb.createQuery();
+        javax.persistence.criteria.Root<Rezervace> rt = cq.from(Rezervace.class);
+        cq.select(rt);
+        if (cesta != null) {
+            cq.where(cb.equal(rt.get(Rezervace_.idcest), cesta));
+        }
+        javax.persistence.TypedQuery<Rezervace> q = getEntityManager().createQuery(cq);
+        return q.getResultList();
+    }
+
     
 }
