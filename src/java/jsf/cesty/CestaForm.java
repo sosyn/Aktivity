@@ -423,6 +423,7 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
             }
             for (Ucastnik ucast : this.ucastnikList) {
                 if (ucast.isNewEntity()) {
+                    ucast.setNewEntity(false);
                     this.ejbUcastnikFacade.create(ucast);
                 } else {
                     this.ejbUcastnikFacade.edit(ucast);
@@ -435,6 +436,7 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
             }
             for (Rezervace reze : this.rezervaceList) {
                 if (reze.isNewEntity()) {
+                    reze.setNewEntity(false);
                     this.ejbRezervaceFacade.create(reze);
                 } else {
                     this.ejbRezervaceFacade.edit(reze);

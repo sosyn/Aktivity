@@ -28,7 +28,7 @@ public class JSFConverterTypUcast implements Converter {
     
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
-        System.out.println(" string=" + string);
+        // System.out.println(" string=" + string);
         UUID uuid = UUID.fromString(string);
         for (Typucast typucast : getTypUcastList() ) {
             if (typucast.getId().equals(uuid)) {
@@ -40,7 +40,7 @@ public class JSFConverterTypUcast implements Converter {
     
     @Override
     public String getAsString(FacesContext fc, UIComponent uic, Object o) {
-        System.out.println(" o=" + o);
+        // System.out.println(" o=" + o);
         if (o != null && o instanceof Typucast) {
             return ((Typucast) o).getId().toString();
         } else {
