@@ -76,16 +76,17 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
     LoginUser loginUser;
 
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
-    private Date platiOd = new Date();
-    private Date platiDo = new Date();
 
     private int mode;
+
     private Cesta cesta = new Cesta();
+    private CestaLocal cestaLocal = new CestaLocal();
     private ArrayList<Typzdroje> typZdrList = null;
     private ArrayList<Typucast> typUcastList = null;
     private ArrayList<Ucastnik> ucastnikListDel = null;
     private ArrayList<Ucastnik> ucastnikList = null;
     private Ucastnik ucastnik = null;
+
     private ArrayList<Rezervace> rezervaceListDel = null;
     private ArrayList<Rezervace> rezervaceList = null;
     private Rezervace rezervace = null;
@@ -207,33 +208,66 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
     public void setCal(Calendar cal) {
         this.cal = cal;
     }
+// -----  Lokalni promenne ------------
 
     /**
      * @return the platiOd
      */
     public Date getPlatiOd() {
-        return platiOd;
+        return cestaLocal.platiOd;
     }
 
     /**
      * @param platiOd the platiOd to set
      */
     public void setPlatiOd(Date platiOd) {
-        this.platiOd = platiOd;
+        this.cestaLocal.platiOd = platiOd;
     }
 
     /**
      * @return the platiDo
      */
     public Date getPlatiDo() {
-        return platiDo;
+        return cestaLocal.platiDo;
     }
 
     /**
      * @param platiDo the platiDo to set
      */
     public void setPlatiDo(Date platiDo) {
-        this.platiDo = platiDo;
+        this.cestaLocal.platiDo = platiDo;
+    }
+
+    public String getMisto() {
+        return cestaLocal.misto;
+    }
+
+    public void setMisto(String misto) {
+        this.cestaLocal.misto = misto;
+    }
+
+    public String getDuvod() {
+        return cestaLocal.duvod;
+    }
+
+    public void setDuvod(String duvod) {
+        this.cestaLocal.duvod = duvod;
+    }
+
+    public Typzdroje getTypZdroje() {
+        return cestaLocal.typZdroje;
+    }
+
+    public void setTypZdroje(Typzdroje typZdroje) {
+        this.cestaLocal.typZdroje = typZdroje;
+    }
+
+    public Double getZaloha() {
+        return cestaLocal.zaloha;
+    }
+
+    public void setZaloha(Double zaloha) {
+        this.cestaLocal.zaloha = zaloha;
     }
 
     /**
@@ -248,20 +282,6 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
      */
     public void setMode(int mode) {
         this.mode = mode;
-    }
-
-    /**
-     * @return the cesta
-     */
-    public Cesta getCesta() {
-        return cesta;
-    }
-
-    /**
-     * @param cesta the cesta to set
-     */
-    public void setCesta(Cesta cesta) {
-        this.cesta = cesta;
     }
 
     /**
@@ -355,12 +375,12 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
     }
 
     public void platiOdListener() {
-        if (this.cesta.getPlatiod().after(this.cesta.getPlatido())) {
-            this.cal.setTime(this.cesta.getPlatiod());
+        if (this.getPlatiOd().after(this.getPlatiDo())) {
+            this.cal.setTime(this.getPlatiOd());
             if (cal.get(Calendar.HOUR_OF_DAY) < 17) {
                 cal.set(Calendar.HOUR_OF_DAY, 17);
             }
-            this.cesta.setPlatido(this.cal.getTime());
+            this.setPlatiDo(this.cal.getTime());
         }
     }
 
@@ -373,25 +393,19 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
     public boolean newCesta() {
         this.mode = CestaForm.MODE_NEW;
 
-        this.cesta = new Cesta();
+        this.cestaLocal = new CestaLocal();
         ucastnikList = new ArrayList<>();
         rezervaceList = new ArrayList<>();
         ucastnikListDel = new ArrayList<>();
         rezervaceListDel = new ArrayList<>();
 
-        this.cesta.setNewEntity(true);
-        this.cesta.setIdoso(loginUser.getOsoba());
-        this.cesta.setUcastnikList(new ArrayList<Ucastnik>());
-        this.cesta.setRezervaceList(new ArrayList<Rezervace>());
-        this.cesta.setSchvaleniList(new ArrayList<Schvaleni>());
-//        this.cesta.setZaloha(0.0);
         getCal().set(Calendar.HOUR_OF_DAY, 07);
         getCal().set(Calendar.MINUTE, 00);
-        this.cesta.setPlatiod(getCal().getTime());
+        this.setPlatiOd(getCal().getTime());
         getCal().set(Calendar.HOUR_OF_DAY, 17);
         getCal().set(Calendar.MINUTE, 00);
-        this.cesta.setPlatido(getCal().getTime());
-        this.cesta.setIdtypzdr(this.ejbTypZdrFacade.findPopis("Vozidlo služební"));
+        this.setPlatiDo(getCal().getTime());
+        this.setTypZdroje(this.ejbTypZdrFacade.findPopis("Vozidlo služební"));
 
         // Defaultni ucastnik je tvurce cesty
         this.ucastnik = new Ucastnik();
@@ -404,9 +418,10 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
         return true;
     }
 
-    public boolean editCesta(Cesta cestaLocal) {
+    public boolean editCesta(Cesta cestaParam) {
         this.setMode(CestaForm.MODE_EDIT);
-        this.setCesta(ejbCestaFacade.find(cestaLocal.getId()));
+        this.cesta = cestaParam;
+        this.cestaLocal = new CestaLocal(cestaParam);
 //        ucastnikList = new ArrayList<>();
 //        rezervaceList = new ArrayList<>();
         ucastnikListDel = new ArrayList<>();
@@ -428,10 +443,24 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
         try {
             UserTransaction transaction = (UserTransaction) new InitialContext().lookup("java:comp/UserTransaction");
             transaction.begin();
-            if (this.cesta.isNewEntity()) {
-                this.ejbCestaFacade.create(this.cesta);
+            if (this.mode == CestaForm.MODE_NEW) {
+                cesta = new Cesta();
             } else {
                 this.cesta = ejbCestaFacade.find(this.cesta.getId());
+            }
+            this.cesta.setIdoso(loginUser.getOsoba());
+            this.cesta.setPlatiod(this.getPlatiOd());
+            this.cesta.setPlatido(this.getPlatiDo());
+            this.cesta.setIdtypzdr(this.getTypZdroje());
+            this.cesta.setPopis(this.getMisto());
+            this.cesta.setKomentar(this.getDuvod());
+            this.cesta.setZaloha(this.getZaloha());
+            this.cesta.setUcastnikList(this.getUcastnikList());
+            this.cesta.setRezervaceList(this.getRezervaceList());
+            this.cesta.setSchvaleniList(new ArrayList<Schvaleni>());
+            if (this.mode == CestaForm.MODE_NEW) {
+                this.ejbCestaFacade.create(this.cesta);
+            } else {
                 this.ejbCestaFacade.edit(this.cesta);
             }
             for (Ucastnik ucast : this.ucastnikList) {
@@ -503,7 +532,7 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
 // Helper pro vyber zdroje k rezervaci
 //=====
     public void prepareHelperZdroj() {
-        helperZdroj.initHelperZdroj(loginUser.getOsoba(), this.platiOd, this.platiDo);
+        helperZdroj.initHelperZdroj(loginUser.getOsoba(), this.getPlatiOd(), this.getPlatiDo());
     }
 
     /**
@@ -547,4 +576,35 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
         this.rezervaceList.remove(this.rezervace);
     }
 
+    /**
+     * Vnitrni trida pro "stin" informaci o ceste
+     */
+    class CestaLocal {
+
+        private Date platiOd = null;
+        private Date platiDo = null;
+        private String misto = null;
+        private String duvod = null;
+        private Typzdroje typZdroje = null;
+        private Double zaloha = null;
+
+        public CestaLocal() {
+            platiOd = new Date();
+            platiDo = new Date();
+            misto = new String();
+            duvod = new String();
+            typZdroje = null;
+            zaloha = 0.0;
+        }
+
+        public CestaLocal(Cesta cesta) {
+            platiOd = cesta.getPlatiod();
+            platiDo = cesta.getPlatido();
+            misto = cesta.getPopis();
+            duvod = cesta.getKomentar();
+            typZdroje = cesta.getIdtypzdr();
+            zaloha = cesta.getZaloha();
+        }
+
+    }
 }
