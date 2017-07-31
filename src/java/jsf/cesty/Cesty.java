@@ -59,20 +59,6 @@ public class Cesty implements Serializable {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     /**
-     * @return the cal
-     */
-    public Calendar getCal() {
-        return cal;
-    }
-
-    /**
-     * @param cal the cal to set
-     */
-    public void setCal(Calendar cal) {
-        this.cal = cal;
-    }
-
-    /**
      * @return the platiOd
      */
     public Date getPlatiOd() {
@@ -101,6 +87,9 @@ public class Cesty implements Serializable {
     }
 
     public void onPlatiOdSelect() {
+        if (this.platiOd.after(this.platiDo)) {
+            this.platiDo.setTime(platiOd.getTime());
+        }
     }
 
     public void onPlatiDoSelect() {

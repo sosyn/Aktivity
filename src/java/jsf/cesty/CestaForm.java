@@ -354,6 +354,19 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
         this.rezervaceList = rezervaceList;
     }
 
+    public void platiOdListener() {
+        if (this.cesta.getPlatiod().after(this.cesta.getPlatido())) {
+            this.cal.setTime(this.cesta.getPlatiod());
+            if (cal.get(Calendar.HOUR_OF_DAY) < 17) {
+                cal.set(Calendar.HOUR_OF_DAY, 17);
+            }
+            this.cesta.setPlatido(this.cal.getTime());
+        }
+    }
+
+    public void platiDoListener() {
+    }
+
 // ====
 // Zalozeni nove cesty
 //=====
@@ -415,10 +428,10 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
         try {
             UserTransaction transaction = (UserTransaction) new InitialContext().lookup("java:comp/UserTransaction");
             transaction.begin();
-            this.cesta = ejbCestaFacade.find(this.cesta.getId());
             if (this.cesta.isNewEntity()) {
                 this.ejbCestaFacade.create(this.cesta);
             } else {
+                this.cesta = ejbCestaFacade.find(this.cesta.getId());
                 this.ejbCestaFacade.edit(this.cesta);
             }
             for (Ucastnik ucast : this.ucastnikList) {

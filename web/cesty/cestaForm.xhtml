@@ -19,12 +19,13 @@
                             <h2>Jednání:</h2>
                             <p>
                                 <p:outputLabel for="cestaOd" value="Od: "/>
-                                <p:calendar id="cestaOd" value="#{cestaForm.cesta.platiod}" pattern="dd.MM.yyyy HH:mm"  showOn="button">
-                                    <p:ajax event="dateSelect" update=":cestaForm:cestaOd" />
+                                <p:calendar id="cestaOd" value="#{cestaForm.cesta.platiod}" valueChangeListener="#{cestaForm.platiOdListener}" pattern="dd.MM.yyyy HH:mm"  showOn="button" >
+                                    <p:ajax event="dateSelect" update=":cestaForm:cestaOd,:cestaForm:cestaDo" />
                                 </p:calendar>
+                                <br/>
                                 <p:outputLabel for="cestaDo" value="Do: "/>
-                                <p:calendar id="cestaDo" value="#{cestaForm.cesta.platido}" pattern="dd.MM.yyyy HH:mm"  showOn="button" >
-                                    <p:ajax event="dateSelect" update=":cestaForm:cestaDo" />
+                                <p:calendar id="cestaDo" value="#{cestaForm.cesta.platido}" valueChangeListener="#{cestaForm.platiDoListener}" pattern="dd.MM.yyyy HH:mm"  showOn="button" >
+                                    <p:ajax event="dateSelect" update=":cestaForm:cestaDo,:cestaForm:cestaOd" />
                                 </p:calendar>                   
                             </p>
                             <p>
