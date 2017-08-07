@@ -14,18 +14,19 @@
             <ui:define name="contens">
                 <p:layout fullPage="false">
                     <p:layoutUnit position="center" >
-                        <h:form id="cestaForm" >
-                            <f:ajax event="keyup" render="targetCestaForm"/>
+                        <h:form id="cestaFormCesta" >
+                            <f:ajax event="keyup" render=":cestaForm"/>
                             <h2>Jednání:</h2>
                             <p>
                                 <p:outputLabel for="cestaOd" value="Od: "/>
-                                <p:calendar id="cestaOd" value="#{cestaForm.platiOd}" valueChangeListener="#{cestaForm.platiOdListener}" pattern="dd.MM.yyyy HH:mm"  showOn="button" >
-                                    <p:ajax event="dateSelect" update=":cestaForm:platiDo" />
+                                <p:calendar id="cestaOd" value="#{cestaForm.platiOd}" pattern="dd.MM.yyyy HH:mm" mode="popup" showOn="button">
+                                    <p:ajax event="keyup"  update=":cestaFormCesta:cestaDo" listener="#{cestaForm.platiOdListener}" />
+                                    <p:ajax event="dateSelect"  update=":cestaFormCesta:cestaDo" listener="#{cestaForm.platiOdListener}" />
                                 </p:calendar>
                                 <br/>
                                 <p:outputLabel for="cestaDo" value="Do: "/>
-                                <p:calendar id="cestaDo" value="#{cestaForm.platiDo}" valueChangeListener="#{cestaForm.platiDoListener}" pattern="dd.MM.yyyy HH:mm"  showOn="button" >
-                                    <p:ajax event="dateSelect" update=":cestaForm:platiOd" />
+                                <p:calendar id="cestaDo" value="#{cestaForm.platiDo}" valueChangeListener="#{cestaForm.platiDoListener}" pattern="dd.MM.yyyy HH:mm" mode="popup" showOn="button">
+                                    <p:ajax event="blur" update=":cestaFormCesta:cestaOd" />
                                 </p:calendar>                   
                             </p>
                             <p>

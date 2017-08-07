@@ -41,6 +41,7 @@ import jsf.helper.HelperOsoba;
 import jsf.helper.HelperOsobyListener;
 import jsf.helper.HelperZdroj;
 import jsf.helper.HelperZdrojListener;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -374,7 +375,7 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
         this.rezervaceList = rezervaceList;
     }
 
-    public void platiOdListener() {
+    public void platiOdListener(SelectEvent event) {
         if (this.getPlatiOd().after(this.getPlatiDo())) {
             this.cal.setTime(this.getPlatiOd());
             if (cal.get(Calendar.HOUR_OF_DAY) < 17) {
