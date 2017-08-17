@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Moje cesty</title>
+    </h:head>
+    <h:body>
+        <ui:composition template = "/templates/templateMain.xhtml">	
+            <ui:define name="contens">
+                <p:layout fullPage="false">
+                    <p:layoutUnit position="north" size="50">
+                        <h:form id="platnostRezervaceForm">
+                            <p:outputLabel for="platiOd" value="Od:" />
+                            <p:calendar id="platiOd" value="#{rezervace.platiOd}" pattern="dd.MM.yyyy">
+                                <p:ajax event="dateSelect" listener="#{rezervace.onPlatiOdSelect}" update="platiOd,platiDo" />
+                            </p:calendar>
+                            <p:outputLabel for="platiDo" value="Do:" />
+                            <p:calendar id="platiDo" value="#{rezervace.platiDo}" pattern="dd.MM.yyyy">
+                                <p:ajax event="dateSelect" listener="#{rezervace.onPlatiDoSelect}" update="platiOd,platiDo" />
+                            </p:calendar>
+                        </h:form>
+                    </p:layoutUnit>
+                    <p:layoutUnit position="center" size="50" >
+                        <h:form id="formRezervace">
+                            <p:dataTable id="rezervaceTable" value="#{rezervace.kalendar.kalendarRows}" selection="#{rezervace.kalendar.kalendarRow}"  var="item" rowKey="#{rezervace.kalendar.getCas(item)}" selectionMode="single">
+<!--                                 <p:ajax event="rowSelect" update=":formRezervaceBtn" />
+-->
+                                <p:ajax event="rowSelect" update=":platnostRezervaceForm" />
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Čas"/>
+                                    </f:facet>
+                                    <h:outputText value="#{rezervace.kalendar.getCas(item)}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Zdroj 1"/>
+                                    </f:facet>
+                                    <p:panelGrid />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Zdroj 2"/>
+                                    </f:facet>
+                                    <p:dataGrid paginator="false" emptyMessage="Žádná data" />
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </p:layoutUnit>
+                    <p:layoutUnit position="east" size="100">
+                    </p:layoutUnit>
+                </p:layout>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
