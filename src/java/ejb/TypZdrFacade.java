@@ -5,8 +5,8 @@
  */
 package ejb;
 
-import entity.EntitySuperClass_;
 import entity.Typzdroje;
+import entity.Typzdroje_;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,10 +34,9 @@ public class TypZdrFacade extends AbstractFacade<Typzdroje> {
         javax.persistence.criteria.CriteriaQuery cq = cb.createQuery();
         javax.persistence.criteria.Root<Typzdroje> rt = cq.from(Typzdroje.class);
         cq.select(rt);
-        cq.where(cb.like(rt.get(EntitySuperClass_.popis),podminka));
+        cq.where(cb.like(rt.get(Typzdroje_.popis),podminka));
         javax.persistence.TypedQuery<Typzdroje> q = getEntityManager().createQuery(cq);
         return q.getSingleResult();
     }
-
-    
+   
 }
