@@ -5,8 +5,8 @@
  */
 package ejb;
 
-import entity.EntitySuperClass_;
 import entity.Typucast;
+import entity.Typucast_;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,7 +34,7 @@ public class TypUcastFacade extends AbstractFacade<Typucast> {
         javax.persistence.criteria.CriteriaQuery cq = cb.createQuery();
         javax.persistence.criteria.Root<Typucast> rt = cq.from(Typucast.class);
         cq.select(rt);
-        cq.where(cb.like(rt.get(EntitySuperClass_.popis),podminka));
+        cq.where(cb.like(rt.get(Typucast_.popis),podminka));
         javax.persistence.TypedQuery<Typucast> q = getEntityManager().createQuery(cq);
         return q.getSingleResult();
     }

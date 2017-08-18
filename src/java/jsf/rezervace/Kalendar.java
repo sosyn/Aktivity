@@ -14,7 +14,8 @@ import java.util.Date;
 import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
+
 
 /**
  *

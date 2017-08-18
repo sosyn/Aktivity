@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 import javax.ejb.EJB;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
