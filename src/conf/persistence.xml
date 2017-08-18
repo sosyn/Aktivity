@@ -5,11 +5,4 @@
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties/>
   </persistence-unit>
-  <!--
-  <persistence-unit name="VeraPU" transaction-type="JTA">
-    <jta-data-source>jdbc/vera</jta-data-source>
-    <shared-cache-mode>ALL</shared-cache-mode>
-    <properties/>
-  </persistence-unit>
-  -->
 </persistence>
