@@ -41,7 +41,7 @@
                             <p>
                                 <p:outputLabel for="cestaTypZdr" value="Dopravní prostředek:" />
                                 <br/>
-                                <p:selectOneMenu id="cestaTypZdr" value="#{cestaForm.typZdroje}" converter=#{JSFConverterTypZdr} >
+                                <p:selectOneMenu id="cestaTypZdr" value="#{cestaForm.typZdroje}" converter="#{JSFConverterTypZdr}" >
                                     <f:selectItems value="#{cestaForm.typZdrList}" var="item" itemLabel="#{item.popis}" itemValue="#{item}"  />      
                                 </p:selectOneMenu>
                             </p>
