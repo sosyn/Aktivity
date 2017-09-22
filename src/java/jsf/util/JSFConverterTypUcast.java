@@ -22,22 +22,16 @@ import javax.inject.Named;
 @Named("JSFConverterTypUcast")
 @Stateless
 public class JSFConverterTypUcast implements Converter {
-    
+
     @EJB
     private ejb.TypUcastFacade ejbTypUcastFacade;
-    
-    private ArrayList<Typucast> typUcastList = null;
-    
+
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
         // System.out.println(" string=" + string);
         UUID uuid = UUID.fromString(string);
-        for (Typucast typucast : getTypUcastList() ) {
-            if (typucast.getId().equals(uuid)) {
-                return typucast;
-            }
-        }
-        return null;
+        Typucast typucast = this.ejbTypUcastFacade.find(uuid);
+        return typucast;
     }
     
     @Override
@@ -49,22 +43,4 @@ public class JSFConverterTypUcast implements Converter {
             return null;
         }
     }
-
-    /**
-     * @return the typUcastList
-     */
-    public ArrayList<Typucast> getTypUcastList() {
-        if (this.typUcastList == null) {
-            this.typUcastList = new ArrayList<>(ejbTypUcastFacade.findAll());
-        }
-        return typUcastList;
-    }
-
-    /**
-     * @param typUcastList the typUcastList to set
-     */
-    public void setTypUcastList(ArrayList<Typucast> typUcastList) {
-        this.typUcastList = typUcastList;
-    }
-    
 }

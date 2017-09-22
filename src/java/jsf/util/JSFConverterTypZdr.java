@@ -27,8 +27,8 @@ public class JSFConverterTypZdr implements Converter {
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
-        UUID id = UUID.fromString(string);
-        Typzdroje typZdroj = this.ejbTypZdrFacade.find(id);
+        UUID uuid = UUID.fromString(string);
+        Typzdroje typZdroj = this.ejbTypZdrFacade.find(uuid);
         return typZdroj;
     }
 
