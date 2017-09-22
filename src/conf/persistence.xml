@@ -4,5 +4,5 @@
     <jta-data-source>jdbc/aktivity</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties/>
-  </persistence-unit>
+  </persistence-unit> 
 </persistence>

@@ -19,3 +19,4 @@
 *.rar
 /build/
 /dist/
+/nbproject/private/

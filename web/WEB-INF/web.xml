@@ -39,24 +39,52 @@
         <extension>eot</extension>
         <mime-type>application/vnd.ms-fontobject</mime-type>
     </mime-mapping>
-    <mime-mapping>  
-        <extension>otf</extension>  
-        <mime-type>font/opentype</mime-type>  
-    </mime-mapping>      
-    <mime-mapping>  
-        <extension>ttf</extension>  
-        <mime-type>application/x-font-ttf</mime-type>  
-    </mime-mapping>      
-    <mime-mapping>  
-        <extension>woff</extension>  
-        <mime-type>application/x-font-woff</mime-type>  
+    <mime-mapping>
+        <extension>otf</extension>
+        <mime-type>font/opentype</mime-type>
     </mime-mapping>
-    <mime-mapping>  
-        <extension>woff2</extension>  
-        <mime-type>application/x-font-woff</mime-type>  
+    <mime-mapping>
+        <extension>ttf</extension>
+        <mime-type>application/x-font-ttf</mime-type>
     </mime-mapping>
-    <mime-mapping>  
-        <extension>svg</extension>  
-        <mime-type>image/svg+xml</mime-type>  
+    <mime-mapping>
+        <extension>woff</extension>
+        <mime-type>application/x-font-woff</mime-type>
     </mime-mapping>
+    <mime-mapping>
+        <extension>woff2</extension>
+        <mime-type>application/x-font-woff</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>svg</extension>
+        <mime-type>image/svg+xml</mime-type>
+    </mime-mapping>
+    <security-constraint>
+        <display-name>USER</display-name>
+        <web-resource-collection>
+            <web-resource-name>USER</web-resource-name>
+            <description>Uživatel</description>
+            <url-pattern>/faces/*</url-pattern>
+        </web-resource-collection>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>JdbcRealmAktivity</realm-name>
+        <form-login-config>
+            <form-login-page>/login.xhtml</form-login-page>
+            <form-error-page>/error.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description>Uživatelská role</description>
+        <role-name>USER</role-name>
+    </security-role>
+    <security-role>
+        <description>Administrátor</description>
+        <role-name>ADMIN</role-name>
+    </security-role>
+    <security-role>
+        <description>Dispečer</description>
+        <role-name>DISPECER</role-name>
+    </security-role>
 </web-app>

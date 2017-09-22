@@ -20,7 +20,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
-
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;

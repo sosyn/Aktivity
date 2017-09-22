@@ -7,12 +7,11 @@ package jsf.util;
 
 import entity.Typzdroje;
 import java.util.UUID;
+import javax.ejb.EJB;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.inject.Inject;
-import jsf.spravce.Zdroje;
 
 /**
  *
@@ -21,23 +20,19 @@ import jsf.spravce.Zdroje;
 @FacesConverter("JSFConverterTypZdr")
 public class JSFConverterTypZdr implements Converter {
 
-    @Inject
-    Zdroje zdroje;
+    @EJB
+    private ejb.TypZdrFacade ejbTypZdrFacade;
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
         UUID id = UUID.fromString(string);
-        for (Typzdroje typZdroj : zdroje.getTypZdrList()) {
-            if (typZdroj.getId().equals(id)) {
-                return typZdroj;
-            }
-        }
-        return null;
+        Typzdroje typZdroj = this.ejbTypZdrFacade.find(id);
+        return typZdroj;
     }
 
     @Override
     public String getAsString(FacesContext fc, UIComponent uic, Object o) {
-            if (o != null) {
+        if (o != null) {
             return ((Typzdroje) o).getId().toString();
         } else {
             return null;
