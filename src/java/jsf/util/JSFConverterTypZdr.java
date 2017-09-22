@@ -8,16 +8,18 @@ package jsf.util;
 import entity.Typzdroje;
 import java.util.UUID;
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.faces.convert.FacesConverter;
+import javax.inject.Named;
 
 /**
  *
  * @author Ivo
  */
-@FacesConverter("JSFConverterTypZdr")
+@Named("JSFConverterTypZdr")
+@Stateless
 public class JSFConverterTypZdr implements Converter {
 
     @EJB

@@ -9,16 +9,18 @@ import entity.Typucast;
 import java.util.ArrayList;
 import java.util.UUID;
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.faces.convert.FacesConverter;
+import javax.inject.Named;
 
 /**
  *
  * @author Ivo
  */
-@FacesConverter("JSFConverterTypUcast")
+@Named("JSFConverterTypUcast")
+@Stateless
 public class JSFConverterTypUcast implements Converter {
     
     @EJB
