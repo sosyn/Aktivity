@@ -18,7 +18,7 @@ import javax.faces.validator.ValidatorException;
  * @author Ivo
  */
 @FacesValidator("Aktivity.jsf.OdDoValidator")
-public class OdDoValidator implements Validator {
+public class ValidatorOdDo implements Validator {
 
     @Override
     public void validate(FacesContext fc, UIComponent uic, Object o) throws ValidatorException {
