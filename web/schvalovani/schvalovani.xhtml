@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Schvalování cest podřízeným</title>
+    </h:head>
+    <h:body>
+        <ui:composition template = "/templates/templateMain.xhtml">	
+            <ui:define name="contens">
+                <p:layout fullPage="false">
+                    <p:layoutUnit position="north" size="50">
+                        <h:form id="platnostForm">
+                            <p:outputLabel for="platiOd" value="Od:" />
+                            <p:calendar id="platiOd" value="#{schvalovani.platiOd}" pattern="dd.MM.yyyy">
+                                <p:ajax event="dateSelect" listener="#{schvalovani.onPlatiOdSelect}" update="platiOd,platiDo" />
+                            </p:calendar>
+                            <p:outputLabel for="platiDo" value="Do:" />
+                            <p:calendar id="platiDo" value="#{schvalovani.platiDo}" pattern="dd.MM.yyyy">
+                                <p:ajax event="dateSelect" listener="#{schvalovani.onPlatiDoSelect}" update="platiOd,platiDo" />
+                            </p:calendar>
+                        </h:form>
+                    </p:layoutUnit>
+                    <p:layoutUnit position="center" size="50" >
+                        <h:form id="formSchvalovani">
+                            <p:dataTable id="schvalovani" value="#{schvalovani.cesty}" selection="#{schvalovani.cesta}" rowKey="#{itemSchvalovani.id}" var="itemSchvalovani"  >
+                                <p:ajax event="rowSelect" update=":formBtn" />
+                                <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Od"/>
+                                    </f:facet>
+                                    <h:outputText value="#{itemCesta.platiod}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Do"/>
+                                    </f:facet>
+                                    <h:outputText value="#{itemCesta.platido}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Místo"/>
+                                    </f:facet>
+                                    <h:outputText value="#{itemCesta.popis}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Účel:"/>
+                                    </f:facet>
+                                    <h:outputText value="#{itemCesta.komentar}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </p:layoutUnit>
+                    <p:layoutUnit position="east" size="100">
+                        <h:form id="formBtn">
+                            <p:commandButton id="SchvOK" value="Schválení" action="#{schvalovani.newCesta()}"  icon="fa fa-file-o" ajax="false" />
+                            <p:commandButton id="SchvFalse" value="Odmítnutí" action="#{schvalovani.editCesta()}" disabled="#{schvalovani.cesty.size()==0 || schvalovani.cesta==null}" icon="fa fa-edit" ajax="false" />
+                        </h:form>
+                    </p:layoutUnit>
+                </p:layout>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
