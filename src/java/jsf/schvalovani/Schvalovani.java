@@ -30,6 +30,20 @@ import javax.inject.Named;
 @SessionScoped
 public class Schvalovani implements Serializable {
 
+    /**
+     * @return the selCesty
+     */
+    public ArrayList<Cesta> getSelCesty() {
+        return selCesty;
+    }
+
+    /**
+     * @param selCesty the selCesty to set
+     */
+    public void setSelCesty(ArrayList<Cesta> selCesty) {
+        this.selCesty = selCesty;
+    }
+
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
     private Date platiOd = new Date();
     private Date platiDo = new Date();
@@ -47,6 +61,7 @@ public class Schvalovani implements Serializable {
 
     private Cesta cesta = null;
     private ArrayList<Cesta> cesty = new ArrayList<>();
+    private ArrayList<Cesta> selCesty = new ArrayList<>();
 
     @PostConstruct
     void init() {
@@ -91,6 +106,14 @@ public class Schvalovani implements Serializable {
     }
 
     public void onPlatiDoSelect() {
+    }
+
+    public void onCestaSelect(Object obj) {
+        System.out.println("Obj:" + (obj != null ? obj.toString() : "null"));
+    }
+
+    public void onCestaUnSelect(Object obj) {
+        System.out.println("Obj:" + (obj != null ? obj.toString() : "null"));
     }
 
     /**
@@ -139,9 +162,11 @@ public class Schvalovani implements Serializable {
     }
 
     class Schv {
-        Cesta cesta=null;
-        ArrayList<Ucastnik> ucastnici= new ArrayList<Ucastnik>();
+
+        Cesta cesta = null;
+        ArrayList<Ucastnik> ucastnici = new ArrayList<Ucastnik>();
         ArrayList<Zdroj> zdroje = new ArrayList<Zdroj>();
         ArrayList<Rezervace> rezervace = new ArrayList<Rezervace>();
     }
+
 }

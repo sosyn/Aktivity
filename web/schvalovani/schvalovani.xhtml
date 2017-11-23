@@ -6,34 +6,38 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Schvalování cest podřízeným</title>
+        <title>Schvalování cest</title>
     </h:head>
     <h:body>
         <ui:composition template = "/templates/templateMain.xhtml">	
             <ui:define name="contens">
                 <p:layout fullPage="false">
-                    <p:layoutUnit position="north" size="50">
-                        <h:form id="platnostForm">
-                            <p:outputLabel for="platiOd" value="Od:" />
-                            <p:calendar id="platiOd" value="#{schvalovani.platiOd}" pattern="dd.MM.yyyy">
-                                <p:ajax event="dateSelect" listener="#{schvalovani.onPlatiOdSelect}" update="platiOd,platiDo" />
-                            </p:calendar>
-                            <p:outputLabel for="platiDo" value="Do:" />
-                            <p:calendar id="platiDo" value="#{schvalovani.platiDo}" pattern="dd.MM.yyyy">
-                                <p:ajax event="dateSelect" listener="#{schvalovani.onPlatiDoSelect}" update="platiOd,platiDo" />
-                            </p:calendar>
-                        </h:form>
-                    </p:layoutUnit>
-                    <p:layoutUnit position="center" size="50" >
-                        <h:form id="formSchvalovani">
-                            <p:dataTable id="schvalovani" value="#{schvalovani.cesty}" selection="#{schvalovani.cesta}" rowKey="#{itemSchvalovani.id}" var="itemSchvalovani"  >
-                                <p:ajax event="rowSelect" update=":formBtn" />
-                                <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                    <p:layoutUnit position="center" size="70%" >
+                        <h:form id="formSchvTbl">
+                            <p:dataTable id="tblSchv" value="#{schvalovani.cesty}" selection="#{schvalovani.selCesty}" rowKey="#{itemSchv.id}" var="itemSchv" scrollable="true" rowSelectMode="add">
+                                <p:ajax event="rowSelect" listener="#{schvalovani.onCestaSelect(itemSchv)}" update=":formSchvPanel:panelSchv" />
+                                <p:ajax event="rowUnselect" listener="#{schvalovani.onCestaUnSelect(itemSchv)}" update=":formSchvPanel:panelSchv" />                                
+                                <p:ajax event="rowSelectCheckbox" listener="#{schvalovani.onCestaSelect(itemSchv)}" update=":formSchvPanel:panelSchv" />
+                                <p:ajax event="rowUnselectCheckbox" listener="#{schvalovani.onCestaUnSelect(itemSchv)}" update=":formSchvPanel:panelSchv" />                                
+                                <p:column selectionMode="multiple" style="width:16px;text-align:center" />                              
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Stav schválení"/>
+                                    </f:facet>
+                                    <h:outputText value="N/A"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Účastník"/>
+                                    </f:facet>
+                                    <h:outputText value="N/A"/>
+                                </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="Od"/>
                                     </f:facet>
-                                    <h:outputText value="#{itemCesta.platiod}">
+                                    <h:outputText value="#{itemSchv.platiod}">
                                         <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
                                     </h:outputText>
                                 </p:column>
@@ -41,7 +45,7 @@
                                     <f:facet name="header">
                                         <h:outputText value="Do"/>
                                     </f:facet>
-                                    <h:outputText value="#{itemCesta.platido}">
+                                    <h:outputText value="#{itemSchv.platido}">
                                         <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
                                     </h:outputText>
                                 </p:column>
@@ -49,21 +53,69 @@
                                     <f:facet name="header">
                                         <h:outputText value="Místo"/>
                                     </f:facet>
-                                    <h:outputText value="#{itemCesta.popis}"/>
+                                    <h:outputText value="#{itemSchv.popis}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="Účel:"/>
                                     </f:facet>
-                                    <h:outputText value="#{itemCesta.komentar}"/>
+                                    <h:outputText value="#{itemSchv.komentar}"/>
                                 </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Detail"/>
+                                    </f:facet>
+                                    <p:commandButton ajax="true" actionListener="#{schvalovani.onCestaSelect(itemSchv)}" update=":formSchvPanel:panelSchv" icon="fa fa-eye" />
+                                </p:column>
+
                             </p:dataTable>
                         </h:form>
                     </p:layoutUnit>
-                    <p:layoutUnit position="east" size="100">
-                        <h:form id="formBtn">
-                            <p:commandButton id="SchvOK" value="Schválení" action="#{schvalovani.newCesta()}"  icon="fa fa-file-o" ajax="false" />
-                            <p:commandButton id="SchvFalse" value="Odmítnutí" action="#{schvalovani.editCesta()}" disabled="#{schvalovani.cesty.size()==0 || schvalovani.cesta==null}" icon="fa fa-edit" ajax="false" />
+                    <p:layoutUnit position="east" size="30%">
+                        <h:form id="formSchvPanel">
+                            <p:accordionPanel id="panelSchv" multiple="true">
+                                <p:tab id="tabFiltry" title="Filtry:" titletip="Podmínky výběru cest ve schvalovacím procesu.">
+                                    <h:panelGrid columns="2" cellpadding="10">
+                                        <p:outputLabel value="Schválené:" class="right" />
+                                        <p:selectBooleanCheckbox value="false" />
+                                        <p:outputLabel value="Neschválené:" class="right" />
+                                        <p:selectBooleanCheckbox value="true" />
+                                        <p:outputLabel value="Zamítnuté:" class="right" />
+                                        <p:selectBooleanCheckbox value="false" />
+                                        <p:outputLabel value="Datum:" class="right" />
+                                        <p:selectBooleanCheckbox value="false" />
+                                        <p:outputLabel for="platiOd" value="Od:" class="right" />
+                                        <p:calendar id="platiOd" value="#{schvalovani.platiOd}" pattern="dd.MM.yyyy" disabled="true">
+                                            <p:ajax event="dateSelect" listener="#{schvalovani.onPlatiOdSelect}" update="platiOd,platiDo" />
+                                        </p:calendar>
+                                        <p:outputLabel for="platiDo" value="Do:"  class="right" />
+                                        <p:calendar id="platiDo" value="#{schvalovani.platiDo}" pattern="dd.MM.yyyy" disabled="true">
+                                            <p:ajax event="dateSelect" listener="#{schvalovani.onPlatiDoSelect}" update="platiOd,platiDo" />
+                                        </p:calendar>
+
+                                    </h:panelGrid>
+                                    <p:button value="Vyber data podle filtru." />
+                                </p:tab>
+                                <p:tab id="tabDetail" title="Detail cesty:">
+                                    <h:panelGrid columns="2" cellpadding="10">
+                                        <h:outputText value="Cesta:" class="right" />
+                                        <h:outputText value="" />
+                                        <h:outputText value="Od:" class="right" />
+                                        <h:outputText value="N/A" />
+                                        <h:outputText value="Do:" class="right" />
+                                        <h:outputText value="N/A" />
+                                        <h:outputText value="Místo:" class="right" />
+                                        <h:outputText value="N/A" />
+                                        <h:outputText value="Účel:" class="right" />
+                                        <h:outputText value="N/A" />
+                                        <h:outputText value="Účastníci:" class="right" />
+                                        <h:outputText value="N/A" />
+                                        <h:outputText value="Rezervace:" class="right" />
+                                        <h:outputText value="N/A" />
+                                    </h:panelGrid>
+                                </p:tab>
+                            </p:accordionPanel>
                         </h:form>
                     </p:layoutUnit>
                 </p:layout>
