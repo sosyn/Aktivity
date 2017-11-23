@@ -8,6 +8,9 @@ package jsf.schvalovani;
 import ejb.LoginUser;
 import entity.Cesta;
 import entity.Osoba;
+import entity.Rezervace;
+import entity.Ucastnik;
+import entity.Zdroj;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,12 +33,11 @@ public class Schvalovani implements Serializable {
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
     private Date platiOd = new Date();
     private Date platiDo = new Date();
-    private boolean vedouci=true;
-    private boolean zastupce=false;
-    private boolean schvalene=false;
-    private boolean neschvalene=false;
-    private boolean platiOdDo=false;
-    
+    private boolean vedouci = true;
+    private boolean zastupce = false;
+    private boolean schvalene = false;
+    private boolean neschvalene = false;
+    private boolean platiOdDo = false;
 
     @EJB
     private ejb.CestaFacade ejbCestaFacade;
@@ -134,5 +136,12 @@ public class Schvalovani implements Serializable {
      */
     public void setCesty(ArrayList<Cesta> cesty) {
         this.cesty = cesty;
+    }
+
+    class Schv {
+        Cesta cesta=null;
+        ArrayList<Ucastnik> ucastnici= new ArrayList<Ucastnik>();
+        ArrayList<Zdroj> zdroje = new ArrayList<Zdroj>();
+        ArrayList<Rezervace> rezervace = new ArrayList<Rezervace>();
     }
 }
