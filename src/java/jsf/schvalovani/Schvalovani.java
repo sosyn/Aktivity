@@ -107,14 +107,29 @@ public class Schvalovani implements Serializable {
 
     public void onPlatiDoSelect() {
     }
-
-    public void onCestaSelect(Object obj) {
-        System.out.println("Obj:" + (obj != null ? obj.toString() : "null"));
+    public void schvalit() {
+        System.out.println("selCesty.size():"+selCesty.size());
+        System.out.println("schvalit()");
     }
 
-    public void onCestaUnSelect(Object obj) {
-        System.out.println("Obj:" + (obj != null ? obj.toString() : "null"));
+    public void zamitnout() {
+        System.out.println("selCesty.size():"+selCesty.size());
+        System.out.println("zamitnout()");
     }
+    
+    public void showDetail(Cesta cesta) {
+        System.out.println("Cesta:" + (cesta != null ? cesta.toString() : "null"));
+        this.cesta=cesta;
+    }
+
+    public void onCestaSelect() {
+        System.out.println("onCestaSelect()");
+    }
+
+        public void onCestaUnSelect() {
+        System.out.println("onCestaUnSelect()");
+    }
+
 
     /**
      * @return the ejbCestaFacade
