@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.4.4
 -- Dumped by pg_dump version 9.4.4
--- Started on 2017-11-24 13:19:02
+-- Started on 2017-11-24 15:01:04
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -2406,6 +2406,7 @@ INSERT INTO osoba (id, name, password, extid, komentar, skupina, email, popis, p
 INSERT INTO osoba (id, name, password, extid, komentar, skupina, email, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('e691f9cb-b6f8-402a-9b12-08d3f33809f1', 'moravecz', '102b1411651236801bc228c443df2009', 4362, '', 'USER', 'zmoravec@mukrnov.cz', 'Ing. Zbyněk Moravec', '2017-01-01 14:22:56.884', '2100-12-31 14:22:56.884', '2017-08-17 14:23:37.186', '2017-11-24 12:29:30.367', 'postgres');
 INSERT INTO osoba (id, name, password, extid, komentar, skupina, email, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('7620415c-78e9-4d92-a34f-5735212235f5', 'kurnicka', 'c4ca823dc9a9941052070624b7311228', 4363, '', 'USER', 'vkurnicka@mukrnov.cz', 'Bc. Veronika Kurnická', '2017-01-01 14:22:56.884', '2100-12-31 14:22:56.884', '2017-08-17 14:23:37.291', '2017-11-24 12:29:30.367', 'postgres');
 INSERT INTO osoba (id, name, password, extid, komentar, skupina, email, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('da640687-4ab9-416c-8689-edcb5758e443', 'lopatova', '01f24637b91076d16f4ea33c82e107a3', 4921, '', 'USER', 'mlopatova@mukrnov.cz', 'Marie Lopatová', '2017-01-01 14:22:56.884', '2100-12-31 14:22:56.884', '2017-08-17 14:23:37.391', '2017-11-24 12:29:30.367', 'postgres');
+INSERT INTO osoba (id, name, password, extid, komentar, skupina, email, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('00000000-0000-0000-0000-000000000001', 'default', 'd41d8cd98f00b204e9800998ecf8427e', NULL, NULL, 'USER', '@mukrnov.cz', ' default', '2017-01-01 00:00:00', '2100-12-31 00:00:00', '2017-11-24 14:53:17.23', '2017-11-24 14:56:12.464', 'postgres');
 INSERT INTO osoba (id, name, password, extid, komentar, skupina, email, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('8b24fa34-03aa-4a82-bfeb-bb044d252be8', 'sosyn', '07a88e756847244f3496f63f473d6085', 21, '', 'USER', 'isosyn@mukrnov.cz', 'Sosýn Ivo Ing.', '2017-01-01 00:00:00', '2100-12-31 00:00:00', '2017-05-27 00:31:57.88', '2017-11-24 12:29:30.367', 'postgres');
 INSERT INTO osoba (id, name, password, extid, komentar, skupina, email, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('eb8c0aca-e74e-4190-9bef-14dd9270dafa', 'ivanicova', 'be6f3369f3d1e8cb81e39c3f680ce46d', 5305, '', 'USER', 'kivanicova@mukrnov.cz', 'DiS. Bc. Kateřina Ivaničová', '2017-01-01 14:22:56.884', '2100-12-31 14:22:56.884', '2017-08-17 14:23:37.491', '2017-11-24 12:29:30.367', 'postgres');
 INSERT INTO osoba (id, name, password, extid, komentar, skupina, email, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('c0693d97-95b4-4034-83f1-aed3b48dfc41', 'brazdilova', '281ffbf5eb2a3916b9c1eb8f28637836', 367, '', 'USER', 'rbrazdilova@mukrnov.cz', 'Brázdilová Rostislava, Bc.', '2017-01-01 00:00:00', '2100-12-31 00:00:00', '2017-08-17 14:23:28.395', '2017-11-24 12:29:30.367', 'postgres');
@@ -3737,7 +3738,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2017-11-24 13:19:05
+-- Completed on 2017-11-24 15:01:07
 
 --
 -- PostgreSQL database dump complete
