@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Dispečeři zdrojů (lidských i materiálních )</title>
+    </h:head>
+    <h:body>
+        <ui:composition template = "/templates/templateMain.xhtml">	
+            <ui:define name="contens">
+                <p:layout fullPage="false">
+                    <p:layoutUnit position="center" size="70%">
+                        <h:form id="FormDispecerHl">
+                            <p:dataTable value="#{dispecerHl.dispecerHlList}" var="item" selectionMode="single" selection="#{dispecerHl.dispecerHl}" rowKey="#{item.id}" >
+                                <p:ajax event="rowSelect" update=":FormDispecerHlBtn" listener="#{dispecerHl.rowDispecerHlSelectded(item)}" />
+                                
+                                <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains">
+                                    <f:facet name="header">
+                                        <h:outputText value="Příjmení, jméno, titul:"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idoso.popis}"/>
+                                </p:column>
+                                
+                                <p:column sortBy="#{item.idtypschv.popis}" filterBy="#{item.idtypschv.popis}" filterMatchMode="contains">
+                                    <f:facet name="header" >
+                                        <h:outputText value="Role"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idtypschv.popis}"/>
+                                </p:column>
+                                
+                                <p:column sortBy="#{item.idtypzdr.popis}" filterBy="#{item.idtypzdr.popis}" filterMatchMode="contains">
+                                    <f:facet name="header" >
+                                        <h:outputText value="Scvalovaný typ zdroje"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idtypzdr.popis}"/>
+                                </p:column>
+                                
+                                <p:column sortBy="#{item.platiod}">
+                                    <f:facet name="header">
+                                        <h:outputText value="Platí Od"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.platiod}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column sortBy="#{item.platido}">
+                                    <f:facet name="header" >
+                                        <h:outputText value="Do"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.platido}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                                    </h:outputText>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </p:layoutUnit>
+                    <!-- Panel s tlačítky-->
+                    <p:layoutUnit position="east" size="30%">
+                        <h:form id="FormDispecerHlBtn">                         
+                            <p>
+                                <p:commandButton id="DispecerHlNew" value="Nový" action="#{dispecerHl.newDispecerHl}" disabled="#{!dispecerHl.isButtonEnabled('new')}" update=":growl,:FormDispecerHl,:FormDispecerHlBtn" icon="fa fa-file-o" /> <br/>
+                                <p:commandButton id="DispecerHlEdit" value="Edituj" action="#{dispecerHl.editDispecerHl}" disabled="#{!dispecerHl.isButtonEnabled('edit')}" update=":growl,:FormDispecerHl,:FormDispecerHlBtn"  icon="fa fa-pencil-square-o"/><br/>
+                                <p:commandButton id="DispecerHlDel" value="Smazat záznam"  action="#{dispecerHl.delDispecerHl}" disabled="#{!dispecerHl.isButtonEnabled('delete')}"  update=":growl,:FormDispecerHl,:FormDispecerHlBtn"  icon="fa fa-remove">
+                                    <p:confirm  header="Potvrzení" message="Opravdu smazat záznam o dispečerovi?" icon="ui-icon-alert" />
+                                </p:commandButton><br/>
+                            </p>
+                            <p:confirmDialog header="Potvrďte volbu:" global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Ano" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="Ne" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>                            
+                        </h:form>
+                    </p:layoutUnit>
+                </p:layout>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
