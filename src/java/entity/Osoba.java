@@ -26,7 +26,7 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Osoba.findAll", query = "SELECT o FROM Osoba o")})
 public class Osoba extends entity.EntitySuperClass {
-    
+
     @Size(max = 2147483647)
     @Column(length = 2147483647)
     private String name;
@@ -49,98 +49,118 @@ public class Osoba extends entity.EntitySuperClass {
     private List<Cesta> cestaList;
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idoso")
     private List<Ucastnik> ucastnikList;
-    
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idoso")
+    private List<Dispecerhl> dispecerhlList;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idoso")
+    private List<Dispecerpol> dispecerpolList;
+
     public Osoba() {
         super();
     }
-    
+
     public Osoba(UUID id) {
         super(id);
     }
-    
+
     public Osoba(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         super(id, platiod, platido, timeinsert, timemodify);
     }
+
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public String getPassword() {
         return password;
     }
-    
+
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     public Integer getExtid() {
         return extid;
     }
-    
+
     public void setExtid(Integer extid) {
         this.extid = extid;
     }
-    
+
     public String getKomentar() {
         return komentar;
     }
-    
+
     public void setKomentar(String komentar) {
         this.komentar = komentar;
     }
-    
+
     public List<Log> getLogList() {
         return logList;
     }
-    
+
     public void setLogList(List<Log> logList) {
         this.logList = logList;
     }
-    
+
     public List<Zdroj> getZdrojList() {
         return zdrojList;
     }
-    
+
     public void setZdrojList(List<Zdroj> zdrojList) {
         this.zdrojList = zdrojList;
     }
-    
+
     public List<Schvaleni> getSchvaleniList() {
         return schvaleniList;
     }
-    
+
     public void setSchvaleniList(List<Schvaleni> schvaleniList) {
         this.schvaleniList = schvaleniList;
     }
-    
+
     public List<Aktivity> getAktivityList() {
         return aktivityList;
     }
-    
+
     public void setAktivityList(List<Aktivity> aktivityList) {
         this.aktivityList = aktivityList;
     }
-    
+
     public List<Cesta> getCestaList() {
         return cestaList;
     }
-    
+
     public void setCestaList(List<Cesta> cestaList) {
         this.cestaList = cestaList;
     }
-    
+
     public List<Ucastnik> getUcastnikList() {
         return ucastnikList;
     }
-    
+
     public void setUcastnikList(List<Ucastnik> ucastnikList) {
         this.ucastnikList = ucastnikList;
     }
-    
+
+    public List<Dispecerhl> getDispecerhlList() {
+        return dispecerhlList;
+    }
+
+    public void setDispecerhlList(List<Dispecerhl> dispecerhlList) {
+        this.dispecerhlList = dispecerhlList;
+    }
+
+    public List<Dispecerpol> getDispecerpolList() {
+        return dispecerpolList;
+    }
+
+    public void setDispecerpolList(List<Dispecerpol> dispecerpolList) {
+        this.dispecerpolList = dispecerpolList;
+    }
 
     @Override
     public int hashCode() {
@@ -166,5 +186,5 @@ public class Osoba extends entity.EntitySuperClass {
     public String toString() {
         return "entity.Osoba[ id=" + getId() + " ]";
     }
-    
+
 }

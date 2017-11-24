@@ -36,16 +36,23 @@ public class Zdroj extends entity.EntitySuperClass {
     @Column(length = 4096)
     private String komentar;
     private Integer kapacita;
+    
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idzdr")
     private List<Log> logList;
+    
     @JoinColumn(name = "idoso", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private Osoba idoso;
+    
     @JoinColumn(name = "idtypzdr", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private Typzdroje idtypzdr;
+    
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idzdr")
     private List<Rezervace> rezervaceList;
+    
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idzdr")
+    private List<Dispecerpol> dispecerpolList;
 
     public Zdroj() {
         super();
@@ -113,6 +120,14 @@ public class Zdroj extends entity.EntitySuperClass {
 
     public void setRezervaceList(List<Rezervace> rezervaceList) {
         this.rezervaceList = rezervaceList;
+    }
+
+    public List<Dispecerpol> getDispecerpolList() {
+        return dispecerpolList;
+    }
+
+    public void setDispecerpolList(List<Dispecerpol> dispecerpolList) {
+        this.dispecerpolList = dispecerpolList;
     }
 
     @Override

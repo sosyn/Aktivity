@@ -24,73 +24,86 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Typzdroje.findAll", query = "SELECT t FROM Typzdroje t")})
 public class Typzdroje extends entity.EntitySuperClass {
-    
+
     private Integer typzdr;
     private Integer cesta;
     private Integer rezervace;
+
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idtypzdr")
     private List<Zdroj> zdrojList;
+
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idtypzdr")
     private List<Cesta> cestaList;
-    
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idtypzdr")
+    private List<Dispecerhl> dispecerhlList;
+
     public Typzdroje() {
     }
-    
+
     public Typzdroje(UUID id) {
         super(id);
     }
-    
+
     public Typzdroje(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         super(id, platiod, platido, timeinsert, timemodify);
     }
-    
+
     public Integer getTypzdr() {
         return typzdr;
     }
-    
+
     public void setTypzdr(Integer typzdr) {
         this.typzdr = typzdr;
     }
-    
+
     public Integer getCesta() {
         return cesta;
     }
-    
+
     public void setCesta(Integer cesta) {
         this.cesta = cesta;
     }
-    
+
     public Integer getRezervace() {
         return rezervace;
     }
-    
+
     public void setRezervace(Integer rezervace) {
         this.rezervace = rezervace;
     }
-    
+
     public List<Zdroj> getZdrojList() {
         return zdrojList;
     }
-    
+
     public void setZdrojList(List<Zdroj> zdrojList) {
         this.zdrojList = zdrojList;
     }
-    
+
     public List<Cesta> getCestaList() {
         return cestaList;
     }
-    
+
     public void setCestaList(List<Cesta> cestaList) {
         this.cestaList = cestaList;
     }
-    
+
+    public List<Dispecerhl> getDispecerhlList() {
+        return dispecerhlList;
+    }
+
+    public void setDispecerhlList(List<Dispecerhl> dispecerhlList) {
+        this.dispecerhlList = dispecerhlList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (this.getId() != null ? this.getId().hashCode() : 0);
         return hash;
     }
-    
+
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -103,10 +116,10 @@ public class Typzdroje extends entity.EntitySuperClass {
         }
         return true;
     }
-    
+
     @Override
     public String toString() {
         return "entity.Typzdroje[ id=" + this.getId() + " ]";
     }
-    
+
 }

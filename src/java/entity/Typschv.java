@@ -34,8 +34,12 @@ public class Typschv extends entity.EntitySuperClass {
     @Size(min = 1, max = 2147483647)
     @Column(nullable = false, length = 2147483647)
     private String typschv;
+
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idtypschv")
     private List<Schvaleni> schvaleniList;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idtypschv")
+    private List<Dispecerhl> dispecerhlList;
 
     public Typschv() {
     }
@@ -64,6 +68,14 @@ public class Typschv extends entity.EntitySuperClass {
         this.schvaleniList = schvaleniList;
     }
 
+    public List<Dispecerhl> getDispecerhlList() {
+        return dispecerhlList;
+    }
+
+    public void setDispecerhlList(List<Dispecerhl> dispecerhlList) {
+        this.dispecerhlList = dispecerhlList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -88,5 +100,5 @@ public class Typschv extends entity.EntitySuperClass {
     public String toString() {
         return "entity.Typschv[ id=" + getId() + " ]";
     }
-   
+
 }
