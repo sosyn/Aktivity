@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.4.1
 -- Dumped by pg_dump version 9.4.1
--- Started on 2017-11-26 22:57:51
+-- Started on 2017-11-26 23:27:41
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -2502,6 +2502,7 @@ INSERT INTO typzdroje (id, typzdr, cesta, rezervace, osoba, popis, platiod, plat
 INSERT INTO typzdroje (id, typzdr, cesta, rezervace, osoba, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('823ca1d8-60dd-4f59-99e7-76138e997cb9', 0, 0, 0, NULL, 'Vozidlo služební', '2017-01-01 00:00:00', '2100-12-31 00:00:00', '2017-06-20 16:37:22.092', '2017-06-20 16:37:36.346', 'postgres');
 INSERT INTO typzdroje (id, typzdr, cesta, rezervace, osoba, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('f9043670-6118-4b7b-a4a4-a9ea77621483', 3, 1, 0, NULL, 'Notebook', '2017-01-01 00:00:00', '2100-12-31 00:00:00', '2017-06-20 16:38:22.743', '2017-06-20 16:38:34.192', 'postgres');
 INSERT INTO typzdroje (id, typzdr, cesta, rezervace, osoba, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('699e4b0e-54c1-4213-bb8e-4dc74629e3c4', 3, 1, 0, NULL, 'Dataprojektor', '2017-01-01 00:00:00', '2100-12-31 00:00:00', '2017-06-20 16:38:37.484', '2017-06-20 16:39:37.956', 'postgres');
+INSERT INTO typzdroje (id, typzdr, cesta, rezervace, osoba, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('ac94579b-b602-4994-87b4-d0ebfc3f4dda', 5, 1, 1, 0, 'Uživatel', '2017-01-01 00:00:00', '2100-12-31 00:00:00', '2017-11-26 23:24:55.649', '2017-11-26 23:25:15.559', 'postgres');
 
 
 --
@@ -3739,7 +3740,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2017-11-26 22:57:53
+-- Completed on 2017-11-26 23:27:43
 
 --
 -- PostgreSQL database dump complete
