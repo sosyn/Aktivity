@@ -27,6 +27,7 @@ public class Typzdroje extends entity.EntitySuperClass {
 
     private Integer typzdr;
     private Integer cesta;
+    private Integer osoba;
     private Integer rezervace;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idtypzdr")
@@ -63,6 +64,13 @@ public class Typzdroje extends entity.EntitySuperClass {
 
     public void setCesta(Integer cesta) {
         this.cesta = cesta;
+    }
+    public Integer getOsoba() {
+        return osoba;
+    }
+
+    public void setOsoba(Integer osoba) {
+        this.osoba = osoba;
     }
 
     public Integer getRezervace() {

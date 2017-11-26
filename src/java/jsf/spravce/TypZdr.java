@@ -47,7 +47,9 @@ public class TypZdr implements Serializable {
         {"Místnost", 1},
         {"Dopravní prostředek (jiný než vozidlo)", 2},
         {"Výpočetní technika", 3},
-        {"Ostatní nezařazené", 4}};
+        {"Ostatní nezařazené", 4},
+        {"Osoba", 5}
+    };
 
     @PostConstruct
     void initLoginUser() {

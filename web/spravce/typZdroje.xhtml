@@ -36,9 +36,15 @@
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Dopravní zdroj"/>
+                                        <h:outputText value="Dopravní prostředek"/>
                                     </f:facet>
                                     <h:outputText value="#{item.cesta==0?'Ano':'Ne'}"/>
+                                </p:column>                                
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Osoba"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.osoba==0?'Ano':'Ne'}"/>
                                 </p:column>                                
                                 <p:column  sortBy="#{item.platiod}">
                                     <f:facet name="header">
@@ -78,6 +84,14 @@
                             <p>
                                 <p:outputLabel for="typZdrCesta" value="Zdroj je dopravní prostředek:"  />
                                 <p:selectOneMenu id="typZdrCesta" value="#{typZdr.typZdr.cesta}">
+                                    <f:selectItem  itemLabel="Ano" itemValue="0" />
+                                    <f:selectItem itemLabel="Ne" itemValue="1"  />
+                                </p:selectOneMenu>
+                                <p:message for="typZdrCesta" />
+                            </p>
+                            <p>
+                                <p:outputLabel for="typZdrOsoba" value="Zdrojem je osoba:"  />
+                                <p:selectOneMenu id="typZdrOsoba" value="#{typZdr.typZdr.osoba}">
                                     <f:selectItem  itemLabel="Ano" itemValue="0" />
                                     <f:selectItem itemLabel="Ne" itemValue="1"  />
                                 </p:selectOneMenu>
