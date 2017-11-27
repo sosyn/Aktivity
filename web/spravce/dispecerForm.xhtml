@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cesta</title>
+    </h:head>
+    <h:body>
+        <ui:composition template = "/templates/templateMain.xhtml">	
+            <ui:define name="contens">
+                <p:layout fullPage="false">
+                    <p:layoutUnit position="center" size="30%" >
+                        <h:form id="dispecerForm" >
+                            <f:ajax event="keyup" render="dispecerForm"/>
+                            <h2>Dispečer(schvalovatel):</h2>
+                            <p>
+                                <p:outputLabel for="dispecer" value="Osoba dispečera: "/>
+                                <br/>
+                                <p:selectOneMenu id="dispecer" value="#{dispecerForm.dispecerHl.idoso}" converter="#{JSFConverterOsoba}" >
+                                    <f:selectItems value="#{dispecerForm.osobaList}" var="item" itemLabel="#{item.popis}" itemValue="#{item}"  />      
+                                </p:selectOneMenu>
+                            </p>
+                            <p>
+                                <p:outputLabel for="role" value="Role dispečera:" />
+                                <br/>
+                                <p:selectOneMenu id="cestaTypSchv" value="#{dispecerForm.dispecerHl.idtypschv}" converter="#{JSFConverterTypSchv}" >
+                                    <f:selectItems value="#{dispecerForm.typSchvList}" var="item" itemLabel="#{item.popis}" itemValue="#{item}"  />      
+                                </p:selectOneMenu>
+                            </p>
+                            <p>
+                                <p:outputLabel for="typZdroje" value="Typ(kategorie)zdroje:" />
+                                <br/>
+                                <p:selectOneMenu id="cestaTypZdr" value="#{dispecerForm.dispecerHl.idtypzdr}" converter="#{JSFConverterTypZdr}" >
+                                    <f:selectItems value="#{dispecerForm.typZdrList}" var="item" itemLabel="#{item.popis}" itemValue="#{item}"  />      
+                                </p:selectOneMenu>
+                            </p>
+                            <p:outputLabel for="platiOd" value="Záznam platí od: "/>
+                            <p:calendar id="platiOd" value="#{dispecerForm.dispecerHl.platiod}" valueChangeListener="#{dispecerForm.platiOdListener}" pattern="dd.MM.yyyy"  showOn="button" validator="#{validatorPlatiOd.validate}">
+                                <p:ajax event="dateSelect" update=":dispecerForm:platiDo" />
+                                <p:ajax event="blur" update=":dispecerForm:platiDo" />
+                                <f:attribute name="platiDo" value="#{dispecerForm.dispecerHl.platido}" />
+                            </p:calendar>
+                            <br/>
+                            <p:outputLabel for="platiDo" value="Do: "/>
+                            <p:calendar id="platiDo" value="#{dispecerForm.dispecerHl.platido}" valueChangeListener="#{dispecerForm.platiDoListener}" pattern="dd.MM.yyyy"  showOn="button" >
+                                <p:ajax event="dateSelect" update=":dispecerForm:platiOd" />
+                            </p:calendar>                   
+                            <!--                            <h:outputText id="targetCestaForm" /> -->
+                        </h:form>
+                    </p:layoutUnit>
+                    <p:layoutUnit position="east" size="70%" >
+                    </p:layoutUnit>
+                    <p:layoutUnit position="south">
+                        <h:form id="dispecerFormBtn" >
+                            <p:commandButton id="dispecerOK" action="#{dispecerForm.saveDispecer}" value="OK" icon="fa fa-file-o" ajax="false" />
+                            <p:commandButton id="dispecerCancle" value="Zpět" action="/spravce/dipeceri" icon="fa fa-edit"  ajax="false" />
+                        </h:form>
+                    </p:layoutUnit>
+                </p:layout>
+                <ui:include src="/helper/helperOsoby.xhtml"/>
+                <ui:include src="/helper/helperZdroj.xhtml"/>               
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

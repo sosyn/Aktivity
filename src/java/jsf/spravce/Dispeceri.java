@@ -29,9 +29,9 @@ import jsf.util.JsfUtil.PersistAction;
  *
  * @author Ivo
  */
-@Named("dispecerHl")
+@Named("dispeceri")
 @SessionScoped
-public class DispecerHl implements Serializable {
+public class Dispeceri implements Serializable {
 
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
 
