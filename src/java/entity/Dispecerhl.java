@@ -25,9 +25,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(catalog = "aktivity", schema = "public")
 public class Dispecerhl extends entity.EntitySuperClass {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddisphl", fetch = FetchType.LAZY)
-    private List<Dispecerpol> dispecerpolList;
-
     @JoinColumn(name = "idoso", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Osoba idoso;
@@ -40,6 +37,18 @@ public class Dispecerhl extends entity.EntitySuperClass {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Typzdroje idtypzdr;
 
+    @JoinColumn(name = "iddisphl", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Dispecerhl iddisphl;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddisphl", fetch = FetchType.LAZY)
+    private List<Dispecerpol> dispecerpolList;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddisphl", fetch = FetchType.LAZY)
+    private List<Dispecerhl> zastupci;
+
+    
+    
     public Dispecerhl() {
         super();
     }
@@ -110,6 +119,34 @@ public class Dispecerhl extends entity.EntitySuperClass {
     @Override
     public String toString() {
         return "entity.Dispecerhl[ id=" + getId() + " ]";
+    }
+
+    /**
+     * @return the iddisphl
+     */
+    public Dispecerhl getIddisphl() {
+        return iddisphl;
+    }
+
+    /**
+     * @param iddisphl the iddisphl to set
+     */
+    public void setIddisphl(Dispecerhl iddisphl) {
+        this.iddisphl = iddisphl;
+    }
+
+    /**
+     * @return the zastupci
+     */
+    public List<Dispecerhl> getZastupci() {
+        return zastupci;
+    }
+
+    /**
+     * @param zastupci the zastupci to set
+     */
+    public void setZastupci(List<Dispecerhl> zastupci) {
+        this.zastupci = zastupci;
     }
     
 }
