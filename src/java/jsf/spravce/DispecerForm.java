@@ -5,23 +5,26 @@
  */
 package jsf.spravce;
 
-import ejb.LoginUser;
+import ejb.DAOdispecer;
 import entity.Dispecerhl;
 import entity.Dispecerpol;
 import entity.Osoba;
+import entity.Typschv;
 import entity.Typzdroje;
 import java.io.Serializable;
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import jsf.util.JsfUtil;
 
 /**
  *
@@ -33,30 +36,22 @@ public class DispecerForm implements Serializable {
 
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
 
-    @EJB
-    private ejb.DispecerHlFacade ejbDispHlFacade;
-    @EJB
-    private ejb.DispecerPolFacade ejbDispPolFacade;
+    @Inject DAOdispecer daoDispecer;
+
     @EJB
     private ejb.TypZdrFacade ejbTypZdrFacade;
     @EJB
+    private ejb.TypSchvFacade ejbTypSchvFacade;
+    @EJB
     private ejb.OsobaFacade ejbOsobaFacade;
-    @Inject
-    private LoginUser loginUser;
-    private Dispecerhl dispecerHl = null;
-    private ArrayList<Dispecerhl> zastupceList = null;
-    private ArrayList<Dispecerpol> dispecerPolList = null;
+
     private ArrayList<Typzdroje> typZdrList = null;
+    private ArrayList<Typschv> typSchvList = null;
     private ArrayList<Osoba> osobaList = null;
 
     @PostConstruct
-    void initLoginUser() {
-        Principal userPrincipal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
-        if (userPrincipal != null) {
-            System.out.println("userPrincipal.getName():" + userPrincipal.getName());
-        }
-        loginUser.initLoginUser();
-        System.out.println("loginUser:" + loginUser);
+    void initDispecerForm() {
+        System.out.println("initDispecerForm()");
     }
 
     // Add business logic below. (Right-click in editor and choose
@@ -79,50 +74,46 @@ public class DispecerForm implements Serializable {
      * @return the dispecerHl
      */
     public Dispecerhl getDispecerHl() {
-        return this.dispecerHl;
+        return this.daoDispecer.getDispecerHl();
     }
 
     /**
      * @param dispecerHl the dispecerHl to set
      */
     public void setDispecerHl(Dispecerhl dispecerHl) {
-        this.dispecerHl = dispecerHl;
+        this.daoDispecer.setDispecerHl(dispecerHl);
     }
 
     /**
-     * @return the zastupceList
+     * @return the dispecerHlList
      */
-    public List<Dispecerhl> getZastupceList() {
-        if (this.zastupceList == null) {
-            this.zastupceList = new ArrayList<Dispecerhl>(ejbDispHlFacade.findAll());
-        }
-        return this.zastupceList;
-
+    public List<Dispecerhl> getDispecerHlList() {
+        return this.daoDispecer.getDispecerHlList();
     }
 
     /**
-     * @param zastupceList the zastupceList to set
+     * @param dispecerHlList the dispecerHlList to set
      */
-    public void setZastupceList(ArrayList<Dispecerhl> zastupceList) {
-        this.zastupceList = zastupceList;
+    public void setDispecerHlList(ArrayList<Dispecerhl> dispecerHlList) {
+        this.daoDispecer.setDispecerHlList(dispecerHlList);
     }
 
     public Dispecerhl getDispecerHl(Object id) {
-        return ejbDispHlFacade.find(id);
+        return this.daoDispecer.getEjbDispHlFacade().find(id);
     }
 
     /**
      * @return the dispecerPolList
      */
     public ArrayList<Dispecerpol> getDispecerPolList() {
-        return dispecerPolList;
+        return this.daoDispecer.getDispecerPolList();
     }
 
     /**
      * @param dispecerPolList the dispecerPolList to set
      */
     public void setDispecerPolList(ArrayList<Dispecerpol> dispecerPolList) {
-        this.dispecerPolList = dispecerPolList;
+        this.daoDispecer.setDispecerPolList(dispecerPolList);
     }
 
     /**
@@ -143,9 +134,29 @@ public class DispecerForm implements Serializable {
     }
 
     /**
+     * @return the typSchvList
+     */
+    public ArrayList<Typschv> getTypSchvList() {
+        if (this.typSchvList == null) {
+            this.typSchvList = new ArrayList<>(ejbTypSchvFacade.findAll());
+        }
+        return typSchvList;
+    }
+
+    /**
+     * @param typSchvList the typSchvList to set
+     */
+    public void setTypSchvList(ArrayList<Typschv> typSchvList) {
+        this.typSchvList = typSchvList;
+    }
+
+    /**
      * @return the osobaList
      */
     public ArrayList<Osoba> getOsobaList() {
+        if (this.osobaList == null) {
+            this.osobaList = new ArrayList<>(ejbOsobaFacade.findAllSortByName());
+        }
         return osobaList;
     }
 
@@ -157,22 +168,55 @@ public class DispecerForm implements Serializable {
     }
 
     public void platiOdListener() {
-        if (dispecerHl.getPlatiod().after(dispecerHl.getPlatido())) {
-            this.cal.setTime(dispecerHl.getPlatiod());
+        if (this.daoDispecer.getDispecerHl().getPlatiod().after(this.daoDispecer.getDispecerHl().getPlatido())) {
+            this.cal.setTime(this.daoDispecer.getDispecerHl().getPlatiod());
             if (cal.get(Calendar.HOUR_OF_DAY) < 17) {
                 cal.set(Calendar.HOUR_OF_DAY, 17);
             }
-            dispecerHl.setPlatido(this.cal.getTime());
+            this.daoDispecer.getDispecerHl().setPlatido(this.cal.getTime());
         }
     }
 
     public void platiDoListener() {
     }
-    
+
     /**
      * Uložení záznam dispecerHl do databáze - persistence
      */
-    public void saveDispecer() {
+    public void prepareCreate() {
+        this.daoDispecer.newDispecerHl();
     }
 
+    public String save() {
+        try {
+            this.daoDispecer.saveDispHl();
+            JsfUtil.addSuccessMessage("Záznam byl úspěšně uložen.");
+        } catch (EJBException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            String msg = "";
+            Throwable cause = ex.getCause();
+            if (cause != null) {
+                msg = cause.getLocalizedMessage();
+            }
+            if (msg.length() > 0) {
+                JsfUtil.addErrorMessage(msg);
+            } else {
+                JsfUtil.addErrorMessage(ex, "Chyba uložení dat");
+            }
+            this.daoDispecer.resetDispecerHl();
+            JsfUtil.validationFailed();
+
+        } catch (Exception ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, "Chyba zpracování");
+            this.daoDispecer.resetDispecerHl();
+            JsfUtil.validationFailed();
+        }
+        return "/spravce/dispeceri";
+    }
+
+    public String cancel() {
+        this.daoDispecer.resetDispecerHl();
+        return "/spravce/dispeceri";
+    }
 }

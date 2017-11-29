@@ -12,32 +12,32 @@
         <ui:composition template = "/templates/templateMain.xhtml">	
             <ui:define name="contens">
                 <p:layout fullPage="false">
-                    <p:layoutUnit position="center" size="70%">
-                        <h:form id="FormDispeceri">
+                    <h:form id="FormDispeceri">
+                        <p:layoutUnit position="center" size="70%">
                             <p:dataTable value="#{dispeceri.dispecerHlList}" var="item" selectionMode="single" selection="#{dispeceri.dispecerHl}" rowKey="#{item.id}" >
-                                <p:ajax event="rowSelect" update=":FormDispeceriBtn" listener="#{dispeceri.rowDispecerHlSelectded(item)}" />
-                                
+                                <p:ajax event="rowSelect" update=":FormDispeceri" listener="#{dispeceri.rowDispecerHlSelectded(item)}" />
+
                                 <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains">
                                     <f:facet name="header">
                                         <h:outputText value="Příjmení, jméno, titul:"/>
                                     </f:facet>
                                     <h:outputText value="#{item.idoso.popis}"/>
                                 </p:column>
-                                
+
                                 <p:column sortBy="#{item.idtypschv.popis}" filterBy="#{item.idtypschv.popis}" filterMatchMode="contains">
                                     <f:facet name="header" >
                                         <h:outputText value="Role"/>
                                     </f:facet>
                                     <h:outputText value="#{item.idtypschv.popis}"/>
                                 </p:column>
-                                
+
                                 <p:column sortBy="#{item.idtypzdr.popis}" filterBy="#{item.idtypzdr.popis}" filterMatchMode="contains">
                                     <f:facet name="header" >
                                         <h:outputText value="Schvalovaný typ zdroje"/>
                                     </f:facet>
                                     <h:outputText value="#{item.idtypzdr.popis}"/>
                                 </p:column>
-                                
+
                                 <p:column sortBy="#{item.platiod}">
                                     <f:facet name="header">
                                         <h:outputText value="Platí Od"/>
@@ -55,15 +55,13 @@
                                     </h:outputText>
                                 </p:column>
                             </p:dataTable>
-                        </h:form>
-                    </p:layoutUnit>
-                    <!-- Panel s tlačítky-->
-                    <p:layoutUnit position="east" size="30%">
-                        <h:form id="FormDispeceriBtn">                         
+                        </p:layoutUnit>
+                        <!-- Panel s tlačítky-->
+                        <p:layoutUnit position="east" size="30%">
                             <p>
-                                <p:commandButton id="DispeceriNew" value="Nový" action="#{dispeceri.newDispecerHl}" disabled="#{!dispeceri.isButtonEnabled('new')}" update=":growl,:FormDispeceri,:FormDispeceriBtn" icon="fa fa-file-o" /> <br/>
-                                <p:commandButton id="DispeceriEdit" value="Edituj" action="#{dispeceri.editDispecerHl}" disabled="#{!dispeceri.isButtonEnabled('edit')}" update=":growl,:FormDispeceri,:FormDispeceriBtn"  icon="fa fa-pencil-square-o"/><br/>
-                                <p:commandButton id="DispeceriDel" value="Smazat záznam"  action="#{dispeceri.delDispecerHl}" disabled="#{!dispeceri.isButtonEnabled('delete')}"  update=":growl,:FormDispeceri,:FormDispeceriBtn"  icon="fa fa-remove">
+                                <p:commandButton id="DispeceriNew" value="Nový" action="#{dispeceri.newDispecerHl}" disabled="#{!dispeceri.isButtonEnabled('new')}" update=":growl" icon="fa fa-file-o" /> <br/>
+                                <p:commandButton id="DispeceriEdit" value="Edituj" action="#{dispeceri.editDispecerHl}" disabled="#{!dispeceri.isButtonEnabled('edit')}" update=":growl"  icon="fa fa-pencil-square-o"/><br/>
+                                <p:commandButton id="DispeceriDel" value="Smazat záznam"  action="#{dispeceri.delDispecerHl}" disabled="#{!dispeceri.isButtonEnabled('delete')}"  update=":growl"  icon="fa fa-remove">
                                     <p:confirm  header="Potvrzení" message="Opravdu smazat záznam o dispečerovi?" icon="ui-icon-alert" />
                                 </p:commandButton><br/>
                             </p>
@@ -71,8 +69,8 @@
                                 <p:commandButton value="Ano" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                                 <p:commandButton value="Ne" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>                            
-                        </h:form>
-                    </p:layoutUnit>
+                        </p:layoutUnit>
+                    </h:form>
                 </p:layout>
             </ui:define>
         </ui:composition>
