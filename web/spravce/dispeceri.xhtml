@@ -14,8 +14,9 @@
                 <p:layout fullPage="false">
                     <h:form id="FormDispeceri">
                         <p:layoutUnit position="center" size="70%">
-                            <p:dataTable value="#{dispeceri.dispecerHlList}" var="item" selectionMode="single" selection="#{dispeceri.dispecerHl}" rowKey="#{item.id}" >
-                                <p:ajax event="rowSelect" update=":FormDispeceri" listener="#{dispeceri.rowDispecerHlSelectded(item)}" />
+                            <p:dataTable value="#{daoDispecer.dispecerHlList}" var="item" selectionMode="single" selection="#{daoDispecer.dispecerHl}" rowKey="#{item.id}" >
+
+                                <p:ajax event="rowSelect" update=":FormDispeceri:DispeceriNew :FormDispeceri:DispeceriEdit :FormDispeceri:DispeceriDel" listener="#{dispeceri.rowDispecerHlSelectded(item)}" />
 
                                 <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains">
                                     <f:facet name="header">

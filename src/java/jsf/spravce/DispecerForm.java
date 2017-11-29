@@ -169,15 +169,14 @@ public class DispecerForm implements Serializable {
 
     public void platiOdListener() {
         if (this.daoDispecer.getDispecerHl().getPlatiod().after(this.daoDispecer.getDispecerHl().getPlatido())) {
-            this.cal.setTime(this.daoDispecer.getDispecerHl().getPlatiod());
-            if (cal.get(Calendar.HOUR_OF_DAY) < 17) {
-                cal.set(Calendar.HOUR_OF_DAY, 17);
-            }
-            this.daoDispecer.getDispecerHl().setPlatido(this.cal.getTime());
+            this.daoDispecer.getDispecerHl().setPlatido( this.daoDispecer.getDispecerHl().getPlatiod() );
         }
     }
 
     public void platiDoListener() {
+        if (this.daoDispecer.getDispecerHl().getPlatiod().after(this.daoDispecer.getDispecerHl().getPlatido())) {
+            this.daoDispecer.getDispecerHl().setPlatiod( this.daoDispecer.getDispecerHl().getPlatido() );
+        }
     }
 
     /**

@@ -7,59 +7,20 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Cesta</title>
+        <title>Dispečer-detail</title>
     </h:head>
     <h:body>
         <ui:composition template = "/templates/templateMain.xhtml">	
             <ui:define name="contens">
                 <p:layout fullPage="false">
                     <h:form id="dispecerForm" >
-                        <f:ajax event="keyup" render="dispecerForm"/>
                         <p:layoutUnit position="center" size="30%" >
-                            <h2>Dispečer(schvalovatel):</h2>
-                            <p>
-                                <p:outputLabel for="dispecer" value="Osoba dispečera: "/>
-                                <br/>
-                                <p:selectOneMenu id="dispecer" value="#{dispecerForm.dispecerHl.idoso}" converter="#{JSFConverterOsoba}" >
-                                    <f:selectItems value="#{dispecerForm.osobaList}" var="item" itemLabel="#{item.popis}" itemValue="#{item}"  />      
-                                </p:selectOneMenu>
-                            </p>
-                            <p>
-                                <p:outputLabel for="cestaTypSchv" value="Role dispečera:" />
-                                <br/>
-                                <p:selectOneMenu id="cestaTypSchv" value="#{dispecerForm.dispecerHl.idtypschv}" converter="#{JSFConverterTypSchv}" >
-                                    <f:selectItems value="#{dispecerForm.typSchvList}" var="item" itemLabel="#{item.popis}" itemValue="#{item}"  />      
-                                </p:selectOneMenu>
-                            </p>
-                            <p>
-                                <p:outputLabel for="typZdroje" value="Typ(kategorie)zdroje:" />
-                                <br/>
-                                <p:selectOneMenu id="typZdroje" value="#{dispecerForm.dispecerHl.idtypzdr}" converter="#{JSFConverterTypZdr}" >
-                                    <f:selectItems value="#{dispecerForm.typZdrList}" var="item" itemLabel="#{item.popis}" itemValue="#{item}"  />      
-                                </p:selectOneMenu>
-                            </p>
-                            <p:outputLabel for="platiOd" value="Záznam platí od: "/>
-                            <p:calendar id="platiOd" value="#{dispecerForm.dispecerHl.platiod}" valueChangeListener="#{dispecerForm.platiOdListener}" pattern="dd.MM.yyyy"  showOn="button">
-                                <p:ajax event="dateSelect" update="platiDo" />
-                                <p:ajax event="blur" update="platiDo" />
-                                <f:attribute name="platiDo" value="#{dispecerForm.dispecerHl.platido}" />
-                            </p:calendar>
-                            <br/>
-                            <p:outputLabel for="platiDo" value="Do: "/>
-                            <p:calendar id="platiDo" value="#{dispecerForm.dispecerHl.platido}" valueChangeListener="#{dispecerForm.platiDoListener}" pattern="dd.MM.yyyy"  showOn="button" >
-                                <p:ajax event="dateSelect" update="platiOd" />
-                            </p:calendar>                   
-                            <!--                            <h:outputText id="targetCestaForm" /> -->
-                            <!--
-                                                     </h:form>
-                            -->                            
+                            <ui:include src="dispecerFormDisp.xhtml" />
+                            <ui:include src="dispecerFormZast.xhtml" />
                         </p:layoutUnit>
                         <p:layoutUnit position="east" size="70%" >
                         </p:layoutUnit>
                         <p:layoutUnit position="south">
-                            <!--
-                                                 <h:form id="dispecerFormBtn" >
-                            -->
                             <p:commandButton id="dispecerOK" action="#{dispecerForm.save()}" value="OK" icon="fa fa-file-o" ajax="false" />
                             <p:commandButton id="dispecerCancle" value="Zpět" action="#{dispecerForm.cancel()}" icon="fa fa-edit"  ajax="false" />
                         </p:layoutUnit>

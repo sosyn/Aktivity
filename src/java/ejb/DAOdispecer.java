@@ -7,12 +7,12 @@ package ejb;
 
 import entity.Dispecerhl;
 import entity.Dispecerpol;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import jsf.util.JsfUtil;
@@ -21,11 +21,13 @@ import jsf.util.JsfUtil;
  *
  * @author Ivo
  */
-@Named(value = "DAOdispecer")
+@Named(value = "daoDispecer")
 @SessionScoped
-@Stateful
-public class DAOdispecer {
+//@Stateful
+public class DAOdispecer implements Serializable{
 
+    static final long serialVersionUID = 42L;
+    
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
 
     @EJB
