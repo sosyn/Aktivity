@@ -24,10 +24,13 @@ import jsf.util.JsfUtil;
 @Named(value = "daoDispecer")
 @SessionScoped
 //@Stateful
-public class DAOdispecer implements Serializable{
+public class DAOdispecer implements Serializable {
 
     static final long serialVersionUID = 42L;
-    
+
+    public static final int DISPECERHL_NEW = 0;
+    public static final int DISPECERHL_EDIT = 1;
+
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
 
     @EJB
@@ -36,7 +39,6 @@ public class DAOdispecer implements Serializable{
     private Dispecerhl dispecerHl = null;
     private ArrayList<Dispecerhl> dispecerHlList = null;
     private Dispecerhl zastupce = null;
-    private ArrayList<Dispecerhl> zastupceList = null;
 
     @EJB
     private ejb.DispecerPolFacade ejbDispPolFacade;
@@ -149,24 +151,10 @@ public class DAOdispecer implements Serializable{
     }
 
     /**
-     * @param zastupceList the zastupceList to set
-     */
-    public void setZastupceList(ArrayList<Dispecerhl> zastupceList) {
-        this.zastupceList = zastupceList;
-    }
-
-    /**
-     * @return the zastupceList
-     */
-    public ArrayList<Dispecerhl> getZastupceList() {
-        return zastupceList;
-    }
-
-    /**
      * Metoda vztvori noveho dispecera
      */
     public void newDispecerHl() {
-        this.dispecerHl= new Dispecerhl();
+        this.dispecerHl = new Dispecerhl();
         this.dispecerHl.setNewEntity(true);
         cal.set(Calendar.YEAR, 2017);
         cal.set(Calendar.MONTH, Calendar.JANUARY);
@@ -182,8 +170,8 @@ public class DAOdispecer implements Serializable{
         this.dispecerHl.setPlatido(cal.getTime());
     }
 
-    public void fullDispecerHl(int mod) {
-        if (mod == 0) {
+    public void fillDispecerHl(int mod) {
+        if (mod == DAOdispecer.DISPECERHL_NEW) {
             newDispecerHl();
         } else {
 // !!!!!! Naplnit vsechny matice
@@ -191,29 +179,40 @@ public class DAOdispecer implements Serializable{
     }
 
 //-----------------------
-// Cast PERSISTENCE
+// Cast PERSISTENCE pro dispecera
 //--------------------------    
-    public void saveDispHl() {
+    public void dispHlSave() {
         if (this.getDispecerHl().isNewEntity()) {
-            persist(JsfUtil.PersistAction.CREATE);
+            dispHlPersist(JsfUtil.PersistAction.CREATE);
         } else {
-            persist(JsfUtil.PersistAction.UPDATE);
+            dispHlPersist(JsfUtil.PersistAction.UPDATE);
         }
     }
 
-    public void delete() {
-        persist(JsfUtil.PersistAction.DELETE);
+    public void dispHlDelete() {
+        dispHlPersist(JsfUtil.PersistAction.DELETE);
     }
 
-    private void persist(JsfUtil.PersistAction persistAction) {
+    private void dispHlPersist(JsfUtil.PersistAction persistAction) {
+        ArrayList<Dispecerhl> zastupciList = new ArrayList<>(this.dispecerHl.getZastupciList());
         if (this.getDispecerHl() != null) {
             switch (persistAction) {
                 case CREATE:
-                    getEjbDispHlFacade().create(getDispecerHl());
                     this.getDispecerHl().setNewEntity(false);
+                    for (Dispecerhl zast : zastupciList) {
+                        if (zast.getIdoso() == null) {
+                            this.dispecerHl.getZastupciList().remove(zast);
+                        }
+                    }
+                    getEjbDispHlFacade().create(getDispecerHl());
                     this.dispecerHlList.add(this.dispecerHl);
                     break;
                 case UPDATE:
+                    for (Dispecerhl zast : zastupciList) {
+                        if (zast.getIdoso() == null) {
+                            this.dispecerHl.getZastupciList().remove(zast);
+                        }
+                    }
                     getEjbDispHlFacade().edit(getDispecerHl());
                     break;
                 case DELETE:
@@ -223,12 +222,61 @@ public class DAOdispecer implements Serializable{
         }
     }
 
-    public void resetDispecerHl() {
+    public void dispHlReset() {
         if (this.dispecerHl != null) {
             if (this.dispecerHl.isNewEntity()) {
                 this.dispecerHl = null;
             } else {
                 this.dispecerHl = ejbDispHlFacade.find(this.dispecerHl.getId());
+            }
+        }
+    }
+
+    /*
+    * Prace se zastupci
+     */
+    public void zastNew() {
+        this.zastupce = new Dispecerhl();
+        // Dosadit dispecera, jehoz bude zaznam zastupcem
+        this.zastupce.setIddisphl(dispecerHl);
+        this.zastupce.setIdtypschv(dispecerHl.getIdtypschv());
+        this.zastupce.setIdtypzdr(dispecerHl.getIdtypzdr());
+        this.zastupce.setNewEntity(true);
+        cal.set(Calendar.YEAR, 2017);
+        cal.set(Calendar.MONTH, Calendar.JANUARY);
+        cal.set(Calendar.DAY_OF_YEAR, 1);
+        cal.set(Calendar.HOUR_OF_DAY, 00);
+        cal.set(Calendar.MINUTE, 00);
+        this.zastupce.setPlatiod(cal.getTime());
+        cal.set(Calendar.YEAR, 2100);
+        cal.set(Calendar.MONTH, Calendar.JANUARY);
+        cal.set(Calendar.DAY_OF_YEAR, 1);
+        cal.set(Calendar.HOUR_OF_DAY, 00);
+        cal.set(Calendar.MINUTE, 00);
+        this.zastupce.setPlatido(cal.getTime());
+
+        this.dispecerHl.getZastupciList().add(this.zastupce);
+    }
+
+    public void zastEdit() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void zastDel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void zastSave() {
+        for (Dispecerhl zast : this.dispecerHl.getZastupciList()) {
+            if (zast.getIdoso() != null) {
+                zast.setIdtypschv(dispecerHl.getIdtypschv());
+                zast.setIdtypzdr(dispecerHl.getIdtypzdr());
+                if (zast.isNewEntity()) {
+                    zast.setNewEntity(false);
+                    getEjbDispHlFacade().create(zast);
+                } else {
+                    getEjbDispHlFacade().edit(zast);
+                }
             }
         }
     }

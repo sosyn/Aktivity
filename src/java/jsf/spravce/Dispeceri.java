@@ -8,8 +8,6 @@ package jsf.spravce;
 import ejb.DAOdispecer;
 import entity.Dispecerhl;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -35,41 +33,6 @@ public class Dispeceri implements Serializable {
         System.out.println("initDispeceri()");
     }
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
-    /**
-     * @return the dispecerHl
-     */
-    public Dispecerhl getDispecerHl() {
-        return this.daoDispecer.getDispecerHl();
-    }
-
-    /**
-     * @param dispecerHl the dispecerHl to set
-     */
-    public void setDispecerHl(Dispecerhl dispecerHl) {
-        this.daoDispecer.setDispecerHl(dispecerHl);
-    }
-
-    /**
-     * @return the dispecerHlList
-     */
-    public List<Dispecerhl> getDispecerHlList() {
-        return this.daoDispecer.getDispecerHlList();
-
-    }
-
-    /**
-     * @param dispecerHlList the dispecerHlList to set
-     */
-    public void setDispecerHlList(ArrayList<Dispecerhl> dispecerHlList) {
-        this.daoDispecer.setDispecerHlList(dispecerHlList);
-    }
-
-    public Dispecerhl getDispecerHl(Object id) {
-        return this.daoDispecer.getEjbDispHlFacade().find(id);
-    }
-
     public boolean isButtonEnabled(String param) {
         switch (param) {
             case "new":
@@ -87,19 +50,19 @@ public class Dispeceri implements Serializable {
 
     public String newDispecerHl() {
         String detailDispecerHl = "/spravce/dispecerForm";
-        daoDispecer.fullDispecerHl(0);
+        daoDispecer.fillDispecerHl(DAOdispecer.DISPECERHL_NEW);
         return detailDispecerHl;
     }
 
     public String editDispecerHl() {
         String detailDispecerHl = "/spravce/dispecerForm";
-        daoDispecer.fullDispecerHl(1);
+        daoDispecer.fillDispecerHl(DAOdispecer.DISPECERHL_EDIT);
         return detailDispecerHl;
     }
 
     public String delDispecerHl() {
         try {
-            this.daoDispecer.delete();
+            this.daoDispecer.dispHlDelete();
             JsfUtil.addSuccessMessage("Záznam byl úspěšně smazán.");
         } catch (EJBException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);

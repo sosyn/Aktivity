@@ -5,37 +5,45 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <p:panelGrid columns="1" layout="grid">
+    <p:panelGrid columns="2" layout="grid">
         <f:facet name="header">
-            <p:row > 
-                <p:column>Zástupci dispečera</p:column>
+            <p:row> 
+                <p:column colspan="2">Zástupci dispečera</p:column>
             </p:row>
         </f:facet>
-        <p:dataTable value="#{daoDispecer.zastupceList}" var="item" selectionMode="single" selection="#{daoDispecer.zastupceList}" rowKey="#{item.id}" >
-            <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains">
-                <f:facet name="header">
-                    <h:outputText value="Příjmení, jméno, titul:"/>
-                </f:facet>
-                <h:outputText value="#{item.idoso.popis}"/>
-            </p:column>
+            <p:column>
+                <p:dataTable id="dataTableZast" value="#{daoDispecer.dispecerHl.zastupciList}" var="item" selectionMode="single" selection="#{daoDispecer.zastupce}" rowKey="#{item.id}" editable="true" editMode="cell" >
+                    <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="Příjmení, jméno, titul:"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idoso.popis}"/>
+                    </p:column>
 
-            <p:column sortBy="#{item.platiod}" >
-                <f:facet name="header">
-                    <h:outputText value="Platí Od"/>
-                </f:facet>
-                <h:outputText value="#{item.platiod}" >
-                    <f:convertDateTime pattern="dd.MM.yyyy" />
-                </h:outputText>
+                    <p:column sortBy="#{item.platiod}" >
+                        <f:facet name="header">
+                            <h:outputText value="Platí Od"/>
+                        </f:facet>
+                        <h:outputText value="#{item.platiod}" >
+                            <f:convertDateTime pattern="dd.MM.yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.platido}">
+                        <f:facet name="header" >
+                            <h:outputText value="Do"/>
+                        </f:facet>
+                        <h:outputText value="#{item.platido}">
+                            <f:convertDateTime pattern="dd.MM.yyyy" />
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
             </p:column>
-            <p:column sortBy="#{item.platido}">
-                <f:facet name="header" >
-                    <h:outputText value="Do"/>
-                </f:facet>
-                <h:outputText value="#{item.platido}">
-                    <f:convertDateTime pattern="dd.MM.yyyy" />
-                </h:outputText>
+            <p:column >
+                <p:commandButton id="ZastupceNew" value="Nový" action="#{dispecerForm.zastupceNew}" disabled="#{!dispecerForm.isButtonZastEnabled('new')}" update=":growl dataTableZast" icon="fa fa-file-o" /> <br/>
+                <p:commandButton id="ZastupceEdit" value="Edituj" action="#{dispecerForm.zastupceEdit}" disabled="#{!dispecerForm.isButtonZastEnabled('edit')}" update=":growl dataTableZast"  icon="fa fa-pencil-square-o"/><br/>
+                <p:commandButton id="ZastupceDel" value="Smazat záznam"  action="#{dispecerForm.zastupceDel}" disabled="#{!dispecerForm.isButtonZastEnabled('delete')}"  update=":growl dataTableZast"  icon="fa fa-remove">
+                    <p:confirm  header="Žádám potvrzení" message="Opravdu smazat záznam o zástupci dispečera?" icon="ui-icon-alert" />
+                </p:commandButton><br/>
             </p:column>
-
-        </p:dataTable>
     </p:panelGrid>
 </ui:composition>

@@ -43,12 +43,10 @@ public class Dispecerhl extends entity.EntitySuperClass {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddisphl", fetch = FetchType.LAZY)
     private List<Dispecerpol> dispecerpolList;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddisphl", fetch = FetchType.LAZY)
-    private List<Dispecerhl> zastupci;
 
-    
-    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddisphl", fetch = FetchType.LAZY)
+    private List<Dispecerhl> zastupciList;
+
     public Dispecerhl() {
         super();
     }
@@ -60,7 +58,6 @@ public class Dispecerhl extends entity.EntitySuperClass {
     public Dispecerhl(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         super(id, platiod, platido, timeinsert, timemodify);
     }
-
 
     @XmlTransient
     public List<Dispecerpol> getDispecerpolList() {
@@ -95,6 +92,34 @@ public class Dispecerhl extends entity.EntitySuperClass {
         this.idtypzdr = idtypzdr;
     }
 
+    /**
+     * @return the iddisphl
+     */
+    public Dispecerhl getIddisphl() {
+        return iddisphl;
+    }
+
+    /**
+     * @param iddisphl the iddisphl to set
+     */
+    public void setIddisphl(Dispecerhl iddisphl) {
+        this.iddisphl = iddisphl;
+    }
+
+    /**
+     * @return the zastupciList
+     */
+    public List<Dispecerhl> getZastupciList() {
+        return zastupciList;
+    }
+
+    /**
+     * @param zastupciList the zastupciList to set
+     */
+    public void setZastupciList(List<Dispecerhl> zastupciList) {
+        this.zastupciList = zastupciList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -120,32 +145,4 @@ public class Dispecerhl extends entity.EntitySuperClass {
         return "entity.Dispecerhl[ id=" + getId() + " ]";
     }
 
-    /**
-     * @return the iddisphl
-     */
-    public Dispecerhl getIddisphl() {
-        return iddisphl;
-    }
-
-    /**
-     * @param iddisphl the iddisphl to set
-     */
-    public void setIddisphl(Dispecerhl iddisphl) {
-        this.iddisphl = iddisphl;
-    }
-
-    /**
-     * @return the zastupci
-     */
-    public List<Dispecerhl> getZastupci() {
-        return zastupci;
-    }
-
-    /**
-     * @param zastupci the zastupci to set
-     */
-    public void setZastupci(List<Dispecerhl> zastupci) {
-        this.zastupci = zastupci;
-    }
-    
 }
