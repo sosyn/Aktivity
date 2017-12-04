@@ -107,7 +107,7 @@ public class DispecerForm implements Serializable {
      */
     public ArrayList<Osoba> getOsobaList() {
         if (this.osobaList == null) {
-            this.osobaList = new ArrayList<>(ejbOsobaFacade.findAllSortByName());
+            this.osobaList = new ArrayList<>(ejbOsobaFacade.findAlltByName());
         }
         return osobaList;
     }

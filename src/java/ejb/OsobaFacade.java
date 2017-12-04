@@ -41,7 +41,7 @@ public class OsobaFacade extends AbstractFacade<Osoba> {
         return q.getSingleResult();
     }
 
-    public List<Osoba> findAllSortByName() {
+    public List<Osoba> findAlltByName() {
         javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         javax.persistence.criteria.CriteriaQuery cq = cb.createQuery();
         javax.persistence.criteria.Root<Osoba> osobaRoot = cq.from(Osoba.class);

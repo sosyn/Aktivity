@@ -14,8 +14,7 @@
                 <p:layout fullPage="false">
                     <h:form id="FormDispeceri">
                         <p:layoutUnit position="center" size="70%">
-                            <p:dataTable value="#{daoDispecer.dispecerHlList}" var="item" selectionMode="single" selection="#{daoDispecer.dispecerHl}" rowKey="#{item.id}" >
-
+                            <p:dataTable id="DispeceriDataTable" value="#{daoDispecer.dispecerHlList}" var="item" selectionMode="single" selection="#{daoDispecer.dispecerHl}" rowKey="#{item.id}" editable="true" >
                                 <p:ajax event="rowSelect" update=":FormDispeceri:DispeceriNew :FormDispeceri:DispeceriEdit :FormDispeceri:DispeceriDel" listener="#{dispeceri.rowDispecerHlSelectded(item)}" />
 
                                 <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains">
@@ -24,45 +23,69 @@
                                     </f:facet>
                                     <h:outputText value="#{item.idoso.popis}"/>
                                 </p:column>
-
+                                <p:column sortBy="#{item.iddisphl.idoso.popis}" filterBy="#{item.iddisphl.idoso.popis}" filterMatchMode="contains">
+                                    <f:facet name="header">
+                                        <h:outputText value="Zástupce koho:" title=" Jméno dispečera, kterého je #{item.idoso.popis} zástupcem."/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.iddisphl.idoso.popis}"/>
+                                </p:column>
                                 <p:column sortBy="#{item.idtypschv.popis}" filterBy="#{item.idtypschv.popis}" filterMatchMode="contains">
                                     <f:facet name="header" >
                                         <h:outputText value="Role"/>
                                     </f:facet>
                                     <h:outputText value="#{item.idtypschv.popis}"/>
                                 </p:column>
-
                                 <p:column sortBy="#{item.idtypzdr.popis}" filterBy="#{item.idtypzdr.popis}" filterMatchMode="contains">
                                     <f:facet name="header" >
                                         <h:outputText value="Schvalovaný typ zdroje"/>
                                     </f:facet>
                                     <h:outputText value="#{item.idtypzdr.popis}"/>
                                 </p:column>
-
-                                <p:column sortBy="#{item.platiod}">
+                                <p:column sortBy="#{item.platiod}" >
                                     <f:facet name="header">
                                         <h:outputText value="Platí Od"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.platiod}">
-                                        <f:convertDateTime pattern="dd.MM.yyyy" />
-                                    </h:outputText>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{item.platiod}" >
+                                                <f:convertDateTime pattern="dd.MM.yyyy" />
+                                            </h:outputText>
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:calendar id="platiOd" value="#{item.platiod}" pattern="dd.MM.yyyy"  showOn="button">
+                                                <f:attribute name="platiDo" value="#{daoDispecer.zastupce.platido}" />
+                                            </p:calendar>
+                                        </f:facet>
+                                    </p:cellEditor>
                                 </p:column>
                                 <p:column sortBy="#{item.platido}">
                                     <f:facet name="header" >
                                         <h:outputText value="Do"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.platido}">
-                                        <f:convertDateTime pattern="dd.MM.yyyy" />
-                                    </h:outputText>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{item.platido}" >
+                                                <f:convertDateTime pattern="dd.MM.yyyy" />
+                                            </h:outputText>
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:calendar id="platiDo" value="#{item.platido}" pattern="dd.MM.yyyy"  showOn="button">
+                                                <f:attribute name="platiOd" value="#{daoDispecer.zastupce.platido}" />
+                                            </p:calendar>
+                                        </f:facet>
+                                    </p:cellEditor>                
+                                </p:column>
+                                <p:column>
+                                    <p:rowEditor  />
                                 </p:column>
                             </p:dataTable>
                         </p:layoutUnit>
                         <!-- Panel s tlačítky-->
                         <p:layoutUnit position="east" size="30%">
                             <p>
-                                <p:commandButton id="DispeceriNew" value="Nový" action="#{dispeceri.newDispecerHl}" disabled="#{!dispeceri.isButtonEnabled('new')}" update=":growl" icon="fa fa-file-o" /> <br/>
-                                <p:commandButton id="DispeceriEdit" value="Edituj" action="#{dispeceri.editDispecerHl}" disabled="#{!dispeceri.isButtonEnabled('edit')}" update=":growl"  icon="fa fa-pencil-square-o"/><br/>
-                                <p:commandButton id="DispeceriDel" value="Smazat záznam"  action="#{dispeceri.delDispecerHl}" disabled="#{!dispeceri.isButtonEnabled('delete')}"  update=":growl"  icon="fa fa-remove">
+                                <p:commandButton id="DispeceriNew" value="Nový" action="#{dispeceri.newDispecerHl}" disabled="#{!dispeceri.isButtonEnabled('new')}" update=":FormDispeceri:DispeceriDataTable :growl " icon="fa fa-file-o" /> <br/>
+                                <p:commandButton id="DispeceriEdit" value="Edituj" action="#{dispeceri.editDispecerHl}" disabled="#{!dispeceri.isButtonEnabled('edit')}" update=":FormDispeceri:DispeceriDataTable :growl "  icon="fa fa-pencil-square-o"/><br/>
+                                <p:commandButton id="DispeceriDel" value="Smazat záznam"  action="#{dispeceri.delDispecerHl}" disabled="#{!dispeceri.isButtonEnabled('delete')}"  update=":FormDispeceri:DispeceriDataTable :growl "  icon="fa fa-remove">
                                     <p:confirm  header="Potvrzení" message="Opravdu smazat záznam o dispečerovi?" icon="ui-icon-alert" />
                                 </p:commandButton><br/>
                             </p>
@@ -70,6 +93,10 @@
                                 <p:commandButton value="Ano" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                                 <p:commandButton value="Ne" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>                            
+                            <p:outputLabel for="dispeceriAzastupci" value="Zástupci:  "/>
+                            <p:selectBooleanCheckbox  id="dispeceriAzastupci" value="#{daoDispecer.dispeceriAzastupci}" >
+                                <p:ajax listener="#{daoDispecer.refreshDispecerHlList()}" update=":FormDispeceri:DispeceriDataTable" />
+                            </p:selectBooleanCheckbox>
                         </p:layoutUnit>
                     </h:form>
                 </p:layout>

@@ -28,6 +28,7 @@ public class Dispeceri implements Serializable {
     @Inject
     DAOdispecer daoDispecer;
 
+    
     @PostConstruct
     void initDispeceri() {
         System.out.println("initDispeceri()");
@@ -38,7 +39,8 @@ public class Dispeceri implements Serializable {
             case "new":
                 return true;
             case "edit":
-                return this.daoDispecer.getDispecerHl() != null;
+                // Dipecer je vybran a neni to zastupce
+                return this.daoDispecer.getDispecerHl() != null && this.daoDispecer.getDispecerHl().getIddisphl()==null ;
             case "delete":
                 return this.daoDispecer.getDispecerHl() != null;
         }
@@ -63,6 +65,7 @@ public class Dispeceri implements Serializable {
     public String delDispecerHl() {
         try {
             this.daoDispecer.dispHlDelete();
+            this.daoDispecer.refreshDispecerHlList();
             JsfUtil.addSuccessMessage("Záznam byl úspěšně smazán.");
         } catch (EJBException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);

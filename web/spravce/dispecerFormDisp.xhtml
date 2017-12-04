@@ -15,7 +15,7 @@
                 <p:outputLabel for="dispecer" value="Osoba dispečera: " />
             </p:column>
             <p:column >
-                <p:selectOneMenu id="dispecer" value="#{daoDispecer.dispecerHl.idoso}" converter="#{JSFConverterOsoba}" disabled="#{not daoDispecer.dispecerHl.newEntity}" >
+                <p:selectOneMenu id="dispecer" value="#{daoDispecer.dispecerHl.idoso}" converter="#{JSFConverterOsoba}" filter="true" disabled="#{not daoDispecer.dispecerHl.newEntity}" >
                     <f:selectItems value="#{dispecerForm.osobaList}" var="item" itemLabel="#{item.popis}" itemValue="#{item}"  />      
                 </p:selectOneMenu>
             </p:column>

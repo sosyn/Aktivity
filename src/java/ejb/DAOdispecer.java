@@ -38,6 +38,7 @@ public class DAOdispecer implements Serializable {
 
     private Dispecerhl dispecerHl = null;
     private ArrayList<Dispecerhl> dispecerHlList = null;
+    private boolean dispeceriAzastupci = false;
     private Dispecerhl zastupce = null;
 
     @EJB
@@ -78,12 +79,31 @@ public class DAOdispecer implements Serializable {
     }
 
     /**
+     * @return the dispeceriAzastupci
+     */
+    public boolean isDispeceriAzastupci() {
+        return dispeceriAzastupci;
+    }
+
+    /**
+     * @param dispeceriAzastupci the dispeceriAzastupci to set
+     */
+    public void setDispeceriAzastupci(boolean dispeceriAzastupci) {
+        this.dispeceriAzastupci = dispeceriAzastupci;
+    }
+
+    /**
      * @return the dispecerHlList
      */
     public ArrayList<Dispecerhl> getDispecerHlList() {
         if (this.dispecerHlList == null) {
-            this.dispecerHlList = new ArrayList<>(getEjbDispHlFacade().findAll());
+            this.dispecerHlList = new ArrayList<>(getEjbDispHlFacade().findAllDispAZast(this.dispeceriAzastupci));
         }
+        return dispecerHlList;
+    }
+
+    public ArrayList<Dispecerhl> refreshDispecerHlList() {
+        this.dispecerHlList = new ArrayList<>(getEjbDispHlFacade().findAllDispAZast(this.dispeceriAzastupci));
         return dispecerHlList;
     }
 
@@ -280,4 +300,5 @@ public class DAOdispecer implements Serializable {
             }
         }
     }
+
 }
