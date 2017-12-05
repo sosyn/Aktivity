@@ -24,6 +24,11 @@ import jsf.util.JsfUtil;
 @Named(value = "daoDispecer")
 @SessionScoped
 //@Stateful
+/**
+ * !!! POZOR !!!  persitence tridy funguje POUZE pokud je v tabulce "dispecerihl" alespon 1 veta
+ * Jinak relace dispecerhl.idsiphl > dispecerhl.id  konci nedefinovanou chybou a nedari se pridat zaznam
+ * ASI musi byt ve vsech tabulkach pri startu veta ???
+ */
 public class DAOdispecer implements Serializable {
 
     static final long serialVersionUID = 42L;
