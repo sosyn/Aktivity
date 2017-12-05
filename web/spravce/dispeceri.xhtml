@@ -16,7 +16,7 @@
                         <p:layoutUnit position="center" size="70%">
                             <p:dataTable id="DispeceriDataTable" value="#{daoDispecer.dispecerHlList}" var="item" selectionMode="single" selection="#{daoDispecer.dispecerHl}" rowKey="#{item.id}" editable="true" >
                                 <p:ajax event="rowSelect" update=":FormDispeceri:DispeceriNew :FormDispeceri:DispeceriEdit :FormDispeceri:DispeceriDel" listener="#{dispeceri.rowDispecerHlSelectded(item)}" />
-
+                                <p:ajax event="rowEdit" listener="#{dispeceri.onRowEdit}" update=":growl" />
                                 <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains">
                                     <f:facet name="header">
                                         <h:outputText value="Příjmení, jméno, titul:"/>

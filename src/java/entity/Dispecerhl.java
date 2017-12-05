@@ -37,8 +37,8 @@ public class Dispecerhl extends entity.EntitySuperClass {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Typzdroje idtypzdr;
 
-    @JoinColumn(name = "iddisphl", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "iddisphl", referencedColumnName = "id", nullable = true  )
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private Dispecerhl iddisphl;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddisphl", fetch = FetchType.LAZY)

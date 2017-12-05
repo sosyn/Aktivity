@@ -188,6 +188,9 @@ public class DAOdispecer implements Serializable {
         cal.set(Calendar.HOUR_OF_DAY, 00);
         cal.set(Calendar.MINUTE, 00);
         this.dispecerHl.setPlatido(cal.getTime());
+        //this.dispecerHl.setZastupciList(new ArrayList<Dispecerhl>());
+        //this.dispecerHl.setDispecerpolList(new ArrayList<Dispecerpol>());
+
     }
 
     public void fillDispecerHl(int mod) {
@@ -214,25 +217,26 @@ public class DAOdispecer implements Serializable {
     }
 
     private void dispHlPersist(JsfUtil.PersistAction persistAction) {
-        ArrayList<Dispecerhl> zastupciList = new ArrayList<>(this.dispecerHl.getZastupciList());
-        if (this.getDispecerHl() != null) {
+        ArrayList<Dispecerhl> zastupciList = null;
+        if (this.dispecerHl.getZastupciList() != null && !this.dispecerHl.getZastupciList().isEmpty()) {
+            zastupciList = new ArrayList<>(this.dispecerHl.getZastupciList());
+            for (Dispecerhl zast : zastupciList) {
+                if (zast.getIdoso() == null) {
+                    this.dispecerHl.getZastupciList().remove(zast);
+                }
+            }
+        }
+        if (this.dispecerHl.getZastupciList() != null && this.dispecerHl.getZastupciList().isEmpty()) {
+            this.dispecerHl.setZastupciList(null);
+        }
+        if (this.getDispecerHl()!= null) {
             switch (persistAction) {
                 case CREATE:
                     this.getDispecerHl().setNewEntity(false);
-                    for (Dispecerhl zast : zastupciList) {
-                        if (zast.getIdoso() == null) {
-                            this.dispecerHl.getZastupciList().remove(zast);
-                        }
-                    }
-                    getEjbDispHlFacade().create(getDispecerHl());
+                    getEjbDispHlFacade().create(this.dispecerHl);
                     this.dispecerHlList.add(this.dispecerHl);
                     break;
                 case UPDATE:
-                    for (Dispecerhl zast : zastupciList) {
-                        if (zast.getIdoso() == null) {
-                            this.dispecerHl.getZastupciList().remove(zast);
-                        }
-                    }
                     getEjbDispHlFacade().edit(getDispecerHl());
                     break;
                 case DELETE:

@@ -13,9 +13,12 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import jsf.util.JsfUtil;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -28,7 +31,6 @@ public class Dispeceri implements Serializable {
     @Inject
     DAOdispecer daoDispecer;
 
-    
     @PostConstruct
     void initDispeceri() {
         System.out.println("initDispeceri()");
@@ -40,7 +42,7 @@ public class Dispeceri implements Serializable {
                 return true;
             case "edit":
                 // Dipecer je vybran a neni to zastupce
-                return this.daoDispecer.getDispecerHl() != null && this.daoDispecer.getDispecerHl().getIddisphl()==null ;
+                return this.daoDispecer.getDispecerHl() != null && this.daoDispecer.getDispecerHl().getIddisphl() == null;
             case "delete":
                 return this.daoDispecer.getDispecerHl() != null;
         }
@@ -87,4 +89,24 @@ public class Dispeceri implements Serializable {
         }
         return null;
     }
+
+    public void onRowEdit(RowEditEvent event) {
+        FacesMessage msg = null;
+        Dispecerhl dispecerHl = ((Dispecerhl) event.getObject());
+        try {
+            daoDispecer.setDispecerHl(dispecerHl);
+            daoDispecer.dispHlSave();
+            msg = new FacesMessage("Záznam uložen", dispecerHl.getIdoso().getPopis());
+        } catch (Exception e) {
+            msg = new FacesMessage("Chyba při ukládání záznamu: ", e.getLocalizedMessage());
+        }
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void onRowCancel(RowEditEvent event) {
+        Dispecerhl dispecerHl = ((Dispecerhl) event.getObject());
+        FacesMessage msg = new FacesMessage("Záznam NEuložen, editace zrušena", dispecerHl.getIdoso().getPopis());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
 }
