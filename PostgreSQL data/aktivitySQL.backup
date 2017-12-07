@@ -2,9 +2,9 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.4.1
--- Dumped by pg_dump version 9.4.1
--- Started on 2017-11-29 23:24:44
+-- Dumped from database version 9.4.4
+-- Dumped by pg_dump version 9.4.4
+-- Started on 2017-12-07 14:31:43
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -15,7 +15,7 @@ SET client_min_messages = warning;
 
 DROP DATABASE aktivity;
 --
--- TOC entry 2194 (class 1262 OID 312553)
+-- TOC entry 2194 (class 1262 OID 23478)
 -- Name: aktivity; Type: DATABASE; Schema: -; Owner: postgres
 --
 
@@ -34,7 +34,7 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- TOC entry 2195 (class 1262 OID 312553)
+-- TOC entry 2195 (class 1262 OID 23478)
 -- Dependencies: 2194
 -- Name: aktivity; Type: COMMENT; Schema: -; Owner: postgres
 --
@@ -81,7 +81,7 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 SET search_path = public, pg_catalog;
 
 --
--- TOC entry 540 (class 1247 OID 312554)
+-- TOC entry 540 (class 1247 OID 23479)
 -- Name: _platido; Type: DOMAIN; Schema: public; Owner: postgres
 --
 
@@ -100,7 +100,7 @@ COMMENT ON DOMAIN _platido IS 'Plati DO';
 
 
 --
--- TOC entry 541 (class 1247 OID 312555)
+-- TOC entry 541 (class 1247 OID 23480)
 -- Name: _platiod; Type: DOMAIN; Schema: public; Owner: postgres
 --
 
@@ -119,7 +119,7 @@ COMMENT ON DOMAIN _platiod IS 'Plati OD';
 
 
 --
--- TOC entry 542 (class 1247 OID 312556)
+-- TOC entry 542 (class 1247 OID 23481)
 -- Name: _popis; Type: DOMAIN; Schema: public; Owner: postgres
 --
 
@@ -138,7 +138,7 @@ COMMENT ON DOMAIN _popis IS 'Popisne pole';
 
 
 --
--- TOC entry 543 (class 1247 OID 312557)
+-- TOC entry 543 (class 1247 OID 23482)
 -- Name: _timeinsert; Type: DOMAIN; Schema: public; Owner: postgres
 --
 
@@ -157,7 +157,7 @@ COMMENT ON DOMAIN _timeinsert IS 'Cas zalozeni zaznamu';
 
 
 --
--- TOC entry 544 (class 1247 OID 312558)
+-- TOC entry 544 (class 1247 OID 23483)
 -- Name: _timemodify; Type: DOMAIN; Schema: public; Owner: postgres
 --
 
@@ -176,7 +176,7 @@ COMMENT ON DOMAIN _timemodify IS 'Cas posledni modifikace zaznamu';
 
 
 --
--- TOC entry 545 (class 1247 OID 312559)
+-- TOC entry 545 (class 1247 OID 23484)
 -- Name: _uzivatel; Type: DOMAIN; Schema: public; Owner: postgres
 --
 
@@ -195,7 +195,7 @@ COMMENT ON DOMAIN _uzivatel IS 'Uzivatel, ktery provedl posledni modifikaci';
 
 
 --
--- TOC entry 200 (class 1255 OID 312560)
+-- TOC entry 200 (class 1255 OID 23485)
 -- Name: settimemodify(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -226,7 +226,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 172 (class 1259 OID 312561)
+-- TOC entry 172 (class 1259 OID 23486)
 -- Name: aktivity; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -346,7 +346,7 @@ COMMENT ON COLUMN aktivity.usermodify IS 'Uzivatel, ktery posledni modifikoval z
 
 
 --
--- TOC entry 173 (class 1259 OID 312567)
+-- TOC entry 173 (class 1259 OID 23492)
 -- Name: cesta; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -476,7 +476,7 @@ COMMENT ON COLUMN cesta.usermodify IS 'Uzivatel, ktery posledni modifikoval zazn
 
 
 --
--- TOC entry 174 (class 1259 OID 312573)
+-- TOC entry 174 (class 1259 OID 23498)
 -- Name: dispecerhl; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -606,7 +606,7 @@ COMMENT ON COLUMN dispecerhl.usermodify IS 'Uzivatel, ktery posledni modifikoval
 
 
 --
--- TOC entry 175 (class 1259 OID 312579)
+-- TOC entry 175 (class 1259 OID 23504)
 -- Name: dispecerpol; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -674,15 +674,6 @@ COMMENT ON COLUMN dispecerpol.idzdr IS 'ID  zdroje pokud se bude jednat o techni
 --
 -- TOC entry 2246 (class 0 OID 0)
 -- Dependencies: 175
--- Name: COLUMN dispecerpol.popis; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN dispecerpol.popis IS 'Libovolný popis';
-
-
---
--- TOC entry 2247 (class 0 OID 0)
--- Dependencies: 175
 -- Name: COLUMN dispecerpol.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -690,7 +681,7 @@ COMMENT ON COLUMN dispecerpol.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 2248 (class 0 OID 0)
+-- TOC entry 2247 (class 0 OID 0)
 -- Dependencies: 175
 -- Name: COLUMN dispecerpol.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -699,7 +690,7 @@ COMMENT ON COLUMN dispecerpol.platido IS 'Plati DO';
 
 
 --
--- TOC entry 2249 (class 0 OID 0)
+-- TOC entry 2248 (class 0 OID 0)
 -- Dependencies: 175
 -- Name: COLUMN dispecerpol.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -708,7 +699,7 @@ COMMENT ON COLUMN dispecerpol.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 2250 (class 0 OID 0)
+-- TOC entry 2249 (class 0 OID 0)
 -- Dependencies: 175
 -- Name: COLUMN dispecerpol.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -717,7 +708,7 @@ COMMENT ON COLUMN dispecerpol.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 2251 (class 0 OID 0)
+-- TOC entry 2250 (class 0 OID 0)
 -- Dependencies: 175
 -- Name: COLUMN dispecerpol.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -726,7 +717,7 @@ COMMENT ON COLUMN dispecerpol.usermodify IS 'Uzivatel, ktery posledni modifikova
 
 
 --
--- TOC entry 176 (class 1259 OID 312585)
+-- TOC entry 176 (class 1259 OID 23510)
 -- Name: log; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -750,7 +741,7 @@ CREATE TABLE log (
 ALTER TABLE log OWNER TO postgres;
 
 --
--- TOC entry 2252 (class 0 OID 0)
+-- TOC entry 2251 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: TABLE log; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -759,7 +750,7 @@ COMMENT ON TABLE log IS 'Log - tabulka logujici aktivity nad ruznymi tabulkami';
 
 
 --
--- TOC entry 2253 (class 0 OID 0)
+-- TOC entry 2252 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN log.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -768,7 +759,7 @@ COMMENT ON COLUMN log.id IS 'Identifikátor';
 
 
 --
--- TOC entry 2254 (class 0 OID 0)
+-- TOC entry 2253 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN log.idakt; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -777,7 +768,7 @@ COMMENT ON COLUMN log.idakt IS 'Identifikátor aktivity - cizi klic';
 
 
 --
--- TOC entry 2255 (class 0 OID 0)
+-- TOC entry 2254 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN log.idzdr; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -786,7 +777,7 @@ COMMENT ON COLUMN log.idzdr IS 'Identifikátor zdroje - cizi klic';
 
 
 --
--- TOC entry 2256 (class 0 OID 0)
+-- TOC entry 2255 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN log.idcest; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -795,7 +786,7 @@ COMMENT ON COLUMN log.idcest IS 'ID na tabulku cesty - cizi klic';
 
 
 --
--- TOC entry 2257 (class 0 OID 0)
+-- TOC entry 2256 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN log.idrez; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -804,7 +795,7 @@ COMMENT ON COLUMN log.idrez IS 'ID na tabulku rezervaci - cizi klic';
 
 
 --
--- TOC entry 2258 (class 0 OID 0)
+-- TOC entry 2257 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN log.iducast; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -813,7 +804,7 @@ COMMENT ON COLUMN log.iducast IS 'ID na tabulku ucastniku - cizi klic';
 
 
 --
--- TOC entry 2259 (class 0 OID 0)
+-- TOC entry 2258 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN log.idoso; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -822,7 +813,7 @@ COMMENT ON COLUMN log.idoso IS 'ID na tabulku osob - cizi klic';
 
 
 --
--- TOC entry 2260 (class 0 OID 0)
+-- TOC entry 2259 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN log.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -831,7 +822,7 @@ COMMENT ON COLUMN log.popis IS 'Popis log';
 
 
 --
--- TOC entry 2261 (class 0 OID 0)
+-- TOC entry 2260 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN log.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -840,7 +831,7 @@ COMMENT ON COLUMN log.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 2262 (class 0 OID 0)
+-- TOC entry 2261 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN log.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -849,7 +840,7 @@ COMMENT ON COLUMN log.platido IS 'Plati DO';
 
 
 --
--- TOC entry 2263 (class 0 OID 0)
+-- TOC entry 2262 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN log.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -858,7 +849,7 @@ COMMENT ON COLUMN log.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 2264 (class 0 OID 0)
+-- TOC entry 2263 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN log.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -867,7 +858,7 @@ COMMENT ON COLUMN log.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 2265 (class 0 OID 0)
+-- TOC entry 2264 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN log.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -876,7 +867,7 @@ COMMENT ON COLUMN log.usermodify IS 'Uzivatel, ktery posledni modifikoval zaznam
 
 
 --
--- TOC entry 177 (class 1259 OID 312591)
+-- TOC entry 177 (class 1259 OID 23516)
 -- Name: osoba; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -900,7 +891,7 @@ CREATE TABLE osoba (
 ALTER TABLE osoba OWNER TO postgres;
 
 --
--- TOC entry 2266 (class 0 OID 0)
+-- TOC entry 2265 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: TABLE osoba; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -910,7 +901,7 @@ COMMENT ON TABLE osoba IS 'Seznam osob
 
 
 --
--- TOC entry 2267 (class 0 OID 0)
+-- TOC entry 2266 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: COLUMN osoba.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -919,7 +910,7 @@ COMMENT ON COLUMN osoba.id IS 'Identifikátor';
 
 
 --
--- TOC entry 2268 (class 0 OID 0)
+-- TOC entry 2267 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: COLUMN osoba.name; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -928,7 +919,7 @@ COMMENT ON COLUMN osoba.name IS 'Jméno osoby - uživatele';
 
 
 --
--- TOC entry 2269 (class 0 OID 0)
+-- TOC entry 2268 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: COLUMN osoba.password; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -937,7 +928,7 @@ COMMENT ON COLUMN osoba.password IS 'Heslo osoby-uživatele uloženo v SHA-256';
 
 
 --
--- TOC entry 2270 (class 0 OID 0)
+-- TOC entry 2269 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: COLUMN osoba.extid; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -946,7 +937,7 @@ COMMENT ON COLUMN osoba.extid IS 'ID na externí tabulku s uživatelskými daty'
 
 
 --
--- TOC entry 2271 (class 0 OID 0)
+-- TOC entry 2270 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: COLUMN osoba.komentar; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -955,7 +946,7 @@ COMMENT ON COLUMN osoba.komentar IS 'Komentar k volnemu pouziti';
 
 
 --
--- TOC entry 2272 (class 0 OID 0)
+-- TOC entry 2271 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: COLUMN osoba.skupina; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -964,7 +955,7 @@ COMMENT ON COLUMN osoba.skupina IS 'Skupina oprávnění pro JdbcRealmAktivity';
 
 
 --
--- TOC entry 2273 (class 0 OID 0)
+-- TOC entry 2272 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: COLUMN osoba.email; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -973,7 +964,7 @@ COMMENT ON COLUMN osoba.email IS 'Emailova schranka osoby';
 
 
 --
--- TOC entry 2274 (class 0 OID 0)
+-- TOC entry 2273 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: COLUMN osoba.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -982,7 +973,7 @@ COMMENT ON COLUMN osoba.popis IS 'Prijmeni, jmeno, titul';
 
 
 --
--- TOC entry 2275 (class 0 OID 0)
+-- TOC entry 2274 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: COLUMN osoba.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -991,7 +982,7 @@ COMMENT ON COLUMN osoba.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 2276 (class 0 OID 0)
+-- TOC entry 2275 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: COLUMN osoba.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1000,7 +991,7 @@ COMMENT ON COLUMN osoba.platido IS 'Plati DO';
 
 
 --
--- TOC entry 2277 (class 0 OID 0)
+-- TOC entry 2276 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: COLUMN osoba.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1009,7 +1000,7 @@ COMMENT ON COLUMN osoba.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 2278 (class 0 OID 0)
+-- TOC entry 2277 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: COLUMN osoba.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1018,7 +1009,7 @@ COMMENT ON COLUMN osoba.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 2279 (class 0 OID 0)
+-- TOC entry 2278 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: COLUMN osoba.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1027,7 +1018,7 @@ COMMENT ON COLUMN osoba.usermodify IS 'Uzivatel, ktery posledni modifikoval zazn
 
 
 --
--- TOC entry 178 (class 1259 OID 312599)
+-- TOC entry 178 (class 1259 OID 23524)
 -- Name: rezervace; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1049,7 +1040,7 @@ CREATE TABLE rezervace (
 ALTER TABLE rezervace OWNER TO postgres;
 
 --
--- TOC entry 2280 (class 0 OID 0)
+-- TOC entry 2279 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: TABLE rezervace; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1058,7 +1049,7 @@ COMMENT ON TABLE rezervace IS 'rezervace - tabulka rezervaci';
 
 
 --
--- TOC entry 2281 (class 0 OID 0)
+-- TOC entry 2280 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: COLUMN rezervace.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1067,7 +1058,7 @@ COMMENT ON COLUMN rezervace.id IS 'Identifikátor';
 
 
 --
--- TOC entry 2282 (class 0 OID 0)
+-- TOC entry 2281 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: COLUMN rezervace.idakt; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1076,7 +1067,7 @@ COMMENT ON COLUMN rezervace.idakt IS 'Identifikátor aktivity - cizi klic (muze 
 
 
 --
--- TOC entry 2283 (class 0 OID 0)
+-- TOC entry 2282 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: COLUMN rezervace.idcest; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1085,7 +1076,7 @@ COMMENT ON COLUMN rezervace.idcest IS 'Identifikátor cesty - cizi klic (muze by
 
 
 --
--- TOC entry 2284 (class 0 OID 0)
+-- TOC entry 2283 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: COLUMN rezervace.idzdr; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1094,7 +1085,7 @@ COMMENT ON COLUMN rezervace.idzdr IS 'Identifikátor rezervovaneho zdroje - cizi
 
 
 --
--- TOC entry 2285 (class 0 OID 0)
+-- TOC entry 2284 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: COLUMN rezervace.komentar; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1103,7 +1094,7 @@ COMMENT ON COLUMN rezervace.komentar IS 'Komentar k volnemu pouziti';
 
 
 --
--- TOC entry 2286 (class 0 OID 0)
+-- TOC entry 2285 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: COLUMN rezervace.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1112,7 +1103,7 @@ COMMENT ON COLUMN rezervace.popis IS 'Popis rezervace';
 
 
 --
--- TOC entry 2287 (class 0 OID 0)
+-- TOC entry 2286 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: COLUMN rezervace.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1121,7 +1112,7 @@ COMMENT ON COLUMN rezervace.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 2288 (class 0 OID 0)
+-- TOC entry 2287 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: COLUMN rezervace.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1130,7 +1121,7 @@ COMMENT ON COLUMN rezervace.platido IS 'Plati DO';
 
 
 --
--- TOC entry 2289 (class 0 OID 0)
+-- TOC entry 2288 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: COLUMN rezervace.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1139,7 +1130,7 @@ COMMENT ON COLUMN rezervace.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 2290 (class 0 OID 0)
+-- TOC entry 2289 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: COLUMN rezervace.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1148,7 +1139,7 @@ COMMENT ON COLUMN rezervace.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 2291 (class 0 OID 0)
+-- TOC entry 2290 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: COLUMN rezervace.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1157,7 +1148,7 @@ COMMENT ON COLUMN rezervace.usermodify IS 'Uzivatel, ktery posledni modifikoval 
 
 
 --
--- TOC entry 179 (class 1259 OID 312605)
+-- TOC entry 179 (class 1259 OID 23530)
 -- Name: schvaleni; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1182,7 +1173,7 @@ CREATE TABLE schvaleni (
 ALTER TABLE schvaleni OWNER TO postgres;
 
 --
--- TOC entry 2292 (class 0 OID 0)
+-- TOC entry 2291 (class 0 OID 0)
 -- Dependencies: 179
 -- Name: TABLE schvaleni; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1191,7 +1182,7 @@ COMMENT ON TABLE schvaleni IS 'Tabulka schvalovatelu cesty, uživatelů a rezerv
 
 
 --
--- TOC entry 2293 (class 0 OID 0)
+-- TOC entry 2292 (class 0 OID 0)
 -- Dependencies: 179
 -- Name: COLUMN schvaleni.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1200,7 +1191,7 @@ COMMENT ON COLUMN schvaleni.id IS 'Identifikátor';
 
 
 --
--- TOC entry 2294 (class 0 OID 0)
+-- TOC entry 2293 (class 0 OID 0)
 -- Dependencies: 179
 -- Name: COLUMN schvaleni.idtypschv; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1209,7 +1200,7 @@ COMMENT ON COLUMN schvaleni.idtypschv IS 'ID typu schvalovatele-ciselnik typu sc
 
 
 --
--- TOC entry 2295 (class 0 OID 0)
+-- TOC entry 2294 (class 0 OID 0)
 -- Dependencies: 179
 -- Name: COLUMN schvaleni.idoso; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1218,7 +1209,7 @@ COMMENT ON COLUMN schvaleni.idoso IS 'ID osoby schvalovatele z tabulky osoby';
 
 
 --
--- TOC entry 2296 (class 0 OID 0)
+-- TOC entry 2295 (class 0 OID 0)
 -- Dependencies: 179
 -- Name: COLUMN schvaleni.idcest; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1227,7 +1218,7 @@ COMMENT ON COLUMN schvaleni.idcest IS 'ID cesty, kterou schvalovatel schvaluje';
 
 
 --
--- TOC entry 2297 (class 0 OID 0)
+-- TOC entry 2296 (class 0 OID 0)
 -- Dependencies: 179
 -- Name: COLUMN schvaleni.iducast; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1236,7 +1227,7 @@ COMMENT ON COLUMN schvaleni.iducast IS 'ID - odkaz na tabulku účastníků cest
 
 
 --
--- TOC entry 2298 (class 0 OID 0)
+-- TOC entry 2297 (class 0 OID 0)
 -- Dependencies: 179
 -- Name: COLUMN schvaleni.idrez; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1245,7 +1236,7 @@ COMMENT ON COLUMN schvaleni.idrez IS 'ID - odkaz na tabulku rezervaci';
 
 
 --
--- TOC entry 2299 (class 0 OID 0)
+-- TOC entry 2298 (class 0 OID 0)
 -- Dependencies: 179
 -- Name: COLUMN schvaleni.komentar; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1254,7 +1245,7 @@ COMMENT ON COLUMN schvaleni.komentar IS 'Komentar k volnemu pouziti';
 
 
 --
--- TOC entry 2300 (class 0 OID 0)
+-- TOC entry 2299 (class 0 OID 0)
 -- Dependencies: 179
 -- Name: COLUMN schvaleni.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1263,7 +1254,7 @@ COMMENT ON COLUMN schvaleni.popis IS 'Popis zdroje';
 
 
 --
--- TOC entry 2301 (class 0 OID 0)
+-- TOC entry 2300 (class 0 OID 0)
 -- Dependencies: 179
 -- Name: COLUMN schvaleni.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1272,7 +1263,7 @@ COMMENT ON COLUMN schvaleni.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 2302 (class 0 OID 0)
+-- TOC entry 2301 (class 0 OID 0)
 -- Dependencies: 179
 -- Name: COLUMN schvaleni.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1281,7 +1272,7 @@ COMMENT ON COLUMN schvaleni.platido IS 'Plati DO';
 
 
 --
--- TOC entry 2303 (class 0 OID 0)
+-- TOC entry 2302 (class 0 OID 0)
 -- Dependencies: 179
 -- Name: COLUMN schvaleni.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1290,7 +1281,7 @@ COMMENT ON COLUMN schvaleni.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 2304 (class 0 OID 0)
+-- TOC entry 2303 (class 0 OID 0)
 -- Dependencies: 179
 -- Name: COLUMN schvaleni.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1299,7 +1290,7 @@ COMMENT ON COLUMN schvaleni.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 2305 (class 0 OID 0)
+-- TOC entry 2304 (class 0 OID 0)
 -- Dependencies: 179
 -- Name: COLUMN schvaleni.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1308,7 +1299,7 @@ COMMENT ON COLUMN schvaleni.usermodify IS 'Uzivatel, ktery posledni modifikoval 
 
 
 --
--- TOC entry 180 (class 1259 OID 312612)
+-- TOC entry 180 (class 1259 OID 23537)
 -- Name: skupina; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1328,7 +1319,7 @@ CREATE TABLE skupina (
 ALTER TABLE skupina OWNER TO postgres;
 
 --
--- TOC entry 2306 (class 0 OID 0)
+-- TOC entry 2305 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: TABLE skupina; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1337,7 +1328,7 @@ COMMENT ON TABLE skupina IS 'Seznam skupin oprávnění pro JdbcRealmAktivity';
 
 
 --
--- TOC entry 2307 (class 0 OID 0)
+-- TOC entry 2306 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: COLUMN skupina.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1346,7 +1337,7 @@ COMMENT ON COLUMN skupina.id IS 'Identifikátor';
 
 
 --
--- TOC entry 2308 (class 0 OID 0)
+-- TOC entry 2307 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: COLUMN skupina.name; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1355,7 +1346,7 @@ COMMENT ON COLUMN skupina.name IS 'Jméno osoby - uživatele';
 
 
 --
--- TOC entry 2309 (class 0 OID 0)
+-- TOC entry 2308 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: COLUMN skupina.skupina; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1364,7 +1355,7 @@ COMMENT ON COLUMN skupina.skupina IS 'Skupina oprávnění pro JdbcRealmAktivity
 
 
 --
--- TOC entry 2310 (class 0 OID 0)
+-- TOC entry 2309 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: COLUMN skupina.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1373,7 +1364,7 @@ COMMENT ON COLUMN skupina.popis IS 'Popis skupiny';
 
 
 --
--- TOC entry 2311 (class 0 OID 0)
+-- TOC entry 2310 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: COLUMN skupina.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1382,7 +1373,7 @@ COMMENT ON COLUMN skupina.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 2312 (class 0 OID 0)
+-- TOC entry 2311 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: COLUMN skupina.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1391,7 +1382,7 @@ COMMENT ON COLUMN skupina.platido IS 'Plati DO';
 
 
 --
--- TOC entry 2313 (class 0 OID 0)
+-- TOC entry 2312 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: COLUMN skupina.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1400,7 +1391,7 @@ COMMENT ON COLUMN skupina.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 2314 (class 0 OID 0)
+-- TOC entry 2313 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: COLUMN skupina.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1409,7 +1400,7 @@ COMMENT ON COLUMN skupina.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 2315 (class 0 OID 0)
+-- TOC entry 2314 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: COLUMN skupina.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1418,7 +1409,7 @@ COMMENT ON COLUMN skupina.usermodify IS 'Uzivatel, ktery posledni modifikoval za
 
 
 --
--- TOC entry 181 (class 1259 OID 312618)
+-- TOC entry 181 (class 1259 OID 23543)
 -- Name: typaktivity; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1437,7 +1428,7 @@ CREATE TABLE typaktivity (
 ALTER TABLE typaktivity OWNER TO postgres;
 
 --
--- TOC entry 2316 (class 0 OID 0)
+-- TOC entry 2315 (class 0 OID 0)
 -- Dependencies: 181
 -- Name: TABLE typaktivity; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1448,7 +1439,7 @@ COMMENT ON TABLE typaktivity IS 'Číselník typů aktivity
 
 
 --
--- TOC entry 2317 (class 0 OID 0)
+-- TOC entry 2316 (class 0 OID 0)
 -- Dependencies: 181
 -- Name: COLUMN typaktivity.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1457,7 +1448,7 @@ COMMENT ON COLUMN typaktivity.id IS 'ID typu aktivity';
 
 
 --
--- TOC entry 2318 (class 0 OID 0)
+-- TOC entry 2317 (class 0 OID 0)
 -- Dependencies: 181
 -- Name: COLUMN typaktivity.typakt; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1466,7 +1457,7 @@ COMMENT ON COLUMN typaktivity.typakt IS 'Typ aktivity';
 
 
 --
--- TOC entry 2319 (class 0 OID 0)
+-- TOC entry 2318 (class 0 OID 0)
 -- Dependencies: 181
 -- Name: COLUMN typaktivity.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1475,7 +1466,7 @@ COMMENT ON COLUMN typaktivity.popis IS 'Popis typu aktivity';
 
 
 --
--- TOC entry 2320 (class 0 OID 0)
+-- TOC entry 2319 (class 0 OID 0)
 -- Dependencies: 181
 -- Name: COLUMN typaktivity.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1484,7 +1475,7 @@ COMMENT ON COLUMN typaktivity.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 2321 (class 0 OID 0)
+-- TOC entry 2320 (class 0 OID 0)
 -- Dependencies: 181
 -- Name: COLUMN typaktivity.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1493,7 +1484,7 @@ COMMENT ON COLUMN typaktivity.platido IS 'Plati DO';
 
 
 --
--- TOC entry 2322 (class 0 OID 0)
+-- TOC entry 2321 (class 0 OID 0)
 -- Dependencies: 181
 -- Name: COLUMN typaktivity.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1502,7 +1493,7 @@ COMMENT ON COLUMN typaktivity.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 2323 (class 0 OID 0)
+-- TOC entry 2322 (class 0 OID 0)
 -- Dependencies: 181
 -- Name: COLUMN typaktivity.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1511,7 +1502,7 @@ COMMENT ON COLUMN typaktivity.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 2324 (class 0 OID 0)
+-- TOC entry 2323 (class 0 OID 0)
 -- Dependencies: 181
 -- Name: COLUMN typaktivity.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1520,7 +1511,7 @@ COMMENT ON COLUMN typaktivity.usermodify IS 'Uzivatel, ktery posledni modifikova
 
 
 --
--- TOC entry 182 (class 1259 OID 312624)
+-- TOC entry 182 (class 1259 OID 23549)
 -- Name: typschv; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1539,7 +1530,7 @@ CREATE TABLE typschv (
 ALTER TABLE typschv OWNER TO postgres;
 
 --
--- TOC entry 2325 (class 0 OID 0)
+-- TOC entry 2324 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: TABLE typschv; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1554,7 +1545,7 @@ D - dispecer';
 
 
 --
--- TOC entry 2326 (class 0 OID 0)
+-- TOC entry 2325 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: COLUMN typschv.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1563,7 +1554,7 @@ COMMENT ON COLUMN typschv.id IS 'ID typu schvalovani';
 
 
 --
--- TOC entry 2327 (class 0 OID 0)
+-- TOC entry 2326 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: COLUMN typschv.typschv; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1578,7 +1569,7 @@ D - dispecer';
 
 
 --
--- TOC entry 2328 (class 0 OID 0)
+-- TOC entry 2327 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: COLUMN typschv.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1587,7 +1578,7 @@ COMMENT ON COLUMN typschv.popis IS 'Popis typu schvalovani';
 
 
 --
--- TOC entry 2329 (class 0 OID 0)
+-- TOC entry 2328 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: COLUMN typschv.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1596,7 +1587,7 @@ COMMENT ON COLUMN typschv.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 2330 (class 0 OID 0)
+-- TOC entry 2329 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: COLUMN typschv.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1605,7 +1596,7 @@ COMMENT ON COLUMN typschv.platido IS 'Plati DO';
 
 
 --
--- TOC entry 2331 (class 0 OID 0)
+-- TOC entry 2330 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: COLUMN typschv.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1614,7 +1605,7 @@ COMMENT ON COLUMN typschv.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 2332 (class 0 OID 0)
+-- TOC entry 2331 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: COLUMN typschv.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1623,7 +1614,7 @@ COMMENT ON COLUMN typschv.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 2333 (class 0 OID 0)
+-- TOC entry 2332 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: COLUMN typschv.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1632,7 +1623,7 @@ COMMENT ON COLUMN typschv.usermodify IS 'Uzivatel, ktery posledni modifikoval za
 
 
 --
--- TOC entry 183 (class 1259 OID 312631)
+-- TOC entry 183 (class 1259 OID 23556)
 -- Name: typucast; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1651,7 +1642,7 @@ CREATE TABLE typucast (
 ALTER TABLE typucast OWNER TO postgres;
 
 --
--- TOC entry 2334 (class 0 OID 0)
+-- TOC entry 2333 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: TABLE typucast; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1661,7 +1652,7 @@ COMMENT ON TABLE typucast IS 'Číselník typů ucatniku
 
 
 --
--- TOC entry 2335 (class 0 OID 0)
+-- TOC entry 2334 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: COLUMN typucast.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1670,7 +1661,7 @@ COMMENT ON COLUMN typucast.id IS 'ID typu ucatnika';
 
 
 --
--- TOC entry 2336 (class 0 OID 0)
+-- TOC entry 2335 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: COLUMN typucast.typucast; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1679,7 +1670,7 @@ COMMENT ON COLUMN typucast.typucast IS 'Typ ucatnika 0 - ridic 1 - spolujezdec 2
 
 
 --
--- TOC entry 2337 (class 0 OID 0)
+-- TOC entry 2336 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: COLUMN typucast.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1688,7 +1679,7 @@ COMMENT ON COLUMN typucast.popis IS 'Popis typu ucatnika';
 
 
 --
--- TOC entry 2338 (class 0 OID 0)
+-- TOC entry 2337 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: COLUMN typucast.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1697,7 +1688,7 @@ COMMENT ON COLUMN typucast.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 2339 (class 0 OID 0)
+-- TOC entry 2338 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: COLUMN typucast.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1706,7 +1697,7 @@ COMMENT ON COLUMN typucast.platido IS 'Plati DO';
 
 
 --
--- TOC entry 2340 (class 0 OID 0)
+-- TOC entry 2339 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: COLUMN typucast.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1715,7 +1706,7 @@ COMMENT ON COLUMN typucast.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 2341 (class 0 OID 0)
+-- TOC entry 2340 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: COLUMN typucast.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1724,7 +1715,7 @@ COMMENT ON COLUMN typucast.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 2342 (class 0 OID 0)
+-- TOC entry 2341 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: COLUMN typucast.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1733,7 +1724,7 @@ COMMENT ON COLUMN typucast.usermodify IS 'Uzivatel, ktery posledni modifikoval z
 
 
 --
--- TOC entry 184 (class 1259 OID 312637)
+-- TOC entry 184 (class 1259 OID 23562)
 -- Name: typzdroje; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1755,7 +1746,7 @@ CREATE TABLE typzdroje (
 ALTER TABLE typzdroje OWNER TO postgres;
 
 --
--- TOC entry 2343 (class 0 OID 0)
+-- TOC entry 2342 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: TABLE typzdroje; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1769,7 +1760,7 @@ COMMENT ON TABLE typzdroje IS 'Číselník typů zdrojů
 
 
 --
--- TOC entry 2344 (class 0 OID 0)
+-- TOC entry 2343 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN typzdroje.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1778,7 +1769,7 @@ COMMENT ON COLUMN typzdroje.id IS 'ID typu zdroje';
 
 
 --
--- TOC entry 2345 (class 0 OID 0)
+-- TOC entry 2344 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN typzdroje.typzdr; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1787,7 +1778,7 @@ COMMENT ON COLUMN typzdroje.typzdr IS 'Typ zdroje';
 
 
 --
--- TOC entry 2346 (class 0 OID 0)
+-- TOC entry 2345 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN typzdroje.cesta; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1796,7 +1787,7 @@ COMMENT ON COLUMN typzdroje.cesta IS 'Zdroj je mozne pouzit na cestu 0/1 (pesky,
 
 
 --
--- TOC entry 2347 (class 0 OID 0)
+-- TOC entry 2346 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN typzdroje.rezervace; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1805,7 +1796,7 @@ COMMENT ON COLUMN typzdroje.rezervace IS 'Zdroj je mozne rezervovat 0/1';
 
 
 --
--- TOC entry 2348 (class 0 OID 0)
+-- TOC entry 2347 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN typzdroje.osoba; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1814,7 +1805,7 @@ COMMENT ON COLUMN typzdroje.osoba IS 'Zdroj je osoba 0/1 - hodnota se vyuziva u 
 
 
 --
--- TOC entry 2349 (class 0 OID 0)
+-- TOC entry 2348 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN typzdroje.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1823,7 +1814,7 @@ COMMENT ON COLUMN typzdroje.popis IS 'Popis typu zdroje';
 
 
 --
--- TOC entry 2350 (class 0 OID 0)
+-- TOC entry 2349 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN typzdroje.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1832,7 +1823,7 @@ COMMENT ON COLUMN typzdroje.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 2351 (class 0 OID 0)
+-- TOC entry 2350 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN typzdroje.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1841,7 +1832,7 @@ COMMENT ON COLUMN typzdroje.platido IS 'Plati DO';
 
 
 --
--- TOC entry 2352 (class 0 OID 0)
+-- TOC entry 2351 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN typzdroje.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1850,7 +1841,7 @@ COMMENT ON COLUMN typzdroje.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 2353 (class 0 OID 0)
+-- TOC entry 2352 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN typzdroje.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1859,7 +1850,7 @@ COMMENT ON COLUMN typzdroje.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 2354 (class 0 OID 0)
+-- TOC entry 2353 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN typzdroje.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1868,7 +1859,7 @@ COMMENT ON COLUMN typzdroje.usermodify IS 'Uzivatel, ktery posledni modifikoval 
 
 
 --
--- TOC entry 185 (class 1259 OID 312643)
+-- TOC entry 185 (class 1259 OID 23568)
 -- Name: ucastnik; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1889,7 +1880,7 @@ CREATE TABLE ucastnik (
 ALTER TABLE ucastnik OWNER TO postgres;
 
 --
--- TOC entry 2355 (class 0 OID 0)
+-- TOC entry 2354 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: TABLE ucastnik; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1898,7 +1889,7 @@ COMMENT ON TABLE ucastnik IS 'ucastnik - tabulka ucastniku';
 
 
 --
--- TOC entry 2356 (class 0 OID 0)
+-- TOC entry 2355 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: COLUMN ucastnik.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1907,7 +1898,7 @@ COMMENT ON COLUMN ucastnik.id IS 'Identifikátor';
 
 
 --
--- TOC entry 2357 (class 0 OID 0)
+-- TOC entry 2356 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: COLUMN ucastnik.idoso; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1916,7 +1907,7 @@ COMMENT ON COLUMN ucastnik.idoso IS 'Identifikátor osoby - cizi klic';
 
 
 --
--- TOC entry 2358 (class 0 OID 0)
+-- TOC entry 2357 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: COLUMN ucastnik.idtypucast; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1925,7 +1916,7 @@ COMMENT ON COLUMN ucastnik.idtypucast IS 'Odkaz na ciselnik typu ucatniku';
 
 
 --
--- TOC entry 2359 (class 0 OID 0)
+-- TOC entry 2358 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: COLUMN ucastnik.idcest; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1934,7 +1925,7 @@ COMMENT ON COLUMN ucastnik.idcest IS 'Odkaz na cestu';
 
 
 --
--- TOC entry 2360 (class 0 OID 0)
+-- TOC entry 2359 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: COLUMN ucastnik.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1943,7 +1934,7 @@ COMMENT ON COLUMN ucastnik.popis IS 'Popis cesty';
 
 
 --
--- TOC entry 2361 (class 0 OID 0)
+-- TOC entry 2360 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: COLUMN ucastnik.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1952,7 +1943,7 @@ COMMENT ON COLUMN ucastnik.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 2362 (class 0 OID 0)
+-- TOC entry 2361 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: COLUMN ucastnik.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1961,7 +1952,7 @@ COMMENT ON COLUMN ucastnik.platido IS 'Plati DO';
 
 
 --
--- TOC entry 2363 (class 0 OID 0)
+-- TOC entry 2362 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: COLUMN ucastnik.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1970,7 +1961,7 @@ COMMENT ON COLUMN ucastnik.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 2364 (class 0 OID 0)
+-- TOC entry 2363 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: COLUMN ucastnik.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1979,7 +1970,7 @@ COMMENT ON COLUMN ucastnik.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 2365 (class 0 OID 0)
+-- TOC entry 2364 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: COLUMN ucastnik.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1988,7 +1979,7 @@ COMMENT ON COLUMN ucastnik.usermodify IS 'Uzivatel, ktery posledni modifikoval z
 
 
 --
--- TOC entry 186 (class 1259 OID 312649)
+-- TOC entry 186 (class 1259 OID 23574)
 -- Name: zdroj; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2011,7 +2002,7 @@ CREATE TABLE zdroj (
 ALTER TABLE zdroj OWNER TO postgres;
 
 --
--- TOC entry 2366 (class 0 OID 0)
+-- TOC entry 2365 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: TABLE zdroj; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2020,7 +2011,7 @@ COMMENT ON TABLE zdroj IS 'Zdroj - tabulka zdroju, vozidla a ostatni';
 
 
 --
--- TOC entry 2367 (class 0 OID 0)
+-- TOC entry 2366 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: COLUMN zdroj.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2029,7 +2020,7 @@ COMMENT ON COLUMN zdroj.id IS 'Identifikátor';
 
 
 --
--- TOC entry 2368 (class 0 OID 0)
+-- TOC entry 2367 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: COLUMN zdroj.idtypzdr; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2038,7 +2029,7 @@ COMMENT ON COLUMN zdroj.idtypzdr IS 'Identifikátor typu zdroje - cizi klic';
 
 
 --
--- TOC entry 2369 (class 0 OID 0)
+-- TOC entry 2368 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: COLUMN zdroj.idoso; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2047,7 +2038,7 @@ COMMENT ON COLUMN zdroj.idoso IS 'Identifikátor osoby, svazane s vozidlem - vet
 
 
 --
--- TOC entry 2370 (class 0 OID 0)
+-- TOC entry 2369 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: COLUMN zdroj.spz; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2056,7 +2047,7 @@ COMMENT ON COLUMN zdroj.spz IS 'SPZ vozidla';
 
 
 --
--- TOC entry 2371 (class 0 OID 0)
+-- TOC entry 2370 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: COLUMN zdroj.komentar; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2065,7 +2056,7 @@ COMMENT ON COLUMN zdroj.komentar IS 'Komentar k volnemu pouziti';
 
 
 --
--- TOC entry 2372 (class 0 OID 0)
+-- TOC entry 2371 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: COLUMN zdroj.kapacita; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2074,7 +2065,7 @@ COMMENT ON COLUMN zdroj.kapacita IS 'Kapacita zdroje (pocet cestujicich, kapacit
 
 
 --
--- TOC entry 2373 (class 0 OID 0)
+-- TOC entry 2372 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: COLUMN zdroj.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2083,7 +2074,7 @@ COMMENT ON COLUMN zdroj.popis IS 'Popis zdroje';
 
 
 --
--- TOC entry 2374 (class 0 OID 0)
+-- TOC entry 2373 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: COLUMN zdroj.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2092,7 +2083,7 @@ COMMENT ON COLUMN zdroj.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 2375 (class 0 OID 0)
+-- TOC entry 2374 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: COLUMN zdroj.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2101,7 +2092,7 @@ COMMENT ON COLUMN zdroj.platido IS 'Plati DO';
 
 
 --
--- TOC entry 2376 (class 0 OID 0)
+-- TOC entry 2375 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: COLUMN zdroj.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2110,7 +2101,7 @@ COMMENT ON COLUMN zdroj.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 2377 (class 0 OID 0)
+-- TOC entry 2376 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: COLUMN zdroj.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2119,7 +2110,7 @@ COMMENT ON COLUMN zdroj.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 2378 (class 0 OID 0)
+-- TOC entry 2377 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: COLUMN zdroj.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2128,7 +2119,7 @@ COMMENT ON COLUMN zdroj.usermodify IS 'Uzivatel, ktery posledni modifikoval zazn
 
 
 --
--- TOC entry 2175 (class 0 OID 312561)
+-- TOC entry 2175 (class 0 OID 23486)
 -- Dependencies: 172
 -- Data for Name: aktivity; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2138,7 +2129,7 @@ INSERT INTO aktivity (id, idtypakt, idoso, komentar, popis, platiod, platido, ti
 
 
 --
--- TOC entry 2176 (class 0 OID 312567)
+-- TOC entry 2176 (class 0 OID 23492)
 -- Dependencies: 173
 -- Data for Name: cesta; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2162,34 +2153,32 @@ INSERT INTO cesta (id, idtypzdr, idoso, komentar, zaloha, popis, platiod, platid
 
 
 --
--- TOC entry 2177 (class 0 OID 312573)
+-- TOC entry 2177 (class 0 OID 23498)
 -- Dependencies: 174
 -- Data for Name: dispecerhl; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('8b24fa34-03aa-4a82-bfeb-bb044d252be8', '8b24fa34-03aa-4a82-bfeb-bb044d252be8', '11c78229-8f45-4011-a70a-8b176a590bb8', '823ca1d8-60dd-4f59-99e7-76138e997cb9', NULL, 'Vedoucí IT - Sosýn', '2017-01-01 00:00:00', '2100-12-31 00:00:00', '2017-11-26 22:55:58.539', '2017-11-26 22:55:58.539', 'postgres');
+INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('481c2e4f-0a0c-4705-a10e-f69b0818714a', '4a3ef679-87d0-479b-995e-1218296efc5b', '68c11075-ff60-45a3-818e-4f4d0be9ea8f', '50ca4787-6d49-4b29-a8fb-5c82acf5523e', NULL, NULL, '2017-01-01 00:00:00', '2100-01-01 00:00:00', '2017-11-29 00:43:57.622', '2017-11-29 00:46:46.917', 'postgres');
 INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('eeeb6a92-5ea5-4a3a-a2f8-08a1c8c5c266', '4a3ef679-87d0-479b-995e-1218296efc5b', '68c11075-ff60-45a3-818e-4f4d0be9ea8f', '50ca4787-6d49-4b29-a8fb-5c82acf5523e', NULL, NULL, '2017-01-01 00:00:00', '2100-01-01 00:00:00', '2017-11-29 00:47:08.575', '2017-11-29 00:47:37.888', 'postgres');
+INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('76f17dde-bf83-402a-b38d-127e175418aa', '4a3ef679-87d0-479b-995e-1218296efc5b', '68c11075-ff60-45a3-818e-4f4d0be9ea8f', '50ca4787-6d49-4b29-a8fb-5c82acf5523e', NULL, NULL, '2017-01-01 00:00:00', '2100-01-01 00:00:00', '2017-11-29 00:47:42.198', '2017-11-29 00:48:10.06', 'postgres');
+INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('cd462971-5b24-4ae0-a3d9-bc92c79a6b5c', '9960cbb8-db3a-4dfc-9292-fab189f9040e', 'dd32144f-12d4-485b-83a3-182d5602da0f', '823ca1d8-60dd-4f59-99e7-76138e997cb9', NULL, NULL, '2017-01-01 00:00:00', '2100-01-01 00:00:00', '2017-11-29 00:48:18.06', '2017-11-29 00:48:55.731', 'postgres');
+INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('e6cf2adf-fba6-4378-9769-155c965be0a0', 'c8f4089e-5574-4aa1-a248-4a2a8768360e', '11c78229-8f45-4011-a70a-8b176a590bb8', 'ac94579b-b602-4994-87b4-d0ebfc3f4dda', NULL, NULL, '2017-01-01 00:00:00', '2100-01-04 00:00:00', '2017-11-29 00:50:02.12', '2017-11-29 00:50:29.622', 'postgres');
 INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('2d7d3264-2078-4705-bf7e-c8be748083e6', '565b2abc-810d-41cc-9a71-7031907263bf', '68c11075-ff60-45a3-818e-4f4d0be9ea8f', 'c2d29867-3d0b-d497-9191-18a9d8ee7800', NULL, NULL, '2017-01-01 00:00:00', '2100-01-01 00:00:00', '2017-11-29 01:05:53.745', '2017-11-29 01:06:13.277', 'postgres');
 INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('478f7c49-bf8c-4f78-8aaa-b6d8c108ba6c', '718dfe2a-aea7-4525-a550-d4358c09fa15', '68c11075-ff60-45a3-818e-4f4d0be9ea8f', 'c2d29867-3d0b-d497-9191-18a9d8ee7800', NULL, NULL, '2017-01-01 00:00:00', '2100-01-01 00:00:00', '2017-11-29 01:08:13.59', '2017-11-29 01:08:20.122', 'postgres');
-INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('e6cf2adf-fba6-4378-9769-155c965be0a0', 'c8f4089e-5574-4aa1-a248-4a2a8768360e', '11c78229-8f45-4011-a70a-8b176a590bb8', 'ac94579b-b602-4994-87b4-d0ebfc3f4dda', NULL, NULL, '0201-06-11 00:00:00', '2015-06-11 00:00:00', '2017-11-29 00:50:02.12', '2017-11-29 20:48:07.319', 'postgres');
-INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('78fb3dbe-d10f-44ec-bb5e-8eb8c4389860', 'dcb31c8c-51f1-404a-9691-e6d16aa296b5', '68c11075-ff60-45a3-818e-4f4d0be9ea8f', 'f9043670-6118-4b7b-a4a4-a9ea77621483', NULL, NULL, '2017-01-01 00:00:00', '2100-01-01 00:00:00', '2017-11-29 20:48:13.41', '2017-11-29 20:49:18.561', 'postgres');
-INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('76f17dde-bf83-402a-b38d-127e175418aa', 'eff7dc9c-12f5-49a5-ab61-ebb69ba51abd', '68c11075-ff60-45a3-818e-4f4d0be9ea8f', '50ca4787-6d49-4b29-a8fb-5c82acf5523e', NULL, NULL, '2017-01-01 00:00:00', '2100-01-01 00:00:00', '2017-11-29 00:47:42.198', '2017-11-29 21:32:28.411', 'postgres');
-INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('cd462971-5b24-4ae0-a3d9-bc92c79a6b5c', 'eff7dc9c-12f5-49a5-ab61-ebb69ba51abd', '68c11075-ff60-45a3-818e-4f4d0be9ea8f', '50ca4787-6d49-4b29-a8fb-5c82acf5523e', NULL, NULL, '2017-01-01 00:00:00', '2100-01-01 00:00:00', '2017-11-29 00:48:18.06', '2017-11-29 21:32:43.399', 'postgres');
-INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('481c2e4f-0a0c-4705-a10e-f69b0818714a', 'a8cb0bad-02c1-44a8-8a18-1504af6a92c6', '68c11075-ff60-45a3-818e-4f4d0be9ea8f', '50ca4787-6d49-4b29-a8fb-5c82acf5523e', NULL, NULL, '2017-01-01 00:00:00', '2100-01-01 00:00:00', '2017-11-29 00:43:57.622', '2017-11-29 21:39:43.092', 'postgres');
-INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('ef0e7fdf-96ba-48fd-9a4e-e32263211256', '15571662-7c2e-4366-b032-035a134a3339', 'dd32144f-12d4-485b-83a3-182d5602da0f', '823ca1d8-60dd-4f59-99e7-76138e997cb9', NULL, NULL, '2017-01-01 00:00:00', '2020-12-31 00:00:00', '2017-11-29 21:43:18.732', '2017-11-29 21:44:30.067', 'postgres');
-INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('e0320f67-43df-4ca5-adcb-61e4c72216de', '6ad53093-028d-4b9e-b3b8-82facda10274', 'dd32144f-12d4-485b-83a3-182d5602da0f', 'f9043670-6118-4b7b-a4a4-a9ea77621483', NULL, NULL, '2017-01-01 00:00:00', '2017-12-01 00:00:00', '2017-11-29 22:58:53.571', '2017-11-29 23:18:56.272', 'postgres');
 
 
 --
--- TOC entry 2178 (class 0 OID 312579)
+-- TOC entry 2178 (class 0 OID 23504)
 -- Dependencies: 175
 -- Data for Name: dispecerpol; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('00000000-0000-0000-0000-000000000001', '8b24fa34-03aa-4a82-bfeb-bb044d252be8', NULL, NULL, 'Default', '2017-01-01 00:00:00', '2100-12-31 00:00:00', '2017-12-07 13:45:48.897', '2017-12-07 13:47:40.186', 'postgres');
 
 
 --
--- TOC entry 2179 (class 0 OID 312585)
+-- TOC entry 2179 (class 0 OID 23510)
 -- Dependencies: 176
 -- Data for Name: log; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2197,7 +2186,7 @@ INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod
 
 
 --
--- TOC entry 2180 (class 0 OID 312591)
+-- TOC entry 2180 (class 0 OID 23516)
 -- Dependencies: 177
 -- Data for Name: osoba; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2445,7 +2434,7 @@ INSERT INTO osoba (id, name, password, extid, komentar, skupina, email, popis, p
 
 
 --
--- TOC entry 2181 (class 0 OID 312599)
+-- TOC entry 2181 (class 0 OID 23524)
 -- Dependencies: 178
 -- Data for Name: rezervace; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2467,7 +2456,7 @@ INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, plati
 
 
 --
--- TOC entry 2182 (class 0 OID 312605)
+-- TOC entry 2182 (class 0 OID 23530)
 -- Dependencies: 179
 -- Data for Name: schvaleni; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2475,7 +2464,7 @@ INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, plati
 
 
 --
--- TOC entry 2183 (class 0 OID 312612)
+-- TOC entry 2183 (class 0 OID 23537)
 -- Dependencies: 180
 -- Data for Name: skupina; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2485,7 +2474,7 @@ INSERT INTO skupina (id, name, skupina, popis, platiod, platido, timeinsert, tim
 
 
 --
--- TOC entry 2184 (class 0 OID 312618)
+-- TOC entry 2184 (class 0 OID 23543)
 -- Dependencies: 181
 -- Data for Name: typaktivity; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2495,7 +2484,7 @@ INSERT INTO typaktivity (id, typakt, popis, platiod, platido, timeinsert, timemo
 
 
 --
--- TOC entry 2185 (class 0 OID 312624)
+-- TOC entry 2185 (class 0 OID 23549)
 -- Dependencies: 182
 -- Data for Name: typschv; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2506,7 +2495,7 @@ INSERT INTO typschv (id, typschv, popis, platiod, platido, timeinsert, timemodif
 
 
 --
--- TOC entry 2186 (class 0 OID 312631)
+-- TOC entry 2186 (class 0 OID 23556)
 -- Dependencies: 183
 -- Data for Name: typucast; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2522,7 +2511,7 @@ INSERT INTO typucast (id, typucast, popis, platiod, platido, timeinsert, timemod
 
 
 --
--- TOC entry 2187 (class 0 OID 312637)
+-- TOC entry 2187 (class 0 OID 23562)
 -- Dependencies: 184
 -- Data for Name: typzdroje; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2536,7 +2525,7 @@ INSERT INTO typzdroje (id, typzdr, cesta, rezervace, osoba, popis, platiod, plat
 
 
 --
--- TOC entry 2188 (class 0 OID 312643)
+-- TOC entry 2188 (class 0 OID 23568)
 -- Dependencies: 185
 -- Data for Name: ucastnik; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2569,7 +2558,7 @@ INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, ti
 
 
 --
--- TOC entry 2189 (class 0 OID 312649)
+-- TOC entry 2189 (class 0 OID 23574)
 -- Dependencies: 186
 -- Data for Name: zdroj; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2602,12 +2591,12 @@ INSERT INTO zdroj (id, idtypzdr, idoso, spz, komentar, kapacita, popis, platiod,
 (správkyně I. Mondeková kl. 206)', 20, 'Malá zasedačka', '2017-01-01 00:00:00', '2100-12-31 00:00:00', '2017-06-20 17:10:31.144', '2017-06-20 17:11:05.391', 'postgres');
 INSERT INTO zdroj (id, idtypzdr, idoso, spz, komentar, kapacita, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('1928e4da-329c-4599-943d-ba5f9e0e1147', 'f9043670-6118-4b7b-a4a4-a9ea77621483', '9960cbb8-db3a-4dfc-9292-fab189f9040e', '', 'Notebook  Hewlet Packard
 (správce N.Bazakas kl. 219)', 1, 'NB HP', '2017-01-01 00:00:00', '2100-12-31 00:00:00', '2017-06-20 17:11:19.573', '2017-06-20 17:11:44.469', 'postgres');
-INSERT INTO zdroj (id, idtypzdr, idoso, spz, komentar, kapacita, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('1897e6b9-3804-4c09-86b5-811d6d554c1e', 'f9043670-6118-4b7b-a4a4-a9ea77621483', 'dcb31c8c-51f1-404a-9691-e6d16aa296b5', 'SP 13895', 'Notebook Toshiba
-(správce N.Bazakas kl. 219)', 1, 'NB Toshiba', '2017-01-01 00:00:00', '2100-12-31 00:00:00', '2017-06-20 17:06:43.793', '2017-11-29 23:10:12.552', 'postgres');
+INSERT INTO zdroj (id, idtypzdr, idoso, spz, komentar, kapacita, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('1897e6b9-3804-4c09-86b5-811d6d554c1e', 'f9043670-6118-4b7b-a4a4-a9ea77621483', '9960cbb8-db3a-4dfc-9292-fab189f9040e', 'SP 13895', 'Notebook Toshiba
+(správce N.Bazakas kl. 219)', 1, 'NB Toshiba', '2017-01-01 00:00:00', '2100-12-31 00:00:00', '2017-06-20 17:06:43.793', '2017-06-20 17:12:33.496', 'postgres');
 
 
 --
--- TOC entry 2003 (class 2606 OID 312656)
+-- TOC entry 2003 (class 2606 OID 23581)
 -- Name: primarygroup; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2616,7 +2605,7 @@ ALTER TABLE ONLY skupina
 
 
 --
--- TOC entry 1963 (class 2606 OID 312658)
+-- TOC entry 1963 (class 2606 OID 23583)
 -- Name: primaryid; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2625,7 +2614,7 @@ ALTER TABLE ONLY aktivity
 
 
 --
--- TOC entry 1967 (class 2606 OID 312660)
+-- TOC entry 1967 (class 2606 OID 23585)
 -- Name: primaryidcest; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2634,7 +2623,7 @@ ALTER TABLE ONLY cesta
 
 
 --
--- TOC entry 1973 (class 2606 OID 312662)
+-- TOC entry 1973 (class 2606 OID 23587)
 -- Name: primaryiddisphl; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2643,7 +2632,7 @@ ALTER TABLE ONLY dispecerhl
 
 
 --
--- TOC entry 1978 (class 2606 OID 312664)
+-- TOC entry 1978 (class 2606 OID 23589)
 -- Name: primaryiddisppol; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2652,7 +2641,7 @@ ALTER TABLE ONLY dispecerpol
 
 
 --
--- TOC entry 1983 (class 2606 OID 312666)
+-- TOC entry 1983 (class 2606 OID 23591)
 -- Name: primaryidlog; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2661,7 +2650,7 @@ ALTER TABLE ONLY log
 
 
 --
--- TOC entry 1987 (class 2606 OID 312668)
+-- TOC entry 1987 (class 2606 OID 23593)
 -- Name: primaryidoso; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2670,7 +2659,7 @@ ALTER TABLE ONLY osoba
 
 
 --
--- TOC entry 1993 (class 2606 OID 312670)
+-- TOC entry 1993 (class 2606 OID 23595)
 -- Name: primaryidrez; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2679,7 +2668,7 @@ ALTER TABLE ONLY rezervace
 
 
 --
--- TOC entry 1995 (class 2606 OID 312672)
+-- TOC entry 1995 (class 2606 OID 23597)
 -- Name: primaryidschv; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2688,7 +2677,7 @@ ALTER TABLE ONLY schvaleni
 
 
 --
--- TOC entry 2005 (class 2606 OID 312674)
+-- TOC entry 2005 (class 2606 OID 23599)
 -- Name: primaryidtypakt; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2697,7 +2686,7 @@ ALTER TABLE ONLY typaktivity
 
 
 --
--- TOC entry 2007 (class 2606 OID 312676)
+-- TOC entry 2007 (class 2606 OID 23601)
 -- Name: primaryidtypschv; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2706,7 +2695,7 @@ ALTER TABLE ONLY typschv
 
 
 --
--- TOC entry 2009 (class 2606 OID 312678)
+-- TOC entry 2009 (class 2606 OID 23603)
 -- Name: primaryidtypucast; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2715,7 +2704,7 @@ ALTER TABLE ONLY typucast
 
 
 --
--- TOC entry 2011 (class 2606 OID 312680)
+-- TOC entry 2011 (class 2606 OID 23605)
 -- Name: primaryidtypzdr; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2724,7 +2713,7 @@ ALTER TABLE ONLY typzdroje
 
 
 --
--- TOC entry 2017 (class 2606 OID 312682)
+-- TOC entry 2017 (class 2606 OID 23607)
 -- Name: primaryiducast; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2733,7 +2722,7 @@ ALTER TABLE ONLY ucastnik
 
 
 --
--- TOC entry 2021 (class 2606 OID 312684)
+-- TOC entry 2021 (class 2606 OID 23609)
 -- Name: primaryidzdr; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2742,7 +2731,7 @@ ALTER TABLE ONLY zdroj
 
 
 --
--- TOC entry 1984 (class 1259 OID 312685)
+-- TOC entry 1984 (class 1259 OID 23610)
 -- Name: OsobaExtId; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2750,7 +2739,7 @@ CREATE INDEX "OsobaExtId" ON osoba USING btree (extid);
 
 
 --
--- TOC entry 2379 (class 0 OID 0)
+-- TOC entry 2378 (class 0 OID 0)
 -- Dependencies: 1984
 -- Name: INDEX "OsobaExtId"; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2759,7 +2748,7 @@ COMMENT ON INDEX "OsobaExtId" IS 'Externí ID';
 
 
 --
--- TOC entry 1985 (class 1259 OID 312686)
+-- TOC entry 1985 (class 1259 OID 23611)
 -- Name: OsobaName; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2767,7 +2756,7 @@ CREATE INDEX "OsobaName" ON osoba USING btree (name);
 
 
 --
--- TOC entry 2380 (class 0 OID 0)
+-- TOC entry 2379 (class 0 OID 0)
 -- Dependencies: 1985
 -- Name: INDEX "OsobaName"; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2776,7 +2765,7 @@ COMMENT ON INDEX "OsobaName" IS 'Jméno osoby-uživatele-login ';
 
 
 --
--- TOC entry 2001 (class 1259 OID 312687)
+-- TOC entry 2001 (class 1259 OID 23612)
 -- Name: SkupinaName; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2784,7 +2773,7 @@ CREATE INDEX "SkupinaName" ON skupina USING btree (name);
 
 
 --
--- TOC entry 2381 (class 0 OID 0)
+-- TOC entry 2380 (class 0 OID 0)
 -- Dependencies: 2001
 -- Name: INDEX "SkupinaName"; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2793,7 +2782,7 @@ COMMENT ON INDEX "SkupinaName" IS 'Jméno uživatele-osoby skupiny práv pro Jdb
 
 
 --
--- TOC entry 1968 (class 1259 OID 312688)
+-- TOC entry 1968 (class 1259 OID 23613)
 -- Name: disphl-iddisphl; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2801,7 +2790,7 @@ CREATE INDEX "disphl-iddisphl" ON dispecerhl USING btree (iddisphl);
 
 
 --
--- TOC entry 2382 (class 0 OID 0)
+-- TOC entry 2381 (class 0 OID 0)
 -- Dependencies: 1968
 -- Name: INDEX "disphl-iddisphl"; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2810,7 +2799,7 @@ COMMENT ON INDEX "disphl-iddisphl" IS 'Index přes iddisphl na nadřízeného di
 
 
 --
--- TOC entry 1969 (class 1259 OID 312689)
+-- TOC entry 1969 (class 1259 OID 23614)
 -- Name: disphl-idoso; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2818,7 +2807,7 @@ CREATE INDEX "disphl-idoso" ON dispecerhl USING btree (idoso);
 
 
 --
--- TOC entry 2383 (class 0 OID 0)
+-- TOC entry 2382 (class 0 OID 0)
 -- Dependencies: 1969
 -- Name: INDEX "disphl-idoso"; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2827,7 +2816,7 @@ COMMENT ON INDEX "disphl-idoso" IS 'Index přes idoso';
 
 
 --
--- TOC entry 1970 (class 1259 OID 312690)
+-- TOC entry 1970 (class 1259 OID 23615)
 -- Name: disphl-idtypschv; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2835,7 +2824,7 @@ CREATE INDEX "disphl-idtypschv" ON dispecerhl USING btree (idtypschv);
 
 
 --
--- TOC entry 2384 (class 0 OID 0)
+-- TOC entry 2383 (class 0 OID 0)
 -- Dependencies: 1970
 -- Name: INDEX "disphl-idtypschv"; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2844,7 +2833,7 @@ COMMENT ON INDEX "disphl-idtypschv" IS 'Podle ID typu schvalovatele';
 
 
 --
--- TOC entry 1971 (class 1259 OID 312691)
+-- TOC entry 1971 (class 1259 OID 23616)
 -- Name: disphl-idtypzdr; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2852,7 +2841,7 @@ CREATE INDEX "disphl-idtypzdr" ON dispecerhl USING btree (idtypzdr);
 
 
 --
--- TOC entry 2385 (class 0 OID 0)
+-- TOC entry 2384 (class 0 OID 0)
 -- Dependencies: 1971
 -- Name: INDEX "disphl-idtypzdr"; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2861,7 +2850,7 @@ COMMENT ON INDEX "disphl-idtypzdr" IS 'Podle ID typu zdroje';
 
 
 --
--- TOC entry 1974 (class 1259 OID 312692)
+-- TOC entry 1974 (class 1259 OID 23617)
 -- Name: disppol-iddisphl; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2869,7 +2858,7 @@ CREATE INDEX "disppol-iddisphl" ON dispecerpol USING btree (iddisphl);
 
 
 --
--- TOC entry 2386 (class 0 OID 0)
+-- TOC entry 2385 (class 0 OID 0)
 -- Dependencies: 1974
 -- Name: INDEX "disppol-iddisphl"; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2878,7 +2867,7 @@ COMMENT ON INDEX "disppol-iddisphl" IS 'Index přes iddisphl';
 
 
 --
--- TOC entry 1975 (class 1259 OID 312693)
+-- TOC entry 1975 (class 1259 OID 23618)
 -- Name: disppol-idoso; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2886,7 +2875,7 @@ CREATE INDEX "disppol-idoso" ON dispecerpol USING btree (idoso);
 
 
 --
--- TOC entry 2387 (class 0 OID 0)
+-- TOC entry 2386 (class 0 OID 0)
 -- Dependencies: 1975
 -- Name: INDEX "disppol-idoso"; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2895,7 +2884,7 @@ COMMENT ON INDEX "disppol-idoso" IS 'Index přes idoso';
 
 
 --
--- TOC entry 1976 (class 1259 OID 312694)
+-- TOC entry 1976 (class 1259 OID 23619)
 -- Name: disppol-idzdr; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2903,7 +2892,7 @@ CREATE INDEX "disppol-idzdr" ON dispecerpol USING btree (idzdr);
 
 
 --
--- TOC entry 2388 (class 0 OID 0)
+-- TOC entry 2387 (class 0 OID 0)
 -- Dependencies: 1976
 -- Name: INDEX "disppol-idzdr"; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2912,7 +2901,7 @@ COMMENT ON INDEX "disppol-idzdr" IS 'Podle ID zdroje';
 
 
 --
--- TOC entry 2018 (class 1259 OID 312695)
+-- TOC entry 2018 (class 1259 OID 23620)
 -- Name: fki_Zdroj-idoso; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2920,7 +2909,7 @@ CREATE INDEX "fki_Zdroj-idoso" ON zdroj USING btree (idoso);
 
 
 --
--- TOC entry 1988 (class 1259 OID 312696)
+-- TOC entry 1988 (class 1259 OID 23621)
 -- Name: fki_idakt; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2928,7 +2917,7 @@ CREATE INDEX fki_idakt ON rezervace USING btree (idakt DESC);
 
 
 --
--- TOC entry 1989 (class 1259 OID 312697)
+-- TOC entry 1989 (class 1259 OID 23622)
 -- Name: fki_idcest; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2936,7 +2925,7 @@ CREATE INDEX fki_idcest ON rezervace USING btree (idcest DESC);
 
 
 --
--- TOC entry 1964 (class 1259 OID 312698)
+-- TOC entry 1964 (class 1259 OID 23623)
 -- Name: fki_idoso; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2944,7 +2933,7 @@ CREATE INDEX fki_idoso ON cesta USING btree (idoso);
 
 
 --
--- TOC entry 2012 (class 1259 OID 312699)
+-- TOC entry 2012 (class 1259 OID 23624)
 -- Name: fki_idosouca; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2952,7 +2941,7 @@ CREATE INDEX fki_idosouca ON ucastnik USING btree (idoso DESC);
 
 
 --
--- TOC entry 1961 (class 1259 OID 312700)
+-- TOC entry 1961 (class 1259 OID 23625)
 -- Name: fki_idownerakt; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2960,7 +2949,7 @@ CREATE INDEX fki_idownerakt ON aktivity USING btree (idoso);
 
 
 --
--- TOC entry 2013 (class 1259 OID 312701)
+-- TOC entry 2013 (class 1259 OID 23626)
 -- Name: fki_idtypucastuca; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2968,7 +2957,7 @@ CREATE INDEX fki_idtypucastuca ON ucastnik USING btree (idtypucast);
 
 
 --
--- TOC entry 1965 (class 1259 OID 312702)
+-- TOC entry 1965 (class 1259 OID 23627)
 -- Name: fki_idtypzdrces; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2976,7 +2965,7 @@ CREATE INDEX fki_idtypzdrces ON cesta USING btree (idtypzdr DESC);
 
 
 --
--- TOC entry 2019 (class 1259 OID 312703)
+-- TOC entry 2019 (class 1259 OID 23628)
 -- Name: fki_idtypzdrzdr; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2984,7 +2973,7 @@ CREATE INDEX fki_idtypzdrzdr ON zdroj USING btree (idtypzdr);
 
 
 --
--- TOC entry 1990 (class 1259 OID 312704)
+-- TOC entry 1990 (class 1259 OID 23629)
 -- Name: fki_idzdr; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -2992,7 +2981,7 @@ CREATE INDEX fki_idzdr ON rezervace USING btree (idzdr DESC);
 
 
 --
--- TOC entry 1979 (class 1259 OID 312705)
+-- TOC entry 1979 (class 1259 OID 23630)
 -- Name: fki_log-idoso; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -3000,7 +2989,7 @@ CREATE INDEX "fki_log-idoso" ON log USING btree (idoso);
 
 
 --
--- TOC entry 1980 (class 1259 OID 312706)
+-- TOC entry 1980 (class 1259 OID 23631)
 -- Name: fki_log-idrez; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -3008,7 +2997,7 @@ CREATE INDEX "fki_log-idrez" ON log USING btree (idrez);
 
 
 --
--- TOC entry 1981 (class 1259 OID 312707)
+-- TOC entry 1981 (class 1259 OID 23632)
 -- Name: fki_log-iducast; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -3016,7 +3005,7 @@ CREATE INDEX "fki_log-iducast" ON log USING btree (iducast);
 
 
 --
--- TOC entry 1991 (class 1259 OID 312708)
+-- TOC entry 1991 (class 1259 OID 23633)
 -- Name: fki_paltioddo; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -3024,7 +3013,7 @@ CREATE INDEX fki_paltioddo ON rezervace USING btree (platiod DESC, platido DESC)
 
 
 --
--- TOC entry 2014 (class 1259 OID 312709)
+-- TOC entry 2014 (class 1259 OID 23634)
 -- Name: fki_ucast-idcest; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -3032,7 +3021,7 @@ CREATE INDEX "fki_ucast-idcest" ON ucastnik USING btree (idcest);
 
 
 --
--- TOC entry 2015 (class 1259 OID 312710)
+-- TOC entry 2015 (class 1259 OID 23635)
 -- Name: fki_ucast-idoso; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -3040,7 +3029,7 @@ CREATE INDEX "fki_ucast-idoso" ON ucastnik USING btree (idoso);
 
 
 --
--- TOC entry 1996 (class 1259 OID 312711)
+-- TOC entry 1996 (class 1259 OID 23636)
 -- Name: schv-idcest; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -3048,7 +3037,7 @@ CREATE INDEX "schv-idcest" ON schvaleni USING btree (idcest);
 
 
 --
--- TOC entry 2389 (class 0 OID 0)
+-- TOC entry 2388 (class 0 OID 0)
 -- Dependencies: 1996
 -- Name: INDEX "schv-idcest"; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3057,7 +3046,7 @@ COMMENT ON INDEX "schv-idcest" IS 'ID cesty';
 
 
 --
--- TOC entry 1997 (class 1259 OID 312712)
+-- TOC entry 1997 (class 1259 OID 23637)
 -- Name: schv-idoso; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -3065,7 +3054,7 @@ CREATE INDEX "schv-idoso" ON schvaleni USING btree (idoso);
 
 
 --
--- TOC entry 2390 (class 0 OID 0)
+-- TOC entry 2389 (class 0 OID 0)
 -- Dependencies: 1997
 -- Name: INDEX "schv-idoso"; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3074,7 +3063,7 @@ COMMENT ON INDEX "schv-idoso" IS 'Index přes idoso';
 
 
 --
--- TOC entry 1998 (class 1259 OID 312713)
+-- TOC entry 1998 (class 1259 OID 23638)
 -- Name: schv-idrez; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -3082,7 +3071,7 @@ CREATE INDEX "schv-idrez" ON schvaleni USING btree (idrez);
 
 
 --
--- TOC entry 2391 (class 0 OID 0)
+-- TOC entry 2390 (class 0 OID 0)
 -- Dependencies: 1998
 -- Name: INDEX "schv-idrez"; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3091,7 +3080,7 @@ COMMENT ON INDEX "schv-idrez" IS 'Index přes idrez';
 
 
 --
--- TOC entry 1999 (class 1259 OID 312714)
+-- TOC entry 1999 (class 1259 OID 23639)
 -- Name: schv-idtypschv; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -3099,7 +3088,7 @@ CREATE INDEX "schv-idtypschv" ON schvaleni USING btree (idtypschv);
 
 
 --
--- TOC entry 2392 (class 0 OID 0)
+-- TOC entry 2391 (class 0 OID 0)
 -- Dependencies: 1999
 -- Name: INDEX "schv-idtypschv"; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3108,7 +3097,7 @@ COMMENT ON INDEX "schv-idtypschv" IS 'Podle ID typu schvalovatele';
 
 
 --
--- TOC entry 2000 (class 1259 OID 312715)
+-- TOC entry 2000 (class 1259 OID 23640)
 -- Name: schv-iducast; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -3116,7 +3105,7 @@ CREATE INDEX "schv-iducast" ON schvaleni USING btree (iducast);
 
 
 --
--- TOC entry 2393 (class 0 OID 0)
+-- TOC entry 2392 (class 0 OID 0)
 -- Dependencies: 2000
 -- Name: INDEX "schv-iducast"; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3125,7 +3114,7 @@ COMMENT ON INDEX "schv-iducast" IS 'Index podle cizího klíče - id účastník
 
 
 --
--- TOC entry 2051 (class 2620 OID 312716)
+-- TOC entry 2051 (class 2620 OID 23641)
 -- Name: settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3133,7 +3122,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON aktivity FOR EACH ROW EX
 
 
 --
--- TOC entry 2394 (class 0 OID 0)
+-- TOC entry 2393 (class 0 OID 0)
 -- Dependencies: 2051
 -- Name: TRIGGER settimemodify ON aktivity; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3142,7 +3131,7 @@ COMMENT ON TRIGGER settimemodify ON aktivity IS 'Nastavi cas posledni modifikace
 
 
 --
--- TOC entry 2060 (class 2620 OID 312717)
+-- TOC entry 2060 (class 2620 OID 23642)
 -- Name: settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3150,7 +3139,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON typaktivity FOR EACH ROW
 
 
 --
--- TOC entry 2395 (class 0 OID 0)
+-- TOC entry 2394 (class 0 OID 0)
 -- Dependencies: 2060
 -- Name: TRIGGER settimemodify ON typaktivity; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3159,7 +3148,7 @@ COMMENT ON TRIGGER settimemodify ON typaktivity IS 'Nastavi cas posledni modifik
 
 
 --
--- TOC entry 2063 (class 2620 OID 312718)
+-- TOC entry 2063 (class 2620 OID 23643)
 -- Name: settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3167,7 +3156,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON typzdroje FOR EACH ROW E
 
 
 --
--- TOC entry 2396 (class 0 OID 0)
+-- TOC entry 2395 (class 0 OID 0)
 -- Dependencies: 2063
 -- Name: TRIGGER settimemodify ON typzdroje; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3176,7 +3165,7 @@ COMMENT ON TRIGGER settimemodify ON typzdroje IS 'Nastavi cas posledni modifikac
 
 
 --
--- TOC entry 2065 (class 2620 OID 312719)
+-- TOC entry 2065 (class 2620 OID 23644)
 -- Name: settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3184,7 +3173,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON zdroj FOR EACH ROW EXECU
 
 
 --
--- TOC entry 2052 (class 2620 OID 312720)
+-- TOC entry 2052 (class 2620 OID 23645)
 -- Name: settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3192,7 +3181,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON cesta FOR EACH ROW EXECU
 
 
 --
--- TOC entry 2064 (class 2620 OID 312721)
+-- TOC entry 2064 (class 2620 OID 23646)
 -- Name: settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3200,7 +3189,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON ucastnik FOR EACH ROW EX
 
 
 --
--- TOC entry 2062 (class 2620 OID 312722)
+-- TOC entry 2062 (class 2620 OID 23647)
 -- Name: settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3208,7 +3197,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON typucast FOR EACH ROW EX
 
 
 --
--- TOC entry 2397 (class 0 OID 0)
+-- TOC entry 2396 (class 0 OID 0)
 -- Dependencies: 2062
 -- Name: TRIGGER settimemodify ON typucast; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3217,7 +3206,7 @@ COMMENT ON TRIGGER settimemodify ON typucast IS 'Nastavi cas posledni modifikace
 
 
 --
--- TOC entry 2061 (class 2620 OID 312723)
+-- TOC entry 2061 (class 2620 OID 23648)
 -- Name: settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3225,7 +3214,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON typschv FOR EACH ROW EXE
 
 
 --
--- TOC entry 2398 (class 0 OID 0)
+-- TOC entry 2397 (class 0 OID 0)
 -- Dependencies: 2061
 -- Name: TRIGGER settimemodify ON typschv; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3234,7 +3223,7 @@ COMMENT ON TRIGGER settimemodify ON typschv IS 'Nastavi cas posledni modifikace 
 
 
 --
--- TOC entry 2055 (class 2620 OID 312724)
+-- TOC entry 2055 (class 2620 OID 23649)
 -- Name: settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3242,7 +3231,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON log FOR EACH ROW EXECUTE
 
 
 --
--- TOC entry 2057 (class 2620 OID 312725)
+-- TOC entry 2057 (class 2620 OID 23650)
 -- Name: settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3250,7 +3239,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON rezervace FOR EACH ROW E
 
 
 --
--- TOC entry 2056 (class 2620 OID 312726)
+-- TOC entry 2056 (class 2620 OID 23651)
 -- Name: settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3258,7 +3247,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON osoba FOR EACH ROW EXECU
 
 
 --
--- TOC entry 2058 (class 2620 OID 312727)
+-- TOC entry 2058 (class 2620 OID 23652)
 -- Name: settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3266,7 +3255,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON schvaleni FOR EACH ROW E
 
 
 --
--- TOC entry 2059 (class 2620 OID 312728)
+-- TOC entry 2059 (class 2620 OID 23653)
 -- Name: settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3274,7 +3263,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON skupina FOR EACH ROW EXE
 
 
 --
--- TOC entry 2054 (class 2620 OID 312729)
+-- TOC entry 2054 (class 2620 OID 23654)
 -- Name: settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3282,7 +3271,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON dispecerpol FOR EACH ROW
 
 
 --
--- TOC entry 2053 (class 2620 OID 312730)
+-- TOC entry 2053 (class 2620 OID 23655)
 -- Name: settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3290,7 +3279,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON dispecerhl FOR EACH ROW 
 
 
 --
--- TOC entry 2022 (class 2606 OID 312731)
+-- TOC entry 2022 (class 2606 OID 23656)
 -- Name: aktivity-idoso; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3299,7 +3288,7 @@ ALTER TABLE ONLY aktivity
 
 
 --
--- TOC entry 2399 (class 0 OID 0)
+-- TOC entry 2398 (class 0 OID 0)
 -- Dependencies: 2022
 -- Name: CONSTRAINT "aktivity-idoso" ON aktivity; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3308,7 +3297,7 @@ COMMENT ON CONSTRAINT "aktivity-idoso" ON aktivity IS 'Odkaz na tabulku osoba - 
 
 
 --
--- TOC entry 2023 (class 2606 OID 312736)
+-- TOC entry 2023 (class 2606 OID 23661)
 -- Name: aktivity-idtypakt; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3317,7 +3306,7 @@ ALTER TABLE ONLY aktivity
 
 
 --
--- TOC entry 2400 (class 0 OID 0)
+-- TOC entry 2399 (class 0 OID 0)
 -- Dependencies: 2023
 -- Name: CONSTRAINT "aktivity-idtypakt" ON aktivity; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3326,7 +3315,7 @@ COMMENT ON CONSTRAINT "aktivity-idtypakt" ON aktivity IS 'Cizi klic z tabulky ak
 
 
 --
--- TOC entry 2024 (class 2606 OID 312741)
+-- TOC entry 2024 (class 2606 OID 23666)
 -- Name: cesta-idoso; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3335,7 +3324,7 @@ ALTER TABLE ONLY cesta
 
 
 --
--- TOC entry 2401 (class 0 OID 0)
+-- TOC entry 2400 (class 0 OID 0)
 -- Dependencies: 2024
 -- Name: CONSTRAINT "cesta-idoso" ON cesta; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3344,7 +3333,7 @@ COMMENT ON CONSTRAINT "cesta-idoso" ON cesta IS 'Odkaz na tabulku osob';
 
 
 --
--- TOC entry 2025 (class 2606 OID 312746)
+-- TOC entry 2025 (class 2606 OID 23671)
 -- Name: cesta-idtypzdr; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3353,7 +3342,7 @@ ALTER TABLE ONLY cesta
 
 
 --
--- TOC entry 2026 (class 2606 OID 312751)
+-- TOC entry 2026 (class 2606 OID 23676)
 -- Name: disphl-iddisphl; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3362,7 +3351,7 @@ ALTER TABLE ONLY dispecerhl
 
 
 --
--- TOC entry 2402 (class 0 OID 0)
+-- TOC entry 2401 (class 0 OID 0)
 -- Dependencies: 2026
 -- Name: CONSTRAINT "disphl-iddisphl" ON dispecerhl; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3371,7 +3360,7 @@ COMMENT ON CONSTRAINT "disphl-iddisphl" ON dispecerhl IS 'Odkaz na tabulku dispe
 
 
 --
--- TOC entry 2027 (class 2606 OID 312756)
+-- TOC entry 2027 (class 2606 OID 23681)
 -- Name: disphl-idoso; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3380,7 +3369,7 @@ ALTER TABLE ONLY dispecerhl
 
 
 --
--- TOC entry 2403 (class 0 OID 0)
+-- TOC entry 2402 (class 0 OID 0)
 -- Dependencies: 2027
 -- Name: CONSTRAINT "disphl-idoso" ON dispecerhl; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3389,7 +3378,7 @@ COMMENT ON CONSTRAINT "disphl-idoso" ON dispecerhl IS 'Cizi klic na tabulku osob
 
 
 --
--- TOC entry 2028 (class 2606 OID 312761)
+-- TOC entry 2028 (class 2606 OID 23686)
 -- Name: disphl-idtypschv; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3398,7 +3387,7 @@ ALTER TABLE ONLY dispecerhl
 
 
 --
--- TOC entry 2404 (class 0 OID 0)
+-- TOC entry 2403 (class 0 OID 0)
 -- Dependencies: 2028
 -- Name: CONSTRAINT "disphl-idtypschv" ON dispecerhl; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3407,7 +3396,7 @@ COMMENT ON CONSTRAINT "disphl-idtypschv" ON dispecerhl IS 'Odkaz na tabulku typs
 
 
 --
--- TOC entry 2029 (class 2606 OID 312766)
+-- TOC entry 2029 (class 2606 OID 23691)
 -- Name: disphl-idtypzdr; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3416,7 +3405,7 @@ ALTER TABLE ONLY dispecerhl
 
 
 --
--- TOC entry 2405 (class 0 OID 0)
+-- TOC entry 2404 (class 0 OID 0)
 -- Dependencies: 2029
 -- Name: CONSTRAINT "disphl-idtypzdr" ON dispecerhl; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3425,7 +3414,7 @@ COMMENT ON CONSTRAINT "disphl-idtypzdr" ON dispecerhl IS 'Odkaz na tabulku typzd
 
 
 --
--- TOC entry 2030 (class 2606 OID 312771)
+-- TOC entry 2030 (class 2606 OID 23696)
 -- Name: disppol-idoso; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3434,7 +3423,7 @@ ALTER TABLE ONLY dispecerpol
 
 
 --
--- TOC entry 2406 (class 0 OID 0)
+-- TOC entry 2405 (class 0 OID 0)
 -- Dependencies: 2030
 -- Name: CONSTRAINT "disppol-idoso" ON dispecerpol; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3443,16 +3432,16 @@ COMMENT ON CONSTRAINT "disppol-idoso" ON dispecerpol IS 'Cizi klic na tabulku os
 
 
 --
--- TOC entry 2031 (class 2606 OID 312776)
+-- TOC entry 2031 (class 2606 OID 23701)
 -- Name: disppol-idzdr; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY dispecerpol
-    ADD CONSTRAINT "disppol-idzdr" FOREIGN KEY (id) REFERENCES zdroj(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT "disppol-idzdr" FOREIGN KEY (idzdr) REFERENCES zdroj(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- TOC entry 2407 (class 0 OID 0)
+-- TOC entry 2406 (class 0 OID 0)
 -- Dependencies: 2031
 -- Name: CONSTRAINT "disppol-idzdr" ON dispecerpol; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3461,7 +3450,7 @@ COMMENT ON CONSTRAINT "disppol-idzdr" ON dispecerpol IS 'Odkaz na tabulku zdroje
 
 
 --
--- TOC entry 2032 (class 2606 OID 312781)
+-- TOC entry 2032 (class 2606 OID 23706)
 -- Name: log-idakt; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3470,7 +3459,7 @@ ALTER TABLE ONLY log
 
 
 --
--- TOC entry 2033 (class 2606 OID 312786)
+-- TOC entry 2033 (class 2606 OID 23711)
 -- Name: log-idcest; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3479,7 +3468,7 @@ ALTER TABLE ONLY log
 
 
 --
--- TOC entry 2408 (class 0 OID 0)
+-- TOC entry 2407 (class 0 OID 0)
 -- Dependencies: 2033
 -- Name: CONSTRAINT "log-idcest" ON log; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3488,7 +3477,7 @@ COMMENT ON CONSTRAINT "log-idcest" ON log IS 'ID na tabulku cesty';
 
 
 --
--- TOC entry 2034 (class 2606 OID 312791)
+-- TOC entry 2034 (class 2606 OID 23716)
 -- Name: log-idoso; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3497,7 +3486,7 @@ ALTER TABLE ONLY log
 
 
 --
--- TOC entry 2409 (class 0 OID 0)
+-- TOC entry 2408 (class 0 OID 0)
 -- Dependencies: 2034
 -- Name: CONSTRAINT "log-idoso" ON log; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3506,7 +3495,7 @@ COMMENT ON CONSTRAINT "log-idoso" ON log IS 'Odkaz na tabulku osoba';
 
 
 --
--- TOC entry 2035 (class 2606 OID 312796)
+-- TOC entry 2035 (class 2606 OID 23721)
 -- Name: log-idrez; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3515,7 +3504,7 @@ ALTER TABLE ONLY log
 
 
 --
--- TOC entry 2410 (class 0 OID 0)
+-- TOC entry 2409 (class 0 OID 0)
 -- Dependencies: 2035
 -- Name: CONSTRAINT "log-idrez" ON log; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3524,7 +3513,7 @@ COMMENT ON CONSTRAINT "log-idrez" ON log IS 'Odkaz na tabulku rezervací';
 
 
 --
--- TOC entry 2036 (class 2606 OID 312801)
+-- TOC entry 2036 (class 2606 OID 23726)
 -- Name: log-iducast; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3533,7 +3522,7 @@ ALTER TABLE ONLY log
 
 
 --
--- TOC entry 2411 (class 0 OID 0)
+-- TOC entry 2410 (class 0 OID 0)
 -- Dependencies: 2036
 -- Name: CONSTRAINT "log-iducast" ON log; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3542,7 +3531,7 @@ COMMENT ON CONSTRAINT "log-iducast" ON log IS 'Odkaz na tabulku ucastnik';
 
 
 --
--- TOC entry 2037 (class 2606 OID 312806)
+-- TOC entry 2037 (class 2606 OID 23731)
 -- Name: log-idzdr; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3551,7 +3540,7 @@ ALTER TABLE ONLY log
 
 
 --
--- TOC entry 2412 (class 0 OID 0)
+-- TOC entry 2411 (class 0 OID 0)
 -- Dependencies: 2037
 -- Name: CONSTRAINT "log-idzdr" ON log; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3560,7 +3549,7 @@ COMMENT ON CONSTRAINT "log-idzdr" ON log IS 'Odkaz na zdroj - cizi klic';
 
 
 --
--- TOC entry 2038 (class 2606 OID 312811)
+-- TOC entry 2038 (class 2606 OID 23736)
 -- Name: rez-idakt; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3569,7 +3558,7 @@ ALTER TABLE ONLY rezervace
 
 
 --
--- TOC entry 2413 (class 0 OID 0)
+-- TOC entry 2412 (class 0 OID 0)
 -- Dependencies: 2038
 -- Name: CONSTRAINT "rez-idakt" ON rezervace; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3578,7 +3567,7 @@ COMMENT ON CONSTRAINT "rez-idakt" ON rezervace IS 'Odkaz na tabulku aktivity';
 
 
 --
--- TOC entry 2039 (class 2606 OID 312816)
+-- TOC entry 2039 (class 2606 OID 23741)
 -- Name: rez-idcest; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3587,7 +3576,7 @@ ALTER TABLE ONLY rezervace
 
 
 --
--- TOC entry 2414 (class 0 OID 0)
+-- TOC entry 2413 (class 0 OID 0)
 -- Dependencies: 2039
 -- Name: CONSTRAINT "rez-idcest" ON rezervace; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3596,7 +3585,7 @@ COMMENT ON CONSTRAINT "rez-idcest" ON rezervace IS 'Odkaz na tabulku cest';
 
 
 --
--- TOC entry 2040 (class 2606 OID 312821)
+-- TOC entry 2040 (class 2606 OID 23746)
 -- Name: rez-idzdr; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3605,7 +3594,7 @@ ALTER TABLE ONLY rezervace
 
 
 --
--- TOC entry 2415 (class 0 OID 0)
+-- TOC entry 2414 (class 0 OID 0)
 -- Dependencies: 2040
 -- Name: CONSTRAINT "rez-idzdr" ON rezervace; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3614,7 +3603,7 @@ COMMENT ON CONSTRAINT "rez-idzdr" ON rezervace IS 'Odkaz na tabulku zdroje';
 
 
 --
--- TOC entry 2041 (class 2606 OID 312826)
+-- TOC entry 2041 (class 2606 OID 23751)
 -- Name: schv-idcest; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3623,7 +3612,7 @@ ALTER TABLE ONLY schvaleni
 
 
 --
--- TOC entry 2416 (class 0 OID 0)
+-- TOC entry 2415 (class 0 OID 0)
 -- Dependencies: 2041
 -- Name: CONSTRAINT "schv-idcest" ON schvaleni; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3632,7 +3621,7 @@ COMMENT ON CONSTRAINT "schv-idcest" ON schvaleni IS 'Odkaz na tabulku cesta';
 
 
 --
--- TOC entry 2042 (class 2606 OID 312831)
+-- TOC entry 2042 (class 2606 OID 23756)
 -- Name: schv-idoso; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3641,7 +3630,7 @@ ALTER TABLE ONLY schvaleni
 
 
 --
--- TOC entry 2417 (class 0 OID 0)
+-- TOC entry 2416 (class 0 OID 0)
 -- Dependencies: 2042
 -- Name: CONSTRAINT "schv-idoso" ON schvaleni; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3650,7 +3639,7 @@ COMMENT ON CONSTRAINT "schv-idoso" ON schvaleni IS 'Cizi klic na tabulku osoba';
 
 
 --
--- TOC entry 2043 (class 2606 OID 312836)
+-- TOC entry 2043 (class 2606 OID 23761)
 -- Name: schv-idrez; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3659,7 +3648,7 @@ ALTER TABLE ONLY schvaleni
 
 
 --
--- TOC entry 2044 (class 2606 OID 312841)
+-- TOC entry 2044 (class 2606 OID 23766)
 -- Name: schv-idtypschv; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3668,7 +3657,7 @@ ALTER TABLE ONLY schvaleni
 
 
 --
--- TOC entry 2418 (class 0 OID 0)
+-- TOC entry 2417 (class 0 OID 0)
 -- Dependencies: 2044
 -- Name: CONSTRAINT "schv-idtypschv" ON schvaleni; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3677,7 +3666,7 @@ COMMENT ON CONSTRAINT "schv-idtypschv" ON schvaleni IS 'Odkaz na tabulku typschv
 
 
 --
--- TOC entry 2045 (class 2606 OID 312846)
+-- TOC entry 2045 (class 2606 OID 23771)
 -- Name: schv-iducast; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3686,7 +3675,7 @@ ALTER TABLE ONLY schvaleni
 
 
 --
--- TOC entry 2046 (class 2606 OID 312851)
+-- TOC entry 2046 (class 2606 OID 23776)
 -- Name: ucast-idcest; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3695,7 +3684,7 @@ ALTER TABLE ONLY ucastnik
 
 
 --
--- TOC entry 2419 (class 0 OID 0)
+-- TOC entry 2418 (class 0 OID 0)
 -- Dependencies: 2046
 -- Name: CONSTRAINT "ucast-idcest" ON ucastnik; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3704,7 +3693,7 @@ COMMENT ON CONSTRAINT "ucast-idcest" ON ucastnik IS 'Cizí klíč na tabulku ces
 
 
 --
--- TOC entry 2047 (class 2606 OID 312856)
+-- TOC entry 2047 (class 2606 OID 23781)
 -- Name: ucast-idoso; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3713,7 +3702,7 @@ ALTER TABLE ONLY ucastnik
 
 
 --
--- TOC entry 2420 (class 0 OID 0)
+-- TOC entry 2419 (class 0 OID 0)
 -- Dependencies: 2047
 -- Name: CONSTRAINT "ucast-idoso" ON ucastnik; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3722,7 +3711,7 @@ COMMENT ON CONSTRAINT "ucast-idoso" ON ucastnik IS 'Odkaz na tabulku osoba';
 
 
 --
--- TOC entry 2048 (class 2606 OID 312861)
+-- TOC entry 2048 (class 2606 OID 23786)
 -- Name: ucast-idtypucast; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3731,7 +3720,7 @@ ALTER TABLE ONLY ucastnik
 
 
 --
--- TOC entry 2421 (class 0 OID 0)
+-- TOC entry 2420 (class 0 OID 0)
 -- Dependencies: 2048
 -- Name: CONSTRAINT "ucast-idtypucast" ON ucastnik; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3740,7 +3729,7 @@ COMMENT ON CONSTRAINT "ucast-idtypucast" ON ucastnik IS 'Odkaz na ciselnik typu 
 
 
 --
--- TOC entry 2049 (class 2606 OID 312866)
+-- TOC entry 2049 (class 2606 OID 23791)
 -- Name: zdroj-idoso; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3749,7 +3738,7 @@ ALTER TABLE ONLY zdroj
 
 
 --
--- TOC entry 2422 (class 0 OID 0)
+-- TOC entry 2421 (class 0 OID 0)
 -- Dependencies: 2049
 -- Name: CONSTRAINT "zdroj-idoso" ON zdroj; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3758,7 +3747,7 @@ COMMENT ON CONSTRAINT "zdroj-idoso" ON zdroj IS 'Odkaz na tabulku osob';
 
 
 --
--- TOC entry 2050 (class 2606 OID 312871)
+-- TOC entry 2050 (class 2606 OID 23796)
 -- Name: zdroj-idtypzdr; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3767,7 +3756,7 @@ ALTER TABLE ONLY zdroj
 
 
 --
--- TOC entry 2423 (class 0 OID 0)
+-- TOC entry 2422 (class 0 OID 0)
 -- Dependencies: 2050
 -- Name: CONSTRAINT "zdroj-idtypzdr" ON zdroj; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3787,7 +3776,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2017-11-29 23:24:45
+-- Completed on 2017-12-07 14:31:46
 
 --
 -- PostgreSQL database dump complete

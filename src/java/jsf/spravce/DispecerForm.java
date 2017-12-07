@@ -9,6 +9,7 @@ import ejb.DAOdispecer;
 import entity.Osoba;
 import entity.Typschv;
 import entity.Typzdroje;
+import entity.Zdroj;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,10 +43,13 @@ public class DispecerForm implements Serializable {
     private ejb.TypSchvFacade ejbTypSchvFacade;
     @EJB
     private ejb.OsobaFacade ejbOsobaFacade;
+    @EJB
+    private ejb.ZdrojeFacade ejbZdrojeFacade;
 
     private ArrayList<Typzdroje> typZdrList = null;
     private ArrayList<Typschv> typSchvList = null;
     private ArrayList<Osoba> osobaList = null;
+    private ArrayList<Zdroj> zdrojList = null;
 
     @PostConstruct
     void initDispecerForm() {
@@ -92,7 +96,7 @@ public class DispecerForm implements Serializable {
         if (this.typSchvList == null) {
             this.typSchvList = new ArrayList<>(ejbTypSchvFacade.findAll());
         }
-        return typSchvList;
+        return this.typSchvList;
     }
 
     /**
@@ -109,7 +113,7 @@ public class DispecerForm implements Serializable {
         if (this.osobaList == null) {
             this.osobaList = new ArrayList<>(ejbOsobaFacade.findAlltByName());
         }
-        return osobaList;
+        return this.osobaList;
     }
 
     /**
@@ -119,20 +123,46 @@ public class DispecerForm implements Serializable {
         this.osobaList = osobaList;
     }
 
+    /**
+     * @return the zdrojeList
+     */
+    public ArrayList<Zdroj> getZdrojList() {
+        if (this.zdrojList == null) {
+            this.zdrojList = new ArrayList<>(ejbZdrojeFacade.findAll());
+        }
+        return this.zdrojList;
+    }
+
+    /**
+     * @param zdrojList
+     */
+    public void setZdrojList(ArrayList<Zdroj> zdrojList) {
+        this.zdrojList = zdrojList;
+    }
+
+    /**
+     * Kontrola vazby platiOd > platiDo
+     */
     public void platiOdListener() {
         if (this.daoDispecer.getDispecerHl().getPlatiod().after(this.daoDispecer.getDispecerHl().getPlatido())) {
             this.daoDispecer.getDispecerHl().setPlatido(this.daoDispecer.getDispecerHl().getPlatiod());
         }
     }
 
+    /**
+     * Kontrola vazby platiDo > platiOd
+     */
     public void platiDoListener() {
         if (this.daoDispecer.getDispecerHl().getPlatiod().after(this.daoDispecer.getDispecerHl().getPlatido())) {
             this.daoDispecer.getDispecerHl().setPlatiod(this.daoDispecer.getDispecerHl().getPlatido());
         }
     }
 
-    /*
-    * Metody pro zastupce
+    /**
+     * Metody pro zastupce
+     *
+     * @param param
+     * @return
      */
     public boolean isButtonZastEnabled(String param) {
         switch (param) {
@@ -146,17 +176,33 @@ public class DispecerForm implements Serializable {
         return true;
     }
 
+    /**
+     * Generovani noveho zastupce dispecera
+     *
+     * @return
+     */
     public String zastupceNew() {
         String zastupci = null;
         this.daoDispecer.zastNew();
         return zastupci;
     }
 
+    /**
+     * Nepouziva se
+     *
+     * @return
+     */
     public String zastupceEdit() {
         String zastupci = null;
         return zastupci;
     }
 
+    /**
+     * Vymazani zastupce ze seznamu !!!POZOR!!! dodelat kontrolu na jiz pouzity
+     * zaznam - ten nelze smazat- uz se s nim pracovalo
+     *
+     * @return
+     */
     public String zastupceDel() {
         try {
             this.daoDispecer.zastDel();
@@ -182,8 +228,10 @@ public class DispecerForm implements Serializable {
         return null;
     }
 
-    /*
-    * Ulozit cely formular
+    /**
+     * Ulozit cely formular
+     *
+     * @return
      */
     public String save() {
         try {
@@ -213,8 +261,85 @@ public class DispecerForm implements Serializable {
         return "/spravce/dispeceri";
     }
 
+    /**
+     * Akce na situaci, kdy uzivatel neulozi zaznam
+     *
+     * @return
+     */
     public String cancel() {
         this.daoDispecer.dispHlReset();
         return "/spravce/dispeceri";
     }
+// Polozky
+
+    /**
+     * Kontrola dostupnosti tlacitek
+     *
+     * @param param
+     * @return
+     */
+    public boolean isButtonDispPolEnabled(String param) {
+        switch (param) {
+            case "new":
+                return true;
+            case "edit":
+                return this.daoDispecer.getDispecerPol() != null;
+            case "delete":
+                return this.daoDispecer.getDispecerPol() != null;
+        }
+        return true;
+    }
+
+    /**
+     * Generovani nove polozky spravovane dispecerem
+     *
+     * @return dispPol
+     */
+    public String dispPolNew() {
+        String dispPol = null;
+        this.daoDispecer.dispPolNew();
+        return dispPol;
+    }
+
+    /**
+     * Nepouziva se
+     *
+     * @return
+     */
+    public String dispPolEdit() {
+        String dispPol = null;
+        return dispPol;
+    }
+
+    /**
+     * Smaze zaznam o spravovane polozce dispecerem !!!POZOR!!! dodelat kontrolu
+     * na jiz pouzity zaznam - ten nelze smazat- uz se s nim pracovalo
+     *
+     * @return
+     */
+    public String dispPolDel() {
+        try {
+            this.daoDispecer.dispPolDel();
+            JsfUtil.addSuccessMessage("Záznam byl úspěšně smazán.");
+        } catch (EJBException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            String msg = "";
+            Throwable cause = ex.getCause();
+            if (cause != null) {
+                msg = cause.getLocalizedMessage();
+            }
+            if (msg.length() > 0) {
+                JsfUtil.addErrorMessage(msg);
+            } else {
+                JsfUtil.addErrorMessage(ex, "Chyba uložení dat");
+            }
+            JsfUtil.validationFailed();
+        } catch (Exception ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, "Chyba zpracování");
+            JsfUtil.validationFailed();
+        }
+        return null;
+    }
+
 }

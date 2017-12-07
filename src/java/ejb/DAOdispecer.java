@@ -25,9 +25,10 @@ import jsf.util.JsfUtil;
 @SessionScoped
 //@Stateful
 /**
- * !!! POZOR !!!  persitence tridy funguje POUZE pokud je v tabulce "dispecerihl" alespon 1 veta
- * Jinak relace dispecerhl.idsiphl > dispecerhl.id  konci nedefinovanou chybou a nedari se pridat zaznam
- * ASI musi byt ve vsech tabulkach pri startu veta ???
+ * !!! POZOR !!! persitence tridy funguje POUZE pokud je v tabulce "dispecerihl"
+ * alespon 1 veta Jinak relace dispecerhl.idsiphl > dispecerhl.id konci
+ * nedefinovanou chybou a nedari se pridat zaznam ASI musi byt ve vsech
+ * tabulkach pri startu veta ???
  */
 public class DAOdispecer implements Serializable {
 
@@ -175,6 +176,9 @@ public class DAOdispecer implements Serializable {
         this.zastupce = zastupce;
     }
 
+//-----------------------
+// Cast PERSISTENCE pro dispecera
+//--------------------------    
     /**
      * Metoda vztvori noveho dispecera
      */
@@ -206,9 +210,6 @@ public class DAOdispecer implements Serializable {
         }
     }
 
-//-----------------------
-// Cast PERSISTENCE pro dispecera
-//--------------------------    
     public void dispHlSave() {
         if (this.getDispecerHl().isNewEntity()) {
             dispHlPersist(JsfUtil.PersistAction.CREATE);
@@ -234,7 +235,7 @@ public class DAOdispecer implements Serializable {
         if (this.dispecerHl.getZastupciList() != null && this.dispecerHl.getZastupciList().isEmpty()) {
             this.dispecerHl.setZastupciList(null);
         }
-        if (this.getDispecerHl()!= null) {
+        if (this.getDispecerHl() != null) {
             switch (persistAction) {
                 case CREATE:
                     this.getDispecerHl().setNewEntity(false);
@@ -242,10 +243,10 @@ public class DAOdispecer implements Serializable {
                     this.dispecerHlList.add(this.dispecerHl);
                     break;
                 case UPDATE:
-                    getEjbDispHlFacade().edit(getDispecerHl());
+                    getEjbDispHlFacade().edit(this.dispecerHl);
                     break;
                 case DELETE:
-                    getEjbDispHlFacade().remove(getDispecerHl());
+                    getEjbDispHlFacade().remove(this.dispecerHl);
                     break;
             }
         }
@@ -261,9 +262,9 @@ public class DAOdispecer implements Serializable {
         }
     }
 
-    /*
-    * Prace se zastupci
-     */
+//-----------------------
+// Cast PERSISTENCE pro zastupce
+//--------------------------    
     public void zastNew() {
         this.zastupce = new Dispecerhl();
         // Dosadit dispecera, jehoz bude zaznam zastupcem
@@ -308,6 +309,34 @@ public class DAOdispecer implements Serializable {
                 }
             }
         }
+    }
+
+//----------------------------------------------
+// Cast PERSISTENCE pro podrizene osoby dispecera
+//----------------------------------------------    
+    public void dispPolNew() {
+        this.dispecerPol = new Dispecerpol();
+        // Dosadit dispecera, který bude mít polozku na starosti
+        this.dispecerPol.setIddisphl(dispecerHl);
+        this.dispecerPol.setNewEntity(true);
+        cal.set(Calendar.YEAR, 2017);
+        cal.set(Calendar.MONTH, Calendar.JANUARY);
+        cal.set(Calendar.DAY_OF_YEAR, 1);
+        cal.set(Calendar.HOUR_OF_DAY, 00);
+        cal.set(Calendar.MINUTE, 00);
+        this.dispecerPol.setPlatiod(cal.getTime());
+        cal.set(Calendar.YEAR, 2100);
+        cal.set(Calendar.MONTH, Calendar.JANUARY);
+        cal.set(Calendar.DAY_OF_YEAR, 1);
+        cal.set(Calendar.HOUR_OF_DAY, 00);
+        cal.set(Calendar.MINUTE, 00);
+        this.dispecerPol.setPlatido(cal.getTime());
+
+        this.dispecerHl.getDispecerpolList().add(this.dispecerPol);
+    }
+
+    public void dispPolDel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

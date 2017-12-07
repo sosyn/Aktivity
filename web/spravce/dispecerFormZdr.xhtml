@@ -8,24 +8,24 @@
     <p:panelGrid columns="2" layout="grid">
         <f:facet name="header">
             <p:row> 
-                <p:column colspan="2">Zástupci dispečera</p:column>
+                <p:column colspan="2">Spravované zdroje</p:column>
             </p:row>
         </f:facet>
         <p:column>
-            <p:dataTable id="dataTableZast" value="#{daoDispecer.dispecerHl.zastupciList}" var="item" selectionMode="single" selection="#{daoDispecer.zastupce}" rowKey="#{item.id}" editable="true" editMode="row" >
-                <p:ajax event="rowSelect" update=":dispecerForm:ZastupceNew :dispecerForm:ZastupceDel" />
+            <p:dataTable id="DispPolZdrDataTable" value="#{daoDispecer.dispecerHl.dispecerpolList}" var="item" selectionMode="single" selection="#{daoDispecer.dispecerPol}" rowKey="#{item.id}" editable="true" editMode="row" >
+                <p:ajax event="rowSelect" update=":dispecerForm:DispPolNew :dispecerForm:DispPolDel" />
 
-                <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains">
+                <p:column sortBy="#{item.idzdr.popis}" filterBy="#{item.idzdr.popis}" filterMatchMode="contains">
                     <f:facet name="header">
-                        <h:outputText value="Příjmení, jméno, titul:"/>
+                        <h:outputText value="Popis:"/>
                     </f:facet>
                     <p:cellEditor>
                         <f:facet name="output">
-                            <h:outputText value="#{item.idoso.popis}" />
+                            <h:outputText value="#{item.idzdr.popis}" />
                         </f:facet>
                         <f:facet name="input">
-                            <p:selectOneMenu id="dispecer" value="#{item.idoso}" converter="#{JSFConverterOsoba}" filter="true" disabled="#{not daoDispecer.zastupce.newEntity}" >
-                                <f:selectItems value="#{dispecerForm.osobaList}" var="osoba" itemLabel="#{osoba.popis}" itemValue="#{osoba}"  />      
+                            <p:selectOneMenu id="dispPolZdr" value="#{item.idzdr}" converter="#{JSFConverterZdroj}" filter="true" disabled="#{not daoDispecer.dispecerPol.newEntity}" >
+                                <f:selectItems value="#{dispecerForm.zdrojList}" var="zdroj" itemLabel="#{zdroj.popis}" itemValue="#{zdroj}"  />      
                             </p:selectOneMenu>
                         </f:facet>
                     </p:cellEditor>
@@ -42,7 +42,7 @@
                         </f:facet>
                         <f:facet name="input">
                             <p:calendar id="platiOd" value="#{item.platiod}" pattern="dd.MM.yyyy"  showOn="button">
-                                <f:attribute name="platiDo" value="#{daoDispecer.zastupce.platido}" />
+                                <f:attribute name="platiDo" value="#{daoDispecer.dispecerPol.platido}" />
                             </p:calendar>
                         </f:facet>
                     </p:cellEditor>
@@ -59,7 +59,7 @@
                         </f:facet>
                         <f:facet name="input">
                             <p:calendar id="platiDo" value="#{item.platido}" pattern="dd.MM.yyyy"  showOn="button">
-                                <f:attribute name="platiOd" value="#{daoDispecer.zastupce.platido}" />
+                                <f:attribute name="platiOd" value="#{daoDispecer.dispecerPol.platiod}" />
                             </p:calendar>
                         </f:facet>
                     </p:cellEditor>                
@@ -70,15 +70,14 @@
             </p:dataTable>
         </p:column>
         <p:column >
-            <p:commandButton id="ZastupceNew" value="Nový" action="#{dispecerForm.zastupceNew}" disabled="#{!dispecerForm.isButtonZastEnabled('new')}" update=":growl dataTableZast" icon="fa fa-file-o" /> <br/>
-            <p:commandButton id="ZastupceDel" value="Smazat"  action="#{dispecerForm.zastupceDel}" disabled="#{!dispecerForm.isButtonZastEnabled('delete')}"  update=":growl dataTableZast"  icon="fa fa-remove">
-                <p:confirm  header="Žádám potvrzení" message="Opravdu smazat záznam o zástupci dispečera?" icon="ui-icon-alert" />
+            <p:commandButton id="DispPolNew" value="Nový" action="#{dispecerForm.dispPolNew}" disabled="#{!dispecerForm.isButtonDispPolEnabled('new')}" update=":growl :dispecerForm:DispPolZdrDataTable" icon="fa fa-file-o" /> <br/>
+            <p:commandButton id="DispPolDel" value="Smazat"  action="#{dispecerForm.dispPolDel}" disabled="#{!dispecerForm.isButtonDispPolEnabled('delete')}"  update=":growl :dispecerForm:DispPolZdrDataTable"  icon="fa fa-remove">
+                <p:confirm  header="Žádám potvrzení" message="Opravdu smazat záznam o spravovaném zdroji?" icon="ui-icon-alert" />
             </p:commandButton><br/>
             <p:confirmDialog header="Potvrďte volbu:" global="true" showEffect="fade" hideEffect="fade">
                 <p:commandButton value="Ano" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                 <p:commandButton value="Ne" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
             </p:confirmDialog>                            
-
         </p:column>
     </p:panelGrid>
 </ui:composition>
