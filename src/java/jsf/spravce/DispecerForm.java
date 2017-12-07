@@ -157,6 +157,7 @@ public class DispecerForm implements Serializable {
             this.daoDispecer.getDispecerHl().setPlatiod(this.daoDispecer.getDispecerHl().getPlatido());
         }
     }
+// Zastupce
 
     /**
      * Metody pro zastupce
@@ -270,7 +271,31 @@ public class DispecerForm implements Serializable {
         this.daoDispecer.dispHlReset();
         return "/spravce/dispeceri";
     }
-// Polozky
+
+// Polozky podrizene dispecerovi (osoby nebo zdroje)
+    public boolean isGridDispPolOso() {
+        boolean isOso = false;
+        if (this.daoDispecer.getDispecerHl() != null) {
+            if (this.daoDispecer.getDispecerHl().getIdtypzdr() != null) {
+                if (this.daoDispecer.getDispecerHl().getIdtypzdr().getOsoba() != null) {
+                    isOso = (this.daoDispecer.getDispecerHl().getIdtypzdr().getOsoba() == 0);
+                }
+            }
+        }
+        return isOso;
+    }
+
+    public boolean isGridDispPolZdr() {
+        boolean isZdr = true;
+        if (this.daoDispecer.getDispecerHl() != null) {
+            if (this.daoDispecer.getDispecerHl().getIdtypzdr() != null) {
+                if (this.daoDispecer.getDispecerHl().getIdtypzdr().getOsoba() != null) {
+                    isZdr = (this.daoDispecer.getDispecerHl().getIdtypzdr().getOsoba() != 0);
+                }
+            }
+        }
+        return isZdr;
+    }
 
     /**
      * Kontrola dostupnosti tlacitek

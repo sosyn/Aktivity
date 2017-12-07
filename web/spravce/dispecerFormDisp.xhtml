@@ -35,8 +35,9 @@
                 <p:outputLabel for="typZdroje" value="Typ(kategorie) zdroje:" />
             </p:column>
             <p:column >
-                <p:selectOneMenu id="typZdroje" value="#{daoDispecer.dispecerHl.idtypzdr}" converter="#{JSFConverterTypZdr}"  disabled="#{not daoDispecer.dispecerHl.newEntity}" >
-                    <f:selectItems value="#{dispecerForm.typZdrList}" var="item" itemLabel="#{item.popis}" itemValue="#{item}"  />      
+                <p:selectOneMenu id="typZdroje" value="#{daoDispecer.dispecerHl.idtypzdr}" converter="#{JSFConverterTypZdr}"  disabled="#{not daoDispecer.dispecerHl.newEntity}"  >
+                    <f:selectItems value="#{dispecerForm.typZdrList}" var="item" itemLabel="#{item.popis}" itemValue="#{item}"  /> 
+                    <p:ajax update=":dispecerForm:dispPolLayoutUnit" />
                 </p:selectOneMenu>
             </p:column>
         </p:row>

@@ -14,13 +14,13 @@
             <ui:define name="contens">
                 <p:layout fullPage="false">
                     <h:form id="dispecerForm" >
-                        <p:layoutUnit position="center" size="30%" >
+                        <p:layoutUnit id="dispHlLayoutUnit" position="center" size="30%" >
                             <ui:include src="dispecerFormDisp.xhtml" />
                             <ui:include src="dispecerFormZast.xhtml" />
                         </p:layoutUnit>
-                        <p:layoutUnit position="east" size="70%" >
-<!--                            <ui:include src="dispecerFormOso.xhtml" /> -->
+                        <p:layoutUnit id="dispPolLayoutUnit" position="east" size="70%" >
                             <ui:include src="dispecerFormOso.xhtml" />
+                            <ui:include src="dispecerFormZdr.xhtml" />
                         </p:layoutUnit>
                         <p:layoutUnit position="south">
                             <p:commandButton id="dispecerOK" action="#{dispecerForm.save()}" value="OK" icon="fa fa-file-o" ajax="false" />
