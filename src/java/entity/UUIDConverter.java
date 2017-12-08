@@ -19,25 +19,32 @@ import org.eclipse.persistence.sessions.Session;
 public class UUIDConverter implements Converter {
 
     @Override
-
     public Object convertObjectValueToDataValue(Object objectValue,
             Session session) {
-
+        if (objectValue==null) {
+            System.out.println("!!! UUIDConverter > objectValue=null");
+        }
         return objectValue;
 
     }
 
     @Override
-
     public UUID convertDataValueToObjectValue(Object dataValue,
             Session session) {
 
-        return (UUID) dataValue;
-
+        if (dataValue instanceof UUID) {
+            return (UUID) dataValue;
+        } else {
+            if (dataValue == null) {
+                System.out.println("!!! UUIDConverter > dataValue not UUID: =NULL");
+            } else {
+                System.out.println("!!! UUIDConverter > dataValue not UUID: " + dataValue);
+            }
+            return null;
+        }
     }
 
     @Override
-
     public boolean isMutable() {
 
         return true;
@@ -45,7 +52,6 @@ public class UUIDConverter implements Converter {
     }
 
     @Override
-
     public void initialize(DatabaseMapping mapping, Session session) {
 
         final DatabaseField field;
