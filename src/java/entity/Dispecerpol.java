@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -19,8 +21,13 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(catalog = "aktivity", schema = "public")
+@NamedQueries({
+    @NamedQuery(name = "Dispecerpol.selectAll", query = "SELECT d FROM Dispecerpol d")
+})
 public class Dispecerpol extends entity.EntitySuperClass {
 
+    final private String insertDispecerpol = "INSERT INTO aktivity.public.DISPECERPOL (ID, PLATIDO, PLATIOD, POPIS, TIMEINSERT, TIMEMODIFY, USERMODIFY, iddisphl, idoso, idzdr) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
     @JoinColumn(name = "iddisphl", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Dispecerhl iddisphl;
@@ -29,7 +36,7 @@ public class Dispecerpol extends entity.EntitySuperClass {
     @ManyToOne(fetch = FetchType.LAZY)
     private Osoba idoso;
 
-    @JoinColumn(name = "idzdr", referencedColumnName = "id" )
+    @JoinColumn(name = "idzdr", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Zdroj idzdr;
 
@@ -78,21 +85,18 @@ public class Dispecerpol extends entity.EntitySuperClass {
 
     @Override
     public boolean equals(Object object) {
-       
+
         // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Dispecerpol)) {
             return false;
         }
         Dispecerpol other = (Dispecerpol) object;
-        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.getId().equals(other.getId()))) {
-            return false;
-        }
-        return true;
+        return (this.getId() != null && other.getId() != null && this.getId().equals(other.getId()));
     }
 
     @Override
     public String toString() {
         return "entity.Dispecerpol[ id=" + getId() + " ]";
     }
-    
+
 }
