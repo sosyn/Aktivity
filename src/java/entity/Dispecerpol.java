@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -26,8 +27,9 @@ import javax.persistence.Table;
 })
 public class Dispecerpol extends entity.EntitySuperClass {
 
+    @Transient
     final private String insertDispecerpol = "INSERT INTO aktivity.public.DISPECERPOL (ID, PLATIDO, PLATIOD, POPIS, TIMEINSERT, TIMEMODIFY, USERMODIFY, iddisphl, idoso, idzdr) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    
+
     @JoinColumn(name = "iddisphl", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Dispecerhl iddisphl;

@@ -197,8 +197,8 @@ public class DAOdispecer implements Serializable {
         cal.set(Calendar.HOUR_OF_DAY, 00);
         cal.set(Calendar.MINUTE, 00);
         this.dispecerHl.setPlatido(cal.getTime());
-        //this.dispecerHl.setZastupciList(new ArrayList<Dispecerhl>());
-        //this.dispecerHl.setDispecerpolList(new ArrayList<Dispecerpol>());
+        this.dispecerHl.setZastupciList(new ArrayList<Dispecerhl>());
+        this.dispecerHl.setDispecerpolList(new ArrayList<Dispecerpol>());
 
     }
 
@@ -284,7 +284,6 @@ public class DAOdispecer implements Serializable {
         cal.set(Calendar.HOUR_OF_DAY, 00);
         cal.set(Calendar.MINUTE, 00);
         this.zastupce.setPlatido(cal.getTime());
-
         this.dispecerHl.getZastupciList().add(this.zastupce);
     }
 
