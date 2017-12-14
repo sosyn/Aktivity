@@ -1,71 +1,69 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <p:panelGrid columns="1" layout="grid" >
+    <p:panelGrid layout="tabular" style="border-width:0px;" >
         <f:facet name="header">
             <p:row > 
-                <p:column>Dispečer(schvalovatel)</p:column>
+                <p:column colspan="4" style="border-width:0px;">Dispečer(schvalovatel)</p:column>
             </p:row>
         </f:facet>
-        <p:row > 
-            <p:column >
+        <p:row style="border-width:0px;">
+            <p:column colspan="2" style="border-width:0px;">
                 <p:outputLabel for="dispecer" value="Osoba dispečera: " />
             </p:column>
-            <p:column >
-                <p:selectOneMenu id="dispecer" value="#{daoDispecer.dispecerHl.idoso}" converter="#{JSFConverterOsoba}" filter="true" disabled="#{not daoDispecer.dispecerHl.newEntity}" >
+            <p:column colspan="2" style="border-width:0px;">
+                <p:selectOneMenu id="dispecer" value="#{daoDispecer.dispecerHl.idoso}" converter="#{JSFConverterOsoba}" filter="true" disabled="#{not daoDispecer.dispecerHl.newEntity}" style="width:150px;">
                     <f:selectItems value="#{dispecerForm.osobaList}" var="item" itemLabel="#{item.popis}" itemValue="#{item}"  />      
                 </p:selectOneMenu>
             </p:column>
-        </p:row>
-        <p:row > 
-            <p:column >
+        </p:row> 
+        <p:row style="border-width:0px;" >
+            <p:column colspan="2" style="border-width:0px;">
                 <p:outputLabel for="cestaTypSchv" value="Role dispečera:" />
             </p:column>
-            <p:column >
+            <p:column  colspan="2" style="border-width:0px;">
                 <p:selectOneMenu id="cestaTypSchv" value="#{daoDispecer.dispecerHl.idtypschv}" converter="#{JSFConverterTypSchv}" disabled="#{not daoDispecer.dispecerHl.newEntity}" >
                     <f:selectItems value="#{dispecerForm.typSchvList}" var="item" itemLabel="#{item.popis}" itemValue="#{item}"  />      
                 </p:selectOneMenu>
             </p:column>
         </p:row>
-        <p:row > 
-            <p:column >
+        <p:row  style="border-width:0px;">
+            <p:column  colspan="2" style="border-width:0px;" >
                 <p:outputLabel for="typZdroje" value="Typ(kategorie) zdroje:" />
             </p:column>
-            <p:column >
+            <p:column  colspan="2" style="border-width:0px;">
                 <p:selectOneMenu id="typZdroje" value="#{daoDispecer.dispecerHl.idtypzdr}" converter="#{JSFConverterTypZdr}"  disabled="#{not daoDispecer.dispecerHl.newEntity}" >
                     <f:selectItems value="#{dispecerForm.typZdrList}" var="item" itemLabel="#{item.popis}" itemValue="#{item}"   /> 
-                    <p:ajax update=":dispecerForm:dispPolLayoutUnit :dispecerForm:dispPolOsoPanelGrid :dispecerForm:dispPolZdrPanelGrid" />                    
+                    <p:ajax update=":dispecerForm:dispPolOsoPanelGrid :dispecerForm:dispPolZdrPanelGrid"/>                    
+                    <!--   :dispecerForm:dispPolLayoutUnit Nesmí se to celé Updatovat, jinak se vše ztratí-->
                 </p:selectOneMenu>
             </p:column>
         </p:row>
-        <p:row > 
-            <p:column style="font-weight: bold;">Záznam platí</p:column>
+        <p:row style="border-width:0px;">
+            <p:column style="font-weight: bold;border-width:0px;" colspan="4">Záznam platí</p:column>
         </p:row>
-        <p:row > 
-            <p:column >
-                <p:outputLabel for="platiOd" value=" Od: "/>
-            </p:column>
-            <p:column >
-                <p:calendar id="platiOd" value="#{daoDispecer.dispecerHl.platiod}" valueChangeListener="#{dispecerForm.platiOdListener}" pattern="dd.MM.yyyy"  showOn="button">
-                    <p:ajax event="keyup" update=":dispecerForm:platiDo" listener="#{dispecerForm.platiOdListener}" />
-                    <p:ajax event="dateSelect" update=":dispecerForm:platiDo" listener="#{dispecerForm.platiOdListener}" />
-                    <p:ajax event="blur" update=":dispecerForm:platiDo"  listener="#{dispecerForm.platiOdListener}" />
-                    <f:attribute name="platiDo" value="#{daoDispecer.dispecerHl.platido}" />
-                </p:calendar>
-            </p:column>
-            <p:column >
-                <p:outputLabel for="platiDo" value="Do: "/>
-            </p:column>
-            <p:column >
-                <p:calendar id="platiDo" value="#{daoDispecer.dispecerHl.platido}" valueChangeListener="#{dispecerForm.platiDoListener}" pattern="dd.MM.yyyy"  showOn="button" >
-                    <p:ajax event="dateSelect" update=":dispecerForm:platiOd" listener="#{dispecerForm.platiDoListener}" />
-                    <p:ajax event="blur" update=":dispecerForm:platiOd"  listener="#{dispecerForm.platiDoListener}" />
-                </p:calendar>                   
-            </p:column>            
-        </p:row>
+        <p:column  style="border-width:0px;">
+            <p:outputLabel for="platiOd" value=" Od: "/>
+        </p:column>
+        <p:column  style="border-width:0px;">
+            <p:calendar id="platiOd" value="#{daoDispecer.dispecerHl.platiod}" valueChangeListener="#{dispecerForm.platiOdListener}" pattern="dd.MM.yyyy"  showOn="button">
+                <p:ajax event="keyup" update=":dispecerForm:platiDo" listener="#{dispecerForm.platiOdListener}" />
+                <p:ajax event="dateSelect" update=":dispecerForm:platiDo" listener="#{dispecerForm.platiOdListener}" />
+                <p:ajax event="blur" update=":dispecerForm:platiDo"  listener="#{dispecerForm.platiOdListener}" />
+                <f:attribute name="platiDo" value="#{daoDispecer.dispecerHl.platido}" />
+            </p:calendar>
+        </p:column>
+        <p:column  style="border-width:0px;">
+            <p:outputLabel for="platiDo" value="Do: "/>
+        </p:column>
+        <p:column style="border-width:0px;">
+            <p:calendar id="platiDo" value="#{daoDispecer.dispecerHl.platido}" valueChangeListener="#{dispecerForm.platiDoListener}" pattern="dd.MM.yyyy"  showOn="button" >
+                <p:ajax event="dateSelect" update=":dispecerForm:platiOd" listener="#{dispecerForm.platiDoListener}" />
+                <p:ajax event="blur" update=":dispecerForm:platiOd"  listener="#{dispecerForm.platiDoListener}" />
+            </p:calendar>                   
+        </p:column>            
     </p:panelGrid>
 </ui:composition>
 

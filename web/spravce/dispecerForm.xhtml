@@ -14,18 +14,35 @@
             <ui:define name="contens">
                 <p:layout fullPage="false">
                     <h:form id="dispecerForm" >
-                        <p:layoutUnit id="dispHlLayoutUnit" position="center">
+                        <!--                    
+                                            <p:panelGrid columns="2" layout="grid" style="height:700px">
+                                                <p:column id="dispHlCol" width="40%" >
+                                                    <ui:include src="dispecerFormDisp.xhtml" />
+                                                    <ui:include src="dispecerFormZast.xhtml" />
+                                                </p:column>
+                                                <p:column id="dispPolCol" width="60%">
+                                                    <ui:include src="dispecerFormOso.xhtml" />
+                                                    <ui:include src="dispecerFormZdr.xhtml" />
+                                                </p:column>
+                                                <p:column colspan="2" id="dispHlBtnCol">
+                                                    <p:commandButton id="dispecerOK" action="#{dispecerForm.save()}" value="OK" icon="fa fa-file-o" ajax="false" />
+                                                    <p:commandButton id="dispecerCancle" value="Zpět" action="#{dispecerForm.cancel()}" icon="fa fa-edit"  ajax="false" />
+                                                </p:column>                          
+                                            </p:panelGrid>
+                        -->
+                        <p:layoutUnit id="dispHlLayoutUnit" position="west" size="500" minSize="400" maxSize="800" visible="true">
                             <ui:include src="dispecerFormDisp.xhtml" />
                             <ui:include src="dispecerFormZast.xhtml" />
                         </p:layoutUnit>
-                        <p:layoutUnit id="dispPolLayoutUnit" position="east">
+                        <p:layoutUnit id="dispPolLayoutUnit" position="center" size="600" minSize="400" maxSize="900" visible="true">
                             <ui:include src="dispecerFormOso.xhtml" />
                             <ui:include src="dispecerFormZdr.xhtml" />
                         </p:layoutUnit>
-                        <p:layoutUnit position="south">
+                        <p:layoutUnit id="dispHlBtnLayoutUnit"  position="south" visible="true" resizable="true" >
                             <p:commandButton id="dispecerOK" action="#{dispecerForm.save()}" value="OK" icon="fa fa-file-o" ajax="false" />
                             <p:commandButton id="dispecerCancle" value="Zpět" action="#{dispecerForm.cancel()}" icon="fa fa-edit"  ajax="false" />
                         </p:layoutUnit>
+
                     </h:form>
                 </p:layout>
             </ui:define>

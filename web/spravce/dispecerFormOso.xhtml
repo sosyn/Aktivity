@@ -5,17 +5,17 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <p:panelGrid id="dispPolOsoPanelGrid" columns="2" layout="grid" rendered="#{dispecerForm.gridDispPolOso}">
+    <p:panelGrid columns="2" id="dispPolOsoPanelGrid" layout="grid">
         <f:facet name="header">
             <p:row> 
-                <p:column colspan="2">Spravované osoby</p:column>
+                <p:column colspan="2">Podřízené osoby</p:column>
             </p:row>
         </f:facet>
         <p:column>
-            <p:dataTable id="DispPolOsoDataTable" value="#{daoDispecer.dispecerHl.dispecerpolList}" var="item" selectionMode="single" selection="#{daoDispecer.dispecerPol}" rowKey="#{item.id}" editable="true" editMode="row" >
+            <p:dataTable id="DispPolOsoDataTable" value="#{daoDispecer.dispecerHl.dispecerpolList}" var="item" selectionMode="single" selection="#{daoDispecer.dispecerPol}" rowKey="#{item.id}" editable="true" editMode="cell" rendered="#{dispecerForm.gridDispPolOso}"  scrollable="true" scrollHeight="98%">
                 <p:ajax event="rowSelect" update=":dispecerForm:DispPolOsoNew :dispecerForm:DispPolOsoDel" />
 
-                <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains">
+                <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains" width="200">
                     <f:facet name="header">
                         <h:outputText value="Příjmení, jméno, titul:"/>
                     </f:facet>
@@ -30,7 +30,7 @@
                         </f:facet>
                     </p:cellEditor>
                 </p:column>
-                <p:column sortBy="#{item.platiod}" >
+                <p:column sortBy="#{item.platiod}" width="80">
                     <f:facet name="header">
                         <h:outputText value="Platí Od"/>
                     </f:facet>
@@ -47,7 +47,7 @@
                         </f:facet>
                     </p:cellEditor>
                 </p:column>
-                <p:column sortBy="#{item.platido}">
+                <p:column sortBy="#{item.platido}" width="80">
                     <f:facet name="header" >
                         <h:outputText value="Do"/>
                     </f:facet>
@@ -64,14 +64,11 @@
                         </f:facet>
                     </p:cellEditor>                
                 </p:column>
-                <p:column>
-                    <p:rowEditor />
-                </p:column>
             </p:dataTable>
         </p:column>
         <p:column >
-            <p:commandButton id="DispPolOsoNew" value="Nový" action="#{dispecerForm.dispPolNew}" disabled="#{!dispecerForm.isButtonDispPolEnabled('new')}" update=":growl :dispecerForm:DispPolOsoDataTable" icon="fa fa-file-o" /> <br/>
-            <p:commandButton id="DispPolOsoDel" value="Smazat"  action="#{dispecerForm.dispPolDel}" disabled="#{!dispecerForm.isButtonDispPolEnabled('delete')}"  update=":growl :dispecerForm:DispPolOsoDataTable"  icon="fa fa-remove">
+            <p:commandButton id="DispPolOsoNew" value="Nový" action="#{dispecerForm.dispPolNew}" disabled="#{!dispecerForm.isButtonDispPolEnabled('new')}" update=":growl :dispecerForm:DispPolOsoDataTable" icon="fa fa-file-o" rendered="#{dispecerForm.gridDispPolOso}" /> <br/>
+            <p:commandButton id="DispPolOsoDel" value="Smazat"  action="#{dispecerForm.dispPolDel}" disabled="#{!dispecerForm.isButtonDispPolEnabled('delete')}"  update=":growl :dispecerForm:DispPolOsoDataTable"  icon="fa fa-remove" rendered="#{dispecerForm.gridDispPolOso}" >
                 <p:confirm  header="Žádám potvrzení" message="Opravdu smazat záznam o spravované osobě?" icon="ui-icon-alert" />
             </p:commandButton><br/>
             <p:confirmDialog header="Potvrďte volbu:" global="true" showEffect="fade" hideEffect="fade">

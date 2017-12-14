@@ -5,17 +5,17 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <p:panelGrid columns="2" layout="grid">
+    <p:panelGrid columns="2" layout="tabular">
         <f:facet name="header">
             <p:row> 
                 <p:column colspan="2">Zástupci dispečera</p:column>
             </p:row>
         </f:facet>
         <p:column>
-            <p:dataTable id="dataTableZast" value="#{daoDispecer.dispecerHl.zastupciList}" var="item" selectionMode="single" selection="#{daoDispecer.zastupce}" rowKey="#{item.id}" editable="true" editMode="row" >
+            <p:dataTable id="dataTableZast" value="#{daoDispecer.dispecerHl.zastupciList}" var="item" selectionMode="single" selection="#{daoDispecer.zastupce}" rowKey="#{item.id}" editable="true" editMode="cell" scrollable="true" scrollHeight="98%" >
                 <p:ajax event="rowSelect" update=":dispecerForm:ZastupceNew :dispecerForm:ZastupceDel" />
 
-                <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains">
+                <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains" width="150">
                     <f:facet name="header">
                         <h:outputText value="Příjmení, jméno, titul:"/>
                     </f:facet>
@@ -30,7 +30,7 @@
                         </f:facet>
                     </p:cellEditor>
                 </p:column>
-                <p:column sortBy="#{item.platiod}" >
+                <p:column sortBy="#{item.platiod}" width="80">
                     <f:facet name="header">
                         <h:outputText value="Platí Od"/>
                     </f:facet>
@@ -47,7 +47,7 @@
                         </f:facet>
                     </p:cellEditor>
                 </p:column>
-                <p:column sortBy="#{item.platido}">
+                <p:column sortBy="#{item.platido}" width="80">
                     <f:facet name="header" >
                         <h:outputText value="Do"/>
                     </f:facet>
@@ -63,9 +63,6 @@
                             </p:calendar>
                         </f:facet>
                     </p:cellEditor>                
-                </p:column>
-                <p:column>
-                    <p:rowEditor />
                 </p:column>
             </p:dataTable>
         </p:column>

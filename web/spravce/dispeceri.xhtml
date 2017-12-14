@@ -14,10 +14,10 @@
                 <p:layout fullPage="false">
                     <h:form id="FormDispeceri">
                         <p:layoutUnit position="center" size="70%">
-                            <p:dataTable id="DispeceriDataTable" value="#{daoDispecer.dispecerHlList}" var="item" selectionMode="single" selection="#{daoDispecer.dispecerHl}" rowKey="#{item.id}" editable="true" >
+                            <p:dataTable id="DispeceriDataTable" value="#{daoDispecer.dispecerHlList}" var="item" selectionMode="single" selection="#{daoDispecer.dispecerHl}" rowKey="#{item.id}" editable="true" editMode="row" scrollable="true" scrollHeight="98%">
                                 <p:ajax event="rowSelect" update=":FormDispeceri:DispeceriNew :FormDispeceri:DispeceriEdit :FormDispeceri:DispeceriDel" listener="#{dispeceri.rowDispecerHlSelectded(item)}" />
                                 <p:ajax event="rowEdit" listener="#{dispeceri.onRowEdit}" update=":growl" />
-                                <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains">
+                                <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains"  width="200">
                                     <f:facet name="header">
                                         <h:outputText value="Příjmení, jméno, titul:"/>
                                     </f:facet>
