@@ -238,11 +238,21 @@ public class DAOdispecer implements Serializable {
         if (this.getDispecerHl() != null) {
             switch (persistAction) {
                 case CREATE:
+                    for (Dispecerpol dispecerpol : dispecerHl.getDispecerpolList()) {
+                        getEjbDispPolFacade().dispecerPolInsert(dispecerpol);
+                    }
                     this.getDispecerHl().setNewEntity(false);
                     getEjbDispHlFacade().create(this.dispecerHl);
                     this.dispecerHlList.add(this.dispecerHl);
                     break;
                 case UPDATE:
+                    for (Dispecerpol dispecerpol : dispecerHl.getDispecerpolList()) {
+                        if (dispecerpol.isNewEntity()) {
+                            getEjbDispPolFacade().dispecerPolInsert(dispecerpol);
+                        } else {
+                            getEjbDispPolFacade().dispecerPolUpdate(dispecerpol);
+                        }
+                    }
                     getEjbDispHlFacade().edit(this.dispecerHl);
                     break;
                 case DELETE:

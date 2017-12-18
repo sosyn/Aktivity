@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 /**
  *
@@ -27,19 +26,16 @@ import javax.persistence.Transient;
 })
 public class Dispecerpol extends entity.EntitySuperClass {
 
-    @Transient
-    final private String insertDispecerpol = "INSERT INTO aktivity.public.DISPECERPOL (ID, PLATIDO, PLATIOD, POPIS, TIMEINSERT, TIMEMODIFY, USERMODIFY, iddisphl, idoso, idzdr) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
     @JoinColumn(name = "iddisphl", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Dispecerhl iddisphl;
 
-    @JoinColumn(name = "idoso", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idoso", referencedColumnName = "id", nullable = true)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     private Osoba idoso;
 
-    @JoinColumn(name = "idzdr", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "idzdr", referencedColumnName = "id", nullable = true)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     private Zdroj idzdr;
 
     public Dispecerpol() {

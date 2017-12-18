@@ -20,6 +20,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import jsf.util.JsfUtil;
@@ -231,10 +232,15 @@ public class DispecerForm implements Serializable {
 
     /**
      * Ulozit cely formular
-     *
+     * ActionEvent event
      * @return
      */
     public String save() {
+        if (this.daoDispecer.getDispecerHl().getIdoso() == null
+                || this.daoDispecer.getDispecerHl().getIdtypschv() == null
+                || this.daoDispecer.getDispecerHl().getIdtypzdr() == null) {
+            return null;
+        }
         try {
             this.daoDispecer.dispHlSave();
             JsfUtil.addSuccessMessage("Záznam byl úspěšně uložen.");
