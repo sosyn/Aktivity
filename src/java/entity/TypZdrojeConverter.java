@@ -19,7 +19,6 @@ import org.eclipse.persistence.sessions.Session;
 public class TypZdrojeConverter implements Converter {
 
     @Override
-
     public Object convertObjectValueToDataValue(Object objectValue,
             Session session) {
 
@@ -28,7 +27,6 @@ public class TypZdrojeConverter implements Converter {
     }
 
     @Override
-
     public Integer convertDataValueToObjectValue(Object dataValue,
             Session session) {
 
