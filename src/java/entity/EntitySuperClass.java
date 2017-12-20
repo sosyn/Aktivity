@@ -16,6 +16,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -31,11 +32,10 @@ public class EntitySuperClass implements Serializable {
 
     @Id
     @Basic(optional = false)
-    // @Converter(name = "uuidConverter", converterClass = IntegerConverter.class)
+    // @Converter(name = "uuidConverter", converterClass = UUIDConverter.class)
     // @Convert("uuidConverter")
-    // @NotNull
-    // @Column(nullable = false)
-    // private Integer id;
+    @NotNull
+    @Column(nullable = false)
     private Integer id;
 
     @Size(max = 2048)
