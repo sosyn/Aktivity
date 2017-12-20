@@ -31,7 +31,7 @@ public class EntitySuperClass implements Serializable {
     private static Calendar cal = Calendar.getInstance(Locale.getDefault());
 
     @Id
-    @Basic(optional = false)
+    @Basic(optional = true)
     // @Converter(name = "uuidConverter", converterClass = UUIDConverter.class)
     // @Convert("uuidConverter")
     @NotNull
