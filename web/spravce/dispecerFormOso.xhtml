@@ -5,76 +5,78 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <p:panelGrid columns="2" id="dispPolOsoPanelGrid" layout="grid">
+    <p:panelGrid id="dispPolOsoPanelGrid" >
         <f:facet name="header">
             <p:row> 
                 <p:column colspan="2">Podřízené osoby</p:column>
             </p:row>
         </f:facet>
-        <p:column>
-            <p:dataTable id="DispPolOsoDataTable" value="#{daoDispecer.dispecerHl.dispecerpolList}" var="item" selectionMode="single" selection="#{daoDispecer.dispecerPol}" rowKey="#{item.id}" editable="true" editMode="cell" rendered="#{dispecerForm.gridDispPolOso}"  scrollable="true" scrollHeight="98%">
-                <p:ajax event="rowSelect" update=":dispecerForm:DispPolOsoNew :dispecerForm:DispPolOsoDel" />
+        <p:row> 
+            <p:column>
+                <p:dataTable id="DispPolOsoDataTable" value="#{daoDispecer.dispecerHl.dispecerpolList}" var="item" selectionMode="single" selection="#{daoDispecer.dispecerPol}" rowKey="#{item.id}" editable="true" editMode="cell" rendered="#{dispecerForm.gridDispPolOso}"  scrollable="true" scrollHeight="98%">
+                    <p:ajax event="rowSelect" update=":dispecerForm:DispPolOsoNew :dispecerForm:DispPolOsoDel" />
 
-                <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains" width="200">
-                    <f:facet name="header">
-                        <h:outputText value="Příjmení, jméno, titul:"/>
-                    </f:facet>
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{item.idoso.popis}" />
+                    <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains" width="200">
+                        <f:facet name="header">
+                            <h:outputText value="Příjmení, jméno, titul:"/>
                         </f:facet>
-                        <f:facet name="input">
-                            <p:selectOneMenu id="dispecer" value="#{item.idoso}" converter="#{JSFConverterOsoba}" filter="true" disabled="#{not daoDispecer.dispecerPol.newEntity}" >
-                                <f:selectItems value="#{dispecerForm.osobaList}" var="osoba" itemLabel="#{osoba.popis}" itemValue="#{osoba}"  />      
-                            </p:selectOneMenu>
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{item.idoso.popis}" />
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:selectOneMenu id="dispecer" value="#{item.idoso}" converter="#{JSFConverterOsoba}" filter="true" disabled="#{not daoDispecer.dispecerPol.newEntity}" >
+                                    <f:selectItems value="#{dispecerForm.osobaList}" var="osoba" itemLabel="#{osoba.popis}" itemValue="#{osoba}"  />      
+                                </p:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column sortBy="#{item.platiod}" width="80">
+                        <f:facet name="header">
+                            <h:outputText value="Platí Od"/>
                         </f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column sortBy="#{item.platiod}" width="80">
-                    <f:facet name="header">
-                        <h:outputText value="Platí Od"/>
-                    </f:facet>
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{item.platiod}" >
-                                <f:convertDateTime pattern="dd.MM.yyyy" />
-                            </h:outputText>
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{item.platiod}" >
+                                    <f:convertDateTime pattern="dd.MM.yyyy" />
+                                </h:outputText>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:calendar id="platiOd" value="#{item.platiod}" pattern="dd.MM.yyyy"  showOn="button">
+                                    <f:attribute name="platiDo" value="#{daoDispecer.dispecerPol.platido}" />
+                                </p:calendar>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column sortBy="#{item.platido}" width="80">
+                        <f:facet name="header" >
+                            <h:outputText value="Do"/>
                         </f:facet>
-                        <f:facet name="input">
-                            <p:calendar id="platiOd" value="#{item.platiod}" pattern="dd.MM.yyyy"  showOn="button">
-                                <f:attribute name="platiDo" value="#{daoDispecer.dispecerPol.platido}" />
-                            </p:calendar>
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column sortBy="#{item.platido}" width="80">
-                    <f:facet name="header" >
-                        <h:outputText value="Do"/>
-                    </f:facet>
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{item.platido}" >
-                                <f:convertDateTime pattern="dd.MM.yyyy" />
-                            </h:outputText>
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:calendar id="platiDo" value="#{item.platido}" pattern="dd.MM.yyyy"  showOn="button">
-                                <f:attribute name="platiOd" value="#{daoDispecer.dispecerPol.platiod}" />
-                            </p:calendar>
-                        </f:facet>
-                    </p:cellEditor>                
-                </p:column>
-            </p:dataTable>
-        </p:column>
-        <p:column >
-            <p:commandButton id="DispPolOsoNew" value="Nový" action="#{dispecerForm.dispPolNew}" disabled="#{!dispecerForm.isButtonDispPolEnabled('new')}" update=":growl :dispecerForm:DispPolOsoDataTable" icon="fa fa-file-o" rendered="#{dispecerForm.gridDispPolOso}" /> <br/>
-            <p:commandButton id="DispPolOsoDel" value="Smazat"  action="#{dispecerForm.dispPolDel}" disabled="#{!dispecerForm.isButtonDispPolEnabled('delete')}"  update=":growl :dispecerForm:DispPolOsoDataTable"  icon="fa fa-remove" rendered="#{dispecerForm.gridDispPolOso}" >
-                <p:confirm  header="Žádám potvrzení" message="Opravdu smazat záznam o spravované osobě?" icon="ui-icon-alert" />
-            </p:commandButton><br/>
-            <p:confirmDialog header="Potvrďte volbu:" global="true" showEffect="fade" hideEffect="fade">
-                <p:commandButton value="Ano" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                <p:commandButton value="Ne" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-            </p:confirmDialog>                            
-        </p:column>
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{item.platido}" >
+                                    <f:convertDateTime pattern="dd.MM.yyyy" />
+                                </h:outputText>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:calendar id="platiDo" value="#{item.platido}" pattern="dd.MM.yyyy"  showOn="button">
+                                    <f:attribute name="platiOd" value="#{daoDispecer.dispecerPol.platiod}" />
+                                </p:calendar>
+                            </f:facet>
+                        </p:cellEditor>                
+                    </p:column>
+                </p:dataTable>
+            </p:column>
+            <p:column >
+                <p:commandButton id="DispPolOsoNew" value="Nový" action="#{dispecerForm.dispPolNew}" disabled="#{!dispecerForm.isButtonDispPolEnabled('new')}" update=":growl :dispecerForm:DispPolOsoDataTable" icon="fa fa-file-o" rendered="#{dispecerForm.gridDispPolOso}" /> <br/>
+                <p:commandButton id="DispPolOsoDel" value="Smazat"  action="#{dispecerForm.dispPolDel}" disabled="#{!dispecerForm.isButtonDispPolEnabled('delete')}"  update=":growl :dispecerForm:DispPolOsoDataTable"  icon="fa fa-remove" rendered="#{dispecerForm.gridDispPolOso}" >
+                    <p:confirm  header="Žádám potvrzení" message="Opravdu smazat záznam o spravované osobě?" icon="ui-icon-alert" />
+                </p:commandButton><br/>
+                <p:confirmDialog header="Potvrďte volbu:" global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Ano" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="Ne" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>                            
+            </p:column>
+        </p:row> 
     </p:panelGrid>
 </ui:composition>

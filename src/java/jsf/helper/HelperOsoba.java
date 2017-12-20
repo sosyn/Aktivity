@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -76,7 +75,7 @@ public class HelperOsoba implements Serializable {
         return selectedOsoba;
     }
 
-    public Osoba getSelectedOsoba(UUID id) {
+    public Osoba getSelectedOsoba(Integer id) {
         this.selectedOsoba = getEjbFacade().find(id);
         return this.selectedOsoba;
     }

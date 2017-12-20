@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.UUID;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -17,12 +16,10 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import org.eclipse.persistence.annotations.Convert;
-import org.eclipse.persistence.annotations.Converter;
 
 /**
+ * Spolecna trida vsech entit
  *
  * @author Ivo
  */
@@ -34,11 +31,12 @@ public class EntitySuperClass implements Serializable {
 
     @Id
     @Basic(optional = false)
-    @Converter(name = "uuidConverter", converterClass = UUIDConverter.class)
-    @Convert("uuidConverter")
-    @NotNull
-    @Column(nullable = false)
-    private UUID id;
+    // @Converter(name = "uuidConverter", converterClass = IntegerConverter.class)
+    // @Convert("uuidConverter")
+    // @NotNull
+    // @Column(nullable = false)
+    // private Integer id;
+    private Integer id;
 
     @Size(max = 2048)
     @Column(length = 2048)
@@ -64,7 +62,8 @@ public class EntitySuperClass implements Serializable {
     private boolean newEntity = false;
 
     public EntitySuperClass() {
-        this.id = UUID.randomUUID();
+//        this.id = Integer.randomInteger();
+        this.id = 0;
         cal.set(2017, Calendar.JANUARY, 1);
         this.platiod = cal.getTime();
         cal.set(2100, Calendar.DECEMBER, 31);
@@ -74,11 +73,11 @@ public class EntitySuperClass implements Serializable {
         this.usermodify = java.lang.System.getenv("username");
     }
 
-    public EntitySuperClass(UUID id) {
+    public EntitySuperClass(Integer id) {
         this.id = id;
     }
 
-    public EntitySuperClass(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
+    public EntitySuperClass(Integer id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         this.id = id;
         this.platiod = platiod;
         this.platido = platido;
@@ -87,11 +86,11 @@ public class EntitySuperClass implements Serializable {
 
     }
 
-    public UUID getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -176,7 +175,7 @@ public class EntitySuperClass implements Serializable {
 
     @Override
     public String toString() {
-        return "entity."+this.getClass().getName()+"[ id=" + id + " ]";
+        return "entity." + this.getClass().getName() + "[ id=" + id + " ]";
     }
 
 }

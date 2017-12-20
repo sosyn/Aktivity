@@ -78,7 +78,7 @@
                         <h:form id="FormZdrojeDetail">
                             <p>
                                 <p:outputLabel for="typZdr" value="Typ zdroje:" /><br/>
-                                <p:selectOneMenu id="typZdr" value="#{zdroje.zdroj.idtypzdr}" converter="#{JSFConverterTypZdr}" >
+                                <p:selectOneMenu id="typZdr" value="#{zdroje.zdroj.idtypzdr}"  >
                                     <f:selectItems value="#{zdroje.typZdrList}" var="item" itemLabel="#{item.popis}" itemValue="#{item}"  />      
                                 </p:selectOneMenu>
                             </p>

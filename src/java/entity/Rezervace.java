@@ -7,7 +7,6 @@ package entity;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +17,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
 /**
@@ -57,11 +55,11 @@ public class Rezervace extends entity.EntitySuperClass {
     public Rezervace() {
     }
 
-    public Rezervace(UUID id) {
+    public Rezervace(Integer id) {
         super();
     }
 
-    public Rezervace(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
+    public Rezervace(Integer id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         super(id, platiod, platido, timeinsert, timemodify);
     }
 

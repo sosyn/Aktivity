@@ -7,11 +7,8 @@ package jsf.util;
 
 import entity.Typaktivity;
 import entity.Typschv;
-import java.util.List;
-import java.util.UUID;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.faces.application.Application;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -30,8 +27,8 @@ public class JSFConverterTypAkt implements Converter {
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
-        UUID uuid = UUID.fromString(string);
-        Typaktivity typAktivity = this.ejbTypAktFacade.find(uuid);
+        Integer id = Integer.valueOf(string);
+        Typaktivity typAktivity = this.ejbTypAktFacade.find(id);
         return typAktivity;
     }
 

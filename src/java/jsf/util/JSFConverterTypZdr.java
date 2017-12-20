@@ -6,7 +6,6 @@
 package jsf.util;
 
 import entity.Typzdroje;
-import java.util.UUID;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.component.UIComponent;
@@ -28,7 +27,7 @@ public class JSFConverterTypZdr implements Converter {
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
 
-        UUID uuid = UUID.fromString(string);
+        Integer uuid = Integer.valueOf(string);
         Typzdroje typZdroj = this.ejbTypZdrFacade.find(uuid);
         return typZdroj;
     }

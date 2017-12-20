@@ -7,7 +7,7 @@ package entity;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
@@ -42,11 +42,11 @@ public class Typzdroje extends entity.EntitySuperClass {
     public Typzdroje() {
     }
 
-    public Typzdroje(UUID id) {
+    public Typzdroje(Integer id) {
         super(id);
     }
 
-    public Typzdroje(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
+    public Typzdroje(Integer id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         super(id, platiod, platido, timeinsert, timemodify);
     }
 

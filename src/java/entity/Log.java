@@ -6,10 +6,8 @@
 package entity;
 
 import java.util.Date;
-import java.util.UUID;
-import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -49,11 +47,11 @@ public class Log extends entity.EntitySuperClass {
         super();
     }
 
-    public Log(UUID id) {
+    public Log(Integer id) {
         super(id);
     }
 
-    public Log(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
+    public Log(Integer id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         super(id, platiod, platido, timeinsert, timemodify);
     }
 

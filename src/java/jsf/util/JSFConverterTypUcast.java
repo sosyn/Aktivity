@@ -6,8 +6,6 @@
 package jsf.util;
 
 import entity.Typucast;
-import java.util.ArrayList;
-import java.util.UUID;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.component.UIComponent;
@@ -29,8 +27,8 @@ public class JSFConverterTypUcast implements Converter {
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
         // System.out.println(" string=" + string);
-        UUID uuid = UUID.fromString(string);
-        Typucast typucast = this.ejbTypUcastFacade.find(uuid);
+        Integer id = Integer.valueOf(string);
+        Typucast typucast = this.ejbTypUcastFacade.find(id);
         return typucast;
     }
     

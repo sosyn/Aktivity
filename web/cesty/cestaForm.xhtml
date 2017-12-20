@@ -43,7 +43,7 @@
                             <p>
                                 <p:outputLabel for="cestaTypZdr" value="Dopravní prostředek:" />
                                 <br/>
-                                <p:selectOneMenu id="cestaTypZdr" value="#{cestaForm.typZdroje}" converter="#{JSFConverterTypZdr}" >
+                                <p:selectOneMenu id="cestaTypZdr" value="#{cestaForm.typZdroje}"  >
                                     <f:selectItems value="#{cestaForm.typZdrList}" var="item" itemLabel="#{item.popis}" itemValue="#{item}"  />      
                                 </p:selectOneMenu>
                             </p>
@@ -79,7 +79,7 @@
                                                 <h:outputText value="#{itemUcast.idtypucast.popis}" />
                                             </f:facet>
                                             <f:facet name="input" >
-                                                <h:selectOneMenu  value="#{itemUcast.idtypucast}"  style="width:100%" converter="#{JSFConverterTypUcast}" >
+                                                <h:selectOneMenu  value="#{itemUcast.idtypucast}"  style="width:100%" >
                                                     <f:selectItems value="#{cestaForm.typUcastList}" var="typUcastnika" itemLabel="#{typUcastnika.popis}" itemValue="#{typUcastnika}"  />
                                                     <!--  <f:validator validatorId="jsf.cesty.typUcastValidator" /> -->
                                                 </h:selectOneMenu>

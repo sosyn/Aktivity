@@ -6,7 +6,7 @@
 package entity;
 
 import java.util.Date;
-import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -42,11 +42,11 @@ public class Dispecerpol extends entity.EntitySuperClass {
         super();
     }
 
-    public Dispecerpol(UUID id) {
+    public Dispecerpol(Integer id) {
         super(id);
     }
 
-    public Dispecerpol(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
+    public Dispecerpol(Integer id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         super(id, platiod, platido, timeinsert, timemodify);
     }
 

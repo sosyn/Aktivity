@@ -7,7 +7,6 @@ package entity;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +19,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
-import org.eclipse.persistence.annotations.Converter;
 
 /**
  *
@@ -65,11 +63,11 @@ public class Cesta extends entity.EntitySuperClass {
         super();
     }
 
-    public Cesta(UUID id) {
+    public Cesta(Integer id) {
         super(id);
     }
 
-    public Cesta(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
+    public Cesta(Integer id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         super(id, platiod, platido, timeinsert, timemodify);
     }
 

@@ -6,7 +6,6 @@
 package jsf.util;
 
 import entity.Osoba;
-import java.util.UUID;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.component.UIComponent;
@@ -28,8 +27,8 @@ public class JSFConverterOsoba implements Converter {
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
 
-        UUID uuid = UUID.fromString(string);
-        Osoba osoba = this.ejbOsobaFacade.find(uuid);
+        Integer id = Integer.valueOf(string);
+        Osoba osoba = this.ejbOsobaFacade.find(id);
         return osoba;
     }
 

@@ -5,7 +5,7 @@
  */
 package entity;
 
-import java.util.UUID;
+
 import org.eclipse.persistence.internal.helper.DatabaseField;
 import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.mappings.DirectCollectionMapping;
@@ -29,10 +29,10 @@ public class TypZdrojeConverter implements Converter {
 
     @Override
 
-    public UUID convertDataValueToObjectValue(Object dataValue,
+    public Integer convertDataValueToObjectValue(Object dataValue,
             Session session) {
 
-        return (UUID) ((Typzdroje)dataValue).getId();
+        return (Integer) ((Typzdroje)dataValue).getId();
 
     }
 
@@ -63,9 +63,9 @@ public class TypZdrojeConverter implements Converter {
 
         field.setSqlType(java.sql.Types.OTHER);
 
-        field.setTypeName("java.util.UUID");
+        field.setTypeName("java.util.Integer");
 
-        field.setColumnDefinition("UUID");
+        field.setColumnDefinition("Integer");
 
     }
 

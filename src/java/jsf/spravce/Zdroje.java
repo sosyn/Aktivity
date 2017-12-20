@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -139,7 +139,7 @@ public class Zdroje implements Serializable, HelperOsobaListener {
         return zdroj;
     }
 
-    public Zdroj getZdroj(UUID id) {
+    public Zdroj getZdroj(Integer id) {
         return getEjbFacade().find(id);
     }
 

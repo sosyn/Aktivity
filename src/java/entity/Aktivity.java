@@ -7,7 +7,6 @@ package entity;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,11 +50,11 @@ public class Aktivity extends entity.EntitySuperClass {
         super();
     }
 
-    public Aktivity(UUID id) {
+    public Aktivity(Integer id) {
         super(id);
     }
 
-    public Aktivity(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
+    public Aktivity(Integer id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         super(id, platiod, platido, timeinsert, timemodify);
     }
 

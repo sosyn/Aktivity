@@ -6,7 +6,6 @@
 package jsf.util;
 
 import entity.Typschv;
-import java.util.UUID;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.component.UIComponent;
@@ -27,8 +26,8 @@ public class JSFConverterTypSchv implements Converter {
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
-        UUID uuid = UUID.fromString(string);
-        Typschv typSchv = this.ejbTypSchvFacade.find(uuid);
+        Integer id = Integer.valueOf(string);
+        Typschv typSchv = this.ejbTypSchvFacade.find(id);
         return typSchv;
     }
 

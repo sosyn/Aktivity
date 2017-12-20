@@ -6,7 +6,6 @@
 package ejb;
 
 import entity.Dispecerpol;
-import java.util.UUID;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -46,8 +45,8 @@ public class DispecerPolFacade extends AbstractFacade<Dispecerpol> {
             q.setParameter(2, dispecerPol.getPlatiod());
             q.setParameter(3, dispecerPol.getPopis());
             q.setParameter(4, dispecerPol.getIddisphl().getId());
-            q.setParameter(5, dispecerPol.getIdoso() != null ? dispecerPol.getIdoso().getId() : new UUID(0,0) );
-            q.setParameter(6, dispecerPol.getIdzdr()!= null ? dispecerPol.getIdzdr().getId() : new UUID(0,0) );
+            q.setParameter(5, dispecerPol.getIdoso() != null ? dispecerPol.getIdoso().getId() : 0 );
+            q.setParameter(6, dispecerPol.getIdzdr()!= null ? dispecerPol.getIdzdr().getId() : 0 );
             q.setParameter(7, dispecerPol.getId());
 //            em.getTransaction().begin();
             try {
@@ -66,8 +65,8 @@ public class DispecerPolFacade extends AbstractFacade<Dispecerpol> {
             q.setParameter(2, dispecerPol.getPlatiod());
             q.setParameter(3, dispecerPol.getPopis());
             q.setParameter(4, dispecerPol.getIddisphl().getId());
-            q.setParameter(5, dispecerPol.getIdoso() != null ? dispecerPol.getIdoso().getId() : new UUID(0,0) );
-            q.setParameter(6, dispecerPol.getIdzdr()!= null ? dispecerPol.getIdzdr().getId() : new UUID(0,0) );
+            q.setParameter(5, dispecerPol.getIdoso() != null ? dispecerPol.getIdoso().getId() : 0 );
+            q.setParameter(6, dispecerPol.getIdzdr()!= null ? dispecerPol.getIdzdr().getId() : 0 );
             q.setParameter(7, dispecerPol.getId());
 //          em.getTransaction().begin();
             try {

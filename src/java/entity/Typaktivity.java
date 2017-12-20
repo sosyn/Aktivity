@@ -7,7 +7,7 @@ package entity;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
@@ -32,11 +32,11 @@ public class Typaktivity extends entity.EntitySuperClass {
     public Typaktivity() {
     }
 
-    public Typaktivity(UUID id) {
+    public Typaktivity(Integer id) {
 super(id);
     }
 
-    public Typaktivity(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
+    public Typaktivity(Integer id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
 super(id, platiod, platido, timeinsert, timemodify);    }
 
     public Integer getTypakt() {
