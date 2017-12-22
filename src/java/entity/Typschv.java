@@ -7,6 +7,7 @@ package entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -44,11 +45,11 @@ public class Typschv extends entity.EntitySuperClass {
     public Typschv() {
     }
 
-    public Typschv(Integer id) {
+    public Typschv(UUID id) {
         super(id);
     }
 
-    public Typschv(Integer id, String typschv, Date platiod, Date platido, Date timeinsert, Date timemodify) {
+    public Typschv(UUID id, String typschv, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         super(id, platiod, platido, timeinsert, timemodify);
     }
 

@@ -7,6 +7,7 @@ package entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -63,11 +64,11 @@ public class Cesta extends entity.EntitySuperClass {
         super();
     }
 
-    public Cesta(Integer id) {
+    public Cesta(UUID id) {
         super(id);
     }
 
-    public Cesta(Integer id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
+    public Cesta(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         super(id, platiod, platido, timeinsert, timemodify);
     }
 

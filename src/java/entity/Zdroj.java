@@ -7,6 +7,7 @@ package entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -57,11 +58,11 @@ public class Zdroj extends entity.EntitySuperClass {
         super();
     }
 
-    public Zdroj(Integer id) {
+    public Zdroj(UUID id) {
         super(id);
     }
 
-    public Zdroj(Integer id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
+    public Zdroj(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         super(id, platiod, platido, timeinsert, timemodify);
     }
 

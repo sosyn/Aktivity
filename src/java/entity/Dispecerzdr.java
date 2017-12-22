@@ -7,7 +7,6 @@ package entity;
 
 import java.util.Date;
 import java.util.UUID;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -23,31 +22,27 @@ import javax.persistence.Table;
 @Entity
 @Table(catalog = "aktivity", schema = "public")
 @NamedQueries({
-    @NamedQuery(name = "Dispecerpol.selectAll", query = "SELECT d FROM Dispecerpol d")
+    @NamedQuery(name = "Dispecerzdr.selectAll", query = "SELECT d FROM Dispecerzdr d")
 })
-public class Dispecerpol extends entity.EntitySuperClass {
+public class Dispecerzdr extends entity.EntitySuperClass {
 
     @JoinColumn(name = "iddisphl", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Dispecerhl iddisphl;
 
-    @JoinColumn(name = "idoso", referencedColumnName = "id", nullable = true)
-    @ManyToOne(optional = true, fetch = FetchType.EAGER)
-    private Osoba idoso;
-
     @JoinColumn(name = "idzdr", referencedColumnName = "id", nullable = true)
     @ManyToOne(optional = true, fetch = FetchType.EAGER)
     private Zdroj idzdr;
 
-    public Dispecerpol() {
+    public Dispecerzdr() {
         super();
     }
 
-    public Dispecerpol(UUID id) {
+    public Dispecerzdr(UUID id) {
         super(id);
     }
 
-    public Dispecerpol(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
+    public Dispecerzdr(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         super(id, platiod, platido, timeinsert, timemodify);
     }
 
@@ -57,14 +52,6 @@ public class Dispecerpol extends entity.EntitySuperClass {
 
     public void setIddisphl(Dispecerhl iddisphl) {
         this.iddisphl = iddisphl;
-    }
-
-    public Osoba getIdoso() {
-        return idoso;
-    }
-
-    public void setIdoso(Osoba idoso) {
-        this.idoso = idoso;
     }
 
     public Zdroj getIdzdr() {
@@ -86,10 +73,10 @@ public class Dispecerpol extends entity.EntitySuperClass {
     public boolean equals(Object object) {
 
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Dispecerpol)) {
+        if (!(object instanceof Dispecerzdr)) {
             return false;
         }
-        Dispecerpol other = (Dispecerpol) object;
+        Dispecerzdr other = (Dispecerzdr) object;
         return (this.getId() != null && other.getId() != null && this.getId().equals(other.getId()));
     }
 

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -101,7 +102,7 @@ public class Osoby implements Serializable {
         return osoba;
     }
 
-    public Osoba getOsoba(Integer id) {
+    public Osoba getOsoba(UUID id) {
         return getEjbFacade().find(id);
     }
 

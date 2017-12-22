@@ -7,7 +7,6 @@ package entity;
 
 import java.util.Date;
 import java.util.UUID;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -23,9 +22,9 @@ import javax.persistence.Table;
 @Entity
 @Table(catalog = "aktivity", schema = "public")
 @NamedQueries({
-    @NamedQuery(name = "Dispecerpol.selectAll", query = "SELECT d FROM Dispecerpol d")
+    @NamedQuery(name = "Dispeceroso.selectAll", query = "SELECT d FROM Dispeceroso d")
 })
-public class Dispecerpol extends entity.EntitySuperClass {
+public class Dispeceroso extends entity.EntitySuperClass {
 
     @JoinColumn(name = "iddisphl", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -35,19 +34,16 @@ public class Dispecerpol extends entity.EntitySuperClass {
     @ManyToOne(optional = true, fetch = FetchType.EAGER)
     private Osoba idoso;
 
-    @JoinColumn(name = "idzdr", referencedColumnName = "id", nullable = true)
-    @ManyToOne(optional = true, fetch = FetchType.EAGER)
-    private Zdroj idzdr;
 
-    public Dispecerpol() {
+    public Dispeceroso() {
         super();
     }
 
-    public Dispecerpol(UUID id) {
+    public Dispeceroso(UUID id) {
         super(id);
     }
 
-    public Dispecerpol(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
+    public Dispeceroso(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         super(id, platiod, platido, timeinsert, timemodify);
     }
 
@@ -67,13 +63,6 @@ public class Dispecerpol extends entity.EntitySuperClass {
         this.idoso = idoso;
     }
 
-    public Zdroj getIdzdr() {
-        return idzdr;
-    }
-
-    public void setIdzdr(Zdroj idzdr) {
-        this.idzdr = idzdr;
-    }
 
     @Override
     public int hashCode() {
@@ -86,16 +75,16 @@ public class Dispecerpol extends entity.EntitySuperClass {
     public boolean equals(Object object) {
 
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Dispecerpol)) {
+        if (!(object instanceof Dispeceroso)) {
             return false;
         }
-        Dispecerpol other = (Dispecerpol) object;
+        Dispeceroso other = (Dispeceroso) object;
         return (this.getId() != null && other.getId() != null && this.getId().equals(other.getId()));
     }
 
     @Override
     public String toString() {
-        return "entity.Dispecerpol[ id=" + getId() + " ]";
+        return "entity.Dispeceroso[ id=" + getId() + " ]";
     }
 
 }

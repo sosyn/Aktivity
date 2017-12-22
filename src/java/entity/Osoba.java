@@ -7,6 +7,7 @@ package entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -57,11 +58,11 @@ public class Osoba extends entity.EntitySuperClass {
         super();
     }
 
-    public Osoba(Integer id) {
+    public Osoba(UUID id) {
         super(id);
     }
 
-    public Osoba(Integer id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
+    public Osoba(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         super(id, platiod, platido, timeinsert, timemodify);
     }
 

@@ -6,6 +6,7 @@
 package entity;
 
 import java.util.Date;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -57,11 +58,11 @@ public class Schvaleni extends entity.EntitySuperClass {
         super();
     }
 
-    public Schvaleni(Integer id) {
+    public Schvaleni(UUID id) {
         super(id);
     }
 
-    public Schvaleni(Integer id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
+    public Schvaleni(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         super(id, platiod, platido, timeinsert, timemodify);
     }
 

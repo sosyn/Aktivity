@@ -6,6 +6,7 @@
 package entity;
 
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -47,11 +48,11 @@ public class Log extends entity.EntitySuperClass {
         super();
     }
 
-    public Log(Integer id) {
+    public Log(UUID id) {
         super(id);
     }
 
-    public Log(Integer id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
+    public Log(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         super(id, platiod, platido, timeinsert, timemodify);
     }
 

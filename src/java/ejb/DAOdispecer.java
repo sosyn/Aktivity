@@ -6,7 +6,9 @@
 package ejb;
 
 import entity.Dispecerhl;
+import entity.Dispeceroso;
 import entity.Dispecerpol;
+import entity.Dispecerzdr;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,8 +50,11 @@ public class DAOdispecer implements Serializable {
     private Dispecerhl zastupce = null;
 
     @EJB
-    private ejb.DispecerPolFacade ejbDispPolFacade;
-    private Dispecerpol dispecerPol = null;
+    private ejb.DispecerOsoFacade ejbDispOsoFacade;
+    private Dispeceroso dispecerOso = null;
+    @EJB
+    private ejb.DispecerZdrFacade ejbDispZdrFacade;
+    private Dispecerzdr dispecerZdr = null;
 
     @PostConstruct
     void initDAOdispecer() {
@@ -121,48 +126,6 @@ public class DAOdispecer implements Serializable {
     }
 
     /**
-     * @return the ejbDispPolFacade
-     */
-    public ejb.DispecerPolFacade getEjbDispPolFacade() {
-        return ejbDispPolFacade;
-    }
-
-    /**
-     * @param ejbDispPolFacade the ejbDispPolFacade to set
-     */
-    public void setEjbDispPolFacade(ejb.DispecerPolFacade ejbDispPolFacade) {
-        this.ejbDispPolFacade = ejbDispPolFacade;
-    }
-
-    /**
-     * @return the dispecerPol
-     */
-    public Dispecerpol getDispecerPol() {
-        return dispecerPol;
-    }
-
-    /**
-     * @param dispecerPol the dispecerPol to set
-     */
-    public void setDispecerPol(Dispecerpol dispecerPol) {
-        this.dispecerPol = dispecerPol;
-    }
-
-    /**
-     * @return the dispecerPolList
-     */
-    public ArrayList<Dispecerpol> getDispecerPolList() {
-        return (ArrayList<Dispecerpol>) this.dispecerHl.getDispecerpolList();
-    }
-
-    /**
-     * @param dispecerPolList the dispecerPolList to set
-     */
-    public void setDispecerPolList(ArrayList<Dispecerpol> dispecerPolList) {
-        this.dispecerHl.setDispecerpolList(dispecerPolList);
-    }
-
-    /**
      * @return the zastupce
      */
     public Dispecerhl getZastupce() {
@@ -176,6 +139,65 @@ public class DAOdispecer implements Serializable {
         this.zastupce = zastupce;
     }
 
+    
+    /**
+     * @return the ejbDispOsoFacade
+     */
+    public ejb.DispecerOsoFacade getEjbDispOsoFacade() {
+        return ejbDispOsoFacade;
+    }
+
+    /**
+     * @param ejbDispOsoFacade the ejbDispOsoFacade to set
+     */
+    public void setEjbDispOsoFacade(ejb.DispecerOsoFacade ejbDispOsoFacade) {
+        this.ejbDispOsoFacade = ejbDispOsoFacade;
+    }
+
+    /**
+     * @return the dispecerOso
+     */
+    public Dispeceroso getDispecerOso() {
+        return dispecerOso;
+    }
+
+    /**
+     * @param dispecerOso the dispecerOso to set
+     */
+    public void setDispecerOso(Dispeceroso dispecerOso) {
+        this.dispecerOso = dispecerOso;
+    }
+
+    /**
+     * @return the ejbDispZdrFacade
+     */
+    public ejb.DispecerZdrFacade getEjbDispZdrFacade() {
+        return ejbDispZdrFacade;
+    }
+
+    /**
+     * @param ejbDispZdrFacade the ejbDispZdrFacade to set
+     */
+    public void setEjbDispZdrFacade(ejb.DispecerZdrFacade ejbDispZdrFacade) {
+        this.ejbDispZdrFacade = ejbDispZdrFacade;
+    }
+
+    /**
+     * @return the dispecerZdr
+     */
+    public Dispecerzdr getDispecerZdr() {
+        return dispecerZdr;
+    }
+
+    /**
+     * @param dispecerZdr the dispecerZdr to set
+     */
+    public void setDispecerZdr(Dispecerzdr dispecerZdr) {
+        this.dispecerZdr = dispecerZdr;
+    }
+
+    
+    
 //-----------------------
 // Cast PERSISTENCE pro dispecera
 //--------------------------    
@@ -198,8 +220,8 @@ public class DAOdispecer implements Serializable {
         cal.set(Calendar.MINUTE, 00);
         this.dispecerHl.setPlatido(cal.getTime());
         this.dispecerHl.setZastupciList(new ArrayList<Dispecerhl>());
-        this.dispecerHl.setDispecerpolList(new ArrayList<Dispecerpol>());
-
+        this.dispecerHl.setDispecerOsoList(new ArrayList<Dispeceroso>());
+        this.dispecerHl.setDispecerZdrList(new ArrayList<Dispecerzdr>());
     }
 
     public void fillDispecerHl(int mod) {
@@ -223,36 +245,32 @@ public class DAOdispecer implements Serializable {
     }
 
     private void dispHlPersist(JsfUtil.PersistAction persistAction) {
-        ArrayList<Dispecerhl> zastupciList = null;
-        if (this.dispecerHl.getZastupciList() != null && !this.dispecerHl.getZastupciList().isEmpty()) {
-            zastupciList = new ArrayList<>(this.dispecerHl.getZastupciList());
-            for (Dispecerhl zast : zastupciList) {
-                if (zast.getIdoso() == null) {
-                    this.dispecerHl.getZastupciList().remove(zast);
-                }
+        ArrayList<Dispecerhl> zastupciList = new ArrayList<>(this.dispecerHl.getZastupciList());
+        for (Dispecerhl zast : zastupciList) {
+            if (zast.getIdoso() == null) {
+                this.dispecerHl.getZastupciList().remove(zast);
             }
         }
-        if (this.dispecerHl.getZastupciList() != null && this.dispecerHl.getZastupciList().isEmpty()) {
-            this.dispecerHl.setZastupciList(null);
+        ArrayList<Dispeceroso> dispOsoList = new ArrayList<>(this.dispecerHl.getDispecerOsoList());
+        for (Dispeceroso dOso : dispOsoList) {
+            if (dOso.getIdoso() == null) {
+                this.dispecerHl.getDispecerOsoList().remove(dOso);
+            }
+        }
+        ArrayList<Dispecerzdr> dispZdrList = new ArrayList<>(this.dispecerHl.getDispecerZdrList());
+        for (Dispecerzdr dZdr : dispZdrList) {
+            if (dZdr.getIdzdr()== null) {
+                this.dispecerHl.getDispecerZdrList().remove(dZdr);
+            }
         }
         if (this.getDispecerHl() != null) {
             switch (persistAction) {
                 case CREATE:
-                    for (Dispecerpol dispecerpol : dispecerHl.getDispecerpolList()) {
-                        getEjbDispPolFacade().dispecerPolInsert(dispecerpol);
-                    }
                     this.getDispecerHl().setNewEntity(false);
                     getEjbDispHlFacade().create(this.dispecerHl);
                     this.dispecerHlList.add(this.dispecerHl);
                     break;
                 case UPDATE:
-                    for (Dispecerpol dispecerpol : dispecerHl.getDispecerpolList()) {
-                        if (dispecerpol.isNewEntity()) {
-                            getEjbDispPolFacade().dispecerPolInsert(dispecerpol);
-                        } else {
-                            getEjbDispPolFacade().dispecerPolUpdate(dispecerpol);
-                        }
-                    }
                     getEjbDispHlFacade().edit(this.dispecerHl);
                     break;
                 case DELETE:
@@ -323,28 +341,57 @@ public class DAOdispecer implements Serializable {
 //----------------------------------------------
 // Cast PERSISTENCE pro podrizene osoby dispecera
 //----------------------------------------------    
-    public void dispPolNew() {
-        this.dispecerPol = new Dispecerpol();
+    public void dispOsoNew() {
+        this.setDispecerOso(new Dispeceroso());
         // Dosadit dispecera, který bude mít polozku na starosti
-        this.dispecerPol.setIddisphl(dispecerHl);
-        this.dispecerPol.setNewEntity(true);
+        this.getDispecerOso().setIddisphl(dispecerHl);
+        this.getDispecerOso().setNewEntity(true);
         cal.set(Calendar.YEAR, 2017);
         cal.set(Calendar.MONTH, Calendar.JANUARY);
         cal.set(Calendar.DAY_OF_YEAR, 1);
         cal.set(Calendar.HOUR_OF_DAY, 00);
         cal.set(Calendar.MINUTE, 00);
-        this.dispecerPol.setPlatiod(cal.getTime());
+        this.getDispecerOso().setPlatiod(cal.getTime());
         cal.set(Calendar.YEAR, 2100);
         cal.set(Calendar.MONTH, Calendar.JANUARY);
         cal.set(Calendar.DAY_OF_YEAR, 1);
         cal.set(Calendar.HOUR_OF_DAY, 00);
         cal.set(Calendar.MINUTE, 00);
-        this.dispecerPol.setPlatido(cal.getTime());
+        this.getDispecerOso().setPlatido(cal.getTime());
 
-        this.dispecerHl.getDispecerpolList().add(this.dispecerPol);
+        this.dispecerHl.getDispecerOsoList().add(this.getDispecerOso());
     }
 
-    public void dispPolDel() {
+    public void dispOsoDel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+//----------------------------------------------
+// Cast PERSISTENCE pro spravovane zdroje
+//----------------------------------------------    
+    public void dispZdrNew() {
+        this.setDispecerZdr(new Dispecerzdr());
+        // Dosadit dispecera, který bude mít polozku na starosti
+        this.getDispecerZdr().setIddisphl(dispecerHl);
+        this.getDispecerZdr().setNewEntity(true);
+        cal.set(Calendar.YEAR, 2017);
+        cal.set(Calendar.MONTH, Calendar.JANUARY);
+        cal.set(Calendar.DAY_OF_YEAR, 1);
+        cal.set(Calendar.HOUR_OF_DAY, 00);
+        cal.set(Calendar.MINUTE, 00);
+        this.getDispecerZdr().setPlatiod(cal.getTime());
+        cal.set(Calendar.YEAR, 2100);
+        cal.set(Calendar.MONTH, Calendar.JANUARY);
+        cal.set(Calendar.DAY_OF_YEAR, 1);
+        cal.set(Calendar.HOUR_OF_DAY, 00);
+        cal.set(Calendar.MINUTE, 00);
+        this.getDispecerZdr().setPlatido(cal.getTime());
+
+        this.dispecerHl.getDispecerZdrList().add(this.getDispecerZdr());
+    }
+
+    public void dispZdrDel() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

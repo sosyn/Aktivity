@@ -8,6 +8,7 @@ package jsf.rezervace;
 import entity.Zdroj;
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  */
 class KalendarRow {
 
-    private Integer id = 0;
+    private int id = 0;
     private Date cas = null;
     private Zdroj zdroj = null;
     private ArrayList<Zdroj> zdroje = null;
@@ -71,14 +72,14 @@ class KalendarRow {
     /**
      * @return the id
      */
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

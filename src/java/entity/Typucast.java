@@ -7,6 +7,7 @@ package entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -32,11 +33,11 @@ public class Typucast extends entity.EntitySuperClass {
     public Typucast() {
     }
 
-    public Typucast(Integer id) {
+    public Typucast(UUID id) {
         super();
     }
 
-    public Typucast(Integer id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
+    public Typucast(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
     super(id, platiod, platido, timeinsert, timemodify);
     }
 

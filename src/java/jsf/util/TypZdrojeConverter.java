@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package jsf.util;
 
 
+import entity.Typzdroje;
+import java.util.UUID;
 import org.eclipse.persistence.internal.helper.DatabaseField;
 import org.eclipse.persistence.mappings.DatabaseMapping;
 import org.eclipse.persistence.mappings.DirectCollectionMapping;
@@ -27,10 +29,10 @@ public class TypZdrojeConverter implements Converter {
     }
 
     @Override
-    public Integer convertDataValueToObjectValue(Object dataValue,
+    public UUID convertDataValueToObjectValue(Object dataValue,
             Session session) {
 
-        return (Integer) ((Typzdroje)dataValue).getId();
+        return (UUID) ((Typzdroje)dataValue).getId();
 
     }
 

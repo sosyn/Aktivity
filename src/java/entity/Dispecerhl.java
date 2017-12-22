@@ -7,6 +7,7 @@ package entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -37,35 +38,29 @@ public class Dispecerhl extends entity.EntitySuperClass {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Typzdroje idtypzdr;
 
-    @JoinColumn(name = "iddisphl", referencedColumnName = "id", nullable = true  )
+    @JoinColumn(name = "iddisphl", referencedColumnName = "id", nullable = true)
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private Dispecerhl iddisphl;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddisphl", fetch = FetchType.LAZY)
-    private List<Dispecerpol> dispecerpolList;
+    private List<Dispecerhl> zastupciList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddisphl", fetch = FetchType.LAZY)
-    private List<Dispecerhl> zastupciList;
+    private List<Dispeceroso> dispecerOsoList;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddisphl", fetch = FetchType.LAZY)
+    private List<Dispecerzdr> dispecerZdrList;
 
     public Dispecerhl() {
         super();
     }
 
-    public Dispecerhl(Integer id) {
+    public Dispecerhl(UUID id) {
         super(id);
     }
 
-    public Dispecerhl(Integer id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
+    public Dispecerhl(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         super(id, platiod, platido, timeinsert, timemodify);
-    }
-
-    @XmlTransient
-    public List<Dispecerpol> getDispecerpolList() {
-        return dispecerpolList;
-    }
-
-    public void setDispecerpolList(List<Dispecerpol> dispecerpolList) {
-        this.dispecerpolList = dispecerpolList;
     }
 
     public Osoba getIdoso() {
@@ -118,6 +113,34 @@ public class Dispecerhl extends entity.EntitySuperClass {
      */
     public void setZastupciList(List<Dispecerhl> zastupciList) {
         this.zastupciList = zastupciList;
+    }
+
+    /**
+     * @return the dispecerOsoList
+     */
+    public List<Dispeceroso> getDispecerOsoList() {
+        return dispecerOsoList;
+    }
+
+    /**
+     * @param dispecerOsoList the dispecerOsoList to set
+     */
+    public void setDispecerOsoList(List<Dispeceroso> dispecerOsoList) {
+        this.dispecerOsoList = dispecerOsoList;
+    }
+
+    /**
+     * @return the dispecerZdrList
+     */
+    public List<Dispecerzdr> getDispecerZdrList() {
+        return dispecerZdrList;
+    }
+
+    /**
+     * @param dispecerZdrList the dispecerZdrList to set
+     */
+    public void setDispecerZdrList(List<Dispecerzdr> dispecerZdrList) {
+        this.dispecerZdrList = dispecerZdrList;
     }
 
     @Override

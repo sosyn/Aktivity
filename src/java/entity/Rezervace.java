@@ -7,6 +7,7 @@ package entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -55,11 +56,11 @@ public class Rezervace extends entity.EntitySuperClass {
     public Rezervace() {
     }
 
-    public Rezervace(Integer id) {
+    public Rezervace(UUID id) {
         super();
     }
 
-    public Rezervace(Integer id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
+    public Rezervace(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
         super(id, platiod, platido, timeinsert, timemodify);
     }
 

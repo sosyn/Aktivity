@@ -20,7 +20,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import jsf.util.JsfUtil;
@@ -302,21 +301,21 @@ public class DispecerForm implements Serializable {
         }
         return isZdr;
     }
-
+// Osoby
     /**
      * Kontrola dostupnosti tlacitek
      *
      * @param param
      * @return
      */
-    public boolean isButtonDispPolEnabled(String param) {
+    public boolean isButtonDispOsoEnabled(String param) {
         switch (param) {
             case "new":
                 return true;
             case "edit":
-                return this.daoDispecer.getDispecerPol() != null;
+                return this.daoDispecer.getDispecerOso() != null;
             case "delete":
-                return this.daoDispecer.getDispecerPol() != null;
+                return this.daoDispecer.getDispecerOso() != null;
         }
         return true;
     }
@@ -326,10 +325,10 @@ public class DispecerForm implements Serializable {
      *
      * @return dispPol
      */
-    public String dispPolNew() {
-        String dispPol = null;
-        this.daoDispecer.dispPolNew();
-        return dispPol;
+    public String dispOsoNew() {
+        String dispOso = null;
+        this.daoDispecer.dispOsoNew();
+        return dispOso;
     }
 
     /**
@@ -337,9 +336,9 @@ public class DispecerForm implements Serializable {
      *
      * @return
      */
-    public String dispPolEdit() {
-        String dispPol = null;
-        return dispPol;
+    public String dispOsoEdit() {
+        String dispOso = null;
+        return dispOso;
     }
 
     /**
@@ -350,7 +349,7 @@ public class DispecerForm implements Serializable {
      */
     public String dispPolDel() {
         try {
-            this.daoDispecer.dispPolDel();
+            this.daoDispecer.dispOsoDel();
             JsfUtil.addSuccessMessage("Záznam byl úspěšně smazán.");
         } catch (EJBException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
@@ -373,4 +372,76 @@ public class DispecerForm implements Serializable {
         return null;
     }
 
+// Zdroje
+
+
+    /**
+     * Kontrola dostupnosti tlacitek
+     *
+     * @param param
+     * @return
+     */
+    public boolean isButtonDispZdrEnabled(String param) {
+        switch (param) {
+            case "new":
+                return true;
+            case "edit":
+                return this.daoDispecer.getDispecerZdr() != null;
+            case "delete":
+                return this.daoDispecer.getDispecerZdr() != null;
+        }
+        return true;
+    }
+
+    /**
+     * Generovani nove polozky spravovane dispecerem
+     *
+     * @return dispPol
+     */
+    public String dispZdrNew() {
+        String dispZdr = null;
+        this.daoDispecer.dispZdrNew();
+        return dispZdr;
+    }
+
+    /**
+     * Nepouziva se
+     *
+     * @return
+     */
+    public String dispZdrEdit() {
+        String dispZdr = null;
+        return dispZdr;
+    }
+
+    /**
+     * Smaze zaznam o spravovane polozce dispecerem !!!POZOR!!! dodelat kontrolu
+     * na jiz pouzity zaznam - ten nelze smazat- uz se s nim pracovalo
+     *
+     * @return
+     */
+    public String dispZdrDel() {
+        try {
+            this.daoDispecer.dispZdrDel();
+            JsfUtil.addSuccessMessage("Záznam byl úspěšně smazán.");
+        } catch (EJBException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            String msg = "";
+            Throwable cause = ex.getCause();
+            if (cause != null) {
+                msg = cause.getLocalizedMessage();
+            }
+            if (msg.length() > 0) {
+                JsfUtil.addErrorMessage(msg);
+            } else {
+                JsfUtil.addErrorMessage(ex, "Chyba uložení dat");
+            }
+            JsfUtil.validationFailed();
+        } catch (Exception ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, "Chyba zpracování");
+            JsfUtil.validationFailed();
+        }
+        return null;
+    }    
 }
