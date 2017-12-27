@@ -14,7 +14,7 @@
                 <p:layout fullPage="false">
                     <p:layoutUnit position="center">
                         <h:form id="FormTypZdr">
-                            <p:dataTable value="#{typZdr.typZdrList}" var="item" selectionMode="single" selection="#{typZdr.typZdr}" rowKey="#{item.id}" sortMode="multiple" >
+                            <p:dataTable value="#{typZdr.typZdrList}" var="item" selectionMode="single" selection="#{typZdr.typZdr}" rowKey="#{item.id}" sortMode="multiple"  >
                                 <p:ajax event="rowSelect" update=":FormTypZdrDetail" />
                                 <p:column  sortBy="#{item.popis}">
                                     <f:facet name="header">
