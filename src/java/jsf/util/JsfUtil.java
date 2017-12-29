@@ -3,7 +3,10 @@ package jsf.util;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -11,6 +14,8 @@ import javax.faces.convert.Converter;
 import javax.faces.model.SelectItem;
 
 public class JsfUtil {
+
+    private final static Calendar cal = Calendar.getInstance(Locale.getDefault());
 
     public static SelectItem[] getSelectItems(List<?> entities, boolean selectOne) {
         int size = selectOne ? entities.size() + 1 : entities.size();
@@ -78,7 +83,7 @@ public class JsfUtil {
         // String algorithm = "SHA256";
         // IS VERA pouziva MD5 pro heslo
         String algorithm = "MD5";
-        
+
         try {
             MessageDigest digest = MessageDigest.getInstance(algorithm);
             byte[] hash = digest.digest(heslo.getBytes("UTF-8"));
@@ -97,4 +102,15 @@ public class JsfUtil {
             throw new RuntimeException(ex);
         }
     }
+
+    public static Date startDate() {
+        cal.set(2018, Calendar.JANUARY, 1, 0, 0, 0);
+        return cal.getTime();
+    }
+
+    public static Date endDate() {
+        cal.set(2100, Calendar.JANUARY, 1, 0, 0, 0);
+        return cal.getTime();
+    }
+
 }

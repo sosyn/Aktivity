@@ -7,12 +7,9 @@ package ejb;
 
 import entity.Dispecerhl;
 import entity.Dispeceroso;
-import entity.Dispecerpol;
 import entity.Dispecerzdr;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -39,19 +36,18 @@ public class DAOdispecer implements Serializable {
     public static final int DISPECERHL_NEW = 0;
     public static final int DISPECERHL_EDIT = 1;
 
-    private Calendar cal = Calendar.getInstance(Locale.getDefault());
-
     @EJB
     private ejb.DispecerHlFacade ejbDispHlFacade;
-
     private Dispecerhl dispecerHl = null;
     private ArrayList<Dispecerhl> dispecerHlList = null;
+
     private boolean dispeceriAzastupci = false;
     private Dispecerhl zastupce = null;
 
     @EJB
     private ejb.DispecerOsoFacade ejbDispOsoFacade;
     private Dispeceroso dispecerOso = null;
+
     @EJB
     private ejb.DispecerZdrFacade ejbDispZdrFacade;
     private Dispecerzdr dispecerZdr = null;
@@ -139,7 +135,6 @@ public class DAOdispecer implements Serializable {
         this.zastupce = zastupce;
     }
 
-    
     /**
      * @return the ejbDispOsoFacade
      */
@@ -196,8 +191,6 @@ public class DAOdispecer implements Serializable {
         this.dispecerZdr = dispecerZdr;
     }
 
-    
-    
 //-----------------------
 // Cast PERSISTENCE pro dispecera
 //--------------------------    
@@ -207,18 +200,8 @@ public class DAOdispecer implements Serializable {
     public void newDispecerHl() {
         this.dispecerHl = new Dispecerhl();
         this.dispecerHl.setNewEntity(true);
-        cal.set(Calendar.YEAR, 2017);
-        cal.set(Calendar.MONTH, Calendar.JANUARY);
-        cal.set(Calendar.DAY_OF_YEAR, 1);
-        cal.set(Calendar.HOUR_OF_DAY, 00);
-        cal.set(Calendar.MINUTE, 00);
-        this.dispecerHl.setPlatiod(cal.getTime());
-        cal.set(Calendar.YEAR, 2100);
-        cal.set(Calendar.MONTH, Calendar.JANUARY);
-        cal.set(Calendar.DAY_OF_YEAR, 1);
-        cal.set(Calendar.HOUR_OF_DAY, 00);
-        cal.set(Calendar.MINUTE, 00);
-        this.dispecerHl.setPlatido(cal.getTime());
+        this.dispecerHl.setPlatiod(JsfUtil.startDate());
+        this.dispecerHl.setPlatido(JsfUtil.startDate());
         this.dispecerHl.setZastupciList(new ArrayList<Dispecerhl>());
         this.dispecerHl.setDispecerOsoList(new ArrayList<Dispeceroso>());
         this.dispecerHl.setDispecerZdrList(new ArrayList<Dispecerzdr>());
@@ -259,7 +242,7 @@ public class DAOdispecer implements Serializable {
         }
         ArrayList<Dispecerzdr> dispZdrList = new ArrayList<>(this.dispecerHl.getDispecerZdrList());
         for (Dispecerzdr dZdr : dispZdrList) {
-            if (dZdr.getIdzdr()== null) {
+            if (dZdr.getIdzdr() == null) {
                 this.dispecerHl.getDispecerZdrList().remove(dZdr);
             }
         }
@@ -300,18 +283,8 @@ public class DAOdispecer implements Serializable {
         this.zastupce.setIdtypschv(dispecerHl.getIdtypschv());
         this.zastupce.setIdtypzdr(dispecerHl.getIdtypzdr());
         this.zastupce.setNewEntity(true);
-        cal.set(Calendar.YEAR, 2017);
-        cal.set(Calendar.MONTH, Calendar.JANUARY);
-        cal.set(Calendar.DAY_OF_YEAR, 1);
-        cal.set(Calendar.HOUR_OF_DAY, 00);
-        cal.set(Calendar.MINUTE, 00);
-        this.zastupce.setPlatiod(cal.getTime());
-        cal.set(Calendar.YEAR, 2100);
-        cal.set(Calendar.MONTH, Calendar.JANUARY);
-        cal.set(Calendar.DAY_OF_YEAR, 1);
-        cal.set(Calendar.HOUR_OF_DAY, 00);
-        cal.set(Calendar.MINUTE, 00);
-        this.zastupce.setPlatido(cal.getTime());
+        this.zastupce.setPlatiod(dispecerHl.getPlatiod());
+        this.zastupce.setPlatido(dispecerHl.getPlatido());
         this.dispecerHl.getZastupciList().add(this.zastupce);
     }
 
@@ -346,19 +319,8 @@ public class DAOdispecer implements Serializable {
         // Dosadit dispecera, který bude mít polozku na starosti
         this.getDispecerOso().setIddisphl(dispecerHl);
         this.getDispecerOso().setNewEntity(true);
-        cal.set(Calendar.YEAR, 2017);
-        cal.set(Calendar.MONTH, Calendar.JANUARY);
-        cal.set(Calendar.DAY_OF_YEAR, 1);
-        cal.set(Calendar.HOUR_OF_DAY, 00);
-        cal.set(Calendar.MINUTE, 00);
-        this.getDispecerOso().setPlatiod(cal.getTime());
-        cal.set(Calendar.YEAR, 2100);
-        cal.set(Calendar.MONTH, Calendar.JANUARY);
-        cal.set(Calendar.DAY_OF_YEAR, 1);
-        cal.set(Calendar.HOUR_OF_DAY, 00);
-        cal.set(Calendar.MINUTE, 00);
-        this.getDispecerOso().setPlatido(cal.getTime());
-
+        this.getDispecerOso().setPlatiod(dispecerHl.getPlatiod());
+        this.getDispecerOso().setPlatido(dispecerHl.getPlatido());
         this.dispecerHl.getDispecerOsoList().add(this.getDispecerOso());
     }
 
@@ -366,7 +328,6 @@ public class DAOdispecer implements Serializable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
 //----------------------------------------------
 // Cast PERSISTENCE pro spravovane zdroje
 //----------------------------------------------    
@@ -375,18 +336,8 @@ public class DAOdispecer implements Serializable {
         // Dosadit dispecera, který bude mít polozku na starosti
         this.getDispecerZdr().setIddisphl(dispecerHl);
         this.getDispecerZdr().setNewEntity(true);
-        cal.set(Calendar.YEAR, 2017);
-        cal.set(Calendar.MONTH, Calendar.JANUARY);
-        cal.set(Calendar.DAY_OF_YEAR, 1);
-        cal.set(Calendar.HOUR_OF_DAY, 00);
-        cal.set(Calendar.MINUTE, 00);
-        this.getDispecerZdr().setPlatiod(cal.getTime());
-        cal.set(Calendar.YEAR, 2100);
-        cal.set(Calendar.MONTH, Calendar.JANUARY);
-        cal.set(Calendar.DAY_OF_YEAR, 1);
-        cal.set(Calendar.HOUR_OF_DAY, 00);
-        cal.set(Calendar.MINUTE, 00);
-        this.getDispecerZdr().setPlatido(cal.getTime());
+        this.getDispecerZdr().setPlatiod(dispecerHl.getPlatiod());
+        this.getDispecerZdr().setPlatido(dispecerHl.getPlatido());
 
         this.dispecerHl.getDispecerZdrList().add(this.getDispecerZdr());
     }
