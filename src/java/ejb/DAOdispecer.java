@@ -201,7 +201,7 @@ public class DAOdispecer implements Serializable {
         this.dispecerHl = new Dispecerhl();
         this.dispecerHl.setNewEntity(true);
         this.dispecerHl.setPlatiod(JsfUtil.startDate());
-        this.dispecerHl.setPlatido(JsfUtil.startDate());
+        this.dispecerHl.setPlatido(JsfUtil.endDate());
         this.dispecerHl.setZastupciList(new ArrayList<Dispecerhl>());
         this.dispecerHl.setDispecerOsoList(new ArrayList<Dispeceroso>());
         this.dispecerHl.setDispecerZdrList(new ArrayList<Dispecerzdr>());

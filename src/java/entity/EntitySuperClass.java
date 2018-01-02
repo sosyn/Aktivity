@@ -20,6 +20,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import jsf.util.JsfUtil;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
 
@@ -67,10 +68,8 @@ public class EntitySuperClass implements Serializable {
 
     public EntitySuperClass() {
         this.id = UUID.randomUUID() ;
-        cal.set(2017, Calendar.JANUARY, 1);
-        this.platiod = cal.getTime();
-        cal.set(2100, Calendar.DECEMBER, 31);
-        this.platido = cal.getTime();
+        this.platiod = JsfUtil.startDate();
+        this.platido = JsfUtil.endDate();
         this.timeinsert = new Date();
         this.timemodify = new Date();
         this.usermodify = java.lang.System.getenv("username");

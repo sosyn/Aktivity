@@ -36,8 +36,8 @@
             <p:column  colspan="2">
                 <p:selectOneMenu id="typZdroje" value="#{daoDispecer.dispecerHl.idtypzdr}" converter="#{JSFConverterTypZdr}"  disabled="#{not daoDispecer.dispecerHl.newEntity}" >
                     <f:selectItems value="#{dispecerForm.typZdrList}" var="item" itemLabel="#{item.popis}" itemValue="#{item}"   /> 
-                    <p:ajax update=":dispecerForm:dispPolOsoPanelGrid :dispecerForm:dispPolZdrPanelGrid"/>                    
-                    <!--   :dispecerForm:dispPolLayoutUnit Nesmí se to celé Updatovat, jinak se vše ztratí-->
+                    <p:ajax update=":dispecerForm:dispOsoPanelGrid :dispecerForm:dispZdrPanelGrid"/>                    
+                    <!--   :dispecerForm:dispLayoutUnit Nesmí se to celé Updatovat, jinak se vše ztratí-->
                 </p:selectOneMenu>
             </p:column>
         </p:row>

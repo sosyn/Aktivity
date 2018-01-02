@@ -278,7 +278,7 @@ public class DispecerForm implements Serializable {
     }
 
 // Polozky podrizene dispecerovi (osoby nebo zdroje)
-    public boolean isGridDispPolOso() {
+    public boolean isGridDispOso() {
         boolean isOso = false;
         if (this.daoDispecer.getDispecerHl() != null) {
             if (this.daoDispecer.getDispecerHl().getIdtypzdr() != null) {
@@ -290,7 +290,7 @@ public class DispecerForm implements Serializable {
         return isOso;
     }
 
-    public boolean isGridDispPolZdr() {
+    public boolean isGridDispZdr() {
         boolean isZdr = true;
         if (this.daoDispecer.getDispecerHl() != null) {
             if (this.daoDispecer.getDispecerHl().getIdtypzdr() != null) {
