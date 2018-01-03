@@ -28,6 +28,7 @@ import org.eclipse.persistence.annotations.Converter;
  * Spolecna trida vsech entit
  *
  * @author Ivo
+ * 
  */
 @MappedSuperclass
 public class EntitySuperClass implements Serializable {
