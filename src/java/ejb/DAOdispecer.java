@@ -37,6 +37,9 @@ public class DAOdispecer implements Serializable {
     public static final int DISPECERHL_EDIT = 1;
 
     @EJB
+    private ejb.LogFacade ejbLogFacade;
+    
+    @EJB
     private ejb.DispecerHlFacade ejbDispHlFacade;
     private Dispecerhl dispecerHl = null;
     private ArrayList<Dispecerhl> dispecerHlList = null;
@@ -252,12 +255,16 @@ public class DAOdispecer implements Serializable {
                     this.getDispecerHl().setNewEntity(false);
                     getEjbDispHlFacade().create(this.dispecerHl);
                     this.dispecerHlList.add(this.dispecerHl);
+                    ejbLogFacade.log(this.dispecerHl.getId(),"dispecerhl", "Add dispečer: "+this.dispecerHl.getIdoso().getPopis());
                     break;
                 case UPDATE:
                     getEjbDispHlFacade().edit(this.dispecerHl);
+                    ejbLogFacade.log(this.dispecerHl.getId(),"dispecerhl", "Modify dispečer: "+this.dispecerHl.getIdoso().getPopis());
                     break;
                 case DELETE:
                     getEjbDispHlFacade().remove(this.dispecerHl);
+                    ejbLogFacade.log(this.dispecerHl.getId(),"dispecerhl", "Del dispečer: "+this.dispecerHl.getIdoso().getPopis());
+                    this.dispecerHl=null;
                     break;
             }
         }

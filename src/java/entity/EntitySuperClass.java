@@ -6,9 +6,7 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 import java.util.UUID;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -34,8 +32,7 @@ import org.eclipse.persistence.annotations.Converter;
 public class EntitySuperClass implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private static Calendar cal = Calendar.getInstance(Locale.getDefault());
-
+    
     @Id
     @Basic(optional = false)
     @Converter(name = "uuidConverter", converterClass = UUIDConverter.class)

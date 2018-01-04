@@ -7,6 +7,8 @@ package entity;
 
 import java.util.Date;
 import java.util.UUID;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -14,6 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import org.eclipse.persistence.annotations.Convert;
+import org.eclipse.persistence.annotations.Converter;
+import org.eclipse.persistence.annotations.MapKeyConvert;
 
 /**
  *
@@ -25,23 +30,35 @@ import javax.persistence.Table;
     @NamedQuery(name = "Log.findAll", query = "SELECT l FROM Log l")})
 public class Log extends entity.EntitySuperClass {
 
-    @JoinColumn(name = "idakt", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
+    // Identifikator zaznamu v tabulce
+    @Column(columnDefinition = "UUID", name = "tblid")
+    @Converter(name = "uuidConverter", converterClass = UUIDConverter.class)
+    @Convert("uuidConverter")
+    private UUID tblid;
+
+    private String tblname;
+
+//    @Converter(name = "uuidConverter", converterClass = UUIDConverter.class)
+//    @MapKeyConvert(value = "uuidConverter")
+    @JoinColumn(name = "idakt", referencedColumnName = "id", nullable = true)
+    @ManyToOne(optional = true, cascade = CascadeType.ALL)
     private Aktivity idakt;
-    @JoinColumn(name = "idcest", referencedColumnName = "id")
-    @ManyToOne
+
+    @JoinColumn(name = "idcest", referencedColumnName = "id", nullable = true, columnDefinition = "UUID")
+    @ManyToOne(optional = true, cascade = CascadeType.ALL)
     private Cesta idcest;
-    @JoinColumn(name = "idoso", referencedColumnName = "id")
-    @ManyToOne
+
+    @JoinColumn(name = "idoso", referencedColumnName = "id", nullable = true, columnDefinition = "UUID")
+    @ManyToOne(optional = true, cascade = CascadeType.ALL)
     private Osoba idoso;
-    @JoinColumn(name = "idrez", referencedColumnName = "id")
-    @ManyToOne
+    @JoinColumn(name = "idrez", referencedColumnName = "id", nullable = true, columnDefinition = "UUID")
+    @ManyToOne(optional = true, cascade = CascadeType.ALL)
     private Rezervace idrez;
-    @JoinColumn(name = "iducast", referencedColumnName = "id")
-    @ManyToOne
+    @JoinColumn(name = "iducast", referencedColumnName = "id", nullable = true, columnDefinition = "UUID")
+    @ManyToOne(optional = true, cascade = CascadeType.ALL)
     private Ucastnik iducast;
-    @JoinColumn(name = "idzdr", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "idzdr", referencedColumnName = "id", nullable = true, columnDefinition = "UUID")
+    @ManyToOne(optional = true, cascade = CascadeType.ALL)
     private Zdroj idzdr;
 
     public Log() {
@@ -104,6 +121,33 @@ public class Log extends entity.EntitySuperClass {
         this.idzdr = idzdr;
     }
 
+    /**
+     * @return the tblname
+     */
+    public String getTblname() {
+        return tblname;
+    }
+
+    /**
+     * @param tblname the tblname to set
+     */
+    public void setTblname(String tblname) {
+        this.tblname = tblname;
+    }
+
+    /**
+     * @return the tblid
+     */
+    public UUID getTblid() {
+        return tblid;
+    }
+
+    /**
+     * @param tblid the tblid to set
+     */
+    public void setTblid(UUID tblid) {
+        this.tblid = tblid;
+    }
 
     @Override
     public int hashCode() {
@@ -129,5 +173,4 @@ public class Log extends entity.EntitySuperClass {
     public String toString() {
         return "entity.Log[ id=" + getId() + " ]";
     }
-
 }
