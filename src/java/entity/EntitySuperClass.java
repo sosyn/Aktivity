@@ -38,7 +38,7 @@ public class EntitySuperClass implements Serializable {
     @Converter(name = "uuidConverter", converterClass = UUIDConverter.class)
     @Convert("uuidConverter")
     @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false,columnDefinition = "UUID")
     private UUID id;
 
     @Size(max = 2048)

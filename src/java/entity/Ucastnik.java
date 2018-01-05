@@ -40,7 +40,7 @@ public class Ucastnik extends entity.EntitySuperClass {
     @ManyToOne(fetch = FetchType.EAGER)
     private Typucast idtypucast;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "iducast")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "ucastnik")
     private List<Log> logList;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "iducast")

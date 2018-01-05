@@ -40,26 +40,29 @@ public class Log extends entity.EntitySuperClass {
 
 //    @Converter(name = "uuidConverter", converterClass = UUIDConverter.class)
 //    @MapKeyConvert(value = "uuidConverter")
-    @JoinColumn(name = "idakt", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "idakt", referencedColumnName = "id", nullable = true, columnDefinition = "UUID")
     @ManyToOne(optional = true, cascade = CascadeType.ALL)
-    private Aktivity idakt;
+    private Aktivity aktivity;
 
     @JoinColumn(name = "idcest", referencedColumnName = "id", nullable = true, columnDefinition = "UUID")
     @ManyToOne(optional = true, cascade = CascadeType.ALL)
-    private Cesta idcest;
+    private Cesta cesta;
 
     @JoinColumn(name = "idoso", referencedColumnName = "id", nullable = true, columnDefinition = "UUID")
     @ManyToOne(optional = true, cascade = CascadeType.ALL)
-    private Osoba idoso;
+    private Osoba osoba;
+
     @JoinColumn(name = "idrez", referencedColumnName = "id", nullable = true, columnDefinition = "UUID")
     @ManyToOne(optional = true, cascade = CascadeType.ALL)
-    private Rezervace idrez;
+    private Rezervace rezervace;
+
     @JoinColumn(name = "iducast", referencedColumnName = "id", nullable = true, columnDefinition = "UUID")
     @ManyToOne(optional = true, cascade = CascadeType.ALL)
-    private Ucastnik iducast;
+    private Ucastnik ucastnik;
+
     @JoinColumn(name = "idzdr", referencedColumnName = "id", nullable = true, columnDefinition = "UUID")
     @ManyToOne(optional = true, cascade = CascadeType.ALL)
-    private Zdroj idzdr;
+    private Zdroj zdroj;
 
     public Log() {
         super();
@@ -73,52 +76,88 @@ public class Log extends entity.EntitySuperClass {
         super(id, platiod, platido, timeinsert, timemodify);
     }
 
-    public Aktivity getIdakt() {
-        return idakt;
+    /**
+     * @return the aktivity
+     */
+    public Aktivity getAktivity() {
+        return aktivity;
     }
 
-    public void setIdakt(Aktivity idakt) {
-        this.idakt = idakt;
+    /**
+     * @param aktivity the aktivity to set
+     */
+    public void setAktivity(Aktivity aktivity) {
+        this.aktivity = aktivity;
     }
 
-    public Cesta getIdcest() {
-        return idcest;
+    /**
+     * @return the cesta
+     */
+    public Cesta getCesta() {
+        return cesta;
     }
 
-    public void setIdcest(Cesta idcest) {
-        this.idcest = idcest;
+    /**
+     * @param cesta the cesta to set
+     */
+    public void setCesta(Cesta cesta) {
+        this.cesta = cesta;
     }
 
-    public Osoba getIdoso() {
-        return idoso;
+    /**
+     * @return the osoba
+     */
+    public Osoba getOsoba() {
+        return osoba;
     }
 
-    public void setIdoso(Osoba idoso) {
-        this.idoso = idoso;
+    /**
+     * @param osoba the osoba to set
+     */
+    public void setOsoba(Osoba osoba) {
+        this.osoba = osoba;
     }
 
-    public Rezervace getIdrez() {
-        return idrez;
+    /**
+     * @return the rezervace
+     */
+    public Rezervace getRezervace() {
+        return rezervace;
     }
 
-    public void setIdrez(Rezervace idrez) {
-        this.idrez = idrez;
+    /**
+     * @param rezervace the rezervace to set
+     */
+    public void setRezervace(Rezervace rezervace) {
+        this.rezervace = rezervace;
     }
 
-    public Ucastnik getIducast() {
-        return iducast;
+    /**
+     * @return the ucastnik
+     */
+    public Ucastnik getUcastnik() {
+        return ucastnik;
     }
 
-    public void setIducast(Ucastnik iducast) {
-        this.iducast = iducast;
+    /**
+     * @param ucastnik the ucastnik to set
+     */
+    public void setUcastnik(Ucastnik ucastnik) {
+        this.ucastnik = ucastnik;
     }
 
-    public Zdroj getIdzdr() {
-        return idzdr;
+    /**
+     * @return the zdroj
+     */
+    public Zdroj getZdroj() {
+        return zdroj;
     }
 
-    public void setIdzdr(Zdroj idzdr) {
-        this.idzdr = idzdr;
+    /**
+     * @param zdroj the zdroj to set
+     */
+    public void setZdroj(Zdroj zdroj) {
+        this.zdroj = zdroj;
     }
 
     /**
@@ -173,4 +212,5 @@ public class Log extends entity.EntitySuperClass {
     public String toString() {
         return "entity.Log[ id=" + getId() + " ]";
     }
+
 }

@@ -54,7 +54,7 @@ public class Cesta extends entity.EntitySuperClass {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idcest")
     private List<Ucastnik> ucastnikList;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idcest")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "cesta")
     private List<Log> logList;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idcest")

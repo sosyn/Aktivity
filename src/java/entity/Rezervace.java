@@ -47,7 +47,7 @@ public class Rezervace extends entity.EntitySuperClass {
     @ManyToOne(optional = false,fetch = FetchType.EAGER)
     private Zdroj idzdr;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idrez")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "rezervace")
     private List<Log> logList;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idrez")

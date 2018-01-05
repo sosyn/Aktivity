@@ -44,7 +44,7 @@ public class Aktivity extends entity.EntitySuperClass {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idakt")
     private List<Rezervace> rezervaceList;
     
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idakt")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "aktivity")
     private List<Log> logList;
 
     public Aktivity() {

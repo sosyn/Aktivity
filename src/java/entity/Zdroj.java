@@ -37,7 +37,7 @@ public class Zdroj extends entity.EntitySuperClass {
     private String komentar;
     private Integer kapacita;
     
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idzdr")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "zdroj")
     private List<Log> logList;
     
     @JoinColumn(name = "idoso", referencedColumnName = "id", nullable = false)

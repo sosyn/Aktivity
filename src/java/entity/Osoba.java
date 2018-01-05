@@ -37,7 +37,7 @@ public class Osoba extends entity.EntitySuperClass {
     @Size(max = 2147483647)
     @Column(length = 2147483647)
     private String komentar;
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idoso")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "osoba")
     private List<Log> logList;
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idoso")
     private List<Zdroj> zdrojList;
