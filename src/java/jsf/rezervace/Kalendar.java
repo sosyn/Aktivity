@@ -21,7 +21,9 @@ import javax.enterprise.context.SessionScoped;
  * @author Ivo
  */
 @SessionScoped
-public class Kal implements Serializable {
+public class Kalendar implements Serializable {
+
+    static final int COLUMNS_MAX = 20;
 
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
     private Date platiOd = new Date();
@@ -29,8 +31,8 @@ public class Kal implements Serializable {
 
     ArrayList<Zdroj> zdroje = null;
 
-    private KalCol kalendarRow = null;
-    private HashMap<Integer, KalCol> columns = new HashMap<>();
+    private KalendarColumn kalendarCol = null;
+    private HashMap<Integer, KalendarColumn> columns = new HashMap<>();
 
     @PostConstruct
     void init() {
@@ -39,7 +41,7 @@ public class Kal implements Serializable {
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         this.platiOd = cal.getTime();
-        cal.add(Calendar.DAY_OF_MONTH, 14);
+        cal.add(Calendar.DAY_OF_MONTH, Kalendar.COLUMNS_MAX);
         this.platiDo = cal.getTime();
         getColumns();
     }
@@ -72,17 +74,37 @@ public class Kal implements Serializable {
         this.platiDo = platiDo;
     }
 
-    public Collection<KalCol> getColumns() {
-        cal.setTime(this.platiOd);
+    public Collection<KalendarColumn> getColumns() {
+        if (!columns.isEmpty()) {
+            return columns.values();
+        }
+        Calendar calOd = Calendar.getInstance(Locale.getDefault());
+        Calendar calDo = Calendar.getInstance(Locale.getDefault());
+        calOd.setTime(this.platiOd);
+        calDo.setTime(this.platiOd);
         Integer key = 0;
         do {
-            columns.put(key++, new KalCol(getPlatiOd(), getPlatiDo(), Calendar.DAY_OF_WEEK));
-            cal.add(Calendar.DAY_OF_MONTH, 1);
-        } while (cal.before(this.platiDo) || cal.equals(this.platiDo));
+            if (key > 0) {
+                calOd.set(Calendar.HOUR_OF_DAY, 0);
+                calOd.set(Calendar.MINUTE, 0);
+                calOd.set(Calendar.SECOND, 0);
+            }
+            calDo.setTime(calOd.getTime());
+            calDo.set(Calendar.HOUR_OF_DAY, 23);
+            calDo.set(Calendar.MINUTE, 59);
+            calDo.set(Calendar.SECOND, 59);
+            if (calDo.getTime().after(this.platiDo)) {
+                calDo.setTime(this.platiDo);
+            }
+            columns.put(key++, new KalendarColumn(calOd.getTime(), calDo.getTime(), Calendar.DAY_OF_WEEK));
+
+            calOd.add(Calendar.HOUR_OF_DAY, 24);
+
+        } while (calDo.getTime().before(this.platiDo));
         return columns.values();
     }
 
-    public KalCol getColumn(Integer key) {
+    public KalendarColumn getColumn(Integer key) {
         return columns.get(key);
     }
 

@@ -5,28 +5,19 @@
  */
 package jsf.rezervace;
 
-import ejb.LoginUser;
 import entity.Cesta;
-import entity.Osoba;
 import entity.Zdroj;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -45,10 +36,7 @@ public class Rezervace implements Serializable {
     @EJB
     private ejb.ZdrojeFacade ejbZdrojeFacade;
     @Inject
-    LoginUser loginUser;
-    Osoba osoba = null;
-    @Inject
-    private Kal kalendar;
+    private Kalendar kalendar;
 
     private Cesta cesta = null;
     private ArrayList<Cesta> cesty = new ArrayList<>();
@@ -56,12 +44,9 @@ public class Rezervace implements Serializable {
     private ArrayList<Rezervace> rezervaceList = new ArrayList<>();
     private Zdroj zdroj = null;
     private ArrayList<Zdroj> zdrojList = new ArrayList<>();
-    private String htmlText = "";
 
     @PostConstruct
     void init() {
-        loginUser.initLoginUser();
-        this.osoba = loginUser.getOsoba();
     }
 
     // Add business logic below. (Right-click in editor and choose
@@ -135,9 +120,6 @@ public class Rezervace implements Serializable {
      * @return the cesty
      */
     public ArrayList<Cesta> getCesty() {
-        this.cesty = new ArrayList<>(ejbCestaFacade.findOsoba(this.osoba));
-//        if (this.cesty.isEmpty()) {
-//        }
         return cesty;
     }
 
@@ -146,41 +128,6 @@ public class Rezervace implements Serializable {
      */
     public void setCesty(ArrayList<Cesta> cesty) {
         this.cesty = cesty;
-    }
-
-    public void printPruvodka() {
-        BufferedInputStream fis = null;
-        OutputStream out = null;
-        String filename = "c:\\temp\\IBM_Application_Release_and_Deployment_for_Dummies_0.pdf";
-        byte[] bytes = new byte[1000];
-        try {
-            FacesContext fc = FacesContext.getCurrentInstance();
-            HttpServletResponse response = (HttpServletResponse) fc.getExternalContext().getResponse();
-            out = response.getOutputStream();
-            fis = new BufferedInputStream(new FileInputStream(filename));
-            response.setContentType("application/octet-stream");
-            response.setContentType("application/pdf");
-            response.addHeader("Content-Disposition", "attachment; filename=\"Pruvodka.pdf\"");
-            while (fis.read(bytes) != -1) {
-                out.write(bytes);
-            }
-            out.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(Rezervace.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception e) {
-            Logger.getLogger(Rezervace.class.getName()).log(Level.SEVERE, null, e);
-        }
-        try {
-            if (out != null) {
-                out.close();
-            }
-            if (fis != null) {
-                fis.close();
-            }
-            FacesContext.getCurrentInstance().responseComplete();
-        } catch (IOException e) {
-            Logger.getLogger(Rezervace.class.getName()).log(Level.SEVERE, null, e);
-        }
     }
 
     public String newCesta() {
@@ -194,14 +141,14 @@ public class Rezervace implements Serializable {
     /**
      * @return the kalendar
      */
-    public Kal getKalendar() {
+    public Kalendar getKalendar() {
         return kalendar;
     }
 
     /**
      * @param kalendar the kalendar to set
      */
-    public void setKalendar(Kal kalendar) {
+    public void setKalendar(Kalendar kalendar) {
         this.kalendar = kalendar;
     }
 
@@ -264,22 +211,21 @@ public class Rezervace implements Serializable {
 
     public String getHtmlText(Zdroj zdr, Integer colIndex) {
         StringBuilder html = new StringBuilder("<p>");
-        html.append("<p> UUID zdroje=" + zdr.getId().toString() + "</p>");
+        html.append("<p onClick="+onClick(zdr,colIndex,null) +"> UUID zdroje=" + zdr.getId().toString() + "</p>");
         html.append("<p> Int sloupce=" + colIndex.toString() + "</p>");
         return html.toString();
     }
 
-    /**
-     * @return the htmlText
-     */
-    public String getHtmlText() {
-        return htmlText;
+    private String onClick(Zdroj zdr, Integer colIndex, Rezervace rez) {
+        StringBuilder html = new StringBuilder("onClickCell('");
+        html.append(zdr.getId().toString() + ":" + colIndex.toString());
+        html.append(":" + rez);
+        html.append("')");
+        return html.toString();
     }
 
-    /**
-     * @param htmlText the htmlText to set
-     */
-    public void setHtmlText(String htmlText) {
-        this.htmlText = htmlText;
+    public void eventRezervaceCell() {
+        String cell = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("cell");
+        System.out.println("Cell:" + cell);
     }
 }

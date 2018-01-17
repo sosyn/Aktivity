@@ -12,7 +12,9 @@
         <ui:composition template = "/templates/templateMain.xhtml">	
             <ui:define name="contens">
                 <p:layout fullPage="false">
-                    <h:form id="formRezervace">
+                    <h:form id="formRezervace">    
+                        <p:remoteCommand name="remoteRezervaceCell" actionListener="#{rezervace.eventRezervaceCell}"/>
+                        
                         <p:layoutUnit position="north" size="50">
                             <p:outputLabel for="platiOd" value="Od:" />
                             <p:calendar id="platiOd" value="#{rezervace.kalendar.platiOd}" pattern="dd.MM.yyyy HH:MM">
@@ -23,14 +25,31 @@
                                 <p:ajax event="dateSelect" listener="#{rezervace.onPlatiDoSelect}" update="platiOd,platiDo" />
                             </p:calendar>
                         </p:layoutUnit>
+                        
                         <p:layoutUnit position="center" size="50" >
-                            <p:dataTable id="rezervaceTable" value="#{rezervace.zdrojList}" var="zdr" rowKey="#{zdr.id}">
+                            <p:dataTable id="rezervaceTable" value="#{rezervace.zdrojList}" var="zdr" rowKey="#{zdr.id}" scrollable="true" scrollWidth="99%" scrollHeight="99%" resizableColumns="true" resizeMode="expand">
+                                <p:column filterBy="#{zdr.spz}" width="5%" >
+                                    <f:facet name="header">
+                                        <h:outputText value="SPZ"/>
+                                    </f:facet>
+                                    <h:outputText value="#{zdr.spz}" escape="false" title="#{zdr.popis}"/>
+                                    <br/>
+                                    <p:commandButton  icon="fa fa-info-circle"/>
+                                </p:column>
                                 <p:columns var="column" value="#{rezervace.kalendar.columns}"  columnIndexVar="colIndex" >
                                     <f:facet name="header">
-                                        <h:outputText value="#{rezervace.kalendar.getColumn(colIndex).header}"/>
+                                        <h:outputText value="#{rezervace.kalendar.getColumn(colIndex).headerDate}"/>
+                                        <br/>
+                                        <h:outputText value="#{rezervace.kalendar.getColumn(colIndex).headerOdDo}"/>
                                     </f:facet>
                                     <h:outputText value="#{rezervace.getHtmlText(zdr,colIndex)}" escape="false" />
                                 </p:columns>
+                                <p:column filterBy="#{zdr.popis}" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Popis"/>
+                                    </f:facet>
+                                    <h:outputText value="#{zdr.popis}"/>
+                                </p:column>
                             </p:dataTable>
                         </p:layoutUnit>
                     </h:form>
