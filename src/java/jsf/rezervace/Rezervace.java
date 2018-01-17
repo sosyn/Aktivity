@@ -8,6 +8,7 @@ package jsf.rezervace;
 import ejb.LoginUser;
 import entity.Cesta;
 import entity.Osoba;
+import entity.Zdroj;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -35,24 +36,28 @@ import javax.servlet.http.HttpServletResponse;
 @SessionScoped
 public class Rezervace implements Serializable {
 
-    private Calendar cal = Calendar.getInstance(Locale.getDefault());
+    private final Calendar cal = Calendar.getInstance(Locale.getDefault());
     private Date platiOd = new Date();
     private Date platiDo = new Date();
 
     @EJB
     private ejb.CestaFacade ejbCestaFacade;
+    @EJB
+    private ejb.ZdrojeFacade ejbZdrojeFacade;
     @Inject
     LoginUser loginUser;
     Osoba osoba = null;
     @Inject
-    Kalendar kalendar;
-    
+    private Kal kalendar;
+
     private Cesta cesta = null;
     private ArrayList<Cesta> cesty = new ArrayList<>();
     private Rezervace rezervace = null;
     private ArrayList<Rezervace> rezervaceList = new ArrayList<>();
+    private Zdroj zdroj = null;
+    private ArrayList<Zdroj> zdrojList = new ArrayList<>();
+    private String htmlText = "";
 
-    
     @PostConstruct
     void init() {
         loginUser.initLoginUser();
@@ -189,14 +194,14 @@ public class Rezervace implements Serializable {
     /**
      * @return the kalendar
      */
-    public Kalendar getKalendar() {
+    public Kal getKalendar() {
         return kalendar;
     }
 
     /**
      * @param kalendar the kalendar to set
      */
-    public void setKalendar(Kalendar kalendar) {
+    public void setKalendar(Kal kalendar) {
         this.kalendar = kalendar;
     }
 
@@ -228,4 +233,53 @@ public class Rezervace implements Serializable {
         this.rezervaceList = rezervaceList;
     }
 
+    /**
+     * @return the zdroj
+     */
+    public Zdroj getZdroj() {
+        return zdroj;
+    }
+
+    /**
+     * @param zdroj the zdroj to set
+     */
+    public void setZdroj(Zdroj zdroj) {
+        this.zdroj = zdroj;
+    }
+
+    /**
+     * @return the zdrojList
+     */
+    public ArrayList<Zdroj> getZdrojList() {
+        this.zdrojList = new ArrayList<>(ejbZdrojeFacade.findAll());
+        return zdrojList;
+    }
+
+    /**
+     * @param zdrojList the zdrojList to set
+     */
+    public void setZdrojList(ArrayList<Zdroj> zdrojList) {
+        this.zdrojList = zdrojList;
+    }
+
+    public String getHtmlText(Zdroj zdr, Integer colIndex) {
+        StringBuilder html = new StringBuilder("<p>");
+        html.append("<p> UUID zdroje=" + zdr.getId().toString() + "</p>");
+        html.append("<p> Int sloupce=" + colIndex.toString() + "</p>");
+        return html.toString();
+    }
+
+    /**
+     * @return the htmlText
+     */
+    public String getHtmlText() {
+        return htmlText;
+    }
+
+    /**
+     * @param htmlText the htmlText to set
+     */
+    public void setHtmlText(String htmlText) {
+        this.htmlText = htmlText;
+    }
 }

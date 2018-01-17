@@ -6,55 +6,34 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Moje cesty</title>
+        <title>Rezervace</title>
     </h:head>
     <h:body>
         <ui:composition template = "/templates/templateMain.xhtml">	
             <ui:define name="contens">
                 <p:layout fullPage="false">
-                    <p:layoutUnit position="north" size="50">
-                        <h:form id="platnostRezervaceForm">
+                    <h:form id="formRezervace">
+                        <p:layoutUnit position="north" size="50">
                             <p:outputLabel for="platiOd" value="Od:" />
-                            <p:calendar id="platiOd" value="#{rezervace.platiOd}" pattern="dd.MM.yyyy">
+                            <p:calendar id="platiOd" value="#{rezervace.kalendar.platiOd}" pattern="dd.MM.yyyy HH:MM">
                                 <p:ajax event="dateSelect" listener="#{rezervace.onPlatiOdSelect}" update="platiOd,platiDo" />
                             </p:calendar>
                             <p:outputLabel for="platiDo" value="Do:" />
-                            <p:calendar id="platiDo" value="#{rezervace.platiDo}" pattern="dd.MM.yyyy">
+                            <p:calendar id="platiDo" value="#{rezervace.kalendar.platiDo}" pattern="dd.MM.yyyy HH:MM">
                                 <p:ajax event="dateSelect" listener="#{rezervace.onPlatiDoSelect}" update="platiOd,platiDo" />
                             </p:calendar>
-                        </h:form>
-                    </p:layoutUnit>
-                    <p:layoutUnit position="center" size="50" >
-                        <h:form id="formRezervace">
-                            <p:dataTable id="rezervaceTable" value="#{rezervace.kalendar.kalendarRows}" selection="#{rezervace.kalendar.kalendarRow}"  var="item" rowKey="#{rezervace.kalendar.getCas(item)}" selectionMode="single">
-<!--                                 <p:ajax event="rowSelect" update=":formRezervaceBtn" />
--->
-                                <p:ajax event="rowSelect" update=":platnostRezervaceForm" />
-                                <p:column>
+                        </p:layoutUnit>
+                        <p:layoutUnit position="center" size="50" >
+                            <p:dataTable id="rezervaceTable" value="#{rezervace.zdrojList}" var="zdr" rowKey="#{zdr.id}">
+                                <p:columns var="column" value="#{rezervace.kalendar.columns}"  columnIndexVar="colIndex" >
                                     <f:facet name="header">
-                                        <h:outputText value="Čas"/>
+                                        <h:outputText value="#{rezervace.kalendar.getColumn(colIndex).header}"/>
                                     </f:facet>
-                                    <h:outputText value="#{rezervace.kalendar.getCas(item)}">
-                                        <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
-                                    </h:outputText>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Zdroj 1"/>
-                                    </f:facet>
-                                    <p:panelGrid />
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Zdroj 2"/>
-                                    </f:facet>
-                                    <p:dataGrid paginator="false" emptyMessage="Žádná data" />
-                                </p:column>
+                                    <h:outputText value="#{rezervace.getHtmlText(zdr,colIndex)}" escape="false" />
+                                </p:columns>
                             </p:dataTable>
-                        </h:form>
-                    </p:layoutUnit>
-                    <p:layoutUnit position="east" size="100">
-                    </p:layoutUnit>
+                        </p:layoutUnit>
+                    </h:form>
                 </p:layout>
             </ui:define>
         </ui:composition>
