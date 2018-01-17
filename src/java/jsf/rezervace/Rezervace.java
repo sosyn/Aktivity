@@ -211,7 +211,10 @@ public class Rezervace implements Serializable {
 
     public String getHtmlText(Zdroj zdr, Integer colIndex) {
         StringBuilder html = new StringBuilder("");
-        html.append("<div style=\"background-color: #00ffff; width:100%; height:100%; outline-style: outset; \" onClick="+onClick(zdr,colIndex,null)+">.&nbsp;&nbsp;&nbsp;&nbsp;.</div>");        
+        html.append("<div style=\"background-color: #00ffff; width:100%;  \" onClick="+onClick(zdr,colIndex,null)+">&nbsp;&nbsp;&nbsp;&nbsp;</div>");        
+        html.append("<div style=\"background-color: #00ffff; width:100%;  \" onClick="+onClick(zdr,colIndex,null)+">&nbsp;&nbsp;&nbsp;&nbsp;</div>");        
+        html.append("<div style=\"background-color: #00ffff; width:100%;  \" onClick="+onClick(zdr,colIndex,null)+">&nbsp;&nbsp;&nbsp;&nbsp;</div>");        
+        html.append("<div style=\"background-color: #00ffff; width:100%;  \" onClick="+onClick(zdr,colIndex,null)+">&nbsp;&nbsp;&nbsp;&nbsp;</div>");        
         return html.toString();
     }
 
