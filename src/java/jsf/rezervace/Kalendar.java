@@ -44,6 +44,7 @@ public class Kalendar implements Serializable {
         cal.add(Calendar.DAY_OF_MONTH, Kalendar.COLUMNS_MAX);
         this.platiDo = cal.getTime();
         getColumns();
+        System.out.println("Kalendar.init Kalendar.platiOd="+this.platiOd+" Kalendar.platiDo="+this.platiDo);
     }
 
     /**

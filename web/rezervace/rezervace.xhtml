@@ -12,21 +12,22 @@
         <ui:composition template = "/templates/templateMain.xhtml">	
             <ui:define name="contens">
                 <p:layout fullPage="false">
-                    <h:form id="formRezervace">    
-                        <p:remoteCommand name="remoteRezervaceCell" actionListener="#{rezervace.eventRezervaceCell}"/>
-                        
-                        <p:layoutUnit position="north" size="50">
-                            <p:outputLabel for="platiOd" value="Od:" />
-                            <p:calendar id="platiOd" value="#{rezervace.kalendar.platiOd}" pattern="dd.MM.yyyy HH:MM" mode="popup" showOn="button">
-                                <p:ajax event="dateSelect" listener="#{rezervace.onPlatiOdSelect}" update="platiDo" />
+                    <p:layoutUnit position="north" size="50">
+                        <h:form id="formRezervaceOdDo" >    
+                            <p:outputLabel for="rezPlatiOd" value="Od:" />
+                            <p:calendar id="rezPlatiOd" value="#{rezervace.platiOd}" pattern="dd.MM.yyyy HH:MM" showHour="true" showMinute="true" mode="popup" showOn="button">
+                                <p:ajax event="dateSelect" listener="#{rezervace.onPlatiOdSelect}" update="rezPlatiDo" />
                             </p:calendar>
-                            <p:outputLabel for="platiDo" value="Do:" />
-                            <p:calendar id="platiDo" value="#{rezervace.kalendar.platiDo}" pattern="dd.MM.yyyy HH:MM" mode="popup" showOn="button" mask="true" >
-                                <p:ajax event="dateSelect" listener="#{rezervace.onPlatiDoSelect}" update="platiOd" />
+                            <p:outputLabel for="rezPlatiDo" value="Do:" />
+                            <p:calendar id="rezPlatiDo" value="#{rezervace.platiDo}" pattern="dd.MM.yyyy HH:MM" showHour="true" showMinute="true" mode="popup" showOn="button" >
+                                <p:ajax event="dateSelect" listener="#{rezervace.onPlatiDoSelect}" update="rezPlatiOd" />
                             </p:calendar>
-                        </p:layoutUnit>
-                        
-                        <p:layoutUnit position="center" size="50" >
+                            <p:commandButton  ajax="true" update="rezPlatiOd rezPlatiDo" />
+                        </h:form>
+                    </p:layoutUnit>
+                    <p:layoutUnit position="center" size="50" >
+                        <h:form id="formRezervaceDataTable">    
+                            <p:remoteCommand name="remoteRezervaceCell" actionListener="#{rezervace.eventRezervaceCell}"/>
                             <p:dataTable id="rezervaceTable" value="#{rezervace.zdrojList}" var="zdr" rowKey="#{zdr.id}" scrollable="true" scrollWidth="99%" scrollHeight="99%" resizableColumns="true" resizeMode="expand">
                                 <p:column filterBy="#{zdr.spz}" width="5%" >
                                     <f:facet name="header">
@@ -51,8 +52,8 @@
                                     <h:outputText value="#{zdr.popis}"/>
                                 </p:column>
                             </p:dataTable>
-                        </p:layoutUnit>
-                    </h:form>
+                        </h:form>
+                    </p:layoutUnit>
                 </p:layout>
             </ui:define>
         </ui:composition>

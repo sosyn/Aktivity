@@ -10,10 +10,10 @@ import entity.Zdroj;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -35,6 +35,10 @@ public class Rezervace implements Serializable {
     @Inject
     private Kalendar kalendar;
 
+    private java.util.Calendar cal = java.util.Calendar.getInstance(Locale.getDefault());
+    private Date platiOd = new Date();
+    private Date platiDo = new Date();
+
     private Cesta cesta = null;
     private ArrayList<Cesta> cesty = new ArrayList<>();
     private Rezervace rezervace = null;
@@ -44,29 +48,46 @@ public class Rezervace implements Serializable {
 
     @PostConstruct
     void init() {
+        System.out.println("Rezervace.init platiOd: " + this.getPlatiOd() + " platiDo: " + this.getPlatiDo());
     }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     public void onPlatiOdSelect(SelectEvent event) {
-        Date platiOd=(Date)event.getObject();
-        Calendar calendarPlatiDo=(Calendar)FacesContext.getCurrentInstance().getViewRoot().findComponent("formRezervace:platiDo");
-        calendarPlatiDo.getValue();
-        System.out.println("Calendar calendarPlatiDo="+calendarPlatiDo+"  calendarPlatiDo.getValue()"+calendarPlatiDo.getValue());
-        
-//        if (kalendar.getPlatiOd().after(kalendar.getPlatiDo())) {
-//            kalendar.setPlatiDo(kalendar.getPlatiOd());
+        Calendar calendarPlatiOd = (Calendar) FacesContext.getCurrentInstance().getViewRoot().findComponent("formRezervaceOdDo:rezPlatiOd");
+        Date platiOd = (Date) event.getObject();
+        Calendar calendarPlatiDo = (Calendar) FacesContext.getCurrentInstance().getViewRoot().findComponent("formRezervaceOdDo:rezPlatiDo");
+        Date platiDo = (Date) calendarPlatiDo.getValue();;
+//        System.out.println("onPlatiOdSelect calendarPlatiOd.getValue()=" + calendarPlatiOd.getValue() + "  calendarPlatiDo.getValue()" + calendarPlatiDo.getValue());
+//        if (platiOd.after(platiDo)) {
+//            calendarPlatiDo.setValue(platiOd);
 //        }
-        // System.out.println("onPlatiOdSelect()= platiOd: "+kalendar.getPlatiOd()+"platiDo: "+kalendar.getPlatiDo());
+        System.out.println("onPlatiOdSelect calendarPlatiOd.getValue()=" + calendarPlatiOd.getValue() + "  calendarPlatiDo.getValue()" + calendarPlatiDo.getValue());
+
+        if (this.getPlatiOd().after(this.getPlatiDo())) {
+            this.setPlatiDo(this.getPlatiOd());
+        }
+        System.out.println("onPlatiOdSelect()= platiOd: " + this.getPlatiOd() + " platiDo: " + this.getPlatiDo());
     }
 
     public void onPlatiDoSelect(SelectEvent event) {
-        if (kalendar.getPlatiOd().after(kalendar.getPlatiDo())) {
-            Date platiDo = kalendar.getPlatiDo();
-            kalendar.setPlatiDo(kalendar.getPlatiOd());
-            kalendar.setPlatiOd(platiDo);
-            System.out.println("onPlatiDoSelect()= platiOd: "+kalendar.getPlatiOd()+"platiDo: "+kalendar.getPlatiDo());
+        Calendar calendarPlatiOd = (Calendar) FacesContext.getCurrentInstance().getViewRoot().findComponent("formRezervaceOdDo:rezPlatiOd");
+        Date platiOd = (Date) calendarPlatiOd.getValue();
+        Calendar calendarPlatiDo = (Calendar) FacesContext.getCurrentInstance().getViewRoot().findComponent("formRezervaceOdDo:rezPlatiDo");
+        Date platiDo = (Date) event.getObject();
+//        System.out.println("onPlatiDoSelect calendarPlatiOd.getValue()=" + calendarPlatiOd.getValue() + "  calendarPlatiDo.getValue()" + calendarPlatiDo.getValue());
+//        if (platiOd.after(platiDo)) {
+//            calendarPlatiOd.setValue(platiDo);
+//            calendarPlatiDo.setValue(platiOd);
+//        }
+        System.out.println(">onPlatiDoSelect calendarPlatiOd.getValue()=" + calendarPlatiOd.getValue() + "  calendarPlatiDo.getValue()" + calendarPlatiDo.getValue());
+
+        if (this.getPlatiOd().after(this.getPlatiDo())) {
+            platiDo = this.getPlatiDo();
+            this.setPlatiDo(this.getPlatiOd());
+            this.setPlatiOd(platiDo);
         }
+        System.out.println(">onPlatiDoSelect()= platiOd: " + this.getPlatiOd() + " platiDo: " + this.getPlatiDo());
     }
 
     /**
@@ -210,5 +231,47 @@ public class Rezervace implements Serializable {
     public void eventRezervaceCell() {
         String cell = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("cell");
         System.out.println("Cell:" + cell);
+    }
+
+    /**
+     * @return the cal
+     */
+    public java.util.Calendar getCal() {
+        return cal;
+    }
+
+    /**
+     * @param cal the cal to set
+     */
+    public void setCal(java.util.Calendar cal) {
+        this.cal = cal;
+    }
+
+    /**
+     * @return the platiOd
+     */
+    public Date getPlatiOd() {
+        return platiOd;
+    }
+
+    /**
+     * @param platiOd the platiOd to set
+     */
+    public void setPlatiOd(Date platiOd) {
+        this.platiOd = platiOd;
+    }
+
+    /**
+     * @return the platiDo
+     */
+    public Date getPlatiDo() {
+        return platiDo;
+    }
+
+    /**
+     * @param platiDo the platiDo to set
+     */
+    public void setPlatiDo(Date platiDo) {
+        this.platiDo = platiDo;
     }
 }
