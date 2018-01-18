@@ -17,12 +17,12 @@
                         
                         <p:layoutUnit position="north" size="50">
                             <p:outputLabel for="platiOd" value="Od:" />
-                            <p:calendar id="platiOd" value="#{rezervace.kalendar.platiOd}" pattern="dd.MM.yyyy HH:MM">
-                                <p:ajax event="dateSelect" listener="#{rezervace.onPlatiOdSelect}" update="platiOd,platiDo" />
+                            <p:calendar id="platiOd" value="#{rezervace.kalendar.platiOd}" pattern="dd.MM.yyyy HH:MM" mode="popup" showOn="button">
+                                <p:ajax event="dateSelect" listener="#{rezervace.onPlatiOdSelect}" update="platiDo" />
                             </p:calendar>
                             <p:outputLabel for="platiDo" value="Do:" />
-                            <p:calendar id="platiDo" value="#{rezervace.kalendar.platiDo}" pattern="dd.MM.yyyy HH:MM">
-                                <p:ajax event="dateSelect" listener="#{rezervace.onPlatiDoSelect}" update="platiOd,platiDo" />
+                            <p:calendar id="platiDo" value="#{rezervace.kalendar.platiDo}" pattern="dd.MM.yyyy HH:MM" mode="popup" showOn="button" mask="true" >
+                                <p:ajax event="dateSelect" listener="#{rezervace.onPlatiDoSelect}" update="platiOd" />
                             </p:calendar>
                         </p:layoutUnit>
                         

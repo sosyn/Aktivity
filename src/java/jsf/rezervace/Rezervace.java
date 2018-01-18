@@ -9,15 +9,16 @@ import entity.Cesta;
 import entity.Zdroj;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.component.calendar.Calendar;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -26,10 +27,6 @@ import javax.inject.Named;
 @Named("rezervace")
 @SessionScoped
 public class Rezervace implements Serializable {
-
-    private final Calendar cal = Calendar.getInstance(Locale.getDefault());
-    private Date platiOd = new Date();
-    private Date platiDo = new Date();
 
     @EJB
     private ejb.CestaFacade ejbCestaFacade;
@@ -51,41 +48,25 @@ public class Rezervace implements Serializable {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-    /**
-     * @return the platiOd
-     */
-    public Date getPlatiOd() {
-        return platiOd;
+    public void onPlatiOdSelect(SelectEvent event) {
+        Date platiOd=(Date)event.getObject();
+        Calendar calendarPlatiDo=(Calendar)FacesContext.getCurrentInstance().getViewRoot().findComponent("formRezervace:platiDo");
+        calendarPlatiDo.getValue();
+        System.out.println("Calendar calendarPlatiDo="+calendarPlatiDo+"  calendarPlatiDo.getValue()"+calendarPlatiDo.getValue());
+        
+//        if (kalendar.getPlatiOd().after(kalendar.getPlatiDo())) {
+//            kalendar.setPlatiDo(kalendar.getPlatiOd());
+//        }
+        // System.out.println("onPlatiOdSelect()= platiOd: "+kalendar.getPlatiOd()+"platiDo: "+kalendar.getPlatiDo());
     }
 
-    /**
-     * @param platiOd the platiOd to set
-     */
-    public void setPlatiOd(Date platiOd) {
-        this.platiOd = platiOd;
-    }
-
-    /**
-     * @return the platiDo
-     */
-    public Date getPlatiDo() {
-        return platiDo;
-    }
-
-    /**
-     * @param platiDo the platiDo to set
-     */
-    public void setPlatiDo(Date platiDo) {
-        this.platiDo = platiDo;
-    }
-
-    public void onPlatiOdSelect() {
-        if (this.platiOd.after(this.platiDo)) {
-            this.platiDo.setTime(platiOd.getTime());
+    public void onPlatiDoSelect(SelectEvent event) {
+        if (kalendar.getPlatiOd().after(kalendar.getPlatiDo())) {
+            Date platiDo = kalendar.getPlatiDo();
+            kalendar.setPlatiDo(kalendar.getPlatiOd());
+            kalendar.setPlatiOd(platiDo);
+            System.out.println("onPlatiDoSelect()= platiOd: "+kalendar.getPlatiOd()+"platiDo: "+kalendar.getPlatiDo());
         }
-    }
-
-    public void onPlatiDoSelect() {
     }
 
     /**
@@ -211,10 +192,10 @@ public class Rezervace implements Serializable {
 
     public String getHtmlText(Zdroj zdr, Integer colIndex) {
         StringBuilder html = new StringBuilder("");
-        html.append("<div style=\"background-color: #00ffff; width:100%;  \" onClick="+onClick(zdr,colIndex,null)+">&nbsp;&nbsp;&nbsp;&nbsp;</div>");        
-        html.append("<div style=\"background-color: #00ffff; width:100%;  \" onClick="+onClick(zdr,colIndex,null)+">&nbsp;&nbsp;&nbsp;&nbsp;</div>");        
-        html.append("<div style=\"background-color: #00ffff; width:100%;  \" onClick="+onClick(zdr,colIndex,null)+">&nbsp;&nbsp;&nbsp;&nbsp;</div>");        
-        html.append("<div style=\"background-color: #00ffff; width:100%;  \" onClick="+onClick(zdr,colIndex,null)+">&nbsp;&nbsp;&nbsp;&nbsp;</div>");        
+        html.append("<div style=\"background-color: #00ffff; width:100%;  \" onClick=" + onClick(zdr, colIndex, null) + ">&nbsp;&nbsp;&nbsp;&nbsp;</div>");
+        html.append("<div style=\"background-color: #00ffff; width:100%;  \" onClick=" + onClick(zdr, colIndex, null) + ">&nbsp;&nbsp;&nbsp;&nbsp;</div>");
+        html.append("<div style=\"background-color: #00ffff; width:100%;  \" onClick=" + onClick(zdr, colIndex, null) + ">&nbsp;&nbsp;&nbsp;&nbsp;</div>");
+        html.append("<div style=\"background-color: #00ffff; width:100%;  \" onClick=" + onClick(zdr, colIndex, null) + ">&nbsp;&nbsp;&nbsp;&nbsp;</div>");
         return html.toString();
     }
 
