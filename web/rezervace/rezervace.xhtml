@@ -15,11 +15,11 @@
                     <p:layoutUnit position="north" size="50">
                         <h:form id="formRezervaceOdDo" >    
                             <p:outputLabel for="rezPlatiOd" value="Od:" />
-                            <p:calendar id="rezPlatiOd" value="#{rezervace.platiOd}" pattern="dd.MM.yyyy HH:MM" showHour="true" showMinute="true" mode="popup" showOn="button">
+                            <p:calendar id="rezPlatiOd" value="#{rezervace.platiOd}" pattern="dd.MM.yyyy HH:mm" mode="popup" showOn="button" stepMinute="15" timeControlType="select" >
                                 <p:ajax event="dateSelect" listener="#{rezervace.onPlatiOdSelect}" update="rezPlatiDo" />
                             </p:calendar>
                             <p:outputLabel for="rezPlatiDo" value="Do:" />
-                            <p:calendar id="rezPlatiDo" value="#{rezervace.platiDo}" pattern="dd.MM.yyyy HH:MM" showHour="true" showMinute="true" mode="popup" showOn="button" >
+                            <p:calendar id="rezPlatiDo" value="#{rezervace.platiDo}" pattern="dd.MM.yyyy HH:mm" mode="popup" showOn="button" stepMinute="15"  timeControlType="select" >
                                 <p:ajax event="dateSelect" listener="#{rezervace.onPlatiDoSelect}" update="rezPlatiOd" />
                             </p:calendar>
                             <p:commandButton  ajax="true" update="rezPlatiOd rezPlatiDo" />

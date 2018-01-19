@@ -216,14 +216,13 @@ public class Rezervace implements Serializable {
         html.append("<div style=\"background-color: #00ffff; width:100%;  \" onClick=" + onClick(zdr, colIndex, null) + ">&nbsp;&nbsp;&nbsp;&nbsp;</div>");
         html.append("<div style=\"background-color: #00ffff; width:100%;  \" onClick=" + onClick(zdr, colIndex, null) + ">&nbsp;&nbsp;&nbsp;&nbsp;</div>");
         html.append("<div style=\"background-color: #00ffff; width:100%;  \" onClick=" + onClick(zdr, colIndex, null) + ">&nbsp;&nbsp;&nbsp;&nbsp;</div>");
-        html.append("<div style=\"background-color: #00ffff; width:100%;  \" onClick=" + onClick(zdr, colIndex, null) + ">&nbsp;&nbsp;&nbsp;&nbsp;</div>");
         return html.toString();
     }
 
-    private String onClick(Zdroj zdr, Integer colIndex, Rezervace rez) {
+    private String onClick(Zdroj zdr, Integer colIndex, entity.Rezervace rez) {
         StringBuilder html = new StringBuilder("onClickCell('");
         html.append(zdr.getId().toString() + ":" + colIndex.toString());
-        html.append(":" + rez);
+        html.append(":" + (rez==null?null:rez.getId()) );
         html.append("')");
         return html.toString();
     }
