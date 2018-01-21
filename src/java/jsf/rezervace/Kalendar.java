@@ -23,7 +23,7 @@ import javax.enterprise.context.SessionScoped;
 @SessionScoped
 public class Kalendar implements Serializable {
 
-    static final int COLUMNS_MAX = 20;
+    static final int COLUMNS_MAX = 150;
 
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
     private Date platiOd = new Date();

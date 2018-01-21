@@ -20,13 +20,15 @@
                     <p:calendar id="rezPlatiDo" value="#{rezervace.platiDo}" pattern="dd.MM.yyyy HH:mm" mode="popup" showOn="button" stepMinute="15"  timeControlType="select" >
                         <p:ajax event="dateSelect" listener="#{rezervace.onPlatiDoSelect}" update="rezPlatiOd" />
                     </p:calendar>
-                    <p:commandButton  ajax="true" update="rezPlatiOd rezPlatiDo" />
+                    <p:commandButton value="Zobraz" icon="fa fa-check-square-o" iconPos="right" ajax="true" update="rezPlatiOd rezPlatiDo" />
+                    <p:commandButton value="Zobraz" icon="fa fa-caret-right"  iconPos="right" ajax="true" update="rezPlatiOd rezPlatiDo" />
+                    <p:commandButton value="Obnov" icon="fa fa-refresh" ajax="true" update="rezPlatiOd rezPlatiDo" />
                 </h:form>
                 <hr></hr>
                 <h:form id="formRezervaceDataTable">    
                     <p:remoteCommand name="remoteRezervaceCell" actionListener="#{rezervace.eventRezervaceCell}"/>
                     <p:dataTable id="rezervaceTable" value="#{rezervace.zdrojList}" var="zdr" rowKey="#{zdr.id}" scrollable="true" scrollWidth="99,5%" scrollHeight="92%" resizableColumns="true" resizeMode="expand" >
-                        <p:column filterBy="#{zdr.spz}" width="5%" >
+                        <p:column filterBy="#{zdr.spz}" style="width: 80px" >
                             <f:facet name="header">
                                 <h:outputText value="SPZ"/>
                             </f:facet>
@@ -34,11 +36,14 @@
                             <br/>
                             <p:commandButton  icon="fa fa-info-circle"/>
                         </p:column>
-                        <p:columns var="column" value="#{rezervace.kalendar.columns}"  columnIndexVar="colIndex" >
+                        <p:columns var="column" value="#{rezervace.kalendar.columns}"  columnIndexVar="colIndex" style="width: 55px" >
                             <f:facet name="header">
                                 <h:outputText value="#{rezervace.kalendar.getColumn(colIndex).headerDate}"/>
                                 <br/>
                                 <h:outputText value="#{rezervace.kalendar.getColumn(colIndex).headerOdDo}"/>
+                                <br/>
+                                <p:commandButton style="width: 15px;height: 15px;" icon="fa fa-caret-down" actionListener="#{rezervace.onColKalendarDown(colIndex,0)}" rendered="#{rezervace.isColKalendarBtnRender(colIndex,0)}" update="@this"/>
+                                <p:commandButton style="width: 15px;height: 15px;" icon="fa fa-caret-up"   actionListener="#{rezervace.onColKalendarDown(colIndex,1)}" rendered="#{rezervace.isColKalendarBtnRender(colIndex,1)}" update="@this"/>
                             </f:facet>
                             <h:outputText value="#{rezervace.getHtmlText(zdr,colIndex)}" escape="false"   />
                         </p:columns>

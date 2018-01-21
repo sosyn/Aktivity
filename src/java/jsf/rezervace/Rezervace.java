@@ -52,6 +52,24 @@ public class Rezervace implements Serializable {
         System.out.println("Rezervace.init platiOd: " + this.getPlatiOd() + " platiDo: " + this.getPlatiDo());
     }
 
+    public void onColKalendarDown(int colIndex, int smer) {
+        // smer=0 down
+        // smer=1 up
+
+        System.out.println(" rezervace.colIndex=" + colIndex + " rezervace.smer=" + smer);
+    }
+
+    public boolean isColKalendarBtnRender(int colIndex, int smer) {
+        if (colIndex == 5 && smer==1) {
+            return false;
+        }
+        if (colIndex == 8) {
+            return false;
+        }
+        return true;
+
+    }
+
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     public void onPlatiOdSelect(SelectEvent event) {
