@@ -66,6 +66,7 @@ public class Typzdroje extends entity.EntitySuperClass {
     public void setCesta(Integer cesta) {
         this.cesta = cesta;
     }
+
     public Integer getOsoba() {
         return osoba;
     }

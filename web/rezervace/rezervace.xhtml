@@ -11,50 +11,45 @@
     <h:body>
         <ui:composition template = "/templates/templateMain.xhtml">	
             <ui:define name="contens">
-                <p:layout fullPage="false">
-                    <p:layoutUnit position="north" size="50">
-                        <h:form id="formRezervaceOdDo" >    
-                            <p:outputLabel for="rezPlatiOd" value="Od:" />
-                            <p:calendar id="rezPlatiOd" value="#{rezervace.platiOd}" pattern="dd.MM.yyyy HH:mm" mode="popup" showOn="button" stepMinute="15" timeControlType="select" >
-                                <p:ajax event="dateSelect" listener="#{rezervace.onPlatiOdSelect}" update="rezPlatiDo" />
-                            </p:calendar>
-                            <p:outputLabel for="rezPlatiDo" value="Do:" />
-                            <p:calendar id="rezPlatiDo" value="#{rezervace.platiDo}" pattern="dd.MM.yyyy HH:mm" mode="popup" showOn="button" stepMinute="15"  timeControlType="select" >
-                                <p:ajax event="dateSelect" listener="#{rezervace.onPlatiDoSelect}" update="rezPlatiOd" />
-                            </p:calendar>
-                            <p:commandButton  ajax="true" update="rezPlatiOd rezPlatiDo" />
-                        </h:form>
-                    </p:layoutUnit>
-                    <p:layoutUnit position="center" size="50" >
-                        <h:form id="formRezervaceDataTable">    
-                            <p:remoteCommand name="remoteRezervaceCell" actionListener="#{rezervace.eventRezervaceCell}"/>
-                            <p:dataTable id="rezervaceTable" value="#{rezervace.zdrojList}" var="zdr" rowKey="#{zdr.id}" scrollable="true" scrollWidth="99%" scrollHeight="99%" resizableColumns="true" resizeMode="expand">
-                                <p:column filterBy="#{zdr.spz}" width="5%" >
-                                    <f:facet name="header">
-                                        <h:outputText value="SPZ"/>
-                                    </f:facet>
-                                    <h:outputText value="#{zdr.spz}" escape="false" title="#{zdr.popis}"/>
-                                    <br/>
-                                    <p:commandButton  icon="fa fa-info-circle"/>
-                                </p:column>
-                                <p:columns var="column" value="#{rezervace.kalendar.columns}"  columnIndexVar="colIndex" >
-                                    <f:facet name="header">
-                                        <h:outputText value="#{rezervace.kalendar.getColumn(colIndex).headerDate}"/>
-                                        <br/>
-                                        <h:outputText value="#{rezervace.kalendar.getColumn(colIndex).headerOdDo}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{rezervace.getHtmlText(zdr,colIndex)}" escape="false"   />
-                                </p:columns>
-                                <p:column filterBy="#{zdr.popis}" >
-                                    <f:facet name="header">
-                                        <h:outputText value="Popis"/>
-                                    </f:facet>
-                                    <h:outputText value="#{zdr.popis}"/>
-                                </p:column>
-                            </p:dataTable>
-                        </h:form>
-                    </p:layoutUnit>
-                </p:layout>
+                <h:form id="formRezervaceOdDo" >    
+                    <p:outputLabel for="rezPlatiOd" value="Od:" />
+                    <p:calendar id="rezPlatiOd" value="#{rezervace.platiOd}" pattern="dd.MM.yyyy HH:mm" mode="popup" showOn="button" stepMinute="15" timeControlType="select" >
+                        <p:ajax event="dateSelect" listener="#{rezervace.onPlatiOdSelect}" update="rezPlatiDo" />
+                    </p:calendar>
+                    <p:outputLabel for="rezPlatiDo" value="Do:" />
+                    <p:calendar id="rezPlatiDo" value="#{rezervace.platiDo}" pattern="dd.MM.yyyy HH:mm" mode="popup" showOn="button" stepMinute="15"  timeControlType="select" >
+                        <p:ajax event="dateSelect" listener="#{rezervace.onPlatiDoSelect}" update="rezPlatiOd" />
+                    </p:calendar>
+                    <p:commandButton  ajax="true" update="rezPlatiOd rezPlatiDo" />
+                </h:form>
+                <hr></hr>
+                <h:form id="formRezervaceDataTable">    
+                    <p:remoteCommand name="remoteRezervaceCell" actionListener="#{rezervace.eventRezervaceCell}"/>
+                    <p:dataTable id="rezervaceTable" value="#{rezervace.zdrojList}" var="zdr" rowKey="#{zdr.id}" scrollable="true" scrollWidth="99,5%" scrollHeight="92%" resizableColumns="true" resizeMode="expand" >
+                        <p:column filterBy="#{zdr.spz}" width="5%" >
+                            <f:facet name="header">
+                                <h:outputText value="SPZ"/>
+                            </f:facet>
+                            <h:outputText value="#{zdr.spz}" escape="false" title="#{zdr.popis}"/>
+                            <br/>
+                            <p:commandButton  icon="fa fa-info-circle"/>
+                        </p:column>
+                        <p:columns var="column" value="#{rezervace.kalendar.columns}"  columnIndexVar="colIndex" >
+                            <f:facet name="header">
+                                <h:outputText value="#{rezervace.kalendar.getColumn(colIndex).headerDate}"/>
+                                <br/>
+                                <h:outputText value="#{rezervace.kalendar.getColumn(colIndex).headerOdDo}"/>
+                            </f:facet>
+                            <h:outputText value="#{rezervace.getHtmlText(zdr,colIndex)}" escape="false"   />
+                        </p:columns>
+                        <p:column filterBy="#{zdr.popis}" >
+                            <f:facet name="header">
+                                <h:outputText value="Popis"/>
+                            </f:facet>
+                            <h:outputText value="#{zdr.popis}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
             </ui:define>
         </ui:composition>
     </h:body>

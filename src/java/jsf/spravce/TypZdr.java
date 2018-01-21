@@ -6,6 +6,7 @@
 package jsf.spravce;
 
 import ejb.LoginUser;
+import entity.TypZdrojeEnum;
 import entity.Typzdroje;
 import java.io.Serializable;
 import java.security.Principal;
@@ -43,12 +44,12 @@ public class TypZdr implements Serializable {
     private ArrayList<Typzdroje> typZdrList = null;
 
     private Object[][] typZdrCis = new Object[][]{
-        {"Vozidlo", 0},
-        {"Místnost", 1},
-        {"Dopravní prostředek (jiný než vozidlo)", 2},
-        {"Výpočetní technika", 3},
-        {"Ostatní nezařazené", 4},
-        {"Osoba", 5}
+        {TypZdrojeEnum.VOZIDLO.getPopis(), TypZdrojeEnum.VOZIDLO.getId()},
+        {TypZdrojeEnum.MISTNOST.getPopis(), TypZdrojeEnum.MISTNOST.getId()},
+        {TypZdrojeEnum.DOPRAVA.getPopis(), TypZdrojeEnum.DOPRAVA.getId()},
+        {TypZdrojeEnum.TECHNIKA.getPopis(), TypZdrojeEnum.TECHNIKA.getId()},
+        {TypZdrojeEnum.OSTATNI.getPopis(), TypZdrojeEnum.OSTATNI.getId()},
+        {TypZdrojeEnum.OSOBA.getPopis(), TypZdrojeEnum.OSOBA.getId()}
     };
 
     @PostConstruct

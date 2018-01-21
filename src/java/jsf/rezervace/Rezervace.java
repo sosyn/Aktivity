@@ -6,6 +6,7 @@
 package jsf.rezervace;
 
 import entity.Cesta;
+import entity.TypZdrojeEnum;
 import entity.Zdroj;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -200,7 +201,9 @@ public class Rezervace implements Serializable {
      * @return the zdrojList
      */
     public ArrayList<Zdroj> getZdrojList() {
-        this.zdrojList = new ArrayList<>(ejbZdrojeFacade.findAll());
+        if (this.zdrojList.isEmpty()) {
+            this.zdrojList = new ArrayList<>(ejbZdrojeFacade.findAllWhereTypZdroje(TypZdrojeEnum.VOZIDLO));
+        }
         return zdrojList;
     }
 
@@ -222,7 +225,7 @@ public class Rezervace implements Serializable {
     private String onClick(Zdroj zdr, Integer colIndex, entity.Rezervace rez) {
         StringBuilder html = new StringBuilder("onClickCell('");
         html.append(zdr.getId().toString() + ":" + colIndex.toString());
-        html.append(":" + (rez==null?null:rez.getId()) );
+        html.append(":" + (rez == null ? null : rez.getId()));
         html.append("')");
         return html.toString();
     }
