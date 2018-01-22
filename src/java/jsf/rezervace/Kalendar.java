@@ -13,7 +13,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 
 /**
@@ -33,19 +32,6 @@ public class Kalendar implements Serializable {
 
     private KalendarColumn kalendarCol = null;
     private HashMap<Integer, KalendarColumn> columns = new HashMap<>();
-
-    @PostConstruct
-    void init() {
-        cal.setTime(this.platiOd);
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        this.platiOd = cal.getTime();
-        cal.add(Calendar.DAY_OF_MONTH, Kalendar.COLUMNS_MAX);
-        this.platiDo = cal.getTime();
-        getColumns();
-        System.out.println("Kalendar.init Kalendar.platiOd="+this.platiOd+" Kalendar.platiDo="+this.platiDo);
-    }
 
     /**
      * @return the platiOd
@@ -76,9 +62,43 @@ public class Kalendar implements Serializable {
     }
 
     public Collection<KalendarColumn> getColumns() {
-        if (!columns.isEmpty()) {
-            return columns.values();
-        }
+        return columns.values();
+    }
+
+    public KalendarColumn getColumn(Integer key) {
+        return columns.get(key);
+    }
+
+    void initColumns(Date platiOd, Date platiDo) {
+        Calendar calOd = Calendar.getInstance(Locale.getDefault());
+        Calendar calDo = Calendar.getInstance(Locale.getDefault());
+        calOd.setTime(this.platiOd);
+        calDo.setTime(this.platiOd);
+        columns = new HashMap<>();
+        Integer key = 0;
+        do {
+            if (key > 0) {
+                calOd.set(Calendar.HOUR_OF_DAY, 0);
+                calOd.set(Calendar.MINUTE, 0);
+                calOd.set(Calendar.SECOND, 0);
+            }
+            calDo.setTime(calOd.getTime());
+            calDo.set(Calendar.HOUR_OF_DAY, 23);
+            calDo.set(Calendar.MINUTE, 59);
+            calDo.set(Calendar.SECOND, 59);
+            if (calDo.getTime().after(platiDo)) {
+                calDo.setTime(platiDo);
+            }
+            columns.put(key++, new KalendarColumn(calOd.getTime(), calDo.getTime(), Calendar.DAY_OF_WEEK));
+
+            calOd.add(Calendar.HOUR_OF_DAY, 24);
+
+            System.out.println(" calOd.getTime()="+calOd.getTime()+" calDo.getTime()="+calDo.getTime());
+        } while (calDo.getTime().before(platiDo));
+
+    }
+
+    public Collection<KalendarColumn> modifiColumns(Date platiOd, Date platiDo, int colIndex, int smer) {
         Calendar calOd = Calendar.getInstance(Locale.getDefault());
         Calendar calDo = Calendar.getInstance(Locale.getDefault());
         calOd.setTime(this.platiOd);
@@ -94,19 +114,16 @@ public class Kalendar implements Serializable {
             calDo.set(Calendar.HOUR_OF_DAY, 23);
             calDo.set(Calendar.MINUTE, 59);
             calDo.set(Calendar.SECOND, 59);
-            if (calDo.getTime().after(this.platiDo)) {
-                calDo.setTime(this.platiDo);
+            if (calDo.getTime().after(platiDo)) {
+                calDo.setTime(platiDo);
             }
             columns.put(key++, new KalendarColumn(calOd.getTime(), calDo.getTime(), Calendar.DAY_OF_WEEK));
 
             calOd.add(Calendar.HOUR_OF_DAY, 24);
 
-        } while (calDo.getTime().before(this.platiDo));
-        return columns.values();
-    }
+        } while (calDo.getTime().before(platiDo));
 
-    public KalendarColumn getColumn(Integer key) {
-        return columns.get(key);
+        return columns.values();
     }
 
     void genColumns(Date platiOd, Date platiDo, int colIndex, int smer) {

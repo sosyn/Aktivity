@@ -22,7 +22,7 @@
                     </p:calendar>
                     <p:commandButton value="Zobraz" icon="fa fa-check-square-o" iconPos="right" ajax="true" update="rezPlatiOd rezPlatiDo" />
                     <p:commandButton value="Zobraz" icon="fa fa-caret-right"  iconPos="right" ajax="true" update="rezPlatiOd rezPlatiDo" />
-                    <p:commandButton value="Obnov" icon="fa fa-refresh" ajax="true" update="rezPlatiOd rezPlatiDo" />
+                    <p:commandButton value="Obnov" icon="fa fa-refresh" ajax="true" update="rezPlatiOd rezPlatiDo :formRezervaceDataTable:rezervaceTable" actionListener="#{rezervace.onRefresh}" />
                 </h:form>
                 <hr></hr>
                 <h:form id="formRezervaceDataTable">    

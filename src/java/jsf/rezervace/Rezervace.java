@@ -49,25 +49,39 @@ public class Rezervace implements Serializable {
 
     @PostConstruct
     void init() {
-        System.out.println("Rezervace.init platiOd: " + this.getPlatiOd() + " platiDo: " + this.getPlatiDo());
+        this.platiOd = zaokrouhliDatum(this.platiOd, 15);
+        cal.add(java.util.Calendar.DAY_OF_MONTH, Kalendar.COLUMNS_MAX);
+        this.platiDo = cal.getTime();
+        kalendar.initColumns(this.platiOd, this.platiDo);
+        // System.out.println("Rezervace.init platiOd: " + this.getPlatiOd() + " platiDo: " + this.getPlatiDo());
+    }
+
+    public void onRefresh() {
+        this.platiOd = zaokrouhliDatum(this.platiOd, 15);
+        this.platiDo = zaokrouhliDatum(this.platiDo, 15);
+        kalendar.initColumns(this.platiOd, this.platiDo);
+        System.out.println("Rezervace.onRefresh platiOd: " + this.platiOd+ " platiDo: " + this.platiDo);
     }
 
     public void onColKalendarDown(int colIndex, int smer) {
         // smer=0 down
         // smer=1 up
+        kalendar.modifiColumns(platiOd, platiDo, colIndex, smer);
+        // System.out.println(" rezervace.colIndex=" + colIndex + " rezervace.smer=" + smer);
 
-        System.out.println(" rezervace.colIndex=" + colIndex + " rezervace.smer=" + smer);
     }
 
     public boolean isColKalendarBtnRender(int colIndex, int smer) {
-        if (colIndex == 5 && smer==1) {
-            return false;
+        int level = kalendar.getColumn(colIndex).getLevel();
+        // Dolu
+        if (smer == 0) {
+            return (level < 2);
         }
-        if (colIndex == 8) {
-            return false;
+        // Nahoru
+        if (smer == 1) {
+            return (level > 0);
         }
         return true;
-
     }
 
     // Add business logic below. (Right-click in editor and choose
@@ -75,8 +89,10 @@ public class Rezervace implements Serializable {
     public void onPlatiOdSelect(SelectEvent event) {
         Calendar calendarPlatiOd = (Calendar) FacesContext.getCurrentInstance().getViewRoot().findComponent("formRezervaceOdDo:rezPlatiOd");
         Date platiOd = (Date) event.getObject();
+        this.platiOd = zaokrouhliDatum(this.platiOd, 15);
         Calendar calendarPlatiDo = (Calendar) FacesContext.getCurrentInstance().getViewRoot().findComponent("formRezervaceOdDo:rezPlatiDo");
         Date platiDo = (Date) calendarPlatiDo.getValue();;
+        this.platiDo = zaokrouhliDatum(this.platiDo, 15);
 //        System.out.println("onPlatiOdSelect calendarPlatiOd.getValue()=" + calendarPlatiOd.getValue() + "  calendarPlatiDo.getValue()" + calendarPlatiDo.getValue());
 //        if (platiOd.after(platiDo)) {
 //            calendarPlatiDo.setValue(platiOd);
@@ -92,8 +108,10 @@ public class Rezervace implements Serializable {
     public void onPlatiDoSelect(SelectEvent event) {
         Calendar calendarPlatiOd = (Calendar) FacesContext.getCurrentInstance().getViewRoot().findComponent("formRezervaceOdDo:rezPlatiOd");
         Date platiOd = (Date) calendarPlatiOd.getValue();
+        this.platiOd = zaokrouhliDatum(this.platiOd, 15);
         Calendar calendarPlatiDo = (Calendar) FacesContext.getCurrentInstance().getViewRoot().findComponent("formRezervaceOdDo:rezPlatiDo");
         Date platiDo = (Date) event.getObject();
+        this.platiDo = zaokrouhliDatum(this.platiDo, 15);
 //        System.out.println("onPlatiDoSelect calendarPlatiOd.getValue()=" + calendarPlatiOd.getValue() + "  calendarPlatiDo.getValue()" + calendarPlatiDo.getValue());
 //        if (platiOd.after(platiDo)) {
 //            calendarPlatiOd.setValue(platiDo);
@@ -293,5 +311,13 @@ public class Rezervace implements Serializable {
      */
     public void setPlatiDo(Date platiDo) {
         this.platiDo = platiDo;
+    }
+
+    private Date zaokrouhliDatum(Date datum, int i) {
+        java.util.Calendar calLocal = java.util.Calendar.getInstance(Locale.getDefault());
+        calLocal.setTime(datum);
+        int minuty = calLocal.get(java.util.Calendar.MINUTE);
+        calLocal.add(java.util.Calendar.MINUTE, (minuty % i) == 0 ? 0 : i - (minuty % i));
+        return calLocal.getTime();
     }
 }
