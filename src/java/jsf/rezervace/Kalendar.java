@@ -23,7 +23,7 @@ import javax.enterprise.context.SessionScoped;
 @SessionScoped
 public class Kalendar implements Serializable {
 
-    static final int COLUMNS_MAX = 150;
+    static final int COLUMNS_MAX = 60;
 
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
     private Date platiOd = new Date();
@@ -107,6 +107,10 @@ public class Kalendar implements Serializable {
 
     public KalendarColumn getColumn(Integer key) {
         return columns.get(key);
+    }
+
+    void genColumns(Date platiOd, Date platiDo, int colIndex, int smer) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
