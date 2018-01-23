@@ -126,8 +126,4 @@ public class Kalendar implements Serializable {
         return columns.values();
     }
 
-    void genColumns(Date platiOd, Date platiDo, int colIndex, int smer) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }
