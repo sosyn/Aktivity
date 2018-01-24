@@ -41,16 +41,22 @@ public class ZdrojeFacade extends AbstractFacade<Zdroj> {
         javax.persistence.criteria.CriteriaQuery cq = cb.createQuery(Zdroj.class);
         javax.persistence.criteria.Root<Zdroj> zdrojRoot = cq.from(Zdroj.class);
         cq.select(zdrojRoot);
-               
+
         Path<Integer> pathTypZdr = zdrojRoot.get(Zdroj_.idtypzdr).get(Typzdroje_.typzdr);
-        Predicate prediTypZdrCar = cb.equal(pathTypZdr,typZdrojeEnum.getId());
+        Predicate prediTypZdrCar = cb.equal(pathTypZdr, typZdrojeEnum.getId());
+
         Path<Date> pathPlatiOd = zdrojRoot.get(Zdroj_.platiod);
         Path<Date> pathPlatiDo = zdrojRoot.get(Zdroj_.platido);
-        Predicate prediPlatiOdDo = cb.isNull(pathPlatiOd);
-        
-        cq.where(prediTypZdrCar);
+        Predicate prediPlatiOdDo = cb.and(
+                cb.or(cb.isNull(pathPlatiOd), cb.not(cb.greaterThan(pathPlatiOd, platiDo))),
+                cb.or(cb.isNull(pathPlatiDo), cb.greaterThan(pathPlatiDo, platiOd))
+        );
+
+        Predicate prediWhere = cb.and(prediTypZdrCar,prediPlatiOdDo);
+
+        cq.where(prediWhere);
         cq.orderBy(cb.asc(zdrojRoot.get(Zdroj_.popis)));
-        
+
         List<Zdroj> rl = getEntityManager().createQuery(cq).getResultList();
 //        System.out.println("findAllWhereTypZdroje.size()="+rl.size());
         return rl;

@@ -89,7 +89,7 @@ public class Kalendar implements Serializable {
             }
             columns.put(key++, new KalendarColumn(calOd.getTime(), calDo.getTime(), Calendar.DAY_OF_MONTH));
 
-            // Pridat 24 hodin
+            // Pridat 1 den
             calOd.add(Calendar.DAY_OF_MONTH, 1);
             calOd.set(Calendar.HOUR_OF_DAY, 0);
             calOd.set(Calendar.MINUTE, 0);
@@ -197,6 +197,7 @@ public class Kalendar implements Serializable {
             csNew.put(j++, colNew);
             colNew = null;
         }
+        // Vygenerovat nove pole sloupcu
         this.columns = new HashMap<>(csNew);
     }
 }
