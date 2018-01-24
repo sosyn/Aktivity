@@ -22,6 +22,7 @@ import javax.enterprise.context.SessionScoped;
 @SessionScoped
 public class Kalendar implements Serializable {
 
+    static final int COLUMNS_DEFAULT = 5;
     static final int COLUMNS_MAX = 5;
 
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
@@ -79,11 +80,6 @@ public class Kalendar implements Serializable {
         this.columns = new HashMap<>();
         Integer key = 0;
         do {
-            if (key > 0) {
-                calOd.set(Calendar.HOUR_OF_DAY, 0);
-                calOd.set(Calendar.MINUTE, 0);
-                calOd.set(Calendar.SECOND, 0);
-            }
             calDo.setTime(calOd.getTime());
             calDo.set(Calendar.HOUR_OF_DAY, 23);
             calDo.set(Calendar.MINUTE, 59);
@@ -93,7 +89,11 @@ public class Kalendar implements Serializable {
             }
             columns.put(key++, new KalendarColumn(calOd.getTime(), calDo.getTime(), Calendar.DAY_OF_MONTH));
 
-            calOd.add(Calendar.HOUR_OF_DAY, 24);
+            // Pridat 24 hodin
+            calOd.add(Calendar.DAY_OF_MONTH, 1);
+            calOd.set(Calendar.HOUR_OF_DAY, 0);
+            calOd.set(Calendar.MINUTE, 0);
+            calOd.set(Calendar.SECOND, 0);
 
             System.out.println(" calOd.getTime()=" + calOd.getTime() + " calDo.getTime()=" + calDo.getTime());
         } while (calDo.getTime().before(platiDo));
@@ -104,12 +104,17 @@ public class Kalendar implements Serializable {
         KalendarColumn kalCol = columns.get(colIndex);
         Calendar calKalCol = Calendar.getInstance(Locale.getDefault());
         calKalCol.setTime(kalCol.getPlatiOd());
+        // Posledni datum ve sloupci
+        Calendar calLastCol = Calendar.getInstance(Locale.getDefault());
+        calLastCol.setTime(columns.get(columns.size() - 1).getPlatiDo());
+        // Pole k pozdejsimu vlozeni
         ArrayList<KalendarColumn> csIns = new ArrayList<>();
+        // Nove pole sloupcu
         HashMap<Integer, KalendarColumn> csNew = new HashMap<>();
         Date dOd = kalCol.getPlatiOd();
         Date dDo = kalCol.getPlatiDo();
         cal.setTime(dOd);
-        int addTime = 0;
+        int addTime;
         if (kalCol.getStatus() == Calendar.DAY_OF_MONTH) {
             addTime = 59;
             cal.set(Calendar.SECOND, 0);
@@ -119,7 +124,7 @@ public class Kalendar implements Serializable {
                 dDo = cal.getTime();
                 csIns.add(new KalendarColumn(dOd, dDo, Calendar.HOUR_OF_DAY));
                 cal.add(Calendar.MINUTE, 1);
-            } while (cal.get(Calendar.DAY_OF_MONTH)==calKalCol.get(Calendar.DAY_OF_MONTH));
+            } while (cal.get(Calendar.DAY_OF_MONTH) == calKalCol.get(Calendar.DAY_OF_MONTH) && cal.before(calLastCol));
 
         }
         if (kalCol.getStatus() == Calendar.HOUR_OF_DAY) {
@@ -131,9 +136,9 @@ public class Kalendar implements Serializable {
                 dDo = cal.getTime();
                 csIns.add(new KalendarColumn(dOd, dDo, Calendar.MINUTE));
                 cal.add(Calendar.MINUTE, 1);
-            } while (cal.get(Calendar.HOUR_OF_DAY)==calKalCol.get(Calendar.HOUR_OF_DAY));
+            } while (cal.get(Calendar.HOUR_OF_DAY) == calKalCol.get(Calendar.HOUR_OF_DAY) && cal.before(calLastCol));
         }
-
+        // Nakopirovat staré sloupce a vlozit nový blok sloupců        
         int j = 0;
         for (Integer key : columns.keySet()) {
             if (key == colIndex) {
@@ -144,6 +149,7 @@ public class Kalendar implements Serializable {
                 csNew.put(j++, columns.get(key));
             }
         }
+        // Vygenerovat nove pole sloupcu
         this.columns = new HashMap<>(csNew);
     }
 

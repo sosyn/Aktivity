@@ -9,6 +9,7 @@ import entity.TypZdrojeEnum;
 import entity.Typzdroje_;
 import entity.Zdroj;
 import entity.Zdroj_;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -35,7 +36,7 @@ public class ZdrojeFacade extends AbstractFacade<Zdroj> {
         super(Zdroj.class);
     }
 
-    public List<Zdroj> findAllWhereTypZdroje(TypZdrojeEnum typZdrojeEnum) {
+    public List<Zdroj> findAllWhereTypZdroje(TypZdrojeEnum typZdrojeEnum, Date platiOd, Date platiDo) {
         javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         javax.persistence.criteria.CriteriaQuery cq = cb.createQuery(Zdroj.class);
         javax.persistence.criteria.Root<Zdroj> zdrojRoot = cq.from(Zdroj.class);
@@ -43,7 +44,10 @@ public class ZdrojeFacade extends AbstractFacade<Zdroj> {
                
         Path<Integer> pathTypZdr = zdrojRoot.get(Zdroj_.idtypzdr).get(Typzdroje_.typzdr);
         Predicate prediTypZdrCar = cb.equal(pathTypZdr,typZdrojeEnum.getId());
-
+        Path<Date> pathPlatiOd = zdrojRoot.get(Zdroj_.platiod);
+        Path<Date> pathPlatiDo = zdrojRoot.get(Zdroj_.platido);
+        Predicate prediPlatiOdDo = cb.isNull(pathPlatiOd);
+        
         cq.where(prediTypZdrCar);
         cq.orderBy(cb.asc(zdrojRoot.get(Zdroj_.popis)));
         

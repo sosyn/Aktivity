@@ -5,6 +5,7 @@
  */
 package jsf.rezervace;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Calendar;
 
@@ -12,21 +13,17 @@ import java.util.Calendar;
  *
  * @author Ivo
  */
-public class KalendarColumn {
+public class KalendarColumn implements Serializable{
 
 //    private Calendar cal = Calendar.getInstance(Locale.getDefault());
     private Date platiOd = new Date();
     private Date platiDo = new Date();
     private int status = Calendar.DAY_OF_MONTH;
-    private String headerDate = "";
-    private String headerOdDo = "";
-
+    
     public KalendarColumn(Date platiOd, Date platiDo, int status) {
         this.platiOd = platiOd;
         this.platiDo = platiDo;
         this.status = status;
-        this.headerDate = String.format("%1$td.%1$tm.%1$tY", platiOd);
-        this.headerOdDo = String.format("%1$tR-%2$tR", platiOd, platiDo);
     }
 
     /**
@@ -58,30 +55,18 @@ public class KalendarColumn {
     }
 
     public String getHeaderDate() {
-        return headerDate;
+        return String.format("%1$td.%1$tm.%1$tY", platiOd);
     }
 
-    /**
-     * @param headerDate the headerDate to set
-     */
-    public void setHeaderDate(String headerDate) {
-        this.headerDate = headerDate;
-    }
-
+    
     /**
      * @return the headerOdDo
      */
     public String getHeaderOdDo() {
-        return headerOdDo;
+        return String.format("%1$tR-%2$tR", platiOd, platiDo);
     }
 
-    /**
-     * @param headerOdDo the headerOdDo to set
-     */
-    public void setHeaderOdDo(String headerOdDo) {
-        this.headerOdDo = headerOdDo;
-    }
-
+    
     /**
      * @return the status
      */
@@ -106,12 +91,11 @@ public class KalendarColumn {
             case Calendar.HOUR_OF_DAY:
                 return 1;
             case Calendar.MINUTE:
-                return 2;                
+                return 2;
         }
         return 0;
     }
-    
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -132,7 +116,7 @@ public class KalendarColumn {
 
     @Override
     public String toString() {
-        return "jsf.rezervace.KalendarColumn[" +String.format("%1$td.%1$tm.%1$tY %1$tR-%2$td.%2$tm.%2$tY %2$tR", platiOd,platiDo)+ " ]";
+        return "jsf.rezervace.KalendarColumn[" + String.format("%1$td.%1$tm.%1$tY %1$tR-%2$td.%2$tm.%2$tY %2$tR", platiOd, platiDo) + " ]";
     }
 
 }

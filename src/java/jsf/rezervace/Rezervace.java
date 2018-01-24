@@ -51,8 +51,9 @@ public class Rezervace implements Serializable {
     void init() {
         this.platiOd = zaokrouhliDatum(this.platiOd, 15);
         cal.setTime(this.platiOd);
-        cal.add(java.util.Calendar.DAY_OF_MONTH, Kalendar.COLUMNS_MAX);
+        cal.add(java.util.Calendar.DAY_OF_MONTH, Kalendar.COLUMNS_DEFAULT);
         this.platiDo = cal.getTime();
+        this.zdrojList = new ArrayList<>(ejbZdrojeFacade.findAllWhereTypZdroje(TypZdrojeEnum.VOZIDLO, this.platiOd, this.platiDo));
         kalendar.initColumns(this.platiOd, this.platiDo);
         //System.out.println("Rezervace.init platiOd: " + this.getPlatiOd() + " platiDo: " + this.getPlatiDo());
     }
@@ -65,6 +66,7 @@ public class Rezervace implements Serializable {
     public void onRefresh() {
         this.platiOd = zaokrouhliDatum(this.platiOd, 15);
         this.platiDo = zaokrouhliDatum(this.platiDo, 15);
+        this.zdrojList = new ArrayList<>(ejbZdrojeFacade.findAllWhereTypZdroje(TypZdrojeEnum.VOZIDLO, this.platiOd, this.platiDo));
         kalendar.initColumns(this.platiOd, this.platiDo);
         //System.out.println("Rezervace.onRefresh platiOd: " + this.platiOd + " platiDo: " + this.platiDo);
     }
@@ -248,9 +250,6 @@ public class Rezervace implements Serializable {
      * @return the zdrojList
      */
     public ArrayList<Zdroj> getZdrojList() {
-        if (this.zdrojList.isEmpty()) {
-            this.zdrojList = new ArrayList<>(ejbZdrojeFacade.findAllWhereTypZdroje(TypZdrojeEnum.VOZIDLO));
-        }
         return zdrojList;
     }
 
