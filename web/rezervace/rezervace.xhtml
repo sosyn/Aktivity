@@ -20,9 +20,9 @@
                     <p:calendar id="rezPlatiDo" value="#{rezervace.platiDo}" pattern="dd.MM.yyyy HH:mm" mode="popup" showOn="button" stepMinute="15"  timeControlType="select" >
                         <p:ajax event="dateSelect" listener="#{rezervace.onPlatiDoSelect}" update="rezPlatiOd" />
                     </p:calendar>
-                    <p:commandButton value="Zobraz" icon="fa fa-check-square-o" iconPos="right" ajax="true" update="rezPlatiOd rezPlatiDo" />
-                    <p:commandButton value="Zobraz" icon="fa fa-caret-right"  iconPos="right" ajax="true" update="rezPlatiOd rezPlatiDo" />
-                    <p:commandButton value="Obnov" icon="fa fa-refresh" ajax="true" update="rezPlatiOd rezPlatiDo :formRezervaceDataTable:rezervaceTable" actionListener="#{rezervace.onRefresh}" />
+                    <p:commandButton value="Zobraz" icon="fa fa-check-square-o" iconPos="right" ajax="true" update="rezPlatiOd rezPlatiDo :formRezervaceDataTable:rezervaceTable" actionListener="#{rezervace.onRefresh}"  title="Zpracování vstupních dat a generování tabulky."  />
+                    <p:commandButton value="Zobraz" icon="fa fa-caret-right"  iconPos="right" ajax="true" update="rezPlatiOd rezPlatiDo :formRezervaceDataTable:rezervaceTable" actionListener="#{rezervace.onRefresh}" />
+                    <p:commandButton value="Reset" icon="fa fa-refresh" ajax="true" update="rezPlatiOd rezPlatiDo :formRezervaceDataTable:rezervaceTable" actionListener="#{rezervace.onReset}" title="Nastavení na počáteční hodnoty." />
                 </h:form>
                 <hr></hr>
                 <h:form id="formRezervaceDataTable">    
@@ -42,8 +42,8 @@
                                 <br/>
                                 <h:outputText value="#{rezervace.kalendar.getColumn(colIndex).headerOdDo}"/>
                                 <br/>
-                                <p:commandButton style="width: 15px;height: 15px;" icon="fa fa-caret-down" actionListener="#{rezervace.onColKalendarDown(colIndex,0)}" rendered="#{rezervace.isColKalendarBtnRender(colIndex,0)}" update="@this"/>
-                                <p:commandButton style="width: 15px;height: 15px;" icon="fa fa-caret-up"   actionListener="#{rezervace.onColKalendarDown(colIndex,1)}" rendered="#{rezervace.isColKalendarBtnRender(colIndex,1)}" update="@this"/>
+                                <p:commandButton style="width: 15px;height: 15px;" icon="fa fa-caret-down" actionListener="#{rezervace.onColBtn(colIndex,0)}" rendered="#{rezervace.isColBtnRender(colIndex,0)}" update="@form"/>
+                                <p:commandButton style="width: 15px;height: 15px;" icon="fa fa-caret-up"   actionListener="#{rezervace.onColBtn(colIndex,1)}" rendered="#{rezervace.isColBtnRender(colIndex,1)}" update="@form"/>
                             </f:facet>
                             <h:outputText value="#{rezervace.getHtmlText(zdr,colIndex)}" escape="false"   />
                         </p:columns>

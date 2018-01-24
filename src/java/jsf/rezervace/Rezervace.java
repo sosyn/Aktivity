@@ -50,34 +50,45 @@ public class Rezervace implements Serializable {
     @PostConstruct
     void init() {
         this.platiOd = zaokrouhliDatum(this.platiOd, 15);
+        cal.setTime(this.platiOd);
         cal.add(java.util.Calendar.DAY_OF_MONTH, Kalendar.COLUMNS_MAX);
         this.platiDo = cal.getTime();
         kalendar.initColumns(this.platiOd, this.platiDo);
-        // System.out.println("Rezervace.init platiOd: " + this.getPlatiOd() + " platiDo: " + this.getPlatiDo());
+        //System.out.println("Rezervace.init platiOd: " + this.getPlatiOd() + " platiDo: " + this.getPlatiDo());
+    }
+
+    public void onReset() {
+        platiOd = new Date();
+        init();
     }
 
     public void onRefresh() {
         this.platiOd = zaokrouhliDatum(this.platiOd, 15);
         this.platiDo = zaokrouhliDatum(this.platiDo, 15);
         kalendar.initColumns(this.platiOd, this.platiDo);
-        System.out.println("Rezervace.onRefresh platiOd: " + this.platiOd+ " platiDo: " + this.platiDo);
+        //System.out.println("Rezervace.onRefresh platiOd: " + this.platiOd + " platiDo: " + this.platiDo);
     }
 
-    public void onColKalendarDown(int colIndex, int smer) {
-        // smer=0 down
-        // smer=1 up
-        kalendar.modifiColumns(platiOd, platiDo, colIndex, smer);
+    public void onColBtn(int colIndex, int smer) {
+        // Down
+        if (smer == 0) {
+            kalendar.insColumns(platiOd, platiDo, colIndex);
+        }
+        // Up
+        if (smer == 1) {
+            kalendar.delColumns(platiOd, platiDo, colIndex);
+        }
         // System.out.println(" rezervace.colIndex=" + colIndex + " rezervace.smer=" + smer);
 
     }
 
-    public boolean isColKalendarBtnRender(int colIndex, int smer) {
+    public boolean isColBtnRender(int colIndex, int smer) {
         int level = kalendar.getColumn(colIndex).getLevel();
-        // Dolu
+        // Down
         if (smer == 0) {
             return (level < 2);
         }
-        // Nahoru
+        // Up
         if (smer == 1) {
             return (level > 0);
         }
@@ -317,6 +328,8 @@ public class Rezervace implements Serializable {
         java.util.Calendar calLocal = java.util.Calendar.getInstance(Locale.getDefault());
         calLocal.setTime(datum);
         int minuty = calLocal.get(java.util.Calendar.MINUTE);
+        calLocal.set(java.util.Calendar.MILLISECOND, 0);
+        calLocal.set(java.util.Calendar.SECOND, 0);
         calLocal.add(java.util.Calendar.MINUTE, (minuty % i) == 0 ? 0 : i - (minuty % i));
         return calLocal.getTime();
     }
