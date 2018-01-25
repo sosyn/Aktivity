@@ -95,7 +95,7 @@ public class Kalendar implements Serializable {
             calOd.set(Calendar.MINUTE, 0);
             calOd.set(Calendar.SECOND, 0);
 
-            System.out.println(" calOd.getTime()=" + calOd.getTime() + " calDo.getTime()=" + calDo.getTime());
+            // System.out.println(" calOd.getTime()=" + calOd.getTime() + " calDo.getTime()=" + calDo.getTime());
         } while (calDo.getTime().before(platiDo));
 
     }
@@ -116,14 +116,17 @@ public class Kalendar implements Serializable {
         cal.setTime(dOd);
         int addTime;
         if (kalCol.getStatus() == Calendar.DAY_OF_MONTH) {
-            addTime = 59;
             cal.set(Calendar.SECOND, 0);
             do {
                 dOd = cal.getTime();
-                cal.add(Calendar.MINUTE, addTime);
-                dDo = cal.getTime();
+                cal.set(Calendar.MINUTE, 59);
+                cal.set(Calendar.SECOND, 59);
+                dDo = cal.getTime();                
                 csIns.add(new KalendarColumn(dOd, dDo, Calendar.HOUR_OF_DAY));
-                cal.add(Calendar.MINUTE, 1);
+                cal.set(Calendar.MINUTE, 0);
+                cal.set(Calendar.SECOND, 0);               
+                cal.add(Calendar.HOUR_OF_DAY, 1);
+                
             } while (cal.get(Calendar.DAY_OF_MONTH) == calKalCol.get(Calendar.DAY_OF_MONTH) && cal.before(calLastCol));
 
         }
