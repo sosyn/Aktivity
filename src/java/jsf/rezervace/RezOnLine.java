@@ -6,6 +6,7 @@
 package jsf.rezervace;
 
 import entity.Cesta;
+import entity.Rezervace;
 import entity.TypZdrojeEnum;
 import entity.Zdroj;
 import java.io.Serializable;
@@ -25,14 +26,16 @@ import org.primefaces.event.SelectEvent;
  *
  * @author Ivo
  */
-@Named("rezervace")
+@Named("rezOnLine")
 @SessionScoped
-public class Rezervace implements Serializable {
+public class RezOnLine implements Serializable {
 
     @EJB
     private ejb.CestaFacade ejbCestaFacade;
     @EJB
     private ejb.ZdrojeFacade ejbZdrojeFacade;
+    @EJB
+    private ejb.RezervaceFacade ejbRezervaceFacade;
     @Inject
     private Kalendar kalendar;
 
@@ -42,8 +45,8 @@ public class Rezervace implements Serializable {
 
     private Cesta cesta = null;
     private ArrayList<Cesta> cesty = new ArrayList<>();
-    private Rezervace rezervace = null;
-    private ArrayList<Rezervace> rezervaceList = new ArrayList<>();
+    private entity.Rezervace rezervace = null;
+    private ArrayList<entity.Rezervace> rezervaceList = new ArrayList<>();
     private Zdroj zdroj = null;
     private ArrayList<Zdroj> zdrojList = new ArrayList<>();
 
@@ -53,9 +56,7 @@ public class Rezervace implements Serializable {
         cal.setTime(this.platiOd);
         cal.add(java.util.Calendar.DAY_OF_MONTH, Kalendar.COLUMNS_DEFAULT);
         this.platiDo = cal.getTime();
-        this.zdrojList = new ArrayList<>(ejbZdrojeFacade.findAllWhereTypZdroje(TypZdrojeEnum.VOZIDLO, this.platiOd, this.platiDo));
-        kalendar.initColumns(this.platiOd, this.platiDo);
-        //System.out.println("Rezervace.init platiOd: " + this.getPlatiOd() + " platiDo: " + this.getPlatiDo());
+        getDataForRezOnLine();
     }
 
     public void onReset() {
@@ -66,9 +67,14 @@ public class Rezervace implements Serializable {
     public void onRefresh() {
         this.platiOd = zaokrouhliDatum(this.platiOd, 15);
         this.platiDo = zaokrouhliDatum(this.platiDo, 15);
+        getDataForRezOnLine();
+    }
+
+    public void getDataForRezOnLine() {
         this.zdrojList = new ArrayList<>(ejbZdrojeFacade.findAllWhereTypZdroje(TypZdrojeEnum.VOZIDLO, this.platiOd, this.platiDo));
+        this.rezervaceList = new ArrayList<>(ejbRezervaceFacade.getRezeraceOdDo(this.platiOd, this.platiDo));
         kalendar.initColumns(this.platiOd, this.platiDo);
-        //System.out.println("Rezervace.onRefresh platiOd: " + this.platiOd + " platiDo: " + this.platiDo);
+        //System.out.println("RezOnLine.onRefresh platiOd: " + this.platiOd + " platiDo: " + this.platiDo);
     }
 
     public void onColBtn(int colIndex, int smer) {
@@ -182,14 +188,6 @@ public class Rezervace implements Serializable {
         this.cesty = cesty;
     }
 
-    public String newCesta() {
-        return null;
-    }
-
-    public String editCesta() {
-        return null;
-    }
-
     /**
      * @return the kalendar
      */
@@ -207,28 +205,28 @@ public class Rezervace implements Serializable {
     /**
      * @return the rezervace
      */
-    public Rezervace getRezervace() {
+    public entity.Rezervace getRezervace() {
         return rezervace;
     }
 
     /**
      * @param rezervace the rezervace to set
      */
-    public void setRezervace(Rezervace rezervace) {
+    public void setRezervace(entity.Rezervace rezervace) {
         this.rezervace = rezervace;
     }
 
     /**
      * @return the rezervaceList
      */
-    public ArrayList<Rezervace> getRezervaceList() {
+    public ArrayList<entity.Rezervace> getRezervaceList() {
         return rezervaceList;
     }
 
     /**
      * @param rezervaceList the rezervaceList to set
      */
-    public void setRezervaceList(ArrayList<Rezervace> rezervaceList) {
+    public void setRezervaceList(ArrayList<entity.Rezervace> rezervaceList) {
         this.rezervaceList = rezervaceList;
     }
 
@@ -262,9 +260,17 @@ public class Rezervace implements Serializable {
 
     public String getHtmlText(Zdroj zdr, Integer colIndex) {
         StringBuilder html = new StringBuilder("");
-        html.append("<div style=\"background-color: #00ffff; width:100%;  \" onClick=" + onClick(zdr, colIndex, null) + ">&nbsp;&nbsp;&nbsp;&nbsp;</div>");
-        html.append("<div style=\"background-color: #00ffff; width:100%;  \" onClick=" + onClick(zdr, colIndex, null) + ">&nbsp;&nbsp;&nbsp;&nbsp;</div>");
-        html.append("<div style=\"background-color: #00ffff; width:100%;  \" onClick=" + onClick(zdr, colIndex, null) + ">&nbsp;&nbsp;&nbsp;&nbsp;</div>");
+        KalendarColumn kalCol = this.kalendar.getColumn(colIndex);
+        for (Rezervace rez : rezervaceList) {
+            if (zdr.getId().compareTo(rez.getIdzdr().getId()) == 0
+                    && kalCol.getPlatiOd().before(rez.getPlatido())
+                    && kalCol.getPlatiDo().after(rez.getPlatiod())) {
+                html.append("<div style=\"width:100%;\" onClick=" + onClick(zdr, colIndex, null) + ">" + rez.getIdcest().getKomentar() + "</div>");
+            }
+        }
+        html.append("<div style=\"background-color: #00ffff; width:100%;\" onClick=" + onClick(zdr, colIndex, null) + ">&nbsp;&nbsp;&nbsp;&nbsp;</div>");
+        html.append("<div style=\"background-color: #00ffff; width:100%;\" onClick=" + onClick(zdr, colIndex, null) + ">&nbsp;&nbsp;&nbsp;&nbsp;</div>");
+        html.append("<div style=\"background-color: #00ffff; width:100%;\" onClick=" + onClick(zdr, colIndex, null) + ">&nbsp;&nbsp;&nbsp;&nbsp;</div>");
         return html.toString();
     }
 
@@ -332,4 +338,5 @@ public class Rezervace implements Serializable {
         calLocal.add(java.util.Calendar.MINUTE, (minuty % i) == 0 ? 0 : i - (minuty % i));
         return calLocal.getTime();
     }
+
 }

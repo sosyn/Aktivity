@@ -8,10 +8,14 @@ package ejb;
 import entity.Cesta;
 import entity.Rezervace;
 import entity.Rezervace_;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
 
 /**
  *
@@ -31,8 +35,8 @@ public class RezervaceFacade extends AbstractFacade<Rezervace> {
     public RezervaceFacade() {
         super(Rezervace.class);
     }
-    
-        public List<Rezervace> findRezervaceWhereCesta(Cesta cesta) {
+
+    public List<Rezervace> findRezervaceWhereCesta(Cesta cesta) {
         javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         javax.persistence.criteria.CriteriaQuery cq = cb.createQuery();
         javax.persistence.criteria.Root<Rezervace> rt = cq.from(Rezervace.class);
@@ -44,5 +48,27 @@ public class RezervaceFacade extends AbstractFacade<Rezervace> {
         return q.getResultList();
     }
 
-    
+    public List<Rezervace> getRezeraceOdDo(Date platiOd, Date platiDo) {
+        javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+        javax.persistence.criteria.CriteriaQuery cq = cb.createQuery(Rezervace.class);
+        javax.persistence.criteria.Root<Rezervace> zdrojRoot = cq.from(Rezervace.class);
+        cq.select(zdrojRoot);
+
+        Path<Date> pathPlatiOd = zdrojRoot.get(Rezervace_.platiod);
+        Path<Date> pathPlatiDo = zdrojRoot.get(Rezervace_.platido);
+        Predicate prediPlatiOdDo = cb.and(
+                cb.or(cb.isNull(pathPlatiOd), cb.not(cb.greaterThan(pathPlatiOd, platiDo))),
+                cb.or(cb.isNull(pathPlatiDo), cb.greaterThan(pathPlatiDo, platiOd))
+        );
+
+        Predicate prediWhere = cb.and(prediPlatiOdDo);
+
+        cq.where(prediWhere);
+        cq.orderBy(cb.asc(zdrojRoot.get(Rezervace_.platiod)));
+
+        List<Rezervace> rl = getEntityManager().createQuery(cq).getResultList();
+//        System.out.println("findAllWhereTypZdroje.size()="+rl.size());
+        return rl;
+    }
+
 }

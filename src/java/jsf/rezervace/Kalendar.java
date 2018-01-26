@@ -121,12 +121,15 @@ public class Kalendar implements Serializable {
                 dOd = cal.getTime();
                 cal.set(Calendar.MINUTE, 59);
                 cal.set(Calendar.SECOND, 59);
-                dDo = cal.getTime();                
+                dDo = cal.getTime();
+                if (cal.after(calLastCol)) {
+                    dDo = calLastCol.getTime();
+                }
                 csIns.add(new KalendarColumn(dOd, dDo, Calendar.HOUR_OF_DAY));
                 cal.set(Calendar.MINUTE, 0);
-                cal.set(Calendar.SECOND, 0);               
+                cal.set(Calendar.SECOND, 0);
                 cal.add(Calendar.HOUR_OF_DAY, 1);
-                
+
             } while (cal.get(Calendar.DAY_OF_MONTH) == calKalCol.get(Calendar.DAY_OF_MONTH) && cal.before(calLastCol));
 
         }
@@ -137,6 +140,9 @@ public class Kalendar implements Serializable {
                 dOd = cal.getTime();
                 cal.add(Calendar.MINUTE, addTime);
                 dDo = cal.getTime();
+                if (cal.after(calLastCol)) {
+                    dDo = calLastCol.getTime();
+                }
                 csIns.add(new KalendarColumn(dOd, dDo, Calendar.MINUTE));
                 cal.add(Calendar.MINUTE, 1);
             } while (cal.get(Calendar.HOUR_OF_DAY) == calKalCol.get(Calendar.HOUR_OF_DAY) && cal.before(calLastCol));

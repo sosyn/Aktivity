@@ -13,21 +13,21 @@
             <ui:define name="contens">
                 <h:form id="formRezervaceOdDo" >    
                     <p:outputLabel for="rezPlatiOd" value="Od:" />
-                    <p:calendar id="rezPlatiOd" value="#{rezervace.platiOd}" pattern="dd.MM.yyyy HH:mm" mode="popup" showOn="button" stepMinute="15" timeControlType="select" >
-                        <p:ajax event="dateSelect" listener="#{rezervace.onPlatiOdSelect}" update="rezPlatiDo" />
+                    <p:calendar id="rezPlatiOd" value="#{rezOnLine.platiOd}" pattern="dd.MM.yyyy HH:mm" mode="popup" showOn="button" stepMinute="15" timeControlType="select" >
+                        <p:ajax event="dateSelect" listener="#{rezOnLine.onPlatiOdSelect}" update="rezPlatiDo" />
                     </p:calendar>
                     <p:outputLabel for="rezPlatiDo" value="Do:" />
-                    <p:calendar id="rezPlatiDo" value="#{rezervace.platiDo}" pattern="dd.MM.yyyy HH:mm" mode="popup" showOn="button" stepMinute="15"  timeControlType="select" >
-                        <p:ajax event="dateSelect" listener="#{rezervace.onPlatiDoSelect}" update="rezPlatiOd" />
+                    <p:calendar id="rezPlatiDo" value="#{rezOnLine.platiDo}" pattern="dd.MM.yyyy HH:mm" mode="popup" showOn="button" stepMinute="15"  timeControlType="select" >
+                        <p:ajax event="dateSelect" listener="#{rezOnLine.onPlatiDoSelect}" update="rezPlatiOd" />
                     </p:calendar>
-                    <p:commandButton value="Zobraz" icon="fa fa-check-square-o" iconPos="right" ajax="true" update="rezPlatiOd rezPlatiDo :formRezervaceDataTable:rezervaceTable" actionListener="#{rezervace.onRefresh}"  title="Zpracování vstupních dat a generování tabulky."  />
-                    <p:commandButton value="Zobraz" icon="fa fa-caret-right"  iconPos="right" ajax="true" update="rezPlatiOd rezPlatiDo :formRezervaceDataTable:rezervaceTable" actionListener="#{rezervace.onRefresh}" />
-                    <p:commandButton value="Reset" icon="fa fa-refresh" ajax="true" update="rezPlatiOd rezPlatiDo :formRezervaceDataTable:rezervaceTable" actionListener="#{rezervace.onReset}" title="Nastavení na počáteční hodnoty." />
+                    <p:commandButton value="Zobraz" icon="fa fa-check-square-o" iconPos="right" ajax="true" update="rezPlatiOd rezPlatiDo :formRezervaceDataTable:rezervaceTable" actionListener="#{rezOnLine.onRefresh}"  title="Zpracování vstupních dat a generování tabulky."  />
+                    <p:commandButton value="Zobraz" icon="fa fa-caret-right"  iconPos="right" ajax="true" update="rezPlatiOd rezPlatiDo :formRezervaceDataTable:rezervaceTable" actionListener="#{rezOnLine.onRefresh}" />
+                    <p:commandButton value="Reset" icon="fa fa-refresh" ajax="true" update="rezPlatiOd rezPlatiDo :formRezervaceDataTable:rezervaceTable" actionListener="#{rezOnLine.onReset}" title="Nastavení na počáteční hodnoty." />
                 </h:form>
                 <hr></hr>
                 <h:form id="formRezervaceDataTable">    
-                    <p:remoteCommand name="remoteRezervaceCell" actionListener="#{rezervace.eventRezervaceCell}"/>
-                    <p:dataTable id="rezervaceTable" value="#{rezervace.zdrojList}" var="zdr" rowKey="#{zdr.id}" scrollable="true" scrollWidth="99,5%" scrollHeight="92%" resizableColumns="true" resizeMode="expand" >
+                    <p:remoteCommand name="remoteRezervaceCell" actionListener="#{rezOnLine.eventRezervaceCell}"/>
+                    <p:dataTable id="rezervaceTable" value="#{rezOnLine.zdrojList}" var="zdr" rowKey="#{zdr.id}" scrollable="true" scrollWidth="99,5%" scrollHeight="92%" resizableColumns="true" resizeMode="expand" >
                         <p:column filterBy="#{zdr.spz}" style="width: 80px" >
                             <f:facet name="header">
                                 <h:outputText value="SPZ"/>
@@ -36,16 +36,16 @@
                             <br/>
                             <p:commandButton  icon="fa fa-info-circle"/>
                         </p:column>
-                        <p:columns var="column" value="#{rezervace.kalendar.columns}"  columnIndexVar="colIndex" style="width: 55px" >
+                        <p:columns var="column" value="#{rezOnLine.kalendar.columns}"  columnIndexVar="colIndex" style="width: 55px" >
                             <f:facet name="header">
-                                <h:outputText value="#{rezervace.kalendar.getColumn(colIndex).headerDate}"/>
+                                <h:outputText value="#{rezOnLine.kalendar.getColumn(colIndex).headerDate}"/>
                                 <br/>
-                                <h:outputText value="#{rezervace.kalendar.getColumn(colIndex).headerOdDo}"/>
+                                <h:outputText value="#{rezOnLine.kalendar.getColumn(colIndex).headerOdDo}"/>
                                 <br/>
-                                <p:commandButton style="width: 15px;height: 15px;" icon="fa fa-caret-down" actionListener="#{rezervace.onColBtn(colIndex,0)}" rendered="#{rezervace.isColBtnRender(colIndex,0)}" update="@form"/>
-                                <p:commandButton style="width: 15px;height: 15px;" icon="fa fa-caret-up"   actionListener="#{rezervace.onColBtn(colIndex,1)}" rendered="#{rezervace.isColBtnRender(colIndex,1)}" update="@form"/>
+                                <p:commandButton style="width: 15px;height: 15px;" icon="fa fa-caret-down" actionListener="#{rezOnLine.onColBtn(colIndex,0)}" rendered="#{rezOnLine.isColBtnRender(colIndex,0)}" update="@form"/>
+                                <p:commandButton style="width: 15px;height: 15px;" icon="fa fa-caret-up"   actionListener="#{rezOnLine.onColBtn(colIndex,1)}" rendered="#{rezOnLine.isColBtnRender(colIndex,1)}" update="@form"/>
                             </f:facet>
-                            <h:outputText value="#{rezervace.getHtmlText(zdr,colIndex)}" escape="false"   />
+                            <h:outputText value="#{rezOnLine.getHtmlText(zdr,colIndex)}" escape="false"   />
                         </p:columns>
                         <p:column filterBy="#{zdr.popis}" >
                             <f:facet name="header">
