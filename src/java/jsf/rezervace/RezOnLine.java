@@ -265,7 +265,7 @@ public class RezOnLine implements Serializable {
             if (zdr.getId().compareTo(rez.getIdzdr().getId()) == 0
                     && kalCol.getPlatiOd().before(rez.getPlatido())
                     && kalCol.getPlatiDo().after(rez.getPlatiod())) {
-                html.append("<div style=\"width:100%;\" onClick=" + onClick(zdr, colIndex, null) + ">" + rez.getIdcest().getKomentar() + "</div>");
+                html.append("<div class=\"rezervace\" onClick=" + onClick(zdr, colIndex, null) + ">" + rez.getIdcest().getKomentar() + "</div>");
             }
         }
         html.append("<div style=\"background-color: #00ffff; width:100%;\" onClick=" + onClick(zdr, colIndex, null) + ">&nbsp;&nbsp;&nbsp;&nbsp;</div>");
