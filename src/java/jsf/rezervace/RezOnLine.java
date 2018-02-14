@@ -59,6 +59,39 @@ public class RezOnLine implements Serializable {
         getDataForRezOnLine();
     }
 
+    
+    public String getHtmlText(Zdroj zdr, Integer colIndex) {
+        StringBuilder html = new StringBuilder("");
+        KalendarColumn kalCol = this.kalendar.getColumn(colIndex);
+        for (Rezervace rez : rezervaceList) {
+            if (zdr.getId().compareTo(rez.getIdzdr().getId()) == 0
+                    && kalCol.getPlatiOd().before(rez.getPlatido())
+                    && kalCol.getPlatiDo().after(rez.getPlatiod())) {
+                html.append("<div class=\"rezervace\" onClick=" + onClickHtml(zdr, colIndex, rez) + ">" + rez.getIdcest().getPopis() + "</div>");
+            }
+        }
+        html.append("<div style=\" display:inline-block; line-height:300%; background-color: #e1e5ed; width:100%;\" onClick=" + onClickHtml(zdr, colIndex, null) + ">&nbsp;&nbsp;&nbsp;&nbsp;</div>");
+        return html.toString();
+    }
+
+    private String onClickHtml(Zdroj zdr, Integer colIndex, entity.Rezervace rez) {
+        StringBuilder html = new StringBuilder("onClickCell('");
+        html.append(zdr.getId().toString() + ":" + colIndex.toString());
+        html.append(":" + (rez == null ? null : rez.getId()));
+        html.append("')");
+        return html.toString();
+    }
+
+    public void eventRezervaceCell() {
+        String cell = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("cell");
+        System.out.println("Cell:" + cell);
+        String[] cellParam;
+        cellParam = cell.split(":");
+        
+    }
+
+ 
+    
     public void onReset() {
         platiOd = new Date();
         init();
@@ -257,37 +290,7 @@ public class RezOnLine implements Serializable {
     public void setZdrojList(ArrayList<Zdroj> zdrojList) {
         this.zdrojList = zdrojList;
     }
-
-    public String getHtmlText(Zdroj zdr, Integer colIndex) {
-        StringBuilder html = new StringBuilder("");
-        KalendarColumn kalCol = this.kalendar.getColumn(colIndex);
-        for (Rezervace rez : rezervaceList) {
-            if (zdr.getId().compareTo(rez.getIdzdr().getId()) == 0
-                    && kalCol.getPlatiOd().before(rez.getPlatido())
-                    && kalCol.getPlatiDo().after(rez.getPlatiod())) {
-                html.append("<div class=\"rezervace\" onClick=" + onClick(zdr, colIndex, null) + ">" + rez.getIdcest().getPopis() + "</div>");
-            }
-        }
-        html.append("<div style=\"background-color: #00ffff; width:100%;\" onClick=" + onClick(zdr, colIndex, null) + ">&nbsp;&nbsp;&nbsp;&nbsp;</div>");
-        html.append("<div style=\"background-color: #00ffff; width:100%;\" onClick=" + onClick(zdr, colIndex, null) + ">&nbsp;&nbsp;&nbsp;&nbsp;</div>");
-        html.append("<div style=\"background-color: #00ffff; width:100%;\" onClick=" + onClick(zdr, colIndex, null) + ">&nbsp;&nbsp;&nbsp;&nbsp;</div>");
-        return html.toString();
-    }
-
-    private String onClick(Zdroj zdr, Integer colIndex, entity.Rezervace rez) {
-        StringBuilder html = new StringBuilder("onClickCell('");
-        html.append(zdr.getId().toString() + ":" + colIndex.toString());
-        html.append(":" + (rez == null ? null : rez.getId()));
-        html.append("')");
-        return html.toString();
-    }
-
-    public void eventRezervaceCell() {
-        String cell = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("cell");
-        System.out.println("Cell:" + cell);
-    }
-
-    /**
+   /**
      * @return the cal
      */
     public java.util.Calendar getCal() {
