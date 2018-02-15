@@ -12,7 +12,10 @@ import entity.Zdroj;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
+import java.util.UUID;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -20,6 +23,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.component.calendar.Calendar;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
 /**
@@ -59,7 +63,6 @@ public class RezOnLine implements Serializable {
         getDataForRezOnLine();
     }
 
-    
     public String getHtmlText(Zdroj zdr, Integer colIndex) {
         StringBuilder html = new StringBuilder("");
         KalendarColumn kalCol = this.kalendar.getColumn(colIndex);
@@ -83,15 +86,38 @@ public class RezOnLine implements Serializable {
     }
 
     public void eventRezervaceCell() {
+        UUID uuidZdr = null;
+        UUID uuidRez = null;
+        Integer colIndex = null;
         String cell = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("cell");
         System.out.println("Cell:" + cell);
         String[] cellParam;
         cellParam = cell.split(":");
-        
+        uuidZdr = UUID.fromString(cellParam[0]);
+        colIndex = Integer.getInteger(cell);
+        if (!cellParam[2].startsWith("null")) {
+            uuidRez = UUID.fromString(cellParam[2]);
+            for (Rezervace rez : rezervaceList) {
+                if (rez.getId().equals(uuidRez)) {
+                    this.rezervace = rez;
+                    System.out.println("this.rezervace.ID: " + this.rezervace.getId() );
+                    Map<String,Object> options = new HashMap<String, Object>();
+        options.put("modal", true);
+        options.put("width", 640);
+        options.put("height", 340);
+        options.put("contentWidth", "100%");
+        options.put("contentHeight", "100%");
+        options.put("headerElement", "customheader");
+         
+//        PrimeFaces.current().dialog.openDynamic("viewCars", options, null);
+RequestContext.getCurrentInstance().openDialog("/rezervace/reyDetail",options,null);
+                    break;
+                }
+            }
+        }
+
     }
 
- 
-    
     public void onReset() {
         platiOd = new Date();
         init();
@@ -290,7 +316,8 @@ public class RezOnLine implements Serializable {
     public void setZdrojList(ArrayList<Zdroj> zdrojList) {
         this.zdrojList = zdrojList;
     }
-   /**
+
+    /**
      * @return the cal
      */
     public java.util.Calendar getCal() {
