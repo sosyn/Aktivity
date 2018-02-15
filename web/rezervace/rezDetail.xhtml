@@ -5,13 +5,54 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    
+
     <h:head>
-        <title>Detail rezervace</title>
+        <title>
+            #{rezOnLine.rezervace.idzdr.spz}&nbsp;&nbsp;&nbsp;#{rezOnLine.rezervace.idzdr.popis}
+        </title>
     </h:head>
-    
+
+    <h1></h1>
     <h:body>        
-        <h:outputText value="#{rezOnLine.rezervace.komentar}" />
+        <div class="ui-g">
+            <div class="ui-g-2">Platí&nbsp;Od:</div>    
+            <div class="ui-g-6"><p:calendar id="platiOd" value="#{rezOnLine.rezervace.platiod}" pattern="dd.MM.yyyy HH:mm" disabled="true" /></div>    
+        </div>           
+        <div class="ui-g">
+            <div class="ui-g-2">Platí&nbsp;Do:</div>    
+            <div class="ui-g-6"><p:calendar id="platiDo" value="#{rezOnLine.rezervace.platido}" pattern="dd.MM.yyyy HH:mm" disabled="true" /></div>    
+        </div>           
+        <div class="ui-g">
+            <div class="ui-g-2">Místo:</div>    
+            <div class="ui-g-8">#{rezOnLine.rezervace.idcest.popis}</div>    
+        </div>           
+        <div class="ui-g">
+            <div class="ui-g-2">Komentář:</div>    
+            <div class="ui-g-8">#{rezOnLine.rezervace.idcest.komentar}</div>    
+        </div>           
+        <div class="ui-g">
+            <div class="ui-g-8">
+                <p:dataTable id="rezUcastnice" value="#{rezOnLine.rezervace.idcest.ucastnikList}" var="itemUcast" rowKey="#{itemUcast.id}" >
+                    <f:facet name="header">
+                        Účastníci
+                    </f:facet>
+                    <p:column sortBy="#{itemUcast.idoso.popis}" >
+                        <f:facet name="header" >
+                            <h:outputText value="Účastník"/>
+                        </f:facet>
+                        <h:outputText value="#{itemUcast.idoso.popis}"/>
+                    </p:column>
+                    <p:column sortBy="#{itemUcast.idtypucast.popis}"  >
+                        <f:facet name="header" >
+                            <h:outputText value="Typ účastníka"/>
+                        </f:facet>
+                        <f:facet name="output">
+                            <h:outputText value="#{itemUcast.idtypucast.popis}" />
+                        </f:facet>
+                    </p:column>
+                </p:dataTable>
+            </div>
+        </div>           
     </h:body>
 </html>
 
