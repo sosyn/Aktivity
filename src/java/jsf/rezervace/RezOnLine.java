@@ -100,17 +100,20 @@ public class RezOnLine implements Serializable {
             for (Rezervace rez : rezervaceList) {
                 if (rez.getId().equals(uuidRez)) {
                     this.rezervace = rez;
-                    System.out.println("this.rezervace.ID: " + this.rezervace.getId() );
-                    Map<String,Object> options = new HashMap<String, Object>();
-        options.put("modal", true);
-        options.put("width", 640);
-        options.put("height", 340);
-        options.put("contentWidth", "100%");
-        options.put("contentHeight", "100%");
-        options.put("headerElement", "customheader");
-         
-//        PrimeFaces.current().dialog.openDynamic("viewCars", options, null);
-RequestContext.getCurrentInstance().openDialog("/rezervace/reyDetail",options,null);
+                    System.out.println("this.rezervace.ID: " + this.rezervace.getId());
+                    Map<String, Object> options = new HashMap<String, Object>();
+                    options.put("modal", true);
+                    options.put("resizable", true);
+                    options.put("draggable", true);
+                    options.put("width", 800);
+                    options.put("height",500);
+                    options.put("contentWidth", "100%");
+                    options.put("contentHeight", "100%");
+                    options.put("closable", true);
+//                    options.put("includeViewParams", true);
+//                    options.put("headerElement", "customheader");
+                    options.put("maximizable", true);
+                    RequestContext.getCurrentInstance().openDialog("/rezervace/rezDetail", options, null);
                     break;
                 }
             }
