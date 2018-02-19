@@ -11,16 +11,13 @@
             #{rezOnLine.rezervace.idzdr.spz}&nbsp;&nbsp;&nbsp;#{rezOnLine.rezervace.idzdr.popis}
         </title>
     </h:head>
-
-    <h1></h1>
+    <h1>Cesta:</h1>
     <h:body>        
         <div class="ui-g">
-            <div class="ui-g-2">Platí&nbsp;Od:</div>    
-            <div class="ui-g-6"><p:calendar id="platiOd" value="#{rezOnLine.rezervace.platiod}" pattern="dd.MM.yyyy HH:mm" disabled="true" /></div>    
-        </div>           
-        <div class="ui-g">
-            <div class="ui-g-2">Platí&nbsp;Do:</div>    
-            <div class="ui-g-6"><p:calendar id="platiDo" value="#{rezOnLine.rezervace.platido}" pattern="dd.MM.yyyy HH:mm" disabled="true" /></div>    
+            <div class="ui-g-8">
+                Od:<p:calendar id="platiOd" value="#{rezOnLine.rezervace.platiod}" pattern="dd.MM.yyyy HH:mm" disabled="true" />
+                Do:<p:calendar id="platiDo" value="#{rezOnLine.rezervace.platido}" pattern="dd.MM.yyyy HH:mm" disabled="true" />
+            </div>
         </div>           
         <div class="ui-g">
             <div class="ui-g-2">Místo:</div>    
@@ -32,23 +29,15 @@
         </div>           
         <div class="ui-g">
             <div class="ui-g-8">
-                <p:dataTable id="rezUcastnice" value="#{rezOnLine.rezervace.idcest.ucastnikList}" var="itemUcast" rowKey="#{itemUcast.id}" >
+                <p:dataTable id="ucastnici" value="#{rezOnLine.rezervace.idcest.ucastnikList}" var="ucastnik" rowKey="#{itemUcast.id}" >
                     <f:facet name="header">
                         Účastníci
                     </f:facet>
-                    <p:column sortBy="#{itemUcast.idoso.popis}" >
-                        <f:facet name="header" >
-                            <h:outputText value="Účastník"/>
-                        </f:facet>
-                        <h:outputText value="#{itemUcast.idoso.popis}"/>
+                    <p:column headerText="Účastník" sortBy="#{ucastnik.idoso.popis}" >
+                        <h:outputText value="#{ucastnik.idoso.popis}"/>
                     </p:column>
-                    <p:column sortBy="#{itemUcast.idtypucast.popis}"  >
-                        <f:facet name="header" >
-                            <h:outputText value="Typ účastníka"/>
-                        </f:facet>
-                        <f:facet name="output">
-                            <h:outputText value="#{itemUcast.idtypucast.popis}" />
-                        </f:facet>
+                    <p:column headerText="Typ účastníka" sortBy="#{ucastnik.idtypucast.popis}"  >
+                        <h:outputText value="#{ucastnik.idtypucast.popis}" />
                     </p:column>
                 </p:dataTable>
             </div>

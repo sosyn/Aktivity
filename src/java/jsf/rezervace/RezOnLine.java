@@ -85,7 +85,7 @@ public class RezOnLine implements Serializable {
         return html.toString();
     }
 
-    public void eventRezervaceCell() {
+    public void eventRezInfo() {
         UUID uuidZdr = null;
         UUID uuidRez = null;
         Integer colIndex = null;
@@ -97,27 +97,42 @@ public class RezOnLine implements Serializable {
         colIndex = Integer.getInteger(cell);
         if (!cellParam[2].startsWith("null")) {
             uuidRez = UUID.fromString(cellParam[2]);
-            for (Rezervace rez : rezervaceList) {
-                if (rez.getId().equals(uuidRez)) {
-                    this.rezervace = rez;
-                    System.out.println("this.rezervace.ID: " + this.rezervace.getId());
-                    Map<String, Object> options = new HashMap<String, Object>();
-                    options.put("modal", true);
-                    options.put("resizable", true);
-                    options.put("draggable", true);
-                    options.put("width", 800);
-                    options.put("height",500);
-                    options.put("contentWidth", "100%");
-                    options.put("contentHeight", "100%");
-                    options.put("closable", true);
+            this.rezervace = ejbRezervaceFacade.find(uuidRez);
+
+            Map<String, Object> options = new HashMap<String, Object>();
+            options.put("modal", true);
+            options.put("resizable", true);
+            options.put("draggable", true);
+            options.put("width", 800);
+            options.put("height", 500);
+            options.put("contentWidth", "100%");
+            options.put("contentHeight", "100%");
+            options.put("closable", true);
 //                    options.put("includeViewParams", true);
 //                    options.put("headerElement", "customheader");
-                    options.put("maximizable", true);
-                    RequestContext.getCurrentInstance().openDialog("/rezervace/rezDetail", options, null);
-                    break;
-                }
-            }
+            options.put("maximizable", true);
+            RequestContext.getCurrentInstance().openDialog("/rezervace/rezDetail", options, null);
         }
+
+    }
+
+
+    public void eventZdrInfo(Zdroj zdr) {
+            this.zdroj = zdr;
+
+            Map<String, Object> options = new HashMap<String, Object>();
+            options.put("modal", true);
+            options.put("resizable", true);
+            options.put("draggable", true);
+            options.put("width", 800);
+            options.put("height", 500);
+            options.put("contentWidth", "100%");
+            options.put("contentHeight", "100%");
+            options.put("closable", true);
+//                    options.put("includeViewParams", true);
+//                    options.put("headerElement", "customheader");
+            options.put("maximizable", true);
+            RequestContext.getCurrentInstance().openDialog("/rezervace/zdrDetail", options, null);
 
     }
 

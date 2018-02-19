@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>
+            #{rezOnLine.zdroj.spz}&nbsp;&nbsp;&nbsp;#{rezOnLine.zdroj.popis}
+        </title>
+    </h:head>
+    <h1>Informace o zdroji:</h1>
+    <h:body>        
+        <div class="ui-g">
+            <div class="ui-g-2">SPZ:</div>    
+            <div class="ui-g-8">#{rezOnLine.zdroj.spz}</div>    
+        </div>           
+        <div class="ui-g">
+            <div class="ui-g-2">Popis:</div>    
+            <div class="ui-g-8">#{rezOnLine.zdroj.popis}</div>    
+        </div>           
+        <div class="ui-g">
+            <div class="ui-g-2">Typ zdroje: </div>    
+            <div class="ui-g-8">#{rezOnLine.zdroj.idtypzdr.popis}</div>    
+        </div>           
+        <div class="ui-g">
+            <div class="ui-g-2">Max. kapacita</div>    
+            <div class="ui-g-8">#{rezOnLine.zdroj.kapacita}</div>    
+        </div>           
+        <div class="ui-g">
+            <div class="ui-g-2">Osoba přiřazená ke zdroji:</div>    
+            <div class="ui-g-8">#{rezOnLine.zdroj.idoso.popis}</div>    
+        </div>           
+        <div class="ui-g">
+            <div class="ui-g-2">Komentář:</div>    
+            <div class="ui-g-8">#{rezOnLine.zdroj.komentar}</div>    
+        </div>           
+        <div class="ui-g">
+            <div class="ui-g-12">
+                Použitelný od:<p:calendar id="platiOd" value="#{rezOnLine.zdroj.platiod}" pattern="dd.MM.yyyy" disabled="true" />
+                do:<p:calendar id="platiDo" value="#{rezOnLine.zdroj.platido}" pattern="dd.MM.yyyy" disabled="true" />
+            </div>
+        </div>           
+
+    </h:body>
+</html>
+
