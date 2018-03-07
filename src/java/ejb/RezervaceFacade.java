@@ -8,7 +8,6 @@ package ejb;
 import entity.Cesta;
 import entity.Rezervace;
 import entity.Rezervace_;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;

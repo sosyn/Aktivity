@@ -64,6 +64,9 @@ public class EntitySuperClass implements Serializable {
     @Transient
     private boolean newEntity = false;
 
+    @Transient
+    private boolean delEntity = false;
+
     public EntitySuperClass() {
         this.id = UUID.randomUUID() ;
         this.platiod = JsfUtil.startDate();
@@ -154,6 +157,20 @@ public class EntitySuperClass implements Serializable {
      */
     public void setNewEntity(boolean newEntity) {
         this.newEntity = newEntity;
+    }
+
+    /**
+     * @return the delEntity
+     */
+    public boolean isDelEntity() {
+        return delEntity;
+    }
+
+    /**
+     * @param delEntity the delEntity to set
+     */
+    public void setDelEntity(boolean delEntity) {
+        this.delEntity = delEntity;
     }
 
     @Override
