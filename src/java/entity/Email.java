@@ -20,6 +20,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -44,22 +46,24 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Email.findByUsermodify", query = "SELECT e FROM Email e WHERE e.usermodify = :usermodify")})
 public class Email extends entity.EntitySuperClass {
 
-    
+    @NotNull
+    @Min(value = 0)
+    @Max(value = 1)
     private Integer smer;
-    
+
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 2147483647)
     @Column(length = 2147483647)
     private String email;
-    
+
     @Size(max = 2147483647)
     @Column(length = 2147483647)
     private String predmet;
-    
+
     @JoinColumn(name = "idakt", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Aktivity idakt;
-    
+
     @JoinColumn(name = "idcest", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cesta idcest;
@@ -71,7 +75,7 @@ public class Email extends entity.EntitySuperClass {
     @JoinColumn(name = "idrez", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Rezervace idrez;
-    
+
     @JoinColumn(name = "iducast", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Ucastnik iducast;
@@ -83,7 +87,6 @@ public class Email extends entity.EntitySuperClass {
     public Email(UUID id) {
         super(id);
     }
-
 
     public Integer getSmer() {
         return smer;
@@ -108,6 +111,7 @@ public class Email extends entity.EntitySuperClass {
     public void setPredmet(String predmet) {
         this.predmet = predmet;
     }
+
     /**
      * @return the idakt
      */
@@ -178,8 +182,6 @@ public class Email extends entity.EntitySuperClass {
         this.iducast = iducast;
     }
 
-
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -204,5 +206,5 @@ public class Email extends entity.EntitySuperClass {
     public String toString() {
         return "entity.Email[ id=" + this.getId() + " ]";
     }
-   
+
 }
