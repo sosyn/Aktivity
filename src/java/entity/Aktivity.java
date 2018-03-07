@@ -46,6 +46,9 @@ public class Aktivity extends entity.EntitySuperClass {
     
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "aktivity")
     private List<Log> logList;
+    
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idakt")
+    private List<Email> emailList;
 
     public Aktivity() {
         super();
@@ -97,6 +100,14 @@ public class Aktivity extends entity.EntitySuperClass {
 
     public void setRezervaceList(List<Rezervace> rezervaceList) {
         this.rezervaceList = rezervaceList;
+    }
+
+    public List<Email> getEmailList() {
+        return emailList;
+    }
+
+    public void setEmailList(List<Email> emailList) {
+        this.emailList = emailList;
     }
 
     @Override

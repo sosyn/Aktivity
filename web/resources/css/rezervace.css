@@ -38,10 +38,12 @@ div.rezervace::after {
   box-shadow: inset calc(-6*(1em*90/135) - .5em) 0 rgba(255,255,255,0);
   transition: .3s;
 }
+/*
+
 div.rezervace:hover::after {
   box-shadow: inset calc(-6*(1em*90/135) - .5em) 0 rgba(255,255,255,.2);
 }
 div.rezervace:active::after {
   background-image: linear-gradient(#c61e40, #d4536d);
 }
-
+*/

@@ -45,6 +45,9 @@ public class Ucastnik extends entity.EntitySuperClass {
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "iducast")
     private List<Schvaleni> schvList;
+    
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "iducast")
+    private List<Email> emailList;
 
     public Ucastnik() {
         super();
@@ -110,6 +113,14 @@ public class Ucastnik extends entity.EntitySuperClass {
         this.schvList = schvList;
     }
 
+    public List<Email> getEmailList() {
+        return emailList;
+    }
+
+    public void setEmailList(List<Email> emailList) {
+        this.emailList = emailList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -134,5 +145,4 @@ public class Ucastnik extends entity.EntitySuperClass {
     public String toString() {
         return "entity.Ucastnik[ id=" + this.getId() + " ]";
     }
-
 }

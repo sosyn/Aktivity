@@ -53,6 +53,8 @@ public class Osoba extends entity.EntitySuperClass {
     private List<Dispecerhl> dispecerhlList;
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idoso")
     private List<Dispecerpol> dispecerpolList;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idoso")
+    private List<Email> emailList;
 
     public Osoba() {
         super();
@@ -160,6 +162,14 @@ public class Osoba extends entity.EntitySuperClass {
 
     public void setDispecerpolList(List<Dispecerpol> dispecerpolList) {
         this.dispecerpolList = dispecerpolList;
+    }
+
+    public List<Email> getEmailList() {
+        return emailList;
+    }
+
+    public void setEmailList(List<Email> emailList) {
+        this.emailList = emailList;
     }
 
     @Override

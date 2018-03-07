@@ -34,7 +34,6 @@ public class Rezervace extends entity.EntitySuperClass {
     @Column(length = 4196)
     private String komentar;
 
-
     @JoinColumn(name = "idakt", referencedColumnName = "id", nullable = true)
     @ManyToOne(optional = true)
     private Aktivity idakt;
@@ -44,7 +43,7 @@ public class Rezervace extends entity.EntitySuperClass {
     private Cesta idcest;
 
     @JoinColumn(name = "idzdr", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false,fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Zdroj idzdr;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "rezervace")
@@ -52,6 +51,9 @@ public class Rezervace extends entity.EntitySuperClass {
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idrez")
     private List<Schvaleni> schvList;
+    
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idrez")
+    private List<Email> emailList;
 
     public Rezervace() {
     }
@@ -117,6 +119,13 @@ public class Rezervace extends entity.EntitySuperClass {
     public void setSchvList(List<Schvaleni> schvList) {
         this.schvList = schvList;
     }
+    public List<Email> getEmailList() {
+        return emailList;
+    }
+
+    public void setEmailList(List<Email> emailList) {
+        this.emailList = emailList;
+    }
 
     @Override
     public int hashCode() {
@@ -142,5 +151,5 @@ public class Rezervace extends entity.EntitySuperClass {
     public String toString() {
         return "entity.Rezervace[ id=" + getId() + " ]";
     }
-
+    
 }

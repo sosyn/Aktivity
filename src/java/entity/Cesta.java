@@ -60,16 +60,15 @@ public class Cesta extends entity.EntitySuperClass {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idcest")
     private List<Rezervace> rezervaceList;
 
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idcest")
+    private List<Email> emailList;
+
     public Cesta() {
         super();
     }
 
     public Cesta(UUID id) {
         super(id);
-    }
-
-    public Cesta(UUID id, Date platiod, Date platido, Date timeinsert, Date timemodify) {
-        super(id, platiod, platido, timeinsert, timemodify);
     }
 
     /**
@@ -152,6 +151,20 @@ public class Cesta extends entity.EntitySuperClass {
 
     public void setRezervaceList(List<Rezervace> rezervaceList) {
         this.rezervaceList = rezervaceList;
+    }
+
+    /**
+     * @return the emailList
+     */
+    public List<Email> getEmailList() {
+        return emailList;
+    }
+
+    /**
+     * @param emailList the emailList to set
+     */
+    public void setEmailList(List<Email> emailList) {
+        this.emailList = emailList;
     }
 
     @Override
