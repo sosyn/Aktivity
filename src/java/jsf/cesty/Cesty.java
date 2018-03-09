@@ -127,7 +127,7 @@ public class Cesty implements Serializable {
      * @return the cesty
      */
     public ArrayList<Cesta> getCesty() {
-        this.cesty = new ArrayList<>(ejbCestaFacade.findOsoba(this.osoba));
+        this.cesty = new ArrayList<>(ejbCestaFacade.findCestyOsoba(this.osoba));
 //        if (this.cesty.isEmpty()) {
 //        }
         return cesty;
@@ -183,7 +183,7 @@ public class Cesty implements Serializable {
     }
 
     public String editCesta() {
-        if (cestaForm.editCesta(this.cesta)) {
+        if (cestaForm.editCesta(this.cesta,this.cesty)) {
             return "/cesty/cestaForm";
         }
         return null;

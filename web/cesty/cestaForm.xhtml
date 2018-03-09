@@ -13,54 +13,54 @@
         <ui:composition template = "/templates/templateMain.xhtml">	
             <ui:define name="contens">
                 <p:layout fullPage="false">
-                    <p:layoutUnit position="center" >
-                        <h:form id="cestaForm" >
-                            <f:ajax event="keyup" render="targetCestaForm"/>
+                    <h:form>
+                        <p:layoutUnit position="center" >
+                            <!-- <f:ajax event="blur" render=":cestaFormBtn"/> -->
                             <h2>Jednání:</h2>
                             <p>
                                 <p:outputLabel for="cestaOd" value="Od: "/>
-                                <p:calendar id="cestaOd" value="#{cestaForm.platiOd}" valueChangeListener="#{cestaForm.platiOdListener}" pattern="dd.MM.yyyy HH:mm"  showOn="button" validator="#{validatorCestaOd.validate}">
-                                    <p:ajax event="dateSelect" update=":cestaForm:cestaDo" />
-                                    <p:ajax event="blur" update=":cestaForm:cestaDo" />
-                                    <f:attribute name="cestaDo" value="#{cestaForm.platiDo}" />
+                                <p:calendar id="cestaOd" value="#{cestaForm.cesta.platiod}" valueChangeListener="#{cestaForm.platiOdListener}" pattern="dd.MM.yyyy HH:mm"  showOn="button" validator="#{validatorCestaOd.validate}">
+                                    <p:ajax event="dateSelect" update="cestaDo" />
+                                    <p:ajax event="blur" update="cestaDo" />
+                                    <f:attribute name="cestaDo" value="#{cestaForm.cesta.platido}" />
                                 </p:calendar>
                                 <br/>
                                 <p:outputLabel for="cestaDo" value="Do: "/>
-                                <p:calendar id="cestaDo" value="#{cestaForm.platiDo}" valueChangeListener="#{cestaForm.platiDoListener}" pattern="dd.MM.yyyy HH:mm"  showOn="button" >
-                                    <p:ajax event="dateSelect" update=":cestaForm:cestaOd" />
+                                <p:calendar id="cestaDo" value="#{cestaForm.cesta.platido}" valueChangeListener="#{cestaForm.platiDoListener}" pattern="dd.MM.yyyy HH:mm"  showOn="button" >
+                                    <p:ajax event="dateSelect" update="cestaOd" />
+                                    <p:ajax event="blur" update="cestaOd"  />
+                                    <f:attribute name="cestaOd" value="#{cestaForm.cesta.platiod}" />
                                 </p:calendar>                   
                             </p>
                             <p>
                                 <p:outputLabel for="cestaMisto" value="Místo:"/>
                                 <br/>
-                                <p:inputTextarea id="cestaMisto" value="#{cestaForm.misto}" rows="1" cols="80" />
+                                <p:inputTextarea id="cestaMisto" value="#{cestaForm.cesta.popis}" rows="1" cols="80"  />
                             </p>
                             <p>
                                 <p:outputLabel for="cestaUcel" value="Účel:" />
                                 <br/>
-                                <p:inputTextarea id="cestaUcel" value="#{cestaForm.duvod}" rows="5" cols="80"/>
+                                <p:inputTextarea id="cestaUcel" value="#{cestaForm.cesta.komentar}" rows="5" cols="80"/>
                             </p>
                             <p>
                                 <p:outputLabel for="cestaTypZdr" value="Dopravní prostředek:" />
                                 <br/>
-                                <p:selectOneMenu id="cestaTypZdr" value="#{cestaForm.typZdroje}"  >
+                                <p:selectOneMenu id="cestaTypZdr" value="#{cestaForm.cesta.idtypzdr}" converter="#{JSFConverterTypZdr}" >
                                     <f:selectItems value="#{cestaForm.typZdrList}" var="item" itemLabel="#{item.popis}" itemValue="#{item}"  />      
                                 </p:selectOneMenu>
                             </p>
                             <p>
                                 <p:outputLabel for="cestaZaloha" value="Záloha:" />
                                 <br/>
-                                <p:inputNumber id="cestaZaloha" value="#{cestaForm.zaloha}" symbol=" Kč" symbolPosition="s" 
+                                <p:inputNumber id="cestaZaloha" value="#{cestaForm.cesta.zaloha}" symbol=" Kč" symbolPosition="s" 
                                                decimalSeparator="," thousandSeparator="." minValue="0" maxValue="1000000" />
                             </p>
-                            <!--                            <h:outputText id="targetCestaForm" /> -->
-                        </h:form>
-                    </p:layoutUnit>
-                    <p:layoutUnit position="east" size="70%" >
-                        <h:form id="cestaFormTables">
+                            <!--  <h:outputText id="targetCestaForm" /> -->
+                        </p:layoutUnit>
+                        <p:layoutUnit position="east" size="70%" >
                             <h:messages id="errorMessages" style="color:red;margin:8px;" />
                             <p>
-                                <p:dataTable id="cestaUcastnici" value="#{cestaForm.ucastnikList}" var="itemUcast" selectionMode="single" selection="#{cestaForm.ucastnik}" rowKey="#{itemUcast.id}" editable="true" editMode="row" >
+                                <p:dataTable id="cestaUcastnici" value="#{cestaForm.cesta.ucastnikList}" var="itemUcast" selectionMode="single" selection="#{cestaForm.ucastnik}" rowKey="#{itemUcast.id}" editable="true" editMode="row" >
                                     <f:facet name="header">
                                         Účastníci
                                     </f:facet>
@@ -79,7 +79,7 @@
                                                 <h:outputText value="#{itemUcast.idtypucast.popis}" />
                                             </f:facet>
                                             <f:facet name="input" >
-                                                <h:selectOneMenu  value="#{itemUcast.idtypucast}"  style="width:100%" >
+                                                <h:selectOneMenu  value="#{itemUcast.idtypucast}"  style="width:100%" converter="#{JSFConverterTypUcast}" >
                                                     <f:selectItems value="#{cestaForm.typUcastList}" var="typUcastnika" itemLabel="#{typUcastnika.popis}" itemValue="#{typUcastnika}"  />
                                                     <!--  <f:validator validatorId="jsf.cesty.typUcastValidator" /> -->
                                                 </h:selectOneMenu>
@@ -90,8 +90,8 @@
                                         <p:rowEditor />
                                     </p:column>
                                     <f:facet name="footer">
-                                        <p:commandButton id="ucastnikNew" value="Nový" actionListener="#{cestaForm.prepareHelperOsoby}" onsuccess="PF('ViewDlgHelperOsoby').show()" update=":cestaFormTables:cestaUcastnici"  icon="fa fa-file-o" />
-                                        <p:commandButton id="ucastnikDel" value="Smazat"  action="#{cestaForm.ucastnikDelete}"  update=":cestaFormTables:cestaUcastnici"  icon="fa fa-remove">
+                                        <p:commandButton id="ucastnikNew" value="Nový" actionListener="#{cestaForm.prepareHelperOsoby}" onsuccess="PF('ViewDlgHelperOsoby').show()" update="cestaUcastnici"  icon="fa fa-file-o" />
+                                        <p:commandButton id="ucastnikDel" value="Smazat"  action="#{cestaForm.ucastnikDelete}"  update="cestaUcastnici"  icon="fa fa-remove">
                                             <p:confirm  header="Potvrzení" message="Opravdu smazat záznam &quot;#{cestaForm.ucastnik.idoso.popis}&quot; ?" icon="ui-icon-alert" />
                                         </p:commandButton>
                                     </f:facet>
@@ -101,8 +101,9 @@
                                     <p:commandButton value="Ne" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                                 </p:confirmDialog>                            
                             </p>
+                            <hr/>   
                             <p>
-                                <p:dataTable id="cestaRez"  value="#{cestaForm.rezervaceList}" var="itemRez" selectionMode="single" selection="#{cestaForm.rezervace}" rowKey="#{itemRez.id}" editable="true" editMode="row">
+                                <p:dataTable id="cestaRez"  value="#{cestaForm.cesta.rezervaceList}" var="itemRez" selectionMode="single" selection="#{cestaForm.rezervace}" rowKey="#{itemRez.id}" editable="true" editMode="row">
                                     <f:facet name="header">
                                         Rezervace vozidel
                                     </f:facet>
@@ -158,22 +159,20 @@
                                         <p:rowEditor />
                                     </p:column>
                                     <f:facet name="footer">
-                                        <p:commandButton  id="rezNew"  value="Nová" actionListener="#{cestaForm.prepareHelperZdroj}" onsuccess="PF('ViewDlgHelperZdr').show()" update=":cestaFormTables:cestaRez" icon="fa fa-file-o"/>                                  
-                                        <p:commandButton  id="rezDel"  value="Smazat" action="#{cestaForm.rezervaceDelete}" update=":cestaFormTables:cestaRez" icon="fa fa-remove" >
+                                        <p:commandButton  id="rezNew"  value="Nová" actionListener="#{cestaForm.prepareHelperZdroj}" onsuccess="PF('ViewDlgHelperZdr').show()" update="cestaRez" icon="fa fa-file-o"/>                                  
+                                        <p:commandButton  id="rezDel"  value="Smazat" action="#{cestaForm.rezervaceDelete}" update="cestaRez" icon="fa fa-remove" >
                                             <p:confirm  header="Potvrzení" message="Opravdu smazat záznam &quot;#{cestaForm.rezervace.idzdr.popis}&quot; ?" icon="ui-icon-alert" />
                                         </p:commandButton>
                                     </f:facet>
                                 </p:dataTable>
                             </p>
-                        </h:form>
-                    </p:layoutUnit>
-                    <p:layoutUnit position="south">
-                        <h:form id="cestaFormBtn" >
+                        </p:layoutUnit>
+                        <p:layoutUnit position="south">
                             <p:commandButton id="cestaOK" action="#{cestaForm.saveCesta}" value="OK" icon="fa fa-file-o" ajax="false" />
                             <p:commandButton id="cestaCancle" value="Zpět" action="/cesty/cesty" icon="fa fa-edit"  ajax="false" />
                             <p:commandButton  id="cestaTiskPruvodka" value="Průvodka"  icon="fa fa-id-card-o" ajax="false" />
-                        </h:form>
-                    </p:layoutUnit>
+                        </p:layoutUnit>
+                    </h:form>
                 </p:layout>
                 <ui:include src="/helper/helperOsoby.xhtml"/>
                 <ui:include src="/helper/helperZdroj.xhtml"/>               

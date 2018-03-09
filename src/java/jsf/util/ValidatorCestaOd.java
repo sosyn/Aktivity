@@ -38,12 +38,12 @@ public class ValidatorCestaOd implements Validator {
 //                + "| cestaForm.getPlatiOd()=" + cestaForm.getPlatiOd()
 //                + "| cestaForm.getPlatiDo()=" + cestaForm.getPlatiDo());
 
-        if (cestaForm.getPlatiOd().after(cestaForm.getPlatiDo())) {
-            this.cal.setTime(cestaForm.getPlatiOd());
+        if (cestaForm.getCesta().getPlatiod().after(cestaForm.getCesta().getPlatido())) {
+            this.cal.setTime(cestaForm.getCesta().getPlatiod());
             if (cal.get(Calendar.HOUR_OF_DAY) < 17) {
                 cal.set(Calendar.HOUR_OF_DAY, 17);
             }
-            cestaForm.setPlatiDo(this.cal.getTime());
+            cestaForm.getCesta().setPlatido(this.cal.getTime());
         }
 
 //        System.out.println(" uic.getAttributes().get('cestaDo')=" + uic.getAttributes().get("cestaDo"));

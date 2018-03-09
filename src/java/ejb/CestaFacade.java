@@ -36,7 +36,7 @@ public class CestaFacade extends AbstractFacade<Cesta> {
         super(Cesta.class);
     }
 
-    public List<Cesta> findOsoba(Osoba osoba) {
+    public List<Cesta> findCestyOsoba(Osoba osoba) {
         javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         javax.persistence.criteria.CriteriaQuery cq = cb.createQuery();
         javax.persistence.criteria.Root<Cesta> rt = cq.from(Cesta.class);
@@ -53,7 +53,7 @@ public class CestaFacade extends AbstractFacade<Cesta> {
         return true;
     }
 
-    public boolean saveCesta(Cesta cesta, ArrayList<Ucastnik> ucastnikList, ArrayList<Rezervace> rezervaceList) {
+    public boolean saveCesta(Cesta cesta, List<Ucastnik> ucastnikList, List<Rezervace> rezervaceList) {
         try {
             saveCesta(cesta);
             saveUcatnikList(ucastnikList);
@@ -65,15 +65,16 @@ public class CestaFacade extends AbstractFacade<Cesta> {
         return true;
     }
 
-    public boolean saveUcatnikList(ArrayList<Ucastnik> ucastnikList) {
+    public boolean saveUcatnikList(List<Ucastnik> ucastnikList) {
         for (Ucastnik ucastnikLocal : ucastnikList) {
             saveUcatnik(ucastnikLocal);
         }
         return true;
     }
 
-    public boolean saveRezervaceList(ArrayList<Rezervace> rezervaceList) {
+    public boolean saveRezervaceList(List<Rezervace> rezervaceList) {
         for (Rezervace rezervaceLocal : rezervaceList) {
+            saveRezervace(rezervaceLocal);
         }
         return true;
     }
@@ -81,21 +82,22 @@ public class CestaFacade extends AbstractFacade<Cesta> {
     public boolean saveCesta(Cesta cesta) {
         // Cesta
         String insCesta = "INSERT INTO aktivity.public.CESTA "
-                + "(id, idtypzdr, idoso, komentar, zaloha, POPIS, PLATIOD, PLATIDO)"
-                + "VALUES (CAST(:id AS uuid), CAST(:idtypzdr AS uuid), CAST(:idoso AS uuid), :komentar, :zaloha, :POPIS, :PLATIOD, :PLATIDO)";
+                + "(idtypzdr, idoso, komentar, zaloha, POPIS, PLATIOD, PLATIDO,id)"
+                + "VALUES (?::uuid,?::uuid,?,?::numeric,?,?,?,cast(? AS uuid))";
         String updCesta = "UPDATE aktivity.public.CESTA SET "
-                + "idtypyzdr=CAST(:idtypzdr AS uuid), idoso=CAST(:idoso AS uuid), komentar=:komentar, zaloha=:zaloha, POPIS=:POPIS, PLATIOD=:PLATIOD, PLATIDO=:PLATIDO"
-                + " WHERE id=CAST(:id AS uuid)";
-        String delCesta = "DELETE aktivity.public.CESTA WHERE id=CAST(:id AS uuid)";
+                + "idtypzdr = ?::uuid, idoso = ?::uuid, komentar = ?, zaloha = ?::numeric, POPIS = ?, PLATIOD = ?, PLATIDO = ?"
+                + " WHERE id= cast(? AS uuid)";
+        String delCesta = "DELETE aktivity.public.CESTA WHERE id=?";
 
-        Query q = em.createNativeQuery(cesta.isNewEntity() ? insCesta : updCesta);
-        q.setParameter("id", cesta.getId());
-        q.setParameter("idtypzdr", cesta.getIdtypzdr().getId());
-        q.setParameter("idoso", cesta.getIdoso().getId());
-        q.setParameter("komentar", cesta.getKomentar());
-        q.setParameter("POPIS", cesta.getPopis());
-        q.setParameter("PLATIOD", cesta.getPlatiod());
-        q.setParameter("PLATIDO", cesta.getPlatido());
+        Query q = em.createNativeQuery(cesta.isNewEntity() ? insCesta : updCesta)
+        .setParameter(1, cesta.getIdtypzdr().getId())
+        .setParameter(2, cesta.getIdoso().getId())
+        .setParameter(3, cesta.getKomentar())
+        .setParameter(4, cesta.getZaloha())
+        .setParameter(5, cesta.getPopis())
+        .setParameter(6, cesta.getPlatiod())
+        .setParameter(7, cesta.getPlatido())
+        .setParameter(8, cesta.getId());
 //            em.getTransaction().begin();
         try {
             q.executeUpdate();
@@ -111,21 +113,21 @@ public class CestaFacade extends AbstractFacade<Cesta> {
     public boolean saveUcatnik(Ucastnik ucastnik) {
         // Ucastnik
         String insUcast = "INSERT INTO aktivity.public.UCASTNIK"
-                + "(id,idoso, idtypucast, idcest, POPIS, PLATIOD, PLATIDO)"
-                + "VALUES (CAST(:id AS uuid), CAST(:idoso AS uuid), CAST(:idtypucast AS uuid), CAST(:idcest AS uuid), :POPIS, :PLATIOD, :PLATIDO)";
+                + "(idoso, idtypucast, idcest, POPIS, PLATIOD, PLATIDO,id)"
+                + "VALUES (?::uuid,?::uuid,?::uuid, ?,?,?,?::uuid)";
         String updUcast = "UPDATE aktivity.public.UCASTNIK SET "
-                + " idoso=CAST(:idoso AS uuid), idtypucast=CAST(:idtypucast AS uuid), idcest=CAST(:idcest AS uuid), POPIS=:POPIS, PLATIOD=:PLATIOD, PLATIDO=:PLATIDO"
-                + " WHERE id=CAST(:id AS uuid)";
-        String delUcast = "DELETE aktivity.public.UCASTNIK WHERE id=CAST(:id AS uuid)";
+                + " idoso=?::uuid, idtypucast=?::uuid,idcest=?::uuid,POPIS=?,PLATIOD=?,PLATIDO=?"
+                + " WHERE id=?::uuid";
+        String delUcast = "DELETE aktivity.public.UCASTNIK WHERE id=CAST(? AS uuid)";
 
-        Query q = em.createNativeQuery(ucastnik.isNewEntity() ? insUcast : updUcast);
-        q.setParameter("id", ucastnik.getId());
-        q.setParameter("idoso", ucastnik.getIdoso().getId());
-        q.setParameter("idtypucast", ucastnik.getIdtypucast().getId());
-        q.setParameter("idcest", ucastnik.getIdcest().getId());
-        q.setParameter("POPIS", ucastnik.getPopis());
-        q.setParameter("PLATIOD", ucastnik.getPlatiod());
-        q.setParameter("PLATIDO", ucastnik.getPlatido());
+        Query q = em.createNativeQuery(ucastnik.isNewEntity() ? insUcast : updUcast)
+        .setParameter(1, ucastnik.getIdoso().getId())
+        .setParameter(2, ucastnik.getIdtypucast().getId())
+        .setParameter(3, ucastnik.getIdcest().getId())
+        .setParameter(4, ucastnik.getPopis())
+        .setParameter(5, ucastnik.getPlatiod())
+        .setParameter(6, ucastnik.getPlatido())
+        .setParameter(7, ucastnik.getId());
 //            em.getTransaction().begin();
         try {
             q.executeUpdate();
@@ -141,22 +143,22 @@ public class CestaFacade extends AbstractFacade<Cesta> {
     public boolean saveRezervace(Rezervace rezervace) {
         // Rezervace
         String insRez = "INSERT INTO aktivity.public.REZERVACE"
-                + "(id,idakt, idzdr, idcest, komentar, POPIS, PLATIOD, PLATIDO)"
-                + "VALUES (CAST(:id AS uuid), CAST(:idakt AS uuid), CAST(:idzdr AS uuid), CAST(:idcest AS uuid), komentar, :POPIS, :PLATIOD, :PLATIDO)";
+                + "(idakt, idzdr, idcest, komentar, POPIS, PLATIOD, PLATIDO,id)"
+                + "VALUES (?::uuid,?::uuid,?::uuid,?,?,?,?,?::uuid)";
         String updRez = "UPDATE aktivity.public.REZERVACE SET "
-                + " idakt=CAST(:idakt AS uuid), idtzdr=CAST(:idzdr AS uuid), idcest=CAST(:idcest AS uuid), komentar=:komentar, POPIS=:POPIS, PLATIOD=:PLATIOD, PLATIDO=:PLATIDO"
-                + " WHERE id=CAST(:id AS uuid)";
-        String delRez = "DELETE aktivity.public.REZERVACE WHERE id=CAST(:id AS uuid)";
+                + " idakt=?::uuid,idzdr=?::uuid,idcest=?::uuid,komentar=?,POPIS=?,PLATIOD=?,PLATIDO=?"
+                + " WHERE id=?::uuid";
+        String delRez = "DELETE aktivity.public.REZERVACE WHERE id=?::uuid";
 
         Query q = em.createNativeQuery(rezervace.isNewEntity() ? insRez : updRez);
-        q.setParameter("id", rezervace.getId());
-        q.setParameter("idakt", rezervace.getIdakt().getId());
-        q.setParameter("idzdr", rezervace.getIdzdr().getId());
-        q.setParameter("idcest", rezervace.getIdcest().getId());
-        q.setParameter("komentar", rezervace.getKomentar());
-        q.setParameter("POPIS", rezervace.getPopis());
-        q.setParameter("PLATIOD", rezervace.getPlatiod());
-        q.setParameter("PLATIDO", rezervace.getPlatido());
+        q.setParameter(1, rezervace.getIdakt().getId());
+        q.setParameter(2, rezervace.getIdzdr().getId());
+        q.setParameter(3, rezervace.getIdcest().getId());
+        q.setParameter(4, rezervace.getKomentar());
+        q.setParameter(5, rezervace.getPopis());
+        q.setParameter(6, rezervace.getPlatiod());
+        q.setParameter(7, rezervace.getPlatido());
+        q.setParameter(8, rezervace.getId());
 //            em.getTransaction().begin();
         try {
             q.executeUpdate();

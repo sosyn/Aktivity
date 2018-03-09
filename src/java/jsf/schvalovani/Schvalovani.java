@@ -163,7 +163,7 @@ public class Schvalovani implements Serializable {
      * @return the cesty
      */
     public ArrayList<Cesta> getCesty() {
-        this.cesty = new ArrayList<>(ejbCestaFacade.findOsoba(this.osoba));
+        this.cesty = new ArrayList<>(ejbCestaFacade.findCestyOsoba(this.osoba));
 //        if (this.cesty.isEmpty()) {
 //        }
         return cesty;
