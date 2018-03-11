@@ -5,7 +5,6 @@
  */
 package entity;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import javax.persistence.CascadeType;
@@ -20,12 +19,16 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import org.eclipse.persistence.annotations.Cache;
+import org.eclipse.persistence.annotations.CacheType;
+import org.eclipse.persistence.config.CacheIsolationType;
 
 /**
  *
  * @author Ivo
  */
 @Entity
+@Cache(isolation = CacheIsolationType.ISOLATED )
 @Table(catalog = "aktivity", schema = "public")
 @NamedQueries({
     @NamedQuery(name = "Cesta.findAll", query = "SELECT c FROM Cesta c")})

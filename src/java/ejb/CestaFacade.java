@@ -38,15 +38,15 @@ public class CestaFacade extends AbstractFacade<Cesta> {
     }
 
     public List<Cesta> findCestyOsoba(Osoba osoba) {
-//        javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
-//        javax.persistence.criteria.CriteriaQuery cq = cb.createQuery();
-//        javax.persistence.criteria.Root<Cesta> rt = cq.from(Cesta.class);
-//        cq.select(rt);
-//        cq.where(cb.equal(rt.get(Cesta_.idoso), osoba));
-//        javax.persistence.TypedQuery<Cesta> q = getEntityManager().createQuery(cq);
+        javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+        javax.persistence.criteria.CriteriaQuery cq = cb.createQuery();
+        javax.persistence.criteria.Root<Cesta> rt = cq.from(Cesta.class);
+        cq.select(rt);
+        cq.where(cb.equal(rt.get(Cesta_.idoso), osoba));
+        javax.persistence.TypedQuery<Cesta> q = getEntityManager().createQuery(cq);
 
-        String selCesty = "SELECT * FROM  aktivity.public.CESTA WHERE aktivity.public.CESTA.idoso=?::uuid";
-        Query q = em.createNativeQuery(selCesty,Cesta.class).setParameter(1, osoba.getId());
+//        String selCesty = "SELECT * FROM  aktivity.public.CESTA WHERE aktivity.public.CESTA.idoso=?::uuid";
+//        Query q = em.createNativeQuery(selCesty,Cesta.class).setParameter(1, osoba.getId());
         return q.getResultList();
     }
 

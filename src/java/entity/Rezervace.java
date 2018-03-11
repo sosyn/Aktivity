@@ -19,12 +19,15 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import org.eclipse.persistence.annotations.Cache;
+import org.eclipse.persistence.config.CacheIsolationType;
 
 /**
  *
  * @author Ivo
  */
 @Entity
+@Cache(isolation = CacheIsolationType.ISOLATED )
 @Table(catalog = "aktivity", schema = "public")
 @NamedQueries({
     @NamedQuery(name = "Rezervace.findAll", query = "SELECT r FROM Rezervace r")})

@@ -3,9 +3,10 @@
   <persistence-unit name="AktivityPU" transaction-type="JTA">
     <jta-data-source>jdbc/aktivity</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <shared-cache-mode>NONE</shared-cache-mode>
+    <!--    <shared-cache-mode>NONE</shared-cache-mode> -->
+    <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
     <properties>
-      <property name="eclipselink.cache.shared.default" value="false"/>
+      <!--      <property name="eclipselink.cache.shared.default" value="false"/> -->
     </properties>
   </persistence-unit>
 </persistence>

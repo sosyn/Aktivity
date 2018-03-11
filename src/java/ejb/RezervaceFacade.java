@@ -50,11 +50,11 @@ public class RezervaceFacade extends AbstractFacade<Rezervace> {
     public List<Rezervace> getRezeraceOdDo(Date platiOd, Date platiDo) {
         javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         javax.persistence.criteria.CriteriaQuery cq = cb.createQuery(Rezervace.class);
-        javax.persistence.criteria.Root<Rezervace> zdrojRoot = cq.from(Rezervace.class);
-        cq.select(zdrojRoot);
+        javax.persistence.criteria.Root<Rezervace> rezRoot = cq.from(Rezervace.class);
+        cq.select(rezRoot);
 
-        Path<Date> pathPlatiOd = zdrojRoot.get(Rezervace_.platiod);
-        Path<Date> pathPlatiDo = zdrojRoot.get(Rezervace_.platido);
+        Path<Date> pathPlatiOd = rezRoot.get(Rezervace_.platiod);
+        Path<Date> pathPlatiDo = rezRoot.get(Rezervace_.platido);
         Predicate prediPlatiOdDo = cb.and(
                 cb.or(cb.isNull(pathPlatiOd), cb.not(cb.greaterThan(pathPlatiOd, platiDo))),
                 cb.or(cb.isNull(pathPlatiDo), cb.greaterThan(pathPlatiDo, platiOd))
@@ -63,7 +63,7 @@ public class RezervaceFacade extends AbstractFacade<Rezervace> {
         Predicate prediWhere = cb.and(prediPlatiOdDo);
 
         cq.where(prediWhere);
-        cq.orderBy(cb.asc(zdrojRoot.get(Rezervace_.platiod)));
+        cq.orderBy(cb.asc(rezRoot.get(Rezervace_.platiod)));
 
         List<Rezervace> rl = getEntityManager().createQuery(cq).getResultList();
 //        System.out.println("findAllWhereTypZdroje.size()="+rl.size());
