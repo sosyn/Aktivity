@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.FlushModeType;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -37,12 +38,15 @@ public class CestaFacade extends AbstractFacade<Cesta> {
     }
 
     public List<Cesta> findCestyOsoba(Osoba osoba) {
-        javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
-        javax.persistence.criteria.CriteriaQuery cq = cb.createQuery();
-        javax.persistence.criteria.Root<Cesta> rt = cq.from(Cesta.class);
-        cq.select(rt);
-        cq.where(cb.equal(rt.get(Cesta_.idoso), osoba));
-        javax.persistence.TypedQuery<Cesta> q = getEntityManager().createQuery(cq);
+//        javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+//        javax.persistence.criteria.CriteriaQuery cq = cb.createQuery();
+//        javax.persistence.criteria.Root<Cesta> rt = cq.from(Cesta.class);
+//        cq.select(rt);
+//        cq.where(cb.equal(rt.get(Cesta_.idoso), osoba));
+//        javax.persistence.TypedQuery<Cesta> q = getEntityManager().createQuery(cq);
+
+        String selCesty = "SELECT * FROM  aktivity.public.CESTA WHERE aktivity.public.CESTA.idoso=?::uuid";
+        Query q = em.createNativeQuery(selCesty,Cesta.class).setParameter(1, osoba.getId());
         return q.getResultList();
     }
 
@@ -90,15 +94,16 @@ public class CestaFacade extends AbstractFacade<Cesta> {
         String delCesta = "DELETE aktivity.public.CESTA WHERE id=?";
 
         Query q = em.createNativeQuery(cesta.isNewEntity() ? insCesta : updCesta)
-        .setParameter(1, cesta.getIdtypzdr().getId())
-        .setParameter(2, cesta.getIdoso().getId())
-        .setParameter(3, cesta.getKomentar())
-        .setParameter(4, cesta.getZaloha())
-        .setParameter(5, cesta.getPopis())
-        .setParameter(6, cesta.getPlatiod())
-        .setParameter(7, cesta.getPlatido())
-        .setParameter(8, cesta.getId());
+                .setParameter(1, cesta.getIdtypzdr().getId())
+                .setParameter(2, cesta.getIdoso().getId())
+                .setParameter(3, cesta.getKomentar())
+                .setParameter(4, cesta.getZaloha())
+                .setParameter(5, cesta.getPopis())
+                .setParameter(6, cesta.getPlatiod())
+                .setParameter(7, cesta.getPlatido())
+                .setParameter(8, cesta.getId());
 //            em.getTransaction().begin();
+        q.setFlushMode(FlushModeType.COMMIT);
         try {
             q.executeUpdate();
         } catch (Exception e) {
@@ -121,13 +126,13 @@ public class CestaFacade extends AbstractFacade<Cesta> {
         String delUcast = "DELETE aktivity.public.UCASTNIK WHERE id=CAST(? AS uuid)";
 
         Query q = em.createNativeQuery(ucastnik.isNewEntity() ? insUcast : updUcast)
-        .setParameter(1, ucastnik.getIdoso().getId())
-        .setParameter(2, ucastnik.getIdtypucast().getId())
-        .setParameter(3, ucastnik.getIdcest().getId())
-        .setParameter(4, ucastnik.getPopis())
-        .setParameter(5, ucastnik.getPlatiod())
-        .setParameter(6, ucastnik.getPlatido())
-        .setParameter(7, ucastnik.getId());
+                .setParameter(1, ucastnik.getIdoso().getId())
+                .setParameter(2, ucastnik.getIdtypucast().getId())
+                .setParameter(3, ucastnik.getIdcest().getId())
+                .setParameter(4, ucastnik.getPopis())
+                .setParameter(5, ucastnik.getPlatiod())
+                .setParameter(6, ucastnik.getPlatido())
+                .setParameter(7, ucastnik.getId());
 //            em.getTransaction().begin();
         try {
             q.executeUpdate();

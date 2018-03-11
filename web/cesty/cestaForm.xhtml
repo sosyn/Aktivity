@@ -14,7 +14,7 @@
             <ui:define name="contens">
                 <p:layout fullPage="false">
                     <h:form>
-                        <p:layoutUnit position="center" >
+                        <p:layoutUnit position="center" style="width:500px;" >
                             <!-- <f:ajax event="blur" render=":cestaFormBtn"/> -->
                             <h2>Jednání:</h2>
                             <p>
@@ -54,10 +54,9 @@
                                 <br/>
                                 <p:inputNumber id="cestaZaloha" value="#{cestaForm.cesta.zaloha}" symbol=" Kč" symbolPosition="s" 
                                                decimalSeparator="," thousandSeparator="." minValue="0" maxValue="1000000" />
-                            </p>
-                            <!--  <h:outputText id="targetCestaForm" /> -->
+                            </p>                         
                         </p:layoutUnit>
-                        <p:layoutUnit position="east" size="70%" >
+                        <p:layoutUnit position="east" style="width:820px;" >
                             <h:messages id="errorMessages" style="color:red;margin:8px;" />
                             <p>
                                 <p:dataTable id="cestaUcastnici" value="#{cestaForm.cesta.ucastnikList}" var="itemUcast" selectionMode="single" selection="#{cestaForm.ucastnik}" rowKey="#{itemUcast.id}" editable="true" editMode="row" >
