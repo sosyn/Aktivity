@@ -24,6 +24,31 @@ import javax.persistence.Query;
  */
 @Stateless
 public class CestaFacade extends AbstractFacade<Cesta> {
+        // Cesta
+        String insCesta = "INSERT INTO aktivity.public.CESTA "
+                + "(idtypzdr, idoso, komentar, zaloha, POPIS, PLATIOD, PLATIDO,id)"
+                + "VALUES (?::uuid,?::uuid,?,?::numeric,?,?,?,cast(? AS uuid))";
+        String updCesta = "UPDATE aktivity.public.CESTA SET "
+                + "idtypzdr = ?::uuid, idoso = ?::uuid, komentar = ?, zaloha = ?::numeric, POPIS = ?, PLATIOD = ?, PLATIDO = ?"
+                + " WHERE id= cast(? AS uuid)";
+        String delCesta = "DELETE aktivity.public.CESTA WHERE id=?";
+        // Ucastnik
+        String insUcast = "INSERT INTO aktivity.public.UCASTNIK"
+                + "(idoso, idtypucast, idcest, POPIS, PLATIOD, PLATIDO,id)"
+                + "VALUES (?::uuid,?::uuid,?::uuid, ?,?,?,?::uuid)";
+        String updUcast = "UPDATE aktivity.public.UCASTNIK SET "
+                + " idoso=?::uuid, idtypucast=?::uuid,idcest=?::uuid,POPIS=?,PLATIOD=?,PLATIDO=?"
+                + " WHERE id=?::uuid";
+        String delUcast = "DELETE aktivity.public.UCASTNIK WHERE id=CAST(? AS uuid)";
+        // Rezervace
+        String insRez = "INSERT INTO aktivity.public.REZERVACE"
+                + "(idakt, idzdr, idcest, komentar, POPIS, PLATIOD, PLATIDO,id)"
+                + "VALUES (?::uuid,?::uuid,?::uuid,?,?,?,?,?::uuid)";
+        String updRez = "UPDATE aktivity.public.REZERVACE SET "
+                + " idakt=?::uuid,idzdr=?::uuid,idcest=?::uuid,komentar=?,POPIS=?,PLATIOD=?,PLATIDO=?"
+                + " WHERE id=?::uuid";
+        String delRez = "DELETE aktivity.public.REZERVACE WHERE id=?::uuid";
+
 
     @PersistenceContext(unitName = "AktivityPU")
     private EntityManager em;
@@ -83,16 +108,10 @@ public class CestaFacade extends AbstractFacade<Cesta> {
         return true;
     }
 
+    /* Ukladani cesta, ucastniku a rezervaci je nutne provest v NativeQuery, protoze je v Query potreba udelat Cast( id<neco> AS uuid)  
+    *  a ukladat kazde zvlast (cestu, rezervace a ucastniky)
+     */
     public boolean saveCesta(Cesta cesta) {
-        // Cesta
-        String insCesta = "INSERT INTO aktivity.public.CESTA "
-                + "(idtypzdr, idoso, komentar, zaloha, POPIS, PLATIOD, PLATIDO,id)"
-                + "VALUES (?::uuid,?::uuid,?,?::numeric,?,?,?,cast(? AS uuid))";
-        String updCesta = "UPDATE aktivity.public.CESTA SET "
-                + "idtypzdr = ?::uuid, idoso = ?::uuid, komentar = ?, zaloha = ?::numeric, POPIS = ?, PLATIOD = ?, PLATIDO = ?"
-                + " WHERE id= cast(? AS uuid)";
-        String delCesta = "DELETE aktivity.public.CESTA WHERE id=?";
-
         Query q = em.createNativeQuery(cesta.isNewEntity() ? insCesta : updCesta)
                 .setParameter(1, cesta.getIdtypzdr().getId())
                 .setParameter(2, cesta.getIdoso().getId())
@@ -102,6 +121,11 @@ public class CestaFacade extends AbstractFacade<Cesta> {
                 .setParameter(6, cesta.getPlatiod())
                 .setParameter(7, cesta.getPlatido())
                 .setParameter(8, cesta.getId());
+
+        if (cesta.isDelEntity()) {
+            q = em.createNativeQuery(delCesta)
+                    .setParameter(1, cesta.getId());
+        }
 //            em.getTransaction().begin();
         q.setFlushMode(FlushModeType.COMMIT);
         try {
@@ -116,14 +140,6 @@ public class CestaFacade extends AbstractFacade<Cesta> {
     }
 
     public boolean saveUcatnik(Ucastnik ucastnik) {
-        // Ucastnik
-        String insUcast = "INSERT INTO aktivity.public.UCASTNIK"
-                + "(idoso, idtypucast, idcest, POPIS, PLATIOD, PLATIDO,id)"
-                + "VALUES (?::uuid,?::uuid,?::uuid, ?,?,?,?::uuid)";
-        String updUcast = "UPDATE aktivity.public.UCASTNIK SET "
-                + " idoso=?::uuid, idtypucast=?::uuid,idcest=?::uuid,POPIS=?,PLATIOD=?,PLATIDO=?"
-                + " WHERE id=?::uuid";
-        String delUcast = "DELETE aktivity.public.UCASTNIK WHERE id=CAST(? AS uuid)";
 
         Query q = em.createNativeQuery(ucastnik.isNewEntity() ? insUcast : updUcast)
                 .setParameter(1, ucastnik.getIdoso().getId())
@@ -133,6 +149,11 @@ public class CestaFacade extends AbstractFacade<Cesta> {
                 .setParameter(5, ucastnik.getPlatiod())
                 .setParameter(6, ucastnik.getPlatido())
                 .setParameter(7, ucastnik.getId());
+
+        if (ucastnik.isDelEntity()) {
+            q = em.createNativeQuery(delUcast)
+                    .setParameter(1, ucastnik.getId());
+        }
 //            em.getTransaction().begin();
         try {
             q.executeUpdate();
@@ -146,15 +167,6 @@ public class CestaFacade extends AbstractFacade<Cesta> {
     }
 
     public boolean saveRezervace(Rezervace rezervace) {
-        // Rezervace
-        String insRez = "INSERT INTO aktivity.public.REZERVACE"
-                + "(idakt, idzdr, idcest, komentar, POPIS, PLATIOD, PLATIDO,id)"
-                + "VALUES (?::uuid,?::uuid,?::uuid,?,?,?,?,?::uuid)";
-        String updRez = "UPDATE aktivity.public.REZERVACE SET "
-                + " idakt=?::uuid,idzdr=?::uuid,idcest=?::uuid,komentar=?,POPIS=?,PLATIOD=?,PLATIDO=?"
-                + " WHERE id=?::uuid";
-        String delRez = "DELETE aktivity.public.REZERVACE WHERE id=?::uuid";
-
         Query q = em.createNativeQuery(rezervace.isNewEntity() ? insRez : updRez);
         q.setParameter(1, rezervace.getIdakt().getId());
         q.setParameter(2, rezervace.getIdzdr().getId());
@@ -164,6 +176,10 @@ public class CestaFacade extends AbstractFacade<Cesta> {
         q.setParameter(6, rezervace.getPlatiod());
         q.setParameter(7, rezervace.getPlatido());
         q.setParameter(8, rezervace.getId());
+        if (rezervace.isDelEntity()) {
+            q = em.createNativeQuery(delRez)
+                    .setParameter(1, rezervace.getId());
+        }
 //            em.getTransaction().begin();
         try {
             q.executeUpdate();

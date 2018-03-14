@@ -59,7 +59,7 @@
                         <p:layoutUnit position="east" style="width:820px;" >
                             <h:messages id="errorMessages" style="color:red;margin:8px;" />
                             <p>
-                                <p:dataTable id="cestaUcastnici" value="#{cestaForm.cesta.ucastnikList}" var="itemUcast" selectionMode="single" selection="#{cestaForm.ucastnik}" rowKey="#{itemUcast.id}" editable="true" editMode="row" >
+                                <p:dataTable id="cestaUcastnici" value="#{cestaForm.cesta.ucastnikList}" var="itemUcast" selectionMode="single" selection="#{cestaForm.ucastnik}" rowKey="#{itemUcast.id}" editable="true" editMode="cell" >
                                     <f:facet name="header">
                                         Účastníci
                                     </f:facet>
@@ -102,7 +102,7 @@
                             </p>
                             <hr/>   
                             <p>
-                                <p:dataTable id="cestaRez"  value="#{cestaForm.cesta.rezervaceList}" var="itemRez" selectionMode="single" selection="#{cestaForm.rezervace}" rowKey="#{itemRez.id}" editable="true" editMode="row">
+                                <p:dataTable id="cestaRez"  value="#{cestaForm.cesta.rezervaceList}" var="itemRez" selectionMode="single" selection="#{cestaForm.rezervace}" rowKey="#{itemRez.id}" editable="true" editMode="cell">
                                     <f:facet name="header">
                                         Rezervace vozidel
                                     </f:facet>
