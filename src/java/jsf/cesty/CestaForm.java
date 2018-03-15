@@ -345,11 +345,10 @@ public class CestaForm implements Serializable {
         Map<String, Object> options = new HashMap<>();
         options.put("modal", true);
         options.put("resizable", true);
+        options.put("maximizable", true);
         options.put("draggable", true);
-        options.put("height", "90%");
-        options.put("width", "100%");
-        options.put("contentHeight", "90%");
-        options.put("contentWidth", "95%");
+        options.put("height", "650");
+        options.put("contentHeight", "700");
         options.put("closeOnEscape", true);
         return options;
     }

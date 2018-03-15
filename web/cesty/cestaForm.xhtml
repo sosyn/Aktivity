@@ -13,8 +13,8 @@
         <ui:composition template = "/templates/templateMain.xhtml">	
             <ui:define name="contens">
                 <p:layout fullPage="false">
-                    <h:form >
-                        <p:layoutUnit position="center" style="width:500px;" >
+                    <h:form id="formCestaDetail"  >
+                        <p:layoutUnit position="west" size="400" >
                             <!-- <f:ajax event="blur" render=":cestaFormBtn"/> -->
                             <h2>Jednání:</h2>
                             <p>
@@ -56,10 +56,10 @@
                                                decimalSeparator="," thousandSeparator="." minValue="0" maxValue="1000000" />
                             </p>                         
                         </p:layoutUnit>
-                        <p:layoutUnit position="east" style="width:820px;" >
+                        <p:layoutUnit position="center">
                             <h:messages id="errorMessages" style="color:red;margin:8px;" />
                             <p>
-                                <p:dataTable id="cestaUcastnici" value="#{cestaForm.cesta.ucastnikList}" var="itemUcast" selectionMode="single" selection="#{cestaForm.ucastnik}" rowKey="#{itemUcast.id}" editable="true" editMode="cell" >
+                                <p:dataTable id="cestaUcastnici" value="#{cestaForm.cesta.ucastnikList}" var="itemUcast" selectionMode="single" selection="#{cestaForm.ucastnik}" rowKey="#{itemUcast.id}" editable="true" editMode="cell" style="width: 560px"  >
                                     <f:facet name="header">
                                         Účastníci
                                     </f:facet>
@@ -97,7 +97,7 @@
                             </p>
                             <hr/>   
                             <p>
-                                <p:dataTable id="cestaRez"  value="#{cestaForm.cesta.rezervaceList}" var="itemRez" selectionMode="single" selection="#{cestaForm.rezervace}" rowKey="#{itemRez.id}" editable="true" editMode="cell">
+                                <p:dataTable id="cestaRez"  value="#{cestaForm.cesta.rezervaceList}" var="itemRez" selectionMode="single" selection="#{cestaForm.rezervace}" rowKey="#{itemRez.id}" editable="true" editMode="cell" style="width: 560px" >
                                     <f:facet name="header">
                                         Rezervace vozidel
                                     </f:facet>
@@ -164,7 +164,7 @@
                             <p:commandButton value="Ano" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                             <p:commandButton value="Ne" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                         </p:confirmDialog>                            
-                        <p:layoutUnit position="south">
+                        <p:layoutUnit position="south" size="1220">
                             <p:commandButton id="cestaOK" action="#{cestaForm.saveCesta}" value="OK" icon="fa fa-file-o" ajax="false" />
                             <p:commandButton id="cestaCancle" value="Zpět" action="/cesty/cesty" icon="fa fa-edit"  ajax="false" />
                             <p:commandButton  id="cestaTiskPruvodka" value="Průvodka"  icon="fa fa-id-card-o" ajax="false" />
