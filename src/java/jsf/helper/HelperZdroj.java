@@ -50,6 +50,8 @@ public class HelperZdroj implements Serializable {
         this.osoba = osoba;
         this.platiOd = platiOd;
         this.platiDo = platiDo;
+        // Naplnit matici zdrojList volnymi zdroji
+        // :TODO
     }
 
     /**

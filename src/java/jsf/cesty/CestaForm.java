@@ -16,6 +16,7 @@ import entity.Zdroj;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -25,6 +26,8 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import jsf.helper.HelperOsoba;
+import jsf.helper.HelperZdroj;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
@@ -52,6 +55,10 @@ public class CestaForm implements Serializable {
     private ejb.UcastnikFacade ejbUcastnikFacade;
     @EJB
     private ejb.AktivityFacade ejbAktivityFacade;
+    @Inject
+    HelperOsoba helperOsoba;
+    @Inject
+    HelperZdroj helperZdroj;
     @Inject
     LoginUser loginUser;
 
@@ -269,6 +276,7 @@ public class CestaForm implements Serializable {
 // Helper pro vyber ucastnika
 //=====
     public void newUcastnici() {
+        helperZdroj.initHelperZdroj(this.loginUser.getOsoba(), this.cesta.getPlatiod(), this.cesta.getPlatiod());
         RequestContext.getCurrentInstance()
                 .openDialog("/helper/helperOsoby", getDialogOptions(), null);
     }
