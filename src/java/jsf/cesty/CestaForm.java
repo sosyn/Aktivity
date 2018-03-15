@@ -16,18 +16,17 @@ import entity.Zdroj;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import jsf.helper.HelperOsoba;
-import jsf.helper.HelperOsobyListener;
-import jsf.helper.HelperZdroj;
-import jsf.helper.HelperZdrojListener;
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -35,7 +34,7 @@ import jsf.helper.HelperZdrojListener;
  */
 @Named("cestaForm")
 @SessionScoped
-public class CestaForm implements Serializable, HelperOsobyListener, HelperZdrojListener {
+public class CestaForm implements Serializable {
 
     private static final int MODE_NEW = 0;
     private static final int MODE_EDIT = 1;
@@ -53,10 +52,6 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
     private ejb.UcastnikFacade ejbUcastnikFacade;
     @EJB
     private ejb.AktivityFacade ejbAktivityFacade;
-    @Inject
-    private HelperOsoba helperOsoba;
-    @Inject
-    private HelperZdroj helperZdroj;
     @Inject
     LoginUser loginUser;
 
@@ -76,15 +71,6 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
     @PostConstruct
     void init() {
         loginUser.initLoginUser();
-        this.helperOsoba.addHelperOsobyListener(this);
-        prepareHelperZdroj();
-        helperZdroj.addHelperZdrojListener(this);
-    }
-
-    @PreDestroy
-    void destroy() {
-        this.helperOsoba.removeHelperOsobyListener(this);
-        helperZdroj.removeHelperZdrojListener(this);
     }
 
     public CestaForm() {
@@ -256,7 +242,7 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
     }
 
     public String saveCesta() {
-        ejbCestaFacade.saveCesta(this.cesta, this.cesta.getUcastnikList(), this.cesta.getRezervaceList());
+        ejbCestaFacade.saveCesta(this.cesta, ucastnikListDel, rezervaceListDel);
         this.cesta = ejbCestaFacade.find(this.cesta.getId());
         if (this.cesta.isNewEntity()) {
             this.cesty.add(this.cesta);
@@ -282,12 +268,16 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
 // ====
 // Helper pro vyber ucastnika
 //=====
-    public void prepareHelperOsoby() {
-        System.out.println("prepareHelperOsoby()");
+    public void newUcastnici() {
+        RequestContext.getCurrentInstance()
+                .openDialog("/helper/helperOsoby", getDialogOptions(), null);
     }
 
-    @Override
-    public void actionHelperOsoby(ArrayList<Osoba> osoby) {
+    public void addUcastnici(SelectEvent selectEvent) {
+        ArrayList<Osoba> osoby = (ArrayList<Osoba>) selectEvent.getObject();
+        if (osoby == null) {
+            return;
+        }
         Ucastnik ucastnikLocal;
         //TODO: Dodelat defaultni typ ucastnika
         Typucast idtypucast = this.ejbTypUcastFacade.findPopis("Spolujezdec");
@@ -301,11 +291,11 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
             ucastnikLocal.setNewEntity(true);
             this.getCesta().getUcastnikList().add(ucastnikLocal);
         }
-//        this.helperOsoba.removeHelperOsobyListener(this);
     }
 
     public void ucastnikDelete() {
         if (!this.ucastnik.isNewEntity()) {
+            this.ucastnik.setDelEntity(true);
             this.ucastnikListDel.add(this.ucastnik);
         }
         this.getCesta().getUcastnikList().remove(this.ucastnik);
@@ -314,26 +304,17 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
 // ====
 // Helper pro vyber zdroje k rezervaci
 //=====
-    public void prepareHelperZdroj() {
-        helperZdroj.initHelperZdroj(loginUser.getOsoba(), this.getCesta().getPlatiod(), this.getCesta().getPlatido());
+    public void newRezervace() {
+//        helperZdroj.initHelperZdroj(loginUser.getOsoba(), this.getCesta().getPlatiod(), this.getCesta().getPlatido());
+        RequestContext.getCurrentInstance()
+                .openDialog("/helper/helperZdroj", getDialogOptions(), null);
     }
 
-    /**
-     * @return the helperZdroj
-     */
-    public HelperZdroj getHelperZdroj() {
-        return helperZdroj;
-    }
-
-    /**
-     * @param helperZdroj the helperZdroj to set
-     */
-    public void setHelperZdroj(HelperZdroj helperZdroj) {
-        this.helperZdroj = helperZdroj;
-    }
-
-    @Override
-    public void actionHelperZdroj(Zdroj zdroj) {
+    public void addRezervace(SelectEvent selectEvent) {
+        Zdroj zdroj = (Zdroj) selectEvent.getObject();
+        if (zdroj == null) {
+            return;
+        }
         this.rezervace = new Rezervace();
         this.rezervace.setIdzdr(zdroj);
         this.rezervace.setIdcest(this.getCesta());
@@ -354,9 +335,22 @@ public class CestaForm implements Serializable, HelperOsobyListener, HelperZdroj
 
     public void rezervaceDelete() {
         if (!this.rezervace.isNewEntity()) {
+            this.rezervace.setDelEntity(true);
             this.rezervaceListDel.add(this.rezervace);
         }
         this.getCesta().getRezervaceList().remove(this.rezervace);
     }
 
+    public Map<String, Object> getDialogOptions() {
+        Map<String, Object> options = new HashMap<>();
+        options.put("modal", true);
+        options.put("resizable", true);
+        options.put("draggable", true);
+        options.put("height", "90%");
+        options.put("width", "100%");
+        options.put("contentHeight", "90%");
+        options.put("contentWidth", "95%");
+        options.put("closeOnEscape", true);
+        return options;
+    }
 }

@@ -6,7 +6,6 @@
 package jsf.spravce;
 
 import ejb.LoginUser;
-import entity.Osoba;
 import entity.Typzdroje;
 import entity.Zdroj;
 import java.io.Serializable;
@@ -28,7 +27,6 @@ import javax.inject.Named;
 import jsf.helper.HelperOsoba;
 import jsf.util.JsfUtil;
 import jsf.util.JsfUtil.PersistAction;
-import jsf.helper.HelperOsobaListener;
 
 /**
  *
@@ -41,7 +39,7 @@ import jsf.helper.HelperOsobaListener;
  */
 @Named("zdroje")
 @SessionScoped
-public class Zdroje implements Serializable, HelperOsobaListener {
+public class Zdroje implements Serializable {
 
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
 
@@ -62,7 +60,6 @@ public class Zdroje implements Serializable, HelperOsobaListener {
 
     @PostConstruct
     void init() {
-        helperOsoba.addHelperOsobaListener(this);
         Principal userPrincipal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
         if (userPrincipal != null) {
             System.out.println("userPrincipal.getName():" + userPrincipal.getName());
@@ -221,11 +218,6 @@ public class Zdroje implements Serializable, HelperOsobaListener {
         helperOsoba.getSelectedOsoba(zdroj.getIdoso().getId());
     }
 
-    public void prepareHelperOsoba(Osoba osoba) {
-        helperOsoba.addHelperOsobaListener(this);
-        this.gethelperOsoba().setSelectedOsoba(osoba);
-    }
-
     public void save() {
         if (this.zdroj.isNewEntity()) {
             this.create();
@@ -297,10 +289,5 @@ public class Zdroje implements Serializable, HelperOsobaListener {
                 JsfUtil.validationFailed();
             }
         }
-    }
-
-    @Override
-    public void actionHelperOsoba(Osoba osoba) {
-        this.zdroj.setIdoso(osoba);
     }
 }

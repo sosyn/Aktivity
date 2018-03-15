@@ -24,31 +24,31 @@ import javax.persistence.Query;
  */
 @Stateless
 public class CestaFacade extends AbstractFacade<Cesta> {
-        // Cesta
-        String insCesta = "INSERT INTO aktivity.public.CESTA "
-                + "(idtypzdr, idoso, komentar, zaloha, POPIS, PLATIOD, PLATIDO,id)"
-                + "VALUES (?::uuid,?::uuid,?,?::numeric,?,?,?,cast(? AS uuid))";
-        String updCesta = "UPDATE aktivity.public.CESTA SET "
-                + "idtypzdr = ?::uuid, idoso = ?::uuid, komentar = ?, zaloha = ?::numeric, POPIS = ?, PLATIOD = ?, PLATIDO = ?"
-                + " WHERE id= cast(? AS uuid)";
-        String delCesta = "DELETE aktivity.public.CESTA WHERE id=?";
-        // Ucastnik
-        String insUcast = "INSERT INTO aktivity.public.UCASTNIK"
-                + "(idoso, idtypucast, idcest, POPIS, PLATIOD, PLATIDO,id)"
-                + "VALUES (?::uuid,?::uuid,?::uuid, ?,?,?,?::uuid)";
-        String updUcast = "UPDATE aktivity.public.UCASTNIK SET "
-                + " idoso=?::uuid, idtypucast=?::uuid,idcest=?::uuid,POPIS=?,PLATIOD=?,PLATIDO=?"
-                + " WHERE id=?::uuid";
-        String delUcast = "DELETE aktivity.public.UCASTNIK WHERE id=CAST(? AS uuid)";
-        // Rezervace
-        String insRez = "INSERT INTO aktivity.public.REZERVACE"
-                + "(idakt, idzdr, idcest, komentar, POPIS, PLATIOD, PLATIDO,id)"
-                + "VALUES (?::uuid,?::uuid,?::uuid,?,?,?,?,?::uuid)";
-        String updRez = "UPDATE aktivity.public.REZERVACE SET "
-                + " idakt=?::uuid,idzdr=?::uuid,idcest=?::uuid,komentar=?,POPIS=?,PLATIOD=?,PLATIDO=?"
-                + " WHERE id=?::uuid";
-        String delRez = "DELETE aktivity.public.REZERVACE WHERE id=?::uuid";
+    // Cesta
 
+    String insCesta = "INSERT INTO aktivity.public.CESTA "
+            + "(idtypzdr, idoso, komentar, zaloha, POPIS, PLATIOD, PLATIDO,id)"
+            + "VALUES (?::uuid,?::uuid,?,?::numeric,?,?,?,cast(? AS uuid))";
+    String updCesta = "UPDATE aktivity.public.CESTA SET "
+            + "idtypzdr = ?::uuid, idoso = ?::uuid, komentar = ?, zaloha = ?::numeric, POPIS = ?, PLATIOD = ?, PLATIDO = ?"
+            + " WHERE id= cast(? AS uuid)";
+    String delCesta = "DELETE FROM aktivity.public.CESTA WHERE id=?::uuid";
+    // Ucastnik
+    String insUcast = "INSERT INTO aktivity.public.UCASTNIK"
+            + "(idoso, idtypucast, idcest, POPIS, PLATIOD, PLATIDO,id)"
+            + "VALUES (?::uuid,?::uuid,?::uuid, ?,?,?,?::uuid)";
+    String updUcast = "UPDATE aktivity.public.UCASTNIK SET "
+            + " idoso=?::uuid, idtypucast=?::uuid,idcest=?::uuid,POPIS=?,PLATIOD=?,PLATIDO=?"
+            + " WHERE id=?::uuid";
+    String delUcast = "DELETE FROM aktivity.public.UCASTNIK WHERE id=?::uuid";
+    // Rezervace
+    String insRez = "INSERT INTO aktivity.public.REZERVACE"
+            + "(idakt, idzdr, idcest, komentar, POPIS, PLATIOD, PLATIDO,id)"
+            + "VALUES (?::uuid,?::uuid,?::uuid,?,?,?,?,?::uuid)";
+    String updRez = "UPDATE aktivity.public.REZERVACE SET "
+            + " idakt=?::uuid,idzdr=?::uuid,idcest=?::uuid,komentar=?,POPIS=?,PLATIOD=?,PLATIDO=?"
+            + " WHERE id=?::uuid";
+    String delRez = "DELETE FROM aktivity.public.REZERVACE WHERE id=?::uuid";
 
     @PersistenceContext(unitName = "AktivityPU")
     private EntityManager em;
@@ -82,11 +82,13 @@ public class CestaFacade extends AbstractFacade<Cesta> {
         return true;
     }
 
-    public boolean saveCesta(Cesta cesta, List<Ucastnik> ucastnikList, List<Rezervace> rezervaceList) {
+    public boolean saveCesta(Cesta cesta, List<Ucastnik> ucastnikListDel, List<Rezervace> rezervaceListDel) {
         try {
             saveCesta(cesta);
-            saveUcatnikList(ucastnikList);
-            saveRezervaceList(rezervaceList);
+            saveUcatnikList(cesta.getUcastnikList());
+            saveUcatnikList(ucastnikListDel);
+            saveRezervaceList(cesta.getRezervaceList());
+            saveRezervaceList(rezervaceListDel);
         } catch (Exception e) {
 //              em.getTransaction().rollback();
             throw e;

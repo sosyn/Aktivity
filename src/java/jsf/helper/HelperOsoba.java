@@ -15,6 +15,7 @@ import java.util.UUID;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -32,12 +33,10 @@ public class HelperOsoba implements Serializable {
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
 
     @EJB
-    private ejb.OsobaFacade ejbFacade;
+    private ejb.OsobaFacade ejbOsobaFacade;
     private Osoba selectedOsoba = null;
     private ArrayList<Osoba> selectedOsoby = null;
     private ArrayList<Osoba> osobyList = null;
-    private ArrayList<HelperOsobaListener> helperOsobaListeners = new ArrayList<>();
-    private ArrayList<HelperOsobyListener> helperOsobyListeners = new ArrayList<>();
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
@@ -56,20 +55,6 @@ public class HelperOsoba implements Serializable {
     }
 
     /**
-     * @return the ejbFacade
-     */
-    public ejb.OsobaFacade getEjbFacade() {
-        return ejbFacade;
-    }
-
-    /**
-     * @param ejbFacade the ejbFacade to set
-     */
-    public void setEjbFacade(ejb.OsobaFacade ejbFacade) {
-        this.ejbFacade = ejbFacade;
-    }
-
-    /**
      * @return the selectedOsoba
      */
     public Osoba getSelectedOsoba() {
@@ -77,12 +62,12 @@ public class HelperOsoba implements Serializable {
     }
 
     public Osoba getSelectedOsoba(UUID id) {
-        this.selectedOsoba = getEjbFacade().find(id);
+        this.selectedOsoba = this.ejbOsobaFacade.find(id);
         return this.selectedOsoba;
     }
 
     public Osoba getOsobaDefault() {
-        return getEjbFacade().findName("default");
+        return this.ejbOsobaFacade.findName("default");
     }
 
     /**
@@ -111,11 +96,11 @@ public class HelperOsoba implements Serializable {
      */
     public List<Osoba> getOsobyList() {
         if (this.osobyList == null) {
-            this.osobyList = new ArrayList<>(getEjbFacade().findAll());
+            this.osobyList = new ArrayList<>(this.ejbOsobaFacade.findAll());
         }
         return this.osobyList;
     }
-
+    
     /**
      * @param osobyList the osobyList to set
      */
@@ -123,39 +108,10 @@ public class HelperOsoba implements Serializable {
         this.osobyList = osobyList;
     }
 
-
-    // Posluchaci jednoho vyberu osoby
-    public void addHelperOsobaListener(HelperOsobaListener helperOsobaListener) {
-        this.helperOsobaListeners.add(helperOsobaListener);
+    public void submitHelperOsoby() {
+        RequestContext.getCurrentInstance().closeDialog(this.selectedOsoby);
     }
-    public void removeHelperOsobaListener(HelperOsobaListener helperOsobaListener) {
-        this.helperOsobaListeners.remove(helperOsobaListener);
+    public void cancelHelperOsoby() {
+        RequestContext.getCurrentInstance().closeDialog(null);
     }
-
-    /**
-     */
-    public void fireHelperOsoba() {
-        System.out.println("this.osoba =" + this.selectedOsoba);
-        for (HelperOsobaListener helperOsobaListener : helperOsobaListeners) {
-            helperOsobaListener.actionHelperOsoba(this.selectedOsoba);
-        }
-
-    }
-
-    // Posluchaci vice nasobneho vyberu osob
-    public void addHelperOsobyListener(HelperOsobyListener helperOsobyListener) {
-        this.helperOsobyListeners.add(helperOsobyListener);
-    }
-    public void removeHelperOsobyListener(HelperOsobyListener helperOsobyListener) {
-        this.helperOsobyListeners.remove(helperOsobyListener);
-    }
-
-    /**
-     */
-    public void fireHelperOsoby() {
-        for (HelperOsobyListener helperOsobyListener : helperOsobyListeners) {
-            helperOsobyListener.actionHelperOsoby(this.selectedOsoby);
-        }
-    }
-
 }

@@ -17,6 +17,7 @@ import java.util.Locale;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -41,10 +42,9 @@ public class HelperZdroj implements Serializable {
     private ArrayList<Zdroj> zdrojList = null;
     private Rezervace selectedRez = null;
     private ArrayList<Rezervace> rezervaceList = new ArrayList<>();
-    Osoba osoba;
-    Date platiOd;
-    Date platiDo;
-    private ArrayList<HelperZdrojListener> helperZdrojListeners = new ArrayList<>();
+    Osoba osoba=null;
+    Date platiOd=new Date();
+    Date platiDo=new Date();
 
     public void initHelperZdroj(Osoba osoba, Date platiOd, Date platiDo) {
         this.osoba = osoba;
@@ -139,20 +139,6 @@ public class HelperZdroj implements Serializable {
         this.selectedRez = selectedRez;
     }
 
-    /**
-     * @return the helperZdrojListeners
-     */
-    public ArrayList<HelperZdrojListener> getHelperZdrojListeners() {
-        return helperZdrojListeners;
-    }
-
-    /**
-     * @param helperZdrojListeners the helperZdrojListeners to set
-     */
-    public void setHelperZdrojListeners(ArrayList<HelperZdrojListener> helperZdrojListeners) {
-        this.helperZdrojListeners = helperZdrojListeners;
-    }
-
     public String getHRkapacita(Zdroj zdroj) {
         rezervaceList = new ArrayList<>();
         int pocetUcastniku = 0;
@@ -186,28 +172,10 @@ public class HelperZdroj implements Serializable {
         return sb.toString();
     }
 
-    
-    
-    
-        // Posluchaci jednoho vyberu osoby
-    public void addHelperZdrojListener(HelperZdrojListener helperZdrojListener) {
-        this.helperZdrojListeners.add(helperZdrojListener);
-    }
-    public void removeHelperZdrojListener(HelperZdrojListener helperZdrojListener) {
-        this.helperZdrojListeners.remove(helperZdrojListener);
-    }
-
-    /**
-     */
-    public void fireHelperZdroj() {
-        System.out.println("this.Zdroj =" + this.selectedZdr);
-        for (HelperZdrojListener helperZdrojListener : helperZdrojListeners) {
-            helperZdrojListener.actionHelperZdroj(this.selectedZdr);
-        }
-
-    }
-
-    
-    
-    
+ public void submitSelectedZdr() {
+      RequestContext.getCurrentInstance().closeDialog(this.selectedZdr);
+  }       
+ public void cancelSelectedZdr() {
+      RequestContext.getCurrentInstance().closeDialog(null);
+  }       
 }

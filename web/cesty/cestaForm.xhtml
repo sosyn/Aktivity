@@ -13,7 +13,7 @@
         <ui:composition template = "/templates/templateMain.xhtml">	
             <ui:define name="contens">
                 <p:layout fullPage="false">
-                    <h:form>
+                    <h:form >
                         <p:layoutUnit position="center" style="width:500px;" >
                             <!-- <f:ajax event="blur" render=":cestaFormBtn"/> -->
                             <h2>Jednání:</h2>
@@ -85,20 +85,15 @@
                                             </f:facet>
                                         </p:cellEditor>
                                     </p:column>
-                                    <p:column style="width:32px">
-                                        <p:rowEditor />
-                                    </p:column>
                                     <f:facet name="footer">
-                                        <p:commandButton id="ucastnikNew" value="Nový" actionListener="#{cestaForm.prepareHelperOsoby}" onsuccess="PF('ViewDlgHelperOsoby').show()" update="cestaUcastnici"  icon="fa fa-file-o" />
+                                        <p:commandButton id="ucastnikNew" value="Nový" actionListener="#{cestaForm.newUcastnici}"  icon="fa fa-file-o" >
+                                            <p:ajax event="dialogReturn" listener="#{cestaForm.addUcastnici}" update="cestaUcastnici" />                                        
+                                        </p:commandButton>
                                         <p:commandButton id="ucastnikDel" value="Smazat"  action="#{cestaForm.ucastnikDelete}"  update="cestaUcastnici"  icon="fa fa-remove">
                                             <p:confirm  header="Potvrzení" message="Opravdu smazat záznam &quot;#{cestaForm.ucastnik.idoso.popis}&quot; ?" icon="ui-icon-alert" />
                                         </p:commandButton>
                                     </f:facet>
                                 </p:dataTable>
-                                <p:confirmDialog header="Potvrďte volbu:" global="true" showEffect="fade" hideEffect="fade">
-                                    <p:commandButton value="Ano" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                                    <p:commandButton value="Ne" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                                </p:confirmDialog>                            
                             </p>
                             <hr/>   
                             <p>
@@ -154,11 +149,10 @@
                                             </f:facet>
                                         </p:cellEditor>
                                     </p:column>
-                                    <p:column style="width:32px">
-                                        <p:rowEditor />
-                                    </p:column>
                                     <f:facet name="footer">
-                                        <p:commandButton  id="rezNew"  value="Nová" actionListener="#{cestaForm.prepareHelperZdroj}" onsuccess="PF('ViewDlgHelperZdr').show()" update="cestaRez" icon="fa fa-file-o"/>                                  
+                                        <p:commandButton  id="rezNew"  value="Nová" actionListener="#{cestaForm.newRezervace}" update="cestaRez" icon="fa fa-file-o">
+                                            <p:ajax event="dialogReturn" listener="#{cestaForm.addRezervace}" update="cestaRez" />
+                                        </p:commandButton>                                       
                                         <p:commandButton  id="rezDel"  value="Smazat" action="#{cestaForm.rezervaceDelete}" update="cestaRez" icon="fa fa-remove" >
                                             <p:confirm  header="Potvrzení" message="Opravdu smazat záznam &quot;#{cestaForm.rezervace.idzdr.popis}&quot; ?" icon="ui-icon-alert" />
                                         </p:commandButton>
@@ -166,6 +160,10 @@
                                 </p:dataTable>
                             </p>
                         </p:layoutUnit>
+                        <p:confirmDialog header="Potvrďte volbu:" global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Ano" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="Ne" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>                            
                         <p:layoutUnit position="south">
                             <p:commandButton id="cestaOK" action="#{cestaForm.saveCesta}" value="OK" icon="fa fa-file-o" ajax="false" />
                             <p:commandButton id="cestaCancle" value="Zpět" action="/cesty/cesty" icon="fa fa-edit"  ajax="false" />
@@ -173,8 +171,6 @@
                         </p:layoutUnit>
                     </h:form>
                 </p:layout>
-                <ui:include src="/helper/helperOsoby.xhtml"/>
-                <ui:include src="/helper/helperZdroj.xhtml"/>               
             </ui:define>
         </ui:composition>
     </h:body>
