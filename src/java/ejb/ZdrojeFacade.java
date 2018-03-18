@@ -11,7 +11,6 @@ import entity.Typzdroje_;
 import entity.Zdroj;
 import entity.Zdroj_;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -66,6 +65,11 @@ public class ZdrojeFacade extends AbstractFacade<Zdroj> {
         return rl;
     }
 
+    /**
+     * Metoda vybere všechny použitelné zdroje, kde jsou splněny podmínky: - je
+     * to auto - zdroj je platný OD-DO - není ve vyloucenych-nedostupnych
+     * zdrojich (napr.jiz jednou vybranych)
+     */
     public List<Zdroj> findAccesibleZdrojList(TypZdrojeEnum typZdrojeEnum, Osoba osoba, Date platiOd, Date platiDo, ArrayList<Zdroj> disableZdrojList) {
         javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         javax.persistence.criteria.CriteriaQuery cq = cb.createQuery(Zdroj.class);
@@ -83,15 +87,15 @@ public class ZdrojeFacade extends AbstractFacade<Zdroj> {
         );
 
         Predicate prediWhere = cb.and(prediTypZdrCar, prediPlatiOdDo);
-        
+
         // Vyloucit nevyzadane zdroje (uz obsazene)
-        if (disableZdrojList != null) {
-            Path<UUID> pathDisableZdr=zdrojRoot.get(Zdroj_.id);
-            ArrayList<UUID> uuidDisableZdrojIdList=new ArrayList<>();
+        if (disableZdrojList != null && !disableZdrojList.isEmpty()) {
+            Path<UUID> pathDisableZdr = zdrojRoot.get(Zdroj_.id);
+            ArrayList<UUID> uuidDisableZdrojIdList = new ArrayList<>();
             for (Zdroj zdrojDisable : disableZdrojList) {
                 uuidDisableZdrojIdList.add(zdrojDisable.getId());
             }
-            prediWhere=cb.and(prediWhere,cb.not(pathDisableZdr.in(uuidDisableZdrojIdList)));
+            prediWhere = cb.and(prediWhere, cb.not(pathDisableZdr.in(uuidDisableZdrojIdList)));
         }
         cq.where(prediWhere);
         cq.orderBy(cb.asc(zdrojRoot.get(Zdroj_.popis)));
