@@ -8,6 +8,7 @@ package jsf.helper;
 import entity.Cesta;
 import entity.Osoba;
 import entity.Rezervace;
+import entity.TypZdrojeEnum;
 import entity.Zdroj;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,18 +41,22 @@ public class HelperZdroj implements Serializable {
     private ejb.ZdrojeFacade zdrojeFacade;
     private Zdroj selectedZdr = null;
     private ArrayList<Zdroj> zdrojList = null;
+    private ArrayList<Zdroj> disableZdrojList = null;
     private Rezervace selectedRez = null;
     private ArrayList<Rezervace> rezervaceList = new ArrayList<>();
-    Osoba osoba=null;
-    Date platiOd=new Date();
-    Date platiDo=new Date();
+    Osoba osoba = null;
+    Date platiOd = new Date();
+    Date platiDo = new Date();
 
-    public void initHelperZdroj(Osoba osoba, Date platiOd, Date platiDo) {
+    public void initHelperZdroj(Osoba osoba, Date platiOd, Date platiDo, ArrayList<Zdroj> disableZdrojList) {
         this.osoba = osoba;
         this.platiOd = platiOd;
         this.platiDo = platiDo;
+        this.disableZdrojList = disableZdrojList;
         // Naplnit matici zdrojList volnymi zdroji
         // :TODO
+        zdrojList = new ArrayList<>(zdrojeFacade.findAccesibleZdrojList(TypZdrojeEnum.VOZIDLO, osoba, platiOd, platiDo, disableZdrojList));
+
     }
 
     /**
@@ -153,7 +158,7 @@ public class HelperZdroj implements Serializable {
             }
         }
 //        return String.format("%1$2d/%2$2d", pocetUcastniku, zdroj.getKapacita());
-        return String.format("%1$2d",zdroj.getKapacita());
+        return String.format("%1$2d", zdroj.getKapacita());
     }
 
     public String getHRlabel(Zdroj zdroj) {
@@ -161,8 +166,8 @@ public class HelperZdroj implements Serializable {
         rezervaceList = new ArrayList<>();
         Cesta cesta;
         for (Rezervace rez : zdroj.getRezervaceList()) {
-            cesta=rez.getIdcest();
-            if (rez.getPlatiod().before(this.platiDo) && rez.getPlatido().after(this.platiOd) && rez.getIdcest()!= null) {
+            cesta = rez.getIdcest();
+            if (rez.getPlatiod().before(this.platiDo) && rez.getPlatido().after(this.platiOd) && rez.getIdcest() != null) {
                 sb.append(rez.getIdcest().getPopis().substring(0, Math.min(rez.getIdcest().getPopis().length(), 20)));
                 sb.append("\n");
                 rezervaceList.add(rez);
@@ -174,10 +179,11 @@ public class HelperZdroj implements Serializable {
         return sb.toString();
     }
 
- public void submitSelectedZdr() {
-      RequestContext.getCurrentInstance().closeDialog(this.selectedZdr);
-  }       
- public void cancelSelectedZdr() {
-      RequestContext.getCurrentInstance().closeDialog(null);
-  }       
+    public void submitSelectedZdr() {
+        RequestContext.getCurrentInstance().closeDialog(this.selectedZdr);
+    }
+
+    public void cancelSelectedZdr() {
+        RequestContext.getCurrentInstance().closeDialog(null);
+    }
 }

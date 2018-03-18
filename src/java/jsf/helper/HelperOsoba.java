@@ -9,6 +9,7 @@ import entity.Osoba;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -113,5 +114,9 @@ public class HelperOsoba implements Serializable {
     }
     public void cancelHelperOsoby() {
         RequestContext.getCurrentInstance().closeDialog(null);
+    }
+
+    public void initHelperOsoby(Osoba osoba, Date platiod, Date platiod0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

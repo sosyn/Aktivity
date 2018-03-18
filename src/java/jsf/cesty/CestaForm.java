@@ -16,7 +16,6 @@ import entity.Zdroj;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -38,10 +37,6 @@ import org.primefaces.event.SelectEvent;
 @Named("cestaForm")
 @SessionScoped
 public class CestaForm implements Serializable {
-
-    private static final int MODE_NEW = 0;
-    private static final int MODE_EDIT = 1;
-    private static final int MODE_DELETE = 2;
 
     @EJB
     private ejb.CestaFacade ejbCestaFacade;
@@ -81,7 +76,6 @@ public class CestaForm implements Serializable {
     }
 
     public CestaForm() {
-        this.mode = CestaForm.MODE_NEW;
     }
 
 // -----  Lokalni promenne ------------
@@ -206,8 +200,6 @@ public class CestaForm implements Serializable {
 // Zalozeni nove cesty
 //=====
     public boolean newCesta() {
-        this.mode = CestaForm.MODE_NEW;
-
         this.cesta = new Cesta();
         this.cesta.setIdoso(loginUser.getOsoba());
         this.cesta.setUcastnikList((List) new ArrayList<>());
@@ -238,7 +230,6 @@ public class CestaForm implements Serializable {
     }
 
     public boolean editCesta(Cesta cestaParam, ArrayList<Cesta> cestyParam) {
-        this.mode = CestaForm.MODE_EDIT;
         this.cesta = cestaParam;
         this.cesty = cestyParam;
         ucastnikListDel = new ArrayList<>();
@@ -276,7 +267,7 @@ public class CestaForm implements Serializable {
 // Helper pro vyber ucastnika
 //=====
     public void newUcastnici() {
-        helperZdroj.initHelperZdroj(this.loginUser.getOsoba(), this.cesta.getPlatiod(), this.cesta.getPlatiod());
+        helperOsoba.initHelperOsoby(this.loginUser.getOsoba(), this.cesta.getPlatiod(), this.cesta.getPlatiod());
         RequestContext.getCurrentInstance()
                 .openDialog("/helper/helperOsoby", getDialogOptions(), null);
     }
@@ -313,7 +304,11 @@ public class CestaForm implements Serializable {
 // Helper pro vyber zdroje k rezervaci
 //=====
     public void newRezervace() {
-//        helperZdroj.initHelperZdroj(loginUser.getOsoba(), this.getCesta().getPlatiod(), this.getCesta().getPlatido());
+        ArrayList<Zdroj> disableZdrojList = new ArrayList<>();
+        for (Rezervace rez : cesta.getRezervaceList()){
+            disableZdrojList.add(rez.getIdzdr());
+        }
+        helperZdroj.initHelperZdroj(loginUser.getOsoba(), this.getCesta().getPlatiod(), this.getCesta().getPlatido(),disableZdrojList);
         RequestContext.getCurrentInstance()
                 .openDialog("/helper/helperZdroj", getDialogOptions(), null);
     }
