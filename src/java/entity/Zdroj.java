@@ -17,6 +17,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 /**
@@ -36,21 +37,23 @@ public class Zdroj extends entity.EntitySuperClass {
     @Column(length = 4096)
     private String komentar;
     private Integer kapacita;
-    
+    @Transient
+    private Integer obsazeno;
+
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "zdroj")
     private List<Log> logList;
-    
+
     @JoinColumn(name = "idoso", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private Osoba idoso;
-    
+
     @JoinColumn(name = "idtypzdr", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private Typzdroje idtypzdr;
-    
+
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idzdr")
     private List<Rezervace> rezervaceList;
-    
+
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idzdr")
     private List<Dispecerpol> dispecerpolList;
 
@@ -88,6 +91,21 @@ public class Zdroj extends entity.EntitySuperClass {
 
     public void setKapacita(Integer kapacita) {
         this.kapacita = kapacita;
+    }
+
+    /**
+     * Pomocná proměnná pro uložení načtené vysoučtované hodnoty obsazených míst v rezervačním systému
+     * @return the obsazeno
+     */
+    public Integer getObsazeno() {
+        return obsazeno;
+    }
+
+    /**
+     * @param obsazeno the obsazeno to set
+     */
+    public void setObsazeno(Integer obsazeno) {
+        this.obsazeno = obsazeno;
     }
 
     public List<Log> getLogList() {
@@ -154,5 +172,4 @@ public class Zdroj extends entity.EntitySuperClass {
     public String toString() {
         return "entity.Zdroj[ id=" + this.getId() + " ]";
     }
-
 }
