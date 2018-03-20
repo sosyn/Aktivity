@@ -17,22 +17,6 @@
                         </f:facet>
                         <h:outputText value="#{item.popis}"/>
                     </p:column>
-                    <p:column sortBy="#{item.platiod}">
-                        <f:facet name="header">
-                            <h:outputText value="Platí Od"/>
-                        </f:facet>
-                        <h:outputText value="#{item.platiod}">
-                            <f:convertDateTime pattern="dd.MM.yyyy" />
-                        </h:outputText>
-                    </p:column>
-                    <p:column sortBy="#{item.platido}">
-                        <f:facet name="header" >
-                            <h:outputText value="Do"/>
-                        </f:facet>
-                        <h:outputText value="#{item.platido}">
-                            <f:convertDateTime pattern="dd.MM.yyyy" />
-                        </h:outputText>
-                    </p:column>
                 </p:dataTable>
                 <f:facet name="footer">
                     <p:commandButton id="btnhelperOsobaOK" value="OK"  action="#{helperOsoba.submitHelperOsoby}" icon="fa fa-check" />

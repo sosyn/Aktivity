@@ -33,25 +33,9 @@
                     </p:column>
                     <p:column >
                         <f:facet name="header" >
-                            <h:outputText value="Obsazeno/Kapacita"/>
+                            <h:outputText value="O/K" title="Obsazeno/Kapacita"/>
                         </f:facet>
-                        <h:outputText value="#{item.obsazeno}/#{item.kapacita}"/>
-                    </p:column>
-                    <p:column sortBy="#{item.platiod}">
-                        <f:facet name="header">
-                            <h:outputText value="Od"/>
-                        </f:facet>
-                        <h:outputText value="#{item.platiod}">
-                            <f:convertDateTime pattern="dd.MM.yyyy hh:mm" />
-                        </h:outputText>
-                    </p:column>
-                    <p:column sortBy="#{item.platido}">
-                        <f:facet name="header" >
-                            <h:outputText value="Do"/>
-                        </f:facet>
-                        <h:outputText value="#{item.platido}">
-                            <f:convertDateTime pattern="dd.MM.yyyy hh:mm" />
-                        </h:outputText>
+                        <h:outputText value="#{item.obsazeno}/#{item.kapacita}" title="Obsazeno/Kapacita"/>
                     </p:column>
                 </p:dataTable>
                 <f:facet name="footer">

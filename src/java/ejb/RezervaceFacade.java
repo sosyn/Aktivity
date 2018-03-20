@@ -47,7 +47,7 @@ public class RezervaceFacade extends AbstractFacade<Rezervace> {
         return q.getResultList();
     }
 
-    public List<Rezervace> getRezeraceOdDo(Date platiOd, Date platiDo) {
+    public List<Rezervace> getRezervaceOdDo(Date platiOd, Date platiDo) {
         javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         javax.persistence.criteria.CriteriaQuery cq = cb.createQuery(Rezervace.class);
         javax.persistence.criteria.Root<Rezervace> rezRoot = cq.from(Rezervace.class);

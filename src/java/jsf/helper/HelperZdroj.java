@@ -8,7 +8,6 @@ package jsf.helper;
 import entity.Cesta;
 import entity.Osoba;
 import entity.Rezervace;
-import entity.TypZdrojeEnum;
 import entity.Zdroj;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -41,22 +40,15 @@ public class HelperZdroj implements Serializable {
     private ejb.ZdrojeFacade zdrojeFacade;
     private Zdroj selectedZdr = null;
     private ArrayList<Zdroj> zdrojList = null;
-    private ArrayList<Zdroj> disableZdrojList = null;
     private Rezervace selectedRez = null;
     private ArrayList<Rezervace> rezervaceList = new ArrayList<>();
     Osoba osoba = null;
     Date platiOd = new Date();
     Date platiDo = new Date();
 
-    public void initHelperZdroj(Osoba osoba, Date platiOd, Date platiDo, ArrayList<Zdroj> disableZdrojList) {
-        this.osoba = osoba;
-        this.platiOd = platiOd;
-        this.platiDo = platiDo;
-        this.disableZdrojList = disableZdrojList;
-        // Naplnit matici zdrojList volnymi zdroji
-        // :TODO
-        zdrojList = new ArrayList<>(zdrojeFacade.findAccesibleZdrojList(TypZdrojeEnum.VOZIDLO, osoba, platiOd, platiDo, disableZdrojList));
-
+    
+    public void initHelperZdroj(Cesta cesta) {
+        zdrojList = new ArrayList<>(zdrojeFacade.findAccesibleZdrojList(cesta));
     }
 
     /**

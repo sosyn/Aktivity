@@ -5,11 +5,11 @@
  */
 package jsf.helper;
 
+import entity.Cesta;
 import entity.Osoba;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -116,7 +116,8 @@ public class HelperOsoba implements Serializable {
         RequestContext.getCurrentInstance().closeDialog(null);
     }
 
-    public void initHelperOsoby(Osoba osoba, Date platiod, Date platiod0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void initHelperOsoby(Cesta cesta ) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            this.osobyList = new ArrayList<>(this.ejbOsobaFacade.findAccesibleOsobaList(cesta));
     }
 }

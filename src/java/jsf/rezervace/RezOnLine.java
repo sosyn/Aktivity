@@ -149,7 +149,7 @@ public class RezOnLine implements Serializable {
 
     public void getDataForRezOnLine() {
         this.zdrojList = new ArrayList<>(ejbZdrojeFacade.findAllWhereTypZdroje(TypZdrojeEnum.VOZIDLO, this.platiOd, this.platiDo));
-        this.rezervaceList = new ArrayList<>(ejbRezervaceFacade.getRezeraceOdDo(this.platiOd, this.platiDo));
+        this.rezervaceList = new ArrayList<>(ejbRezervaceFacade.getRezervaceOdDo(this.platiOd, this.platiDo));
         kalendar.initColumns(this.platiOd, this.platiDo);
         //System.out.println("RezOnLine.onRefresh platiOd: " + this.platiOd + " platiDo: " + this.platiDo);
     }

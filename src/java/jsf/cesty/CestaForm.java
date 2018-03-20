@@ -201,6 +201,7 @@ public class CestaForm implements Serializable {
 //=====
     public boolean newCesta() {
         this.cesta = new Cesta();
+        this.cesta.setNewEntity(true);
         this.cesta.setIdoso(loginUser.getOsoba());
         this.cesta.setUcastnikList((List) new ArrayList<>());
         this.cesta.setRezervaceList((List) new ArrayList<>());
@@ -236,13 +237,15 @@ public class CestaForm implements Serializable {
         rezervaceListDel = new ArrayList<>();
         this.getCesta().setUcastnikList(new ArrayList<>(ejbUcastnikFacade.findUcastnikyWhereCesta(this.getCesta())));
         this.getCesta().setRezervaceList(new ArrayList<>(ejbRezervaceFacade.findRezervaceWhereCesta(this.getCesta())));
+
         return true;
     }
 
     public String saveCesta() {
+        boolean newCesta = this.cesta.isNewEntity();
         ejbCestaFacade.saveCesta(this.cesta, ucastnikListDel, rezervaceListDel);
         this.cesta = ejbCestaFacade.find(this.cesta.getId());
-        if (this.cesta.isNewEntity()) {
+        if (newCesta) {
             this.cesty.add(this.cesta);
         } else {
             for (Cesta cestal : this.cesty) {
@@ -267,9 +270,9 @@ public class CestaForm implements Serializable {
 // Helper pro vyber ucastnika
 //=====
     public void newUcastnici() {
-        helperOsoba.initHelperOsoby(this.loginUser.getOsoba(), this.cesta.getPlatiod(), this.cesta.getPlatiod());
+        helperOsoba.initHelperOsoby(this.cesta);
         RequestContext.getCurrentInstance()
-                .openDialog("/helper/helperOsoby", getDialogOptions(), null);
+                .openDialog("/helper/helperOsoba", getDialogOptions(), null);
     }
 
     public void addUcastnici(SelectEvent selectEvent) {
@@ -305,10 +308,11 @@ public class CestaForm implements Serializable {
 //=====
     public void newRezervace() {
         ArrayList<Zdroj> disableZdrojList = new ArrayList<>();
-        for (Rezervace rez : cesta.getRezervaceList()){
+        for (Rezervace rez : cesta.getRezervaceList()) {
             disableZdrojList.add(rez.getIdzdr());
         }
-        helperZdroj.initHelperZdroj(loginUser.getOsoba(), this.getCesta().getPlatiod(), this.getCesta().getPlatido(),disableZdrojList);
+//        helperZdroj.initHelperZdroj(loginUser.getOsoba(), this.getCesta().getPlatiod(), this.getCesta().getPlatido(), disableZdrojList);
+        helperZdroj.initHelperZdroj(this.cesta);
         RequestContext.getCurrentInstance()
                 .openDialog("/helper/helperZdroj", getDialogOptions(), null);
     }
