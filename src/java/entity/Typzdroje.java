@@ -131,5 +131,4 @@ public class Typzdroje extends entity.EntitySuperClass {
     public String toString() {
         return "entity.Typzdroje[ id=" + this.getId() + " ]";
     }
-
 }

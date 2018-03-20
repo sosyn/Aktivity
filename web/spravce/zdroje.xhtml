@@ -95,9 +95,11 @@
                             </p>
                             <p>
                                 <p:outputLabel  for="zdrojOso" value="Osoba přiřazená ke zdroji:" /><br/>
+<!--                                
                                 <p:inputText id="zdrojOso"  value="#{zdroje.helperOsoba.selectedOsoba.popis}" disabled="true" />
                                 <p:message for="zdrojOso" />
                                 <p:commandButton id="cmdBtnHelperOsoba" value="Číselník osob" actionListener="#{zdroje.prepareHelperOsoba(osoba)}" oncomplete="PF('ViewDlghelperOsoba').show()" update=":growl,:FormZdroje,:FormZdrojeDetail" icon="fa-list-ul" />
+-->
                             </p>
                             <p>
                                 <p:outputLabel  for="kapacita" value="Max. kapacita:" /><br/>
@@ -140,7 +142,6 @@
                         </h:form>
                     </p:layoutUnit>
                 </p:layout>
-                <ui:include src="/helper/helperOsoba.xhtml"/>
             </ui:define>
         </ui:composition>
     </h:body>

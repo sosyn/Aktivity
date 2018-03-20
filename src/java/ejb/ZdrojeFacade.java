@@ -7,9 +7,9 @@ package ejb;
 
 import entity.Osoba;
 import entity.TypZdrojeEnum;
+import entity.Typzdroje_;
 import entity.Zdroj;
 import entity.Zdroj_;
-import entity.Typzdroje_;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -118,7 +118,8 @@ public class ZdrojeFacade extends AbstractFacade<Zdroj> {
 //        cq.orderBy(cb.asc(zdrojRoot.get(Zdroj_.popis)));
 //        List<Zdroj> rl = getEntityManager().createQuery(cq).getResultList();
 
-        String selZdr = "SELECT zdr.id, zdr.idtypzdr, zdr.idoso, zdr.spz, zdr.komentar,zdr.kapacita, zdr.popis, zdr.platiod, zdr.platido, zdr.timeinsert, zdr.timemodify, zdr.usermodify,"
+        StringBuilder selZdr = new StringBuilder(
+                "SELECT zdr.id, zdr.idtypzdr, zdr.idoso, zdr.spz, zdr.komentar,zdr.kapacita, zdr.popis, zdr.platiod, zdr.platido, zdr.timeinsert, zdr.timemodify, zdr.usermodify,"
                 + "( SELECT count(*) "
                 + "         FROM ucastnik uc,rezervace re "
                 + "         WHERE zdr.id=re.idzdr and re.platiod<=? and re.platido>=? and uc.idcest=re.idcest "
@@ -128,40 +129,38 @@ public class ZdrojeFacade extends AbstractFacade<Zdroj> {
                 + "( SELECT count(*) "
                 + "         FROM ucastnik uc, rezervace re "
                 + "         WHERE zdr.id=re.idzdr and re.platiod>=? and re.platido<=? and uc.idcest=re.idcest "
-                + ")<= zdr.kapacita and zdr.id NOT IN (?) "
-                + "ORDER BY zdr.komentar;";
-        StringBuilder disableZdr = new StringBuilder("'XXXX-XXXX'");
-        for (Zdroj zdr : disableZdrojList) {
-            disableZdr.append(",'").append(zdr.getId()).append("'");
+                + ")<= zdr.kapacita "
+        );
+        // Vyloucit nepripustne zdroje
+        if (!disableZdrojList.isEmpty()) {
+            selZdr.append("and zdr.id NOT IN (");
+            boolean comma = false;
+            for (Zdroj zdr : disableZdrojList) {
+                if (comma) {
+                    selZdr.append(",");
+                }
+                selZdr.append("'");
+                selZdr.append(zdr.getId());
+                selZdr.append("'");
+                comma = true;
+            }
+            selZdr.append(") ");
         }
-        Query q = em.createNativeQuery(selZdr)
+        selZdr.append(" ORDER BY zdr.komentar;");
+        // Doplnit parametry a spustit dotaz
+        Query q = em.createNativeQuery(selZdr.toString())
                 .setParameter(1, platiDo)
                 .setParameter(2, platiOd)
                 .setParameter(3, platiOd)
                 .setParameter(4, platiDo)
                 .setParameter(5, platiDo)
-                .setParameter(6, platiOd)
-                .setParameter(7, disableZdr);
+                .setParameter(6, platiOd);
         ArrayList<Zdroj> rl = new ArrayList<>();
         List<Object[]> zdrList = q.getResultList();
         Zdroj zdr;
         for (Object[] obj : zdrList) {
-            zdr = new Zdroj();
-            zdr.setId((UUID)obj[0]);
-            // zdr.setIdtypzdr((UUID)obj[1]);
-            // zdr.setIdoso((UUID)obj[2]);
-            zdr.setSpz((String)obj[3]);
-            zdr.setKomentar((String)obj[4]);
-            zdr.setKapacita((Integer)obj[5]);
-            zdr.setPopis((String)obj[6]);
-            zdr.setPlatiod((Date)obj[7]);
-            zdr.setPlatido((Date)obj[8]);
-            zdr.setTimeinsert((Date)obj[9]);
-            zdr.setTimemodify((Date)obj[10]);
-            zdr.setUsermodify((String)obj[11]);
-            zdr.setObsazeno((Integer)obj[12]);
-            
-            // :TODO
+            zdr = em.find(Zdroj.class, (UUID) obj[0]);
+            zdr.setObsazeno(((Long)obj[12]).intValue());
             rl.add(zdr);
         }
         return rl;

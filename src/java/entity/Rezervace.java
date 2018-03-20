@@ -153,6 +153,5 @@ public class Rezervace extends entity.EntitySuperClass {
     @Override
     public String toString() {
         return "entity.Rezervace[ id=" + getId() + " ]";
-    }
-    
+    }   
 }

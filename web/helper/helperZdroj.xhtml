@@ -33,9 +33,9 @@
                     </p:column>
                     <p:column >
                         <f:facet name="header" >
-                            <h:outputText value="Kapacita"/>
+                            <h:outputText value="Obsazeno/Kapacita"/>
                         </f:facet>
-                        <h:outputText value="#{helperZdroj.getHRkapacita(item)}"/>
+                        <h:outputText value="#{item.obsazeno}/#{item.kapacita}"/>
                     </p:column>
                     <p:column sortBy="#{item.platiod}">
                         <f:facet name="header">

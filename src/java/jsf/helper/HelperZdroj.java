@@ -149,12 +149,14 @@ public class HelperZdroj implements Serializable {
     public String getHRkapacita(Zdroj zdroj) {
         rezervaceList = new ArrayList<>();
         int pocetUcastniku = 0;
-        for (Rezervace rez : zdroj.getRezervaceList()) {
-            if (rez.getPlatiod().before(this.platiDo) && rez.getPlatido().after(this.platiOd)) {
-                if (rez.getIdcest() != null && rez.getIdcest().getUcastnikList() != null) {
-                    pocetUcastniku += rez.getIdcest().getUcastnikList().size();
+        if (zdroj.getRezervaceList() != null) {
+            for (Rezervace rez : zdroj.getRezervaceList()) {
+                if (rez.getPlatiod().before(this.platiDo) && rez.getPlatido().after(this.platiOd)) {
+                    if (rez.getIdcest() != null && rez.getIdcest().getUcastnikList() != null) {
+                        pocetUcastniku += rez.getIdcest().getUcastnikList().size();
+                    }
+                    rezervaceList.add(rez);
                 }
-                rezervaceList.add(rez);
             }
         }
 //        return String.format("%1$2d/%2$2d", pocetUcastniku, zdroj.getKapacita());
@@ -165,12 +167,14 @@ public class HelperZdroj implements Serializable {
         StringBuilder sb = new StringBuilder("");
         rezervaceList = new ArrayList<>();
         Cesta cesta;
-        for (Rezervace rez : zdroj.getRezervaceList()) {
-            cesta = rez.getIdcest();
-            if (rez.getPlatiod().before(this.platiDo) && rez.getPlatido().after(this.platiOd) && rez.getIdcest() != null) {
-                sb.append(rez.getIdcest().getPopis().substring(0, Math.min(rez.getIdcest().getPopis().length(), 20)));
-                sb.append("\n");
-                rezervaceList.add(rez);
+        if (zdroj.getRezervaceList() != null) {
+            for (Rezervace rez : zdroj.getRezervaceList()) {
+                cesta = rez.getIdcest();
+                if (rez.getPlatiod().before(this.platiDo) && rez.getPlatido().after(this.platiOd) && rez.getIdcest() != null) {
+                    sb.append(rez.getIdcest().getPopis().substring(0, Math.min(rez.getIdcest().getPopis().length(), 20)));
+                    sb.append("\n");
+                    rezervaceList.add(rez);
+                }
             }
         }
         if (sb.length() == 0) {
