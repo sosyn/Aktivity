@@ -1,7 +1,7 @@
 # Aktivity
 Rezervace zdrojů a cestovní příkazy
 ===================================
-
+XXX. Začít řešit schvalování, u helperu vyřešit zobrazení detailu rezervace u zdrojů v samostatném dialogu
 XXIX. Dodělán NativeQuery na výběr Zdrojů pro HelperZdroj a HelperOsoba
       doladit celý formulář 
 XXVIII. Dodělán NativeQuery na výběr Zdrojů pro HelperZdroj - ladit zobrazení, zohlednit účastníky 

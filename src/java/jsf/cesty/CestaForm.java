@@ -199,7 +199,8 @@ public class CestaForm implements Serializable {
 // ====
 // Zalozeni nove cesty
 //=====
-    public boolean newCesta() {
+    public boolean newCesta(ArrayList<Cesta> cestyParam) {
+        this.cesty = cestyParam;
         this.cesta = new Cesta();
         this.cesta.setNewEntity(true);
         this.cesta.setIdoso(loginUser.getOsoba());
@@ -307,11 +308,6 @@ public class CestaForm implements Serializable {
 // Helper pro vyber zdroje k rezervaci
 //=====
     public void newRezervace() {
-        ArrayList<Zdroj> disableZdrojList = new ArrayList<>();
-        for (Rezervace rez : cesta.getRezervaceList()) {
-            disableZdrojList.add(rez.getIdzdr());
-        }
-//        helperZdroj.initHelperZdroj(loginUser.getOsoba(), this.getCesta().getPlatiod(), this.getCesta().getPlatido(), disableZdrojList);
         helperZdroj.initHelperZdroj(this.cesta);
         RequestContext.getCurrentInstance()
                 .openDialog("/helper/helperZdroj", getDialogOptions(), null);

@@ -80,8 +80,11 @@ public class OsobaFacade extends AbstractFacade<Osoba> {
                 cb.or(cb.isNull(pathPlatiOd), cb.not(cb.greaterThan(pathPlatiOd, cesta.getPlatido()))),
                 cb.or(cb.isNull(pathPlatiDo), cb.greaterThanOrEqualTo(pathPlatiDo, cesta.getPlatiod()))
         );
+        Predicate prediWhere = prediPlatiOdDo;
+        if (prediNoOsoba != null) {
+            prediWhere = cb.and(prediNoOsoba, prediPlatiOdDo);
 
-        Predicate prediWhere = cb.and(prediNoOsoba, prediPlatiOdDo);
+        }
         cq.where(prediWhere);
         cq.orderBy(cb.asc(osobaRoot.get(Osoba_.popis)));
 

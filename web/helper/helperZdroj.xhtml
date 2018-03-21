@@ -27,15 +27,16 @@
                     </p:column>
                     <p:column >
                         <f:facet name="header" >
-                            <h:outputText value="Rezervace"/>
-                        </f:facet>
-                        <h:outputText value="#{helperZdroj.getHRlabel(item)}"/>
-                    </p:column>
-                    <p:column >
-                        <f:facet name="header" >
                             <h:outputText value="O/K" title="Obsazeno/Kapacita"/>
                         </f:facet>
                         <h:outputText value="#{item.obsazeno}/#{item.kapacita}" title="Obsazeno/Kapacita"/>
+                    </p:column>
+                    <p:column >
+                        <f:facet name="header" >
+                            <h:outputText value="Rezervace"/>
+                        </f:facet>
+                        <p:commandButton value="i"  actionListener="#{helperZdroj.dlgDetailRez(helperZdroj.selectedRez)}" icon="fa fa-check" />
+                        <h:outputText value="#{helperZdroj.getHRlabel(item)}" />
                     </p:column>
                 </p:dataTable>
                 <f:facet name="footer">

@@ -41,6 +41,11 @@ public class HelperOsoba implements Serializable {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
+    public void initHelperOsoby(Cesta cesta) {
+        this.osobyList = new ArrayList<>(this.ejbOsobaFacade.findAccesibleOsobaList(cesta));
+        this.selectedOsoba = null;
+        this.selectedOsoby = null;
+    }
     /**
      * @return the cal
      */
@@ -101,7 +106,7 @@ public class HelperOsoba implements Serializable {
         }
         return this.osobyList;
     }
-    
+
     /**
      * @param osobyList the osobyList to set
      */
@@ -112,12 +117,8 @@ public class HelperOsoba implements Serializable {
     public void submitHelperOsoby() {
         RequestContext.getCurrentInstance().closeDialog(this.selectedOsoby);
     }
+
     public void cancelHelperOsoby() {
         RequestContext.getCurrentInstance().closeDialog(null);
-    }
-
-    public void initHelperOsoby(Cesta cesta ) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            this.osobyList = new ArrayList<>(this.ejbOsobaFacade.findAccesibleOsobaList(cesta));
     }
 }

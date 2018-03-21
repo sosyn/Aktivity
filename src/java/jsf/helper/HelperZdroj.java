@@ -6,7 +6,6 @@
 package jsf.helper;
 
 import entity.Cesta;
-import entity.Osoba;
 import entity.Rezervace;
 import entity.Zdroj;
 import java.io.Serializable;
@@ -34,49 +33,22 @@ public class HelperZdroj implements Serializable {
 
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
 
-    @EJB
-    private ejb.RezervaceFacade rezFacade;
+//    @EJB
+//    private ejb.RezervaceFacade rezFacade;
     @EJB
     private ejb.ZdrojeFacade zdrojeFacade;
     private Zdroj selectedZdr = null;
     private ArrayList<Zdroj> zdrojList = null;
     private Rezervace selectedRez = null;
     private ArrayList<Rezervace> rezervaceList = new ArrayList<>();
-    Osoba osoba = null;
     Date platiOd = new Date();
     Date platiDo = new Date();
 
-    
     public void initHelperZdroj(Cesta cesta) {
         zdrojList = new ArrayList<>(zdrojeFacade.findAccesibleZdrojList(cesta));
-    }
-
-    /**
-     * @return the rezFacade
-     */
-    public ejb.RezervaceFacade getRezFacade() {
-        return rezFacade;
-    }
-
-    /**
-     * @param rezFacade the rezFacade to set
-     */
-    public void setRezFacade(ejb.RezervaceFacade rezFacade) {
-        this.rezFacade = rezFacade;
-    }
-
-    /**
-     * @return the zdrojeFacade
-     */
-    public ejb.ZdrojeFacade getZdrojeFacade() {
-        return zdrojeFacade;
-    }
-
-    /**
-     * @param zdrojeFacade the zdrojeFacade to set
-     */
-    public void setZdrojeFacade(ejb.ZdrojeFacade zdrojeFacade) {
-        this.zdrojeFacade = zdrojeFacade;
+        this.platiOd = cesta.getPlatiod();
+        this.platiDo = cesta.getPlatido();
+        this.selectedZdr = null;
     }
 
     /**
@@ -138,33 +110,21 @@ public class HelperZdroj implements Serializable {
         this.selectedRez = selectedRez;
     }
 
-    public String getHRkapacita(Zdroj zdroj) {
-        rezervaceList = new ArrayList<>();
-        int pocetUcastniku = 0;
-        if (zdroj.getRezervaceList() != null) {
-            for (Rezervace rez : zdroj.getRezervaceList()) {
-                if (rez.getPlatiod().before(this.platiDo) && rez.getPlatido().after(this.platiOd)) {
-                    if (rez.getIdcest() != null && rez.getIdcest().getUcastnikList() != null) {
-                        pocetUcastniku += rez.getIdcest().getUcastnikList().size();
-                    }
-                    rezervaceList.add(rez);
-                }
-            }
-        }
-//        return String.format("%1$2d/%2$2d", pocetUcastniku, zdroj.getKapacita());
-        return String.format("%1$2d", zdroj.getKapacita());
-    }
-
     public String getHRlabel(Zdroj zdroj) {
         StringBuilder sb = new StringBuilder("");
         rezervaceList = new ArrayList<>();
         Cesta cesta;
         if (zdroj.getRezervaceList() != null) {
+            sb.append("<p:commandButton value=\"i\" actionListener=#{helperZdroj.dlgDeatailRey()} />");
             for (Rezervace rez : zdroj.getRezervaceList()) {
                 cesta = rez.getIdcest();
                 if (rez.getPlatiod().before(this.platiDo) && rez.getPlatido().after(this.platiOd) && rez.getIdcest() != null) {
+                    sb.append(String.format("%1$td.%1$tm.%1$tY %1$tR", rez.getPlatiod()));
+                    sb.append(" - ");
+                    sb.append(String.format("%1$td.%1$tm.%1$tY %1$tR", rez.getPlatido()));
+                    sb.append(" ");
                     sb.append(rez.getIdcest().getPopis().substring(0, Math.min(rez.getIdcest().getPopis().length(), 20)));
-                    sb.append("\n");
+                    sb.append("<br/>");
                     rezervaceList.add(rez);
                 }
             }
@@ -181,5 +141,10 @@ public class HelperZdroj implements Serializable {
 
     public void cancelSelectedZdr() {
         RequestContext.getCurrentInstance().closeDialog(null);
+    }
+
+    public void dlgDetailRez(Rezervace rez) {
+        RequestContext.getCurrentInstance()
+                .openDialog("/helper/helperZdrojDetailRez", null, null);
     }
 }
