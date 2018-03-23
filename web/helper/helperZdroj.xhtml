@@ -7,8 +7,8 @@
     <h:head><title>Zdroje</title></h:head>    
     <h:body>
         <h:form id="formHelperZdr" style="font-size: 12px;">
-            <p:panel >
-                <p:dataTable value="#{helperZdroj.zdrojList}" var="item" selection="#{helperZdroj.selectedZdr}" rowKey="#{item.id}" scrollable="true" scrollHeight="430" >
+            <p:panel>
+                <p:dataTable value="#{helperZdroj.zdrojList}" var="item" selection="#{helperZdroj.selectedZdr}" rowKey="#{item.id}" scrollable="true" scrollHeight="430">
                     <f:facet name="header">
                         Zdroje
                     </f:facet>
@@ -35,8 +35,11 @@
                         <f:facet name="header" >
                             <h:outputText value="Rezervace"/>
                         </f:facet>
-                        <p:commandButton value="i"  actionListener="#{helperZdroj.dlgDetailRez(helperZdroj.selectedRez)}" icon="fa fa-check" />
-                        <h:outputText value="#{helperZdroj.getHRlabel(item)}" />
+                        <p:orderList id="orderListRez" value="#{helperZdroj.getRezervaceList(item)}" var="rez" rendered="#{helperZdroj.getRezervaceList(item).size()>0}" itemValue="#{rez}" itemLabel="#{rez}" controlsLocation="none" >
+                            <p:ajax event="select" listener="#{helperZdroj.showDetailRez(rez)}"/>
+                            <h:outputText styleClass="ui-icon ui-icon-search"/> 
+                            <h:outputText value="#{rez.platiod}-#{rez.platido} #{rez.komentar}" />
+                        </p:orderList>
                     </p:column>
                 </p:dataTable>
                 <f:facet name="footer">

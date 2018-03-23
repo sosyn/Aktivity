@@ -39,12 +39,14 @@ public class HelperZdroj implements Serializable {
     private ejb.ZdrojeFacade zdrojeFacade;
     private Zdroj selectedZdr = null;
     private ArrayList<Zdroj> zdrojList = null;
+    private Cesta cesta=null;
     private Rezervace selectedRez = null;
     private ArrayList<Rezervace> rezervaceList = new ArrayList<>();
     Date platiOd = new Date();
     Date platiDo = new Date();
 
     public void initHelperZdroj(Cesta cesta) {
+        this.cesta=cesta;
         zdrojList = new ArrayList<>(zdrojeFacade.findAccesibleZdrojList(cesta));
         this.platiOd = cesta.getPlatiod();
         this.platiDo = cesta.getPlatido();
@@ -110,29 +112,16 @@ public class HelperZdroj implements Serializable {
         this.selectedRez = selectedRez;
     }
 
-    public String getHRlabel(Zdroj zdroj) {
-        StringBuilder sb = new StringBuilder("");
+    public ArrayList<Rezervace> getRezervaceList(Zdroj zdroj) {
         rezervaceList = new ArrayList<>();
-        Cesta cesta;
         if (zdroj.getRezervaceList() != null) {
-            sb.append("<p:commandButton value=\"i\" actionListener=#{helperZdroj.dlgDeatailRey()} />");
             for (Rezervace rez : zdroj.getRezervaceList()) {
-                cesta = rez.getIdcest();
                 if (rez.getPlatiod().before(this.platiDo) && rez.getPlatido().after(this.platiOd) && rez.getIdcest() != null) {
-                    sb.append(String.format("%1$td.%1$tm.%1$tY %1$tR", rez.getPlatiod()));
-                    sb.append(" - ");
-                    sb.append(String.format("%1$td.%1$tm.%1$tY %1$tR", rez.getPlatido()));
-                    sb.append(" ");
-                    sb.append(rez.getIdcest().getPopis().substring(0, Math.min(rez.getIdcest().getPopis().length(), 20)));
-                    sb.append("<br/>");
                     rezervaceList.add(rez);
                 }
             }
         }
-        if (sb.length() == 0) {
-            sb.append("  ");
-        }
-        return sb.toString();
+        return rezervaceList;
     }
 
     public void submitSelectedZdr() {
@@ -143,7 +132,7 @@ public class HelperZdroj implements Serializable {
         RequestContext.getCurrentInstance().closeDialog(null);
     }
 
-    public void dlgDetailRez(Rezervace rez) {
+    public void showDetailRez(Rezervace rez) {
         RequestContext.getCurrentInstance()
                 .openDialog("/helper/helperZdrojDetailRez", null, null);
     }
