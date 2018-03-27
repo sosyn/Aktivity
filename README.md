@@ -1,6 +1,7 @@
 # Aktivity
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XXXII. Příprava schvalování - návrh
 XXXI. Platí předchozí - dodělat p:orderList s rezervacemi - nezobrazují se správně
 XXX. Začít řešit schvalování, u helperu vyřešit zobrazení detailu rezervace u zdrojů v samostatném dialogu
 XXIX. Dodělán NativeQuery na výběr Zdrojů pro HelperZdroj a HelperOsoba
