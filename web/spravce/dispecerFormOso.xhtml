@@ -5,7 +5,7 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <p:panelGrid id="dispOsoPanelGrid" columns="2">
+    <p:panelGrid id="dispOsoPanelGrid" columns="2"  rendered="#{dispecerForm.gridDispOso}">
         <f:facet name="header">
             <p:row> 
                 <p:column colspan="2">Podřízené osoby</p:column>
@@ -25,8 +25,8 @@
                                 <h:outputText value="#{item.idoso.popis}" />
                             </f:facet>
                             <f:facet name="input">
-                                <p:selectOneMenu id="dispecer" value="#{item.idoso}" converter="#{JSFConverterOsoba}" filter="true" disabled="#{not daoDispecer.dispecerPol.newEntity}" >
-                                    <f:selectItems value="#{dispecerForm.osobaList}" var="osoba" itemLabel="#{osoba.popis}" itemValue="#{osoba}"  />      
+                                <p:selectOneMenu id="podrizeny" value="#{item.idoso}" converter="#{JSFConverterOsoba}" filter="true" disabled="#{not daoDispecer.dispecerPol.newEntity}" >
+                                    <f:selectItems value="#{dispecerForm.osobaList}" var="osoba" itemLabel="#{osoba.popis}" itemValue="#{osoba}" />      
                                 </p:selectOneMenu>
                             </f:facet>
                         </p:cellEditor>
@@ -68,10 +68,10 @@
                 </p:dataTable>
             </p:column>
             <p:column >
-                <p:commandButton id="DispPolNew" value="Nový" action="#{dispecerForm.dispPolNew}" disabled="#{!dispecerForm.isButtonDispOsoEnabled('new')}" update=":growl :dispecerForm:DispPolDataTable" icon="fa fa-file-o" rendered="#{dispecerForm.gridDispOso}" /> <br/>
+                <p:commandButton id="DispPolNew" value="Nový" action="#{dispecerForm.dispPolNew}" disabled="#{!dispecerForm.isButtonDispOsoEnabled('new')}" update=":growl :dispecerForm:DispPolDataTable" icon="fa fa-file-o" rendered="#{dispecerForm.gridDispOso}" /> 
                 <p:commandButton id="DispPolDel" value="Smazat"  action="#{dispecerForm.dispPolDel}" disabled="#{!dispecerForm.isButtonDispOsoEnabled('delete')}"  update=":growl :dispecerForm:DispPolDataTable"  icon="fa fa-remove" rendered="#{dispecerForm.gridDispOso}" >
                     <p:confirm  header="Žádám potvrzení" message="Opravdu smazat záznam o podřízené osobě?" icon="ui-icon-alert" />
-                </p:commandButton><br/>
+                </p:commandButton>
                 <p:confirmDialog header="Potvrďte volbu:" global="true" showEffect="fade" hideEffect="fade">
                     <p:commandButton value="Ano" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                     <p:commandButton value="Ne" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />

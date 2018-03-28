@@ -68,10 +68,10 @@
                 </p:dataTable>
             </p:column>
             <p:column >
-                <p:commandButton id="ZastupceNew" value="Nový" action="#{dispecerForm.zastupceNew}" disabled="#{!dispecerForm.isButtonZastEnabled('new')}" update=":growl dataTableZast" icon="fa fa-file-o" /> <br/>
+                <p:commandButton id="ZastupceNew" value="Nový" action="#{dispecerForm.zastupceNew}" disabled="#{!dispecerForm.isButtonZastEnabled('new')}" update=":growl dataTableZast" icon="fa fa-file-o" />
                 <p:commandButton id="ZastupceDel" value="Smazat"  action="#{dispecerForm.zastupceDel}" disabled="#{!dispecerForm.isButtonZastEnabled('delete')}"  update=":growl dataTableZast"  icon="fa fa-remove">
                     <p:confirm  header="Žádám potvrzení" message="Opravdu smazat záznam o zástupci dispečera?" icon="ui-icon-alert" />
-                </p:commandButton><br/>
+                </p:commandButton>
                 <p:confirmDialog header="Potvrďte volbu:" global="true" showEffect="fade" hideEffect="fade">
                     <p:commandButton value="Ano" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                     <p:commandButton value="Ne" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />

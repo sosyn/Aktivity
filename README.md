@@ -1,6 +1,7 @@
 # Aktivity
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XXXIV. Oprava editace dispečerů, nechodí výběr dat ve schvalování
 XXXIII. Oprava editace dispečerů - datový model 
 XXXII. Příprava schvalování - návrh
 XXXI. Platí předchozí - dodělat p:orderList s rezervacemi - nezobrazují se správně

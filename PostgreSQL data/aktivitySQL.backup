@@ -22,7 +22,7 @@ DROP DATABASE aktivity;
 -- Name: aktivity; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE aktivity WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'Czech_Czech Republic.1250' LC_CTYPE = 'Czech_Czech Republic.1250';
+CREATE DATABASE aktivity WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'Czech_Czechia.1250' LC_CTYPE = 'Czech_Czechia.1250';
 
 
 ALTER DATABASE aktivity OWNER TO postgres;

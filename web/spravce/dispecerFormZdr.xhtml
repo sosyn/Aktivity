@@ -5,7 +5,7 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <p:panelGrid id="dispZdrPanelGrid" columns="2"  >
+    <p:panelGrid id="dispZdrPanelGrid" columns="2" rendered="#{dispecerForm.gridDispZdr}">
         <f:facet name="header" >
             <p:row> 
                 <p:column colspan="2">Spravované zdroje</p:column>
@@ -68,10 +68,10 @@
                 </p:dataTable>
             </p:column>
             <p:column >
-                <p:commandButton id="DispZdrNew" value="Nový" action="#{dispecerForm.dispPolNew}" disabled="#{!dispecerForm.isButtonDispZdrEnabled('new')}" update=":growl :dispecerForm:DispZdrDataTable" icon="fa fa-file-o" rendered="#{dispecerForm.gridDispZdr}" /> <br/>
+                <p:commandButton id="DispZdrNew" value="Nový" action="#{dispecerForm.dispPolNew}" disabled="#{!dispecerForm.isButtonDispZdrEnabled('new')}" update=":growl :dispecerForm:DispZdrDataTable" icon="fa fa-file-o" rendered="#{dispecerForm.gridDispZdr}" />
                 <p:commandButton id="DispZdrDel" value="Smazat"  action="#{dispecerForm.dispPolDel}" disabled="#{!dispecerForm.isButtonDispZdrEnabled('delete')}"  update=":growl :dispecerForm:DispZdrDataTable"  icon="fa fa-remove" rendered="#{dispecerForm.gridDispZdr}" >
                     <p:confirm  header="Žádám potvrzení" message="Opravdu smazat záznam o spravovaném zdroji?" icon="ui-icon-alert" />
-                </p:commandButton><br/>
+                </p:commandButton>
                 <p:confirmDialog header="Potvrďte volbu:" global="true" showEffect="fade" hideEffect="fade">
                     <p:commandButton value="Ano" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                     <p:commandButton value="Ne" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
