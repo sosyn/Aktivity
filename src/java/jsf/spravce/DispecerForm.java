@@ -250,7 +250,7 @@ public class DispecerForm implements Serializable {
             if (cause != null) {
                 msg = cause.getLocalizedMessage();
             }
-            if (msg.length() > 0) {
+            if (msg!= null && msg.length() > 0) {
                 JsfUtil.addErrorMessage(msg);
             } else {
                 JsfUtil.addErrorMessage(ex, "Chyba uložení dat");
@@ -313,9 +313,9 @@ public class DispecerForm implements Serializable {
             case "new":
                 return true;
             case "edit":
-                return this.daoDispecer.getDispecerOso() != null;
+                return this.daoDispecer.getDispecerPol() != null;
             case "delete":
-                return this.daoDispecer.getDispecerOso() != null;
+                return this.daoDispecer.getDispecerPol() != null;
         }
         return true;
     }
@@ -325,9 +325,9 @@ public class DispecerForm implements Serializable {
      *
      * @return dispPol
      */
-    public String dispOsoNew() {
+    public String dispPolNew() {
         String dispOso = null;
-        this.daoDispecer.dispOsoNew();
+        this.daoDispecer.dispPolNew();
         return dispOso;
     }
 
@@ -336,9 +336,9 @@ public class DispecerForm implements Serializable {
      *
      * @return
      */
-    public String dispOsoEdit() {
-        String dispOso = null;
-        return dispOso;
+    public String dispPolEdit() {
+        String dispPol = null;
+        return dispPol;
     }
 
     /**
@@ -349,7 +349,7 @@ public class DispecerForm implements Serializable {
      */
     public String dispPolDel() {
         try {
-            this.daoDispecer.dispOsoDel();
+            this.daoDispecer.dispPolDel();
             JsfUtil.addSuccessMessage("Záznam byl úspěšně smazán.");
         } catch (EJBException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
@@ -386,9 +386,9 @@ public class DispecerForm implements Serializable {
             case "new":
                 return true;
             case "edit":
-                return this.daoDispecer.getDispecerZdr() != null;
+                return this.daoDispecer.getDispecerPol() != null;
             case "delete":
-                return this.daoDispecer.getDispecerZdr() != null;
+                return this.daoDispecer.getDispecerPol() != null;
         }
         return true;
     }
@@ -400,7 +400,7 @@ public class DispecerForm implements Serializable {
      */
     public String dispZdrNew() {
         String dispZdr = null;
-        this.daoDispecer.dispZdrNew();
+        this.daoDispecer.dispPolNew();
         return dispZdr;
     }
 
@@ -422,7 +422,7 @@ public class DispecerForm implements Serializable {
      */
     public String dispZdrDel() {
         try {
-            this.daoDispecer.dispZdrDel();
+            this.daoDispecer.dispPolDel();
             JsfUtil.addSuccessMessage("Záznam byl úspěšně smazán.");
         } catch (EJBException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);

@@ -13,7 +13,7 @@
         </f:facet>
         <p:row>
             <p:column>
-                <p:dataTable id="DispZdrDataTable" value="#{daoDispecer.dispecerHl.dispecerZdrList}" var="item" selectionMode="single" selection="#{daoDispecer.dispecerZdr}" rowKey="#{item.id}" editable="true" editMode="cell" rendered="#{dispecerForm.gridDispZdr}"  scrollable="true" scrollHeight="98%"  >
+                <p:dataTable id="DispZdrDataTable" value="#{daoDispecer.dispecerHl.dispecerPolList}" var="item" selectionMode="single" selection="#{daoDispecer.dispecerPol}" rowKey="#{item.id}" editable="true" editMode="cell" rendered="#{dispecerForm.gridDispZdr}"  scrollable="true" scrollHeight="98%"  >
                     <p:ajax event="rowSelect" update=":dispecerForm:DispZdrNew :dispecerForm:DispZdrDel" />
 
                     <p:column sortBy="#{item.idzdr.popis}" filterBy="#{item.idzdr.popis}" filterMatchMode="contains" width="200">
@@ -25,7 +25,7 @@
                                 <h:outputText value="#{item.idzdr.popis}" />
                             </f:facet>
                             <f:facet name="input">
-                                <p:selectOneMenu id="dispZdr" value="#{item.idzdr}" converter="#{JSFConverterZdroj}" filter="true" disabled="#{not daoDispecer.dispecerZdr.newEntity}" >
+                                <p:selectOneMenu id="dispZdr" value="#{item.idzdr}" converter="#{JSFConverterZdroj}" filter="true" disabled="#{not daoDispecer.dispecerPol.newEntity}" >
                                     <f:selectItems value="#{dispecerForm.zdrojList}" var="zdroj" itemLabel="#{zdroj.popis}" itemValue="#{zdroj}"  />      
                                 </p:selectOneMenu>
                             </f:facet>
@@ -43,7 +43,7 @@
                             </f:facet>
                             <f:facet name="input">
                                 <p:calendar id="platiOd" value="#{item.platiod}" pattern="dd.MM.yyyy"  showOn="button">
-                                    <f:attribute name="platiDo" value="#{daoDispecer.dispecerZdr.platido}" />
+                                    <f:attribute name="platiDo" value="#{daoDispecer.dispecerPol.platido}" />
                                 </p:calendar>
                             </f:facet>
                         </p:cellEditor>
@@ -60,7 +60,7 @@
                             </f:facet>
                             <f:facet name="input">
                                 <p:calendar id="platiDo" value="#{item.platido}" pattern="dd.MM.yyyy"  showOn="button">
-                                    <f:attribute name="platiOd" value="#{daoDispecer.dispecerZdr.platiod}" />
+                                    <f:attribute name="platiOd" value="#{daoDispecer.dispecerPol.platiod}" />
                                 </p:calendar>
                             </f:facet>
                         </p:cellEditor>                
@@ -68,8 +68,8 @@
                 </p:dataTable>
             </p:column>
             <p:column >
-                <p:commandButton id="DispZdrNew" value="Nový" action="#{dispecerForm.dispZdrNew}" disabled="#{!dispecerForm.isButtonDispZdrEnabled('new')}" update=":growl :dispecerForm:DispZdrDataTable" icon="fa fa-file-o" rendered="#{dispecerForm.gridDispZdr}" /> <br/>
-                <p:commandButton id="DispZdrDel" value="Smazat"  action="#{dispecerForm.dispZdrDel}" disabled="#{!dispecerForm.isButtonDispZdrEnabled('delete')}"  update=":growl :dispecerForm:DispZdrDataTable"  icon="fa fa-remove" rendered="#{dispecerForm.gridDispZdr}" >
+                <p:commandButton id="DispZdrNew" value="Nový" action="#{dispecerForm.dispPolNew}" disabled="#{!dispecerForm.isButtonDispZdrEnabled('new')}" update=":growl :dispecerForm:DispZdrDataTable" icon="fa fa-file-o" rendered="#{dispecerForm.gridDispZdr}" /> <br/>
+                <p:commandButton id="DispZdrDel" value="Smazat"  action="#{dispecerForm.dispPolDel}" disabled="#{!dispecerForm.isButtonDispZdrEnabled('delete')}"  update=":growl :dispecerForm:DispZdrDataTable"  icon="fa fa-remove" rendered="#{dispecerForm.gridDispZdr}" >
                     <p:confirm  header="Žádám potvrzení" message="Opravdu smazat záznam o spravovaném zdroji?" icon="ui-icon-alert" />
                 </p:commandButton><br/>
                 <p:confirmDialog header="Potvrďte volbu:" global="true" showEffect="fade" hideEffect="fade">

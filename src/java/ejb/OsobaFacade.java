@@ -10,7 +10,6 @@ import entity.EntitySuperClass_;
 import entity.Osoba;
 import entity.Osoba_;
 import entity.Ucastnik;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -54,7 +53,7 @@ public class OsobaFacade extends AbstractFacade<Osoba> {
         javax.persistence.criteria.CriteriaQuery cq = cb.createQuery();
         javax.persistence.criteria.Root<Osoba> osobaRoot = cq.from(Osoba.class);
         cq.select(osobaRoot);
-        cq.orderBy(cb.asc(osobaRoot.get(Osoba_.popis)));
+        cq.orderBy(cb.asc(osobaRoot.get(EntitySuperClass_.popis)));
         return getEntityManager().createQuery(cq).getResultList();
     }
 
@@ -64,7 +63,7 @@ public class OsobaFacade extends AbstractFacade<Osoba> {
         javax.persistence.criteria.Root<Osoba> osobaRoot = cq.from(Osoba.class);
         cq.select(osobaRoot);
         // Vyloucit jiz ucastniky, kteri jsou jiz jednou v ceste pridani
-        Path<UUID> pathNoOsoba = osobaRoot.get(Osoba_.id);
+        Path<UUID> pathNoOsoba = osobaRoot.get(EntitySuperClass_.id);
         Predicate prediNoOsoba = null;
         for (Ucastnik ucastnik : cesta.getUcastnikList()) {
             if (prediNoOsoba == null) {
@@ -86,7 +85,7 @@ public class OsobaFacade extends AbstractFacade<Osoba> {
 
         }
         cq.where(prediWhere);
-        cq.orderBy(cb.asc(osobaRoot.get(Osoba_.popis)));
+        cq.orderBy(cb.asc(osobaRoot.get(EntitySuperClass_.popis)));
 
         return getEntityManager().createQuery(cq).getResultList();
     }

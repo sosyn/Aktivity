@@ -45,10 +45,8 @@ public class Dispecerhl extends entity.EntitySuperClass {
     private List<Dispecerhl> zastupciList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddisphl", fetch = FetchType.LAZY)
-    private List<Dispeceroso> dispecerOsoList;
+    private List<Dispecerpol> dispecerPolList;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddisphl", fetch = FetchType.LAZY)
-    private List<Dispecerzdr> dispecerZdrList;
 
     public Dispecerhl() {
         super();
@@ -113,33 +111,18 @@ public class Dispecerhl extends entity.EntitySuperClass {
     public void setZastupciList(List<Dispecerhl> zastupciList) {
         this.zastupciList = zastupciList;
     }
-
     /**
-     * @return the dispecerOsoList
+     * @return the dispecerPolList
      */
-    public List<Dispeceroso> getDispecerOsoList() {
-        return dispecerOsoList;
+    public List<Dispecerpol> getDispecerPolList() {
+        return dispecerPolList;
     }
 
     /**
-     * @param dispecerOsoList the dispecerOsoList to set
+     * @param dispecerPolList the dispecerPolList to set
      */
-    public void setDispecerOsoList(List<Dispeceroso> dispecerOsoList) {
-        this.dispecerOsoList = dispecerOsoList;
-    }
-
-    /**
-     * @return the dispecerZdrList
-     */
-    public List<Dispecerzdr> getDispecerZdrList() {
-        return dispecerZdrList;
-    }
-
-    /**
-     * @param dispecerZdrList the dispecerZdrList to set
-     */
-    public void setDispecerZdrList(List<Dispecerzdr> dispecerZdrList) {
-        this.dispecerZdrList = dispecerZdrList;
+    public void setDispecerPolList(List<Dispecerpol> dispecerPolList) {
+        this.dispecerPolList = dispecerPolList;
     }
 
     @Override

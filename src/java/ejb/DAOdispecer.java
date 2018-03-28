@@ -6,8 +6,7 @@
 package ejb;
 
 import entity.Dispecerhl;
-import entity.Dispeceroso;
-import entity.Dispecerzdr;
+import entity.Dispecerpol;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
@@ -43,36 +42,21 @@ public class DAOdispecer implements Serializable {
     private ejb.DispecerHlFacade ejbDispHlFacade;
     private Dispecerhl dispecerHl = null;
     private ArrayList<Dispecerhl> dispecerHlList = null;
+    private ArrayList<Dispecerhl> dHlListDel = null;
 
     private boolean dispeceriAzastupci = false;
     private Dispecerhl zastupce = null;
 
     @EJB
-    private ejb.DispecerOsoFacade ejbDispOsoFacade;
-    private Dispeceroso dispecerOso = null;
-
-    @EJB
-    private ejb.DispecerZdrFacade ejbDispZdrFacade;
-    private Dispecerzdr dispecerZdr = null;
+    private ejb.DispecerPolFacade ejbDispPolFacade;
+    private Dispecerpol dispecerPol = null;
+    private ArrayList<Dispecerpol> dPolListDel = null;
 
     @PostConstruct
     void initDAOdispecer() {
         System.out.println("initDAOdispecer()");
     }
 
-    /**
-     * @return the ejbDispHlFacade
-     */
-    public ejb.DispecerHlFacade getEjbDispHlFacade() {
-        return ejbDispHlFacade;
-    }
-
-    /**
-     * @param ejbDispHlFacade the ejbDispHlFacade to set
-     */
-    public void setEjbDispHlFacade(ejb.DispecerHlFacade ejbDispHlFacade) {
-        this.ejbDispHlFacade = ejbDispHlFacade;
-    }
 
     /**
      * @return the dispecerHl
@@ -107,13 +91,15 @@ public class DAOdispecer implements Serializable {
      */
     public ArrayList<Dispecerhl> getDispecerHlList() {
         if (this.dispecerHlList == null) {
-            this.dispecerHlList = new ArrayList<>(getEjbDispHlFacade().findAllDispAZast(this.dispeceriAzastupci));
+            refreshDispecerHlList();
         }
         return dispecerHlList;
     }
 
     public ArrayList<Dispecerhl> refreshDispecerHlList() {
-        this.dispecerHlList = new ArrayList<>(getEjbDispHlFacade().findAllDispAZast(this.dispeceriAzastupci));
+        this.dispecerHlList = new ArrayList<>(this.ejbDispHlFacade.findAllDispAZast(this.dispeceriAzastupci));
+        this.dHlListDel=new ArrayList<>();
+        this.dPolListDel=new ArrayList<>();
         return dispecerHlList;
     }
 
@@ -138,60 +124,19 @@ public class DAOdispecer implements Serializable {
         this.zastupce = zastupce;
     }
 
+
     /**
-     * @return the ejbDispOsoFacade
+     * @return the dispecerPol
      */
-    public ejb.DispecerOsoFacade getEjbDispOsoFacade() {
-        return ejbDispOsoFacade;
+    public Dispecerpol getDispecerPol() {
+        return dispecerPol;
     }
 
     /**
-     * @param ejbDispOsoFacade the ejbDispOsoFacade to set
+     * @param dispecerPol the dispecerPol to set
      */
-    public void setEjbDispOsoFacade(ejb.DispecerOsoFacade ejbDispOsoFacade) {
-        this.ejbDispOsoFacade = ejbDispOsoFacade;
-    }
-
-    /**
-     * @return the dispecerOso
-     */
-    public Dispeceroso getDispecerOso() {
-        return dispecerOso;
-    }
-
-    /**
-     * @param dispecerOso the dispecerOso to set
-     */
-    public void setDispecerOso(Dispeceroso dispecerOso) {
-        this.dispecerOso = dispecerOso;
-    }
-
-    /**
-     * @return the ejbDispZdrFacade
-     */
-    public ejb.DispecerZdrFacade getEjbDispZdrFacade() {
-        return ejbDispZdrFacade;
-    }
-
-    /**
-     * @param ejbDispZdrFacade the ejbDispZdrFacade to set
-     */
-    public void setEjbDispZdrFacade(ejb.DispecerZdrFacade ejbDispZdrFacade) {
-        this.ejbDispZdrFacade = ejbDispZdrFacade;
-    }
-
-    /**
-     * @return the dispecerZdr
-     */
-    public Dispecerzdr getDispecerZdr() {
-        return dispecerZdr;
-    }
-
-    /**
-     * @param dispecerZdr the dispecerZdr to set
-     */
-    public void setDispecerZdr(Dispecerzdr dispecerZdr) {
-        this.dispecerZdr = dispecerZdr;
+    public void setDispecerPol(Dispecerpol dispecerPol) {
+        this.dispecerPol = dispecerPol;
     }
 
 //-----------------------
@@ -206,8 +151,7 @@ public class DAOdispecer implements Serializable {
         this.dispecerHl.setPlatiod(JsfUtil.startDate());
         this.dispecerHl.setPlatido(JsfUtil.endDate());
         this.dispecerHl.setZastupciList(new ArrayList<Dispecerhl>());
-        this.dispecerHl.setDispecerOsoList(new ArrayList<Dispeceroso>());
-        this.dispecerHl.setDispecerZdrList(new ArrayList<Dispecerzdr>());
+        this.dispecerHl.setDispecerPolList(new ArrayList<Dispecerpol>());
     }
 
     public void fillDispecerHl(int mod) {
@@ -219,11 +163,17 @@ public class DAOdispecer implements Serializable {
     }
 
     public void dispHlSave() {
-        if (this.getDispecerHl().isNewEntity()) {
-            dispHlPersist(JsfUtil.PersistAction.CREATE);
-        } else {
-            dispHlPersist(JsfUtil.PersistAction.UPDATE);
-        }
+        this.ejbDispHlFacade.saveDispecerHl(this.dispecerHl, this.dHlListDel ,this.dPolListDel );
+        this.dispecerHl=this.ejbDispHlFacade.find(this.dispecerHl.getId());
+        this.dispecerHl.setNewEntity(false);
+        this.dHlListDel=new ArrayList<>();
+        this.dPolListDel=new ArrayList<>();
+        
+//        if (this.getDispecerHl().isNewEntity()) {
+//            dispHlPersist(JsfUtil.PersistAction.CREATE);
+//        } else {
+//            dispHlPersist(JsfUtil.PersistAction.UPDATE);
+//        }
     }
 
     public void dispHlDelete() {
@@ -237,32 +187,26 @@ public class DAOdispecer implements Serializable {
                 this.dispecerHl.getZastupciList().remove(zast);
             }
         }
-        ArrayList<Dispeceroso> dispOsoList = new ArrayList<>(this.dispecerHl.getDispecerOsoList());
-        for (Dispeceroso dOso : dispOsoList) {
-            if (dOso.getIdoso() == null) {
-                this.dispecerHl.getDispecerOsoList().remove(dOso);
-            }
-        }
-        ArrayList<Dispecerzdr> dispZdrList = new ArrayList<>(this.dispecerHl.getDispecerZdrList());
-        for (Dispecerzdr dZdr : dispZdrList) {
-            if (dZdr.getIdzdr() == null) {
-                this.dispecerHl.getDispecerZdrList().remove(dZdr);
+        ArrayList<Dispecerpol> dispPolList = new ArrayList<>(this.dispecerHl.getDispecerPolList());
+        for (Dispecerpol dPol : dispPolList) {
+            if (dPol.getIdoso() == null) {
+                this.dispecerHl.getDispecerPolList().remove(dPol);
             }
         }
         if (this.getDispecerHl() != null) {
             switch (persistAction) {
                 case CREATE:
                     this.getDispecerHl().setNewEntity(false);
-                    getEjbDispHlFacade().create(this.dispecerHl);
+                    this.ejbDispHlFacade.create(this.dispecerHl);
                     this.dispecerHlList.add(this.dispecerHl);
                     ejbLogFacade.log(this.dispecerHl.getId(),"dispecerhl", "Add dispečer: "+this.dispecerHl.getIdoso().getPopis());
                     break;
                 case UPDATE:
-                    getEjbDispHlFacade().edit(this.dispecerHl);
+                    this.ejbDispHlFacade.edit(this.dispecerHl);
                     ejbLogFacade.log(this.dispecerHl.getId(),"dispecerhl", "Modify dispečer: "+this.dispecerHl.getIdoso().getPopis());
                     break;
                 case DELETE:
-                    getEjbDispHlFacade().remove(this.dispecerHl);
+                    this.ejbDispHlFacade.remove(this.dispecerHl);
                     ejbLogFacade.log(this.dispecerHl.getId(),"dispecerhl", "Del dispečer: "+this.dispecerHl.getIdoso().getPopis());
                     this.dispecerHl=null;
                     break;
@@ -310,47 +254,28 @@ public class DAOdispecer implements Serializable {
                 zast.setIdtypzdr(dispecerHl.getIdtypzdr());
                 if (zast.isNewEntity()) {
                     zast.setNewEntity(false);
-                    getEjbDispHlFacade().create(zast);
+                    this.ejbDispHlFacade.create(zast);
                 } else {
-                    getEjbDispHlFacade().edit(zast);
+                    this.ejbDispHlFacade.edit(zast);
                 }
             }
         }
     }
 
 //----------------------------------------------
-// Cast PERSISTENCE pro podrizene osoby dispecera
+// Cast PERSISTENCE pro polozky dispecera
 //----------------------------------------------    
-    public void dispOsoNew() {
-        this.setDispecerOso(new Dispeceroso());
+    public void dispPolNew() {
+        this.dispecerPol=new Dispecerpol();
         // Dosadit dispecera, který bude mít polozku na starosti
-        this.getDispecerOso().setIddisphl(dispecerHl);
-        this.getDispecerOso().setNewEntity(true);
-        this.getDispecerOso().setPlatiod(dispecerHl.getPlatiod());
-        this.getDispecerOso().setPlatido(dispecerHl.getPlatido());
-        this.dispecerHl.getDispecerOsoList().add(this.getDispecerOso());
+        this.dispecerPol.setIddisphl(dispecerHl);
+        this.dispecerPol.setNewEntity(true);
+        this.dispecerPol.setPlatiod(dispecerHl.getPlatiod());
+        this.dispecerPol.setPlatido(dispecerHl.getPlatido());
+        this.dispecerHl.getDispecerPolList().add(this.dispecerPol);
     }
 
-    public void dispOsoDel() {
+    public void dispPolDel() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-//----------------------------------------------
-// Cast PERSISTENCE pro spravovane zdroje
-//----------------------------------------------    
-    public void dispZdrNew() {
-        this.setDispecerZdr(new Dispecerzdr());
-        // Dosadit dispecera, který bude mít polozku na starosti
-        this.getDispecerZdr().setIddisphl(dispecerHl);
-        this.getDispecerZdr().setNewEntity(true);
-        this.getDispecerZdr().setPlatiod(dispecerHl.getPlatiod());
-        this.getDispecerZdr().setPlatido(dispecerHl.getPlatido());
-
-        this.dispecerHl.getDispecerZdrList().add(this.getDispecerZdr());
-    }
-
-    public void dispZdrDel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

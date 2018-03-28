@@ -13,8 +13,8 @@
         </f:facet>
         <p:row> 
             <p:column>
-                <p:dataTable id="DispOsoDataTable" value="#{daoDispecer.dispecerHl.dispecerOsoList}" var="item" selectionMode="single" selection="#{daoDispecer.dispecerOso}" rowKey="#{item.id}" editable="true" editMode="cell" rendered="#{dispecerForm.gridDispOso}"  scrollable="true" scrollHeight="98%">
-                    <p:ajax event="rowSelect" update=":dispecerForm:DispOsoNew :dispecerForm:DispOsoDel" />
+                <p:dataTable id="DispPolDataTable" value="#{daoDispecer.dispecerHl.dispecerPolList}" var="item" selectionMode="single" selection="#{daoDispecer.dispecerPol}" rowKey="#{item.id}" editable="true" editMode="cell" rendered="#{dispecerForm.gridDispOso}"  scrollable="true" scrollHeight="98%">
+                    <p:ajax event="rowSelect" update=":dispecerForm:DispPolNew :dispecerForm:DispPolDel" />
 
                     <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains" width="200">
                         <f:facet name="header">
@@ -25,7 +25,7 @@
                                 <h:outputText value="#{item.idoso.popis}" />
                             </f:facet>
                             <f:facet name="input">
-                                <p:selectOneMenu id="dispecer" value="#{item.idoso}" converter="#{JSFConverterOsoba}" filter="true" disabled="#{not daoDispecer.dispecerOso.newEntity}" >
+                                <p:selectOneMenu id="dispecer" value="#{item.idoso}" converter="#{JSFConverterOsoba}" filter="true" disabled="#{not daoDispecer.dispecerPol.newEntity}" >
                                     <f:selectItems value="#{dispecerForm.osobaList}" var="osoba" itemLabel="#{osoba.popis}" itemValue="#{osoba}"  />      
                                 </p:selectOneMenu>
                             </f:facet>
@@ -43,7 +43,7 @@
                             </f:facet>
                             <f:facet name="input">
                                 <p:calendar id="platiOd" value="#{item.platiod}" pattern="dd.MM.yyyy"  showOn="button">
-                                    <f:attribute name="platiDo" value="#{daoDispecer.dispecerOso.platido}" />
+                                    <f:attribute name="platiDo" value="#{daoDispecer.dispecerPol.platido}" />
                                 </p:calendar>
                             </f:facet>
                         </p:cellEditor>
@@ -60,7 +60,7 @@
                             </f:facet>
                             <f:facet name="input">
                                 <p:calendar id="platiDo" value="#{item.platido}" pattern="dd.MM.yyyy"  showOn="button">
-                                    <f:attribute name="platiOd" value="#{daoDispecer.dispecerOso.platiod}" />
+                                    <f:attribute name="platiOd" value="#{daoDispecer.dispecerPol.platiod}" />
                                 </p:calendar>
                             </f:facet>
                         </p:cellEditor>                
@@ -68,8 +68,8 @@
                 </p:dataTable>
             </p:column>
             <p:column >
-                <p:commandButton id="DispOsoNew" value="Nový" action="#{dispecerForm.dispOsoNew}" disabled="#{!dispecerForm.isButtonDispOsoEnabled('new')}" update=":growl :dispecerForm:DispOsoDataTable" icon="fa fa-file-o" rendered="#{dispecerForm.gridDispOso}" /> <br/>
-                <p:commandButton id="DispOsoDel" value="Smazat"  action="#{dispecerForm.dispOsoDel}" disabled="#{!dispecerForm.isButtonDispOsoEnabled('delete')}"  update=":growl :dispecerForm:DispOsoDataTable"  icon="fa fa-remove" rendered="#{dispecerForm.gridDispOso}" >
+                <p:commandButton id="DispPolNew" value="Nový" action="#{dispecerForm.dispPolNew}" disabled="#{!dispecerForm.isButtonDispOsoEnabled('new')}" update=":growl :dispecerForm:DispPolDataTable" icon="fa fa-file-o" rendered="#{dispecerForm.gridDispOso}" /> <br/>
+                <p:commandButton id="DispPolDel" value="Smazat"  action="#{dispecerForm.dispPolDel}" disabled="#{!dispecerForm.isButtonDispOsoEnabled('delete')}"  update=":growl :dispecerForm:DispPolDataTable"  icon="fa fa-remove" rendered="#{dispecerForm.gridDispOso}" >
                     <p:confirm  header="Žádám potvrzení" message="Opravdu smazat záznam o podřízené osobě?" icon="ui-icon-alert" />
                 </p:commandButton><br/>
                 <p:confirmDialog header="Potvrďte volbu:" global="true" showEffect="fade" hideEffect="fade">
