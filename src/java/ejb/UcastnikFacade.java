@@ -64,9 +64,9 @@ public class UcastnikFacade extends AbstractFacade<Ucastnik> {
         StringBuilder selUc = new StringBuilder(
                 "SELECT *"
                 + "FROM ucastnik uc "
-                + "     LEFT JOIN (dispeceroso doso "
-                + "                 LEFT JOIN dispecerhl dh ON doso.iddisphl=dh.id) "
-                + "     ON uc.idoso=doso.idoso "
+                + "     LEFT JOIN (dispecerpol dp "
+                + "                 LEFT JOIN dispecerhl dh ON dp.iddisphl=dh.id) "
+                + "     ON uc.idoso=dp.idoso "
                 + "WHERE "
         );
         selUc.append("dh.idoso='");

@@ -13,7 +13,7 @@
         </f:facet>
         <p:row> 
             <p:column>
-                <p:dataTable id="DispPolDataTable" value="#{daoDispecer.dispecerHl.dispecerPolList}" var="item" selectionMode="single" selection="#{daoDispecer.dispecerPol}" rowKey="#{item.id}" editable="true" editMode="cell" rendered="#{dispecerForm.gridDispOso}"  scrollable="true" scrollHeight="98%">
+                <p:dataTable id="DispPolDataTable" value="#{daoDispecer.dispecerHl.dispecerPolList}" var="item" selectionMode="single" selection="#{daoDispecer.dispecerPol}" rowKey="#{item.id}" editable="true" editMode="cell" rendered="#{dispecerForm.gridDispOso}"  scrollable="true" scrollHeight="450">
                     <p:ajax event="rowSelect" update=":dispecerForm:DispPolNew :dispecerForm:DispPolDel" />
 
                     <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains" width="200">

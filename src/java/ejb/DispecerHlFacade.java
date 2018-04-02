@@ -81,7 +81,7 @@ public class DispecerHlFacade extends AbstractFacade<Dispecerhl> {
      * @param dispecerhl
      * @param dispHlDel
      * @param dispPolDel
-     * @return 
+     * @return
      */
     public boolean saveDispecerHl(Dispecerhl dispecerhl, ArrayList<Dispecerhl> dispHlDel, ArrayList<Dispecerpol> dispPolDel) {
         try {
@@ -107,7 +107,7 @@ public class DispecerHlFacade extends AbstractFacade<Dispecerhl> {
                 .setParameter(1, dispecerhl.getIdoso().getId())
                 .setParameter(2, dispecerhl.getIdtypschv().getId())
                 .setParameter(3, dispecerhl.getIdtypzdr().getId())
-                .setParameter(4, dispecerhl.getIddisphl()==null?null:dispecerhl.getIddisphl().getId())
+                .setParameter(4, dispecerhl.getIddisphl() == null ? null : dispecerhl.getIddisphl().getId())
                 .setParameter(5, dispecerhl.getPopis())
                 .setParameter(6, dispecerhl.getPlatiod())
                 .setParameter(7, dispecerhl.getPlatido())
@@ -130,7 +130,6 @@ public class DispecerHlFacade extends AbstractFacade<Dispecerhl> {
         return true;
     }
 
-    
     /**
      *
      * @param dispHlList
@@ -138,7 +137,9 @@ public class DispecerHlFacade extends AbstractFacade<Dispecerhl> {
      */
     public boolean saveDispHlList(List<Dispecerhl> dispHlList) {
         for (Dispecerhl dhl : dispHlList) {
-            saveDispHl(dhl);
+            if (dhl.getIdoso() != null) {
+                saveDispHl(dhl);
+            }
         }
         return true;
     }
@@ -152,8 +153,8 @@ public class DispecerHlFacade extends AbstractFacade<Dispecerhl> {
         for (Dispecerpol dpol : dispPolList) {
             Query q = em.createNativeQuery(dpol.isNewEntity() ? insDispPol : updDispPol)
                     .setParameter(1, dpol.getIddisphl().getId())
-                    .setParameter(2, dpol.getIdoso()==null?null:dpol.getIdoso().getId())
-                    .setParameter(3, dpol.getIdzdr()==null?null:dpol.getIdzdr().getId())
+                    .setParameter(2, dpol.getIdoso() == null ? null : dpol.getIdoso().getId())
+                    .setParameter(3, dpol.getIdzdr() == null ? null : dpol.getIdzdr().getId())
                     .setParameter(4, dpol.getPopis())
                     .setParameter(5, dpol.getPlatiod())
                     .setParameter(6, dpol.getPlatido())
