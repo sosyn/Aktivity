@@ -62,7 +62,7 @@ public class Schvalovani implements Serializable {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     public void initUcastnici() {
-        setUcastnici(ejbUcastnikFacade.findUcastnikyWhereSchvalovatel(getProperties()));
+        setUcastnici(ejbUcastnikFacade.findUcastnikyWhere(getProperties()));
         if (!ucastnici.isEmpty()) {
             this.setPlatiOd(getUcastnici().get(0).getPlatiod());
             this.setPlatiDo(getUcastnici().get(getUcastnici().size() - 1).getPlatido());

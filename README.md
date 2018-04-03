@@ -1,6 +1,7 @@
 # Aktivity
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XXXVI. Editace SQL dotazu výběru účastníků - UcastnikFacade - dodělat - vyladit
 XXXV. Oprava editace dispečerů - drobné úpravy
 XXXIV. Oprava editace dispečerů, nechodí výběr dat ve schvalování
 XXXIII. Oprava editace dispečerů - datový model 

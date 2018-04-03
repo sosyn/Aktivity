@@ -49,7 +49,7 @@ public class UcastnikFacade extends AbstractFacade<Ucastnik> {
         return q.getResultList();
     }
 
-    public ArrayList<Ucastnik> findUcastnikyWhereSchvalovatel(Properties prop) {
+    public ArrayList<Ucastnik> findUcastnikyWhere(Properties prop) {
 
 //        javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 //        javax.persistence.criteria.CriteriaQuery cq = cb.createQuery();
@@ -69,9 +69,31 @@ public class UcastnikFacade extends AbstractFacade<Ucastnik> {
                 + "     ON uc.idoso=dp.idoso "
                 + "WHERE "
         );
-        selUc.append("dh.idoso='");
-        selUc.append(((Osoba)prop.get("osoba")).getId());
-        selUc.append("'");
+        selUc.append("dh.idoso='")
+                .append(((Osoba) prop.get("osoba")).getId())
+                .append("' ");
+        if ((boolean) prop.get("neschvalene")) {
+            selUc.append("SELECT count(*) FROM schvaleni sch WHERE sch.iducast=uc.id ) IS NULL");
+        }
+        if ((boolean) prop.get("schvalene")) {
+            selUc.append("SELECT sch1.stav FROM schvaleni sch1 WHERE sch1.iducast=uc.id ORDER BY sch1.platiod DESC LIMIT 1)='1'");
+        }
+        if ((boolean) prop.get("zamitnute")) {
+            selUc.append("SELECT sch2.stav FROM schvaleni sch2 WHERE sch2.iducast=uc.id ORDER BY sch2.platiod DESC LIMIT 1)='2'");
+        }
+        if ((boolean) prop.get("vedouci")) {
+            selUc.append("dh.iddisphl IS NULL OR dh.iddisphl=dh.id");
+        }
+        if ((boolean) prop.get("zastupce")) {
+            selUc.append("dh.iddisphl IS NOT NULL AND dh.iddisphl<>dh.id");
+        }
+        if ((boolean) prop.get("platiOdDo")) {
+            selUc.append("AND( uc.platiod <= '")
+                    .append(String.format("%1$td %1$tm,%1$tY %1$tR", prop.get("platiDo")))
+                    .append("'  AND uc.platido >='")
+                    .append(String.format("%1$td %1$tm,%1$tY %1$tR", prop.get("platiOd")))
+                    .append("' ) ");
+        }
         Query q = em.createNativeQuery(selUc.toString());
         ArrayList<Ucastnik> rl = new ArrayList<>();
         List<Object[]> listUc = q.getResultList();
