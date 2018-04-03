@@ -1,6 +1,8 @@
 # Aktivity
+(! popis předchozích verzí je v "Readme.MD" je přesunutý )
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XXXVII. Editace SQL dotazu výběru účastníků - UcastnikFacade - dodělat - výběr rolí zástupce a vedoucí (do xhtml)       
 XXXVI. Editace SQL dotazu výběru účastníků - UcastnikFacade - dodělat - vyladit
 XXXV. Oprava editace dispečerů - drobné úpravy
 XXXIV. Oprava editace dispečerů, nechodí výběr dat ve schvalování

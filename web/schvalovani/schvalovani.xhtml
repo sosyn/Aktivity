@@ -80,10 +80,10 @@
                             </p:fieldset>
                             <p:fieldset id="fieldSetFiltry" legend="Filtry:" toggleable="true" collapsed="false" >
                                 <h:panelGrid columns="2" cellpadding="2">
+                                    <p:outputLabel value="Nezpracované:" class="right" />
+                                    <p:selectBooleanCheckbox value="#{schvalovani.nezpracovane}" />
                                     <p:outputLabel value="Schválené:" class="right" />
                                     <p:selectBooleanCheckbox value="#{schvalovani.schvalene}" />
-                                    <p:outputLabel value="Neschválené:" class="right" />
-                                    <p:selectBooleanCheckbox value="#{schvalovani.neschvalene}" />
                                     <p:outputLabel value="Zamítnuté:" class="right" />
                                     <p:selectBooleanCheckbox value="#{schvalovani.zamitnute}" />
                                     <p:outputLabel value="Datum:" class="right" />

@@ -6,11 +6,8 @@
 package jsf.schvalovani;
 
 import ejb.LoginUser;
-import entity.Cesta;
 import entity.Osoba;
-import entity.Rezervace;
 import entity.Ucastnik;
-import entity.Zdroj;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,9 +32,9 @@ public class Schvalovani implements Serializable {
     private Date platiOd = new Date();
     private Date platiDo = new Date();
     private boolean vedouci = true;
-    private boolean zastupce = false;
+    private boolean zastupce = true;
+    private boolean nezpracovane = true;
     private boolean schvalene = false;
-    private boolean neschvalene = true;
     private boolean zamitnute = false;
     private boolean platiOdDo = false;
 
@@ -56,13 +53,13 @@ public class Schvalovani implements Serializable {
         loginUser.initLoginUser();
         this.setOsoba(loginUser.getOsoba());
         initUcastnici();
-
     }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     public void initUcastnici() {
-        setUcastnici(ejbUcastnikFacade.findUcastnikyWhere(getProperties()));
+        this.ucastnici = ejbUcastnikFacade.findUcastnikyWhere(getProperties());
+        this.selUcastnici = new ArrayList<>();
         if (!ucastnici.isEmpty()) {
             this.setPlatiOd(getUcastnici().get(0).getPlatiod());
             this.setPlatiDo(getUcastnici().get(getUcastnici().size() - 1).getPlatido());
@@ -72,8 +69,8 @@ public class Schvalovani implements Serializable {
     private Properties getProperties() {
         Properties prop = new Properties();
         prop.put("osoba", this.osoba);
+        prop.put("nezpracovane", this.isNezpracovane());
         prop.put("schvalene", this.schvalene);
-        prop.put("neschvalene", this.neschvalene);
         prop.put("zamitnute", this.zamitnute);
         prop.put("vedouci", this.vedouci);
         prop.put("zastupce", this.zastupce);
@@ -152,8 +149,7 @@ public class Schvalovani implements Serializable {
     public void setSelUcastnici(ArrayList<Ucastnik> selUcastnici) {
         this.selUcastnici = selUcastnici;
     }
-    
-    
+
     /**
      * @return the cal
      */
@@ -197,6 +193,20 @@ public class Schvalovani implements Serializable {
     }
 
     /**
+     * @return the nezpracovane
+     */
+    public boolean isNezpracovane() {
+        return nezpracovane;
+    }
+
+    /**
+     * @param nezpracovane the nezpracovane to set
+     */
+    public void setNezpracovane(boolean nezpracovane) {
+        this.nezpracovane = nezpracovane;
+    }
+
+    /**
      * @return the schvalene
      */
     public boolean isSchvalene() {
@@ -208,20 +218,6 @@ public class Schvalovani implements Serializable {
      */
     public void setSchvalene(boolean schvalene) {
         this.schvalene = schvalene;
-    }
-
-    /**
-     * @return the neschvalene
-     */
-    public boolean isNeschvalene() {
-        return neschvalene;
-    }
-
-    /**
-     * @param neschvalene the neschvalene to set
-     */
-    public void setNeschvalene(boolean neschvalene) {
-        this.neschvalene = neschvalene;
     }
 
     /**
@@ -265,7 +261,7 @@ public class Schvalovani implements Serializable {
     public void setZamitnute(boolean zamitnute) {
         this.zamitnute = zamitnute;
     }
-    
+
 ///////    
     public void refreshUcatnici() {
         System.out.println("onPlatiDoSelect()");
@@ -282,11 +278,17 @@ public class Schvalovani implements Serializable {
     }
 
     public void schvalit() {
-        System.out.println("schvalit()");
+        for (Ucastnik uc : this.selUcastnici) {
+            ejbUcastnikFacade.insSchvaleni(this.osoba,uc,1);               
+        }
+        this.selUcastnici=new ArrayList<>();
     }
 
     public void zamitnout() {
-        System.out.println("zamitnout()");
+        for (Ucastnik uc : this.selUcastnici) {
+            ejbUcastnikFacade.insSchvaleni(this.osoba,uc,2);               
+        }
+        this.selUcastnici=new ArrayList<>();
     }
 
     public void showDetail(Ucastnik ucast) {
@@ -307,5 +309,4 @@ public class Schvalovani implements Serializable {
 //        ArrayList<Zdroj> zdroje = new ArrayList<Zdroj>();
 //        ArrayList<Rezervace> rezervace = new ArrayList<Rezervace>();
 //    }
-
 }
