@@ -20,11 +20,12 @@
                                 <p:ajax event="rowSelectCheckbox" listener="#{schvalovani.onUcastnikSelect}" update=":formSchvPanel:fieldSetFiltry,:formSchvPanel:fieldSetButtons" />
                                 <p:ajax event="rowUnselectCheckbox" listener="#{schvalovani.onUcastnikUnSelect}" update=":formSchvPanel:fieldSetFiltry,:formSchvPanel:fieldSetButtons" />                                
                                 <p:column selectionMode="multiple" style="width:16px;text-align:center" selectRow="false" />
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Stav schválení"/>
+                                <p:column >
+                                    <f:facet name="header" >
+                                        <h:outputText value="Stav" title="Stav schválení nadřízeným(zástupcem)." />
                                     </f:facet>
-                                    <h:outputText value="N/A"/>
+                                    <h:graphicImage value="#{schvalovani.iconDispecer(itemUcastnik)}" title="Postavení schvalovatele vedoucí/zástupcem." height="12" width="12" />/
+                                    <h:graphicImage value="#{schvalovani.iconSchvalovani(itemUcastnik)}" title="Stav schválení vedoucím(zástupcem)." height="12" width="12" />
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
@@ -80,6 +81,10 @@
                             </p:fieldset>
                             <p:fieldset id="fieldSetFiltry" legend="Filtry:" toggleable="true" collapsed="false" >
                                 <h:panelGrid columns="2" cellpadding="2">
+                                    <p:outputLabel value="Role vedoucí:" class="right" />
+                                    <p:selectBooleanCheckbox value="#{schvalovani.vedouci}" />
+                                    <p:outputLabel value="zástupce:" class="right" />
+                                    <p:selectBooleanCheckbox value="#{schvalovani.zastupce}" />
                                     <p:outputLabel value="Nezpracované:" class="right" />
                                     <p:selectBooleanCheckbox value="#{schvalovani.nezpracovane}" />
                                     <p:outputLabel value="Schválené:" class="right" />

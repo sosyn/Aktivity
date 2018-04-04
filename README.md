@@ -1,7 +1,9 @@
 # Aktivity
-(! popis předchozích verzí je v "Readme.MD" je přesunutý )
+(! popis předchozích verzí je přesunutý do "Readme.MD")
+
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XXXVIII. Započaty práce na ikonách schvalování - dodělat stavy rovnou do věty schvalovani       
 XXXVII. Editace SQL dotazu výběru účastníků - UcastnikFacade - dodělat - výběr rolí zástupce a vedoucí (do xhtml)       
 XXXVI. Editace SQL dotazu výběru účastníků - UcastnikFacade - dodělat - vyladit
 XXXV. Oprava editace dispečerů - drobné úpravy

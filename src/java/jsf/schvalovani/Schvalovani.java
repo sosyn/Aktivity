@@ -279,16 +279,16 @@ public class Schvalovani implements Serializable {
 
     public void schvalit() {
         for (Ucastnik uc : this.selUcastnici) {
-            ejbUcastnikFacade.insSchvaleni(this.osoba,uc,1);               
+            ejbUcastnikFacade.insSchvaleni(this.osoba, uc, 1);
         }
-        this.selUcastnici=new ArrayList<>();
+        this.selUcastnici = new ArrayList<>();
     }
 
     public void zamitnout() {
         for (Ucastnik uc : this.selUcastnici) {
-            ejbUcastnikFacade.insSchvaleni(this.osoba,uc,2);               
+            ejbUcastnikFacade.insSchvaleni(this.osoba, uc, 2);
         }
-        this.selUcastnici=new ArrayList<>();
+        this.selUcastnici = new ArrayList<>();
     }
 
     public void showDetail(Ucastnik ucast) {
@@ -303,10 +303,13 @@ public class Schvalovani implements Serializable {
         System.out.println("onUcastnikUnSelect()");
     }
 
-//    class Schv {
-//        Cesta cesta = null;
-//        ArrayList<Ucastnik> ucastnici = new ArrayList<Ucastnik>();
-//        ArrayList<Zdroj> zdroje = new ArrayList<Zdroj>();
-//        ArrayList<Rezervace> rezervace = new ArrayList<Rezervace>();
-//    }
+    public String iconSchvalovani(Ucastnik ucastnik) {
+        String iconFile = "/images/Otaznik.png";
+        return iconFile;
+    }
+
+    public String iconDispecer(Ucastnik ucastnik) {
+        String iconFile = "/images/Boss.png";
+        return iconFile;
+    }
 }

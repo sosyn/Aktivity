@@ -131,21 +131,41 @@ public class UcastnikFacade extends AbstractFacade<Ucastnik> {
     }
 
     public void insSchvaleni(Osoba osoba, Ucastnik uc, int stav) {
-        Date datum=new Date();
-        Schvaleni schv=new Schvaleni();
+        String insSchvaleni
+                = "INSERT INTO aktivity.public.schvaleni "
+                + "(id, idtypschv, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido) "
+                + "VALUES (?::uuid, ?::uuid, ?::uuid, ?::uuid, ?::uuid, ?::uuid, ?, ?, ?, ?, ?)";
+        Date datum = new Date();
+        Schvaleni schv = new Schvaleni();
         schv.setNewEntity(true);
-        schv.setIdcest(uc.getIdcest());
+        schv.setIdtypschv(uc.getIdoso().getDispecerpolList().get(0).getIddisphl().getIdtypschv());
         schv.setIdoso(osoba);
+        schv.setIdcest(uc.getIdcest());
         schv.setIducast(uc);
+        // schv.setIdrez(null);
         schv.setStav(stav);
-        schv.setIdtypschv( uc.getIdoso().getDispecerpolList().get(0).getIddisphl().getIdtypschv());
-        schv.setKomentar("Schválení: "+osoba.getPopis()+" "+datum);
+        schv.setKomentar("Schválení: " + osoba.getPopis());
+        schv.setPopis(" " + datum);
         schv.setPlatiod(datum);
         schv.setPlatido(datum);
-        
-        schv.setIdrez(uc.getIdcest().getRezervaceList().get(0));
-        
-        em.persist(schv);
-    }
 
+//        em.persist(schv);
+        Query q = em.createNativeQuery(insSchvaleni)
+                .setParameter(1, schv.getId())
+                .setParameter(2, schv.getIdoso().getDispecerpolList().get(0).getIddisphl().getIdtypschv())
+                .setParameter(3, schv.getIdoso() == null ? null : schv.getIdoso().getId())
+                .setParameter(4, schv.getIdcest() == null ? null : schv.getIdcest().getId())
+                .setParameter(5, schv.getIducast() == null ? null : schv.getIducast().getId())
+                .setParameter(6, schv.getIdrez() == null ? null : schv.getIdrez().getId())
+                .setParameter(7, schv.getStav())
+                .setParameter(8, schv.getKomentar())
+                .setParameter(9, schv.getPopis())
+                .setParameter(10, schv.getPlatiod())
+                .setParameter(11, schv.getPlatido());
+        try {
+            q.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }
