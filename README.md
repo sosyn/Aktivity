@@ -3,6 +3,7 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XXXIX. Dodělat ikony schvalování - omezit oprávnění na spuštění schvalování  (začínám v tom mit zmatek)
 XXXVIII. Započaty práce na ikonách schvalování - dodělat stavy rovnou do věty schvalovani       
 XXXVII. Editace SQL dotazu výběru účastníků - UcastnikFacade - dodělat - výběr rolí zástupce a vedoucí (do xhtml)       
 XXXVI. Editace SQL dotazu výběru účastníků - UcastnikFacade - dodělat - vyladit

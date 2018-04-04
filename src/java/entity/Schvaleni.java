@@ -33,9 +33,7 @@ public class Schvaleni extends entity.EntitySuperClass {
     @Column(length = 512)
     private String komentar;
 
-    @JoinColumn(name = "idtypschv", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
-    private Typschv idtypschv;
+    private Integer uroven;
     
     @JoinColumn(name = "idoso", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
@@ -82,6 +80,20 @@ public class Schvaleni extends entity.EntitySuperClass {
         this.komentar = komentar;
     }
 
+    /**
+     * @return the uroven
+     */
+    public Integer getUroven() {
+        return uroven;
+    }
+
+    /**
+     * @param uroven the uroven to set
+     */
+    public void setUroven(Integer uroven) {
+        this.uroven = uroven;
+    }
+
     public Cesta getIdcest() {
         return idcest;
     }
@@ -96,14 +108,6 @@ public class Schvaleni extends entity.EntitySuperClass {
 
     public void setIdoso(Osoba idoso) {
         this.idoso = idoso;
-    }
-
-    public Typschv getIdtypschv() {
-        return idtypschv;
-    }
-
-    public void setIdtypschv(Typschv idtypschv) {
-        this.idtypschv = idtypschv;
     }
 
     /**

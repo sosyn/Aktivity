@@ -37,9 +37,6 @@ public class Typschv extends entity.EntitySuperClass {
     private String typschv;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idtypschv")
-    private List<Schvaleni> schvaleniList;
-
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "idtypschv")
     private List<Dispecerhl> dispecerhlList;
 
     public Typschv() {
@@ -59,14 +56,6 @@ public class Typschv extends entity.EntitySuperClass {
 
     public void setTypschv(String typschv) {
         this.typschv = typschv;
-    }
-
-    public List<Schvaleni> getSchvaleniList() {
-        return schvaleniList;
-    }
-
-    public void setSchvaleniList(List<Schvaleni> schvaleniList) {
-        this.schvaleniList = schvaleniList;
     }
 
     public List<Dispecerhl> getDispecerhlList() {

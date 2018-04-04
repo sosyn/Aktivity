@@ -5,7 +5,7 @@
 -- Dumped from database version 10.1
 -- Dumped by pg_dump version 10.1
 
--- Started on 2018-04-04 00:03:10
+-- Started on 2018-04-05 00:14:35
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -18,7 +18,7 @@ SET row_security = off;
 
 DROP DATABASE aktivity;
 --
--- TOC entry 3014 (class 1262 OID 24681)
+-- TOC entry 3013 (class 1262 OID 24681)
 -- Name: aktivity; Type: DATABASE; Schema: -; Owner: postgres
 --
 
@@ -39,8 +39,8 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 3015 (class 1262 OID 24681)
--- Dependencies: 3014
+-- TOC entry 3014 (class 1262 OID 24681)
+-- Dependencies: 3013
 -- Name: aktivity; Type: COMMENT; Schema: -; Owner: postgres
 --
 
@@ -56,7 +56,7 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 3018 (class 0 OID 0)
+-- TOC entry 3017 (class 0 OID 0)
 -- Dependencies: 1
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
@@ -77,7 +77,7 @@ CREATE DOMAIN _platido AS timestamp without time zone NOT NULL DEFAULT '2100-12-
 ALTER DOMAIN _platido OWNER TO postgres;
 
 --
--- TOC entry 3019 (class 0 OID 0)
+-- TOC entry 3018 (class 0 OID 0)
 -- Dependencies: 521
 -- Name: DOMAIN _platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -96,7 +96,7 @@ CREATE DOMAIN _platiod AS timestamp without time zone NOT NULL DEFAULT '2017-01-
 ALTER DOMAIN _platiod OWNER TO postgres;
 
 --
--- TOC entry 3020 (class 0 OID 0)
+-- TOC entry 3019 (class 0 OID 0)
 -- Dependencies: 522
 -- Name: DOMAIN _platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -115,7 +115,7 @@ CREATE DOMAIN _popis AS text DEFAULT ' '::text;
 ALTER DOMAIN _popis OWNER TO postgres;
 
 --
--- TOC entry 3021 (class 0 OID 0)
+-- TOC entry 3020 (class 0 OID 0)
 -- Dependencies: 602
 -- Name: DOMAIN _popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -134,7 +134,7 @@ CREATE DOMAIN _timeinsert AS timestamp without time zone NOT NULL DEFAULT now();
 ALTER DOMAIN _timeinsert OWNER TO postgres;
 
 --
--- TOC entry 3022 (class 0 OID 0)
+-- TOC entry 3021 (class 0 OID 0)
 -- Dependencies: 603
 -- Name: DOMAIN _timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -153,7 +153,7 @@ CREATE DOMAIN _timemodify AS timestamp without time zone NOT NULL DEFAULT now();
 ALTER DOMAIN _timemodify OWNER TO postgres;
 
 --
--- TOC entry 3023 (class 0 OID 0)
+-- TOC entry 3022 (class 0 OID 0)
 -- Dependencies: 604
 -- Name: DOMAIN _timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -172,7 +172,7 @@ CREATE DOMAIN _uzivatel AS text DEFAULT "current_user"();
 ALTER DOMAIN _uzivatel OWNER TO postgres;
 
 --
--- TOC entry 3024 (class 0 OID 0)
+-- TOC entry 3023 (class 0 OID 0)
 -- Dependencies: 605
 -- Name: DOMAIN _uzivatel; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -199,7 +199,7 @@ $$;
 ALTER FUNCTION public.settimemodify() OWNER TO postgres;
 
 --
--- TOC entry 3025 (class 0 OID 0)
+-- TOC entry 3024 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: FUNCTION settimemodify(); Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -233,7 +233,7 @@ CREATE TABLE aktivity (
 ALTER TABLE aktivity OWNER TO postgres;
 
 --
--- TOC entry 3026 (class 0 OID 0)
+-- TOC entry 3025 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: TABLE aktivity; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -242,7 +242,7 @@ COMMENT ON TABLE aktivity IS 'Aktivita - základní tabulka, poskytující rezer
 
 
 --
--- TOC entry 3027 (class 0 OID 0)
+-- TOC entry 3026 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: COLUMN aktivity.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -251,7 +251,7 @@ COMMENT ON COLUMN aktivity.id IS 'Identifikátor';
 
 
 --
--- TOC entry 3028 (class 0 OID 0)
+-- TOC entry 3027 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: COLUMN aktivity.idtypakt; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -260,7 +260,7 @@ COMMENT ON COLUMN aktivity.idtypakt IS 'Typ aktivity - cizí klíč';
 
 
 --
--- TOC entry 3029 (class 0 OID 0)
+-- TOC entry 3028 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: COLUMN aktivity.idoso; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -269,7 +269,7 @@ COMMENT ON COLUMN aktivity.idoso IS 'Vlastník akce - relace na tabulku osoby - 
 
 
 --
--- TOC entry 3030 (class 0 OID 0)
+-- TOC entry 3029 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: COLUMN aktivity.komentar; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -278,7 +278,7 @@ COMMENT ON COLUMN aktivity.komentar IS 'Komentar k volnemu pouziti';
 
 
 --
--- TOC entry 3031 (class 0 OID 0)
+-- TOC entry 3030 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: COLUMN aktivity.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -287,7 +287,7 @@ COMMENT ON COLUMN aktivity.popis IS 'Popis aktivity';
 
 
 --
--- TOC entry 3032 (class 0 OID 0)
+-- TOC entry 3031 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: COLUMN aktivity.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -296,7 +296,7 @@ COMMENT ON COLUMN aktivity.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 3033 (class 0 OID 0)
+-- TOC entry 3032 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: COLUMN aktivity.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -305,7 +305,7 @@ COMMENT ON COLUMN aktivity.platido IS 'Plati DO';
 
 
 --
--- TOC entry 3034 (class 0 OID 0)
+-- TOC entry 3033 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: COLUMN aktivity.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -314,7 +314,7 @@ COMMENT ON COLUMN aktivity.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 3035 (class 0 OID 0)
+-- TOC entry 3034 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: COLUMN aktivity.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -323,7 +323,7 @@ COMMENT ON COLUMN aktivity.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 3036 (class 0 OID 0)
+-- TOC entry 3035 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: COLUMN aktivity.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -354,7 +354,7 @@ CREATE TABLE cesta (
 ALTER TABLE cesta OWNER TO postgres;
 
 --
--- TOC entry 3037 (class 0 OID 0)
+-- TOC entry 3036 (class 0 OID 0)
 -- Dependencies: 197
 -- Name: TABLE cesta; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -363,7 +363,7 @@ COMMENT ON TABLE cesta IS 'Cesta - tabulka plánovaných a realizovaných cest';
 
 
 --
--- TOC entry 3038 (class 0 OID 0)
+-- TOC entry 3037 (class 0 OID 0)
 -- Dependencies: 197
 -- Name: COLUMN cesta.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -372,7 +372,7 @@ COMMENT ON COLUMN cesta.id IS 'Identifikátor';
 
 
 --
--- TOC entry 3039 (class 0 OID 0)
+-- TOC entry 3038 (class 0 OID 0)
 -- Dependencies: 197
 -- Name: COLUMN cesta.idtypzdr; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -381,7 +381,7 @@ COMMENT ON COLUMN cesta.idtypzdr IS 'Identifikátor typu zdroje cesty - cizi kli
 
 
 --
--- TOC entry 3040 (class 0 OID 0)
+-- TOC entry 3039 (class 0 OID 0)
 -- Dependencies: 197
 -- Name: COLUMN cesta.idoso; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -390,7 +390,7 @@ COMMENT ON COLUMN cesta.idoso IS 'ID osoby, která založila cestu';
 
 
 --
--- TOC entry 3041 (class 0 OID 0)
+-- TOC entry 3040 (class 0 OID 0)
 -- Dependencies: 197
 -- Name: COLUMN cesta.komentar; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -399,7 +399,7 @@ COMMENT ON COLUMN cesta.komentar IS 'Komentar k volnemu pouziti';
 
 
 --
--- TOC entry 3042 (class 0 OID 0)
+-- TOC entry 3041 (class 0 OID 0)
 -- Dependencies: 197
 -- Name: COLUMN cesta.zaloha; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -408,7 +408,7 @@ COMMENT ON COLUMN cesta.zaloha IS 'Záloha na cestu';
 
 
 --
--- TOC entry 3043 (class 0 OID 0)
+-- TOC entry 3042 (class 0 OID 0)
 -- Dependencies: 197
 -- Name: COLUMN cesta.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -417,7 +417,7 @@ COMMENT ON COLUMN cesta.popis IS 'Popis cesty';
 
 
 --
--- TOC entry 3044 (class 0 OID 0)
+-- TOC entry 3043 (class 0 OID 0)
 -- Dependencies: 197
 -- Name: COLUMN cesta.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -426,7 +426,7 @@ COMMENT ON COLUMN cesta.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 3045 (class 0 OID 0)
+-- TOC entry 3044 (class 0 OID 0)
 -- Dependencies: 197
 -- Name: COLUMN cesta.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -435,7 +435,7 @@ COMMENT ON COLUMN cesta.platido IS 'Plati DO';
 
 
 --
--- TOC entry 3046 (class 0 OID 0)
+-- TOC entry 3045 (class 0 OID 0)
 -- Dependencies: 197
 -- Name: COLUMN cesta.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -444,7 +444,7 @@ COMMENT ON COLUMN cesta.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 3047 (class 0 OID 0)
+-- TOC entry 3046 (class 0 OID 0)
 -- Dependencies: 197
 -- Name: COLUMN cesta.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -453,7 +453,7 @@ COMMENT ON COLUMN cesta.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 3048 (class 0 OID 0)
+-- TOC entry 3047 (class 0 OID 0)
 -- Dependencies: 197
 -- Name: COLUMN cesta.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -484,7 +484,7 @@ CREATE TABLE dispecerhl (
 ALTER TABLE dispecerhl OWNER TO postgres;
 
 --
--- TOC entry 3049 (class 0 OID 0)
+-- TOC entry 3048 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: TABLE dispecerhl; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -493,7 +493,7 @@ COMMENT ON TABLE dispecerhl IS 'Seznam dispeceru v zavislosti na pozici (Vedouci
 
 
 --
--- TOC entry 3050 (class 0 OID 0)
+-- TOC entry 3049 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: COLUMN dispecerhl.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -502,7 +502,7 @@ COMMENT ON COLUMN dispecerhl.id IS 'Identifikátor';
 
 
 --
--- TOC entry 3051 (class 0 OID 0)
+-- TOC entry 3050 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: COLUMN dispecerhl.idoso; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -511,7 +511,7 @@ COMMENT ON COLUMN dispecerhl.idoso IS 'ID dispecera z tabulky osob';
 
 
 --
--- TOC entry 3052 (class 0 OID 0)
+-- TOC entry 3051 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: COLUMN dispecerhl.idtypschv; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -520,7 +520,7 @@ COMMENT ON COLUMN dispecerhl.idtypschv IS 'ID na typ schvalovani napr. Dispecer,
 
 
 --
--- TOC entry 3053 (class 0 OID 0)
+-- TOC entry 3052 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: COLUMN dispecerhl.idtypzdr; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -529,7 +529,7 @@ COMMENT ON COLUMN dispecerhl.idtypzdr IS 'ID na typ zdroje napr. osoba-podrizeny
 
 
 --
--- TOC entry 3054 (class 0 OID 0)
+-- TOC entry 3053 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: COLUMN dispecerhl.iddisphl; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -538,7 +538,7 @@ COMMENT ON COLUMN dispecerhl.iddisphl IS 'ID nadrizeneho dispecera v pripade, ž
 
 
 --
--- TOC entry 3055 (class 0 OID 0)
+-- TOC entry 3054 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: COLUMN dispecerhl.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -547,7 +547,7 @@ COMMENT ON COLUMN dispecerhl.popis IS 'Libovolny popis';
 
 
 --
--- TOC entry 3056 (class 0 OID 0)
+-- TOC entry 3055 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: COLUMN dispecerhl.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -556,7 +556,7 @@ COMMENT ON COLUMN dispecerhl.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 3057 (class 0 OID 0)
+-- TOC entry 3056 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: COLUMN dispecerhl.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -565,7 +565,7 @@ COMMENT ON COLUMN dispecerhl.platido IS 'Plati DO';
 
 
 --
--- TOC entry 3058 (class 0 OID 0)
+-- TOC entry 3057 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: COLUMN dispecerhl.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -574,7 +574,7 @@ COMMENT ON COLUMN dispecerhl.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 3059 (class 0 OID 0)
+-- TOC entry 3058 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: COLUMN dispecerhl.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -583,7 +583,7 @@ COMMENT ON COLUMN dispecerhl.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 3060 (class 0 OID 0)
+-- TOC entry 3059 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: COLUMN dispecerhl.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -613,7 +613,7 @@ CREATE TABLE dispecerpol (
 ALTER TABLE dispecerpol OWNER TO postgres;
 
 --
--- TOC entry 3061 (class 0 OID 0)
+-- TOC entry 3060 (class 0 OID 0)
 -- Dependencies: 199
 -- Name: TABLE dispecerpol; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -622,7 +622,7 @@ COMMENT ON TABLE dispecerpol IS 'Seznam osob, které bude mít dispečer na star
 
 
 --
--- TOC entry 3062 (class 0 OID 0)
+-- TOC entry 3061 (class 0 OID 0)
 -- Dependencies: 199
 -- Name: COLUMN dispecerpol.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -631,7 +631,7 @@ COMMENT ON COLUMN dispecerpol.id IS 'Identifikátor';
 
 
 --
--- TOC entry 3063 (class 0 OID 0)
+-- TOC entry 3062 (class 0 OID 0)
 -- Dependencies: 199
 -- Name: COLUMN dispecerpol.iddisphl; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -640,7 +640,7 @@ COMMENT ON COLUMN dispecerpol.iddisphl IS 'ID dispecera z tabulky dispecerhl';
 
 
 --
--- TOC entry 3064 (class 0 OID 0)
+-- TOC entry 3063 (class 0 OID 0)
 -- Dependencies: 199
 -- Name: COLUMN dispecerpol.idoso; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -649,7 +649,7 @@ COMMENT ON COLUMN dispecerpol.idoso IS 'ID osoby podřízené';
 
 
 --
--- TOC entry 3065 (class 0 OID 0)
+-- TOC entry 3064 (class 0 OID 0)
 -- Dependencies: 199
 -- Name: COLUMN dispecerpol.idzdr; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -658,7 +658,7 @@ COMMENT ON COLUMN dispecerpol.idzdr IS 'ID spravovaného zdroje';
 
 
 --
--- TOC entry 3066 (class 0 OID 0)
+-- TOC entry 3065 (class 0 OID 0)
 -- Dependencies: 199
 -- Name: COLUMN dispecerpol.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -667,7 +667,7 @@ COMMENT ON COLUMN dispecerpol.platiod IS 'Platí Od';
 
 
 --
--- TOC entry 3067 (class 0 OID 0)
+-- TOC entry 3066 (class 0 OID 0)
 -- Dependencies: 199
 -- Name: COLUMN dispecerpol.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -676,7 +676,7 @@ COMMENT ON COLUMN dispecerpol.platido IS 'Platí Do';
 
 
 --
--- TOC entry 3068 (class 0 OID 0)
+-- TOC entry 3067 (class 0 OID 0)
 -- Dependencies: 199
 -- Name: COLUMN dispecerpol.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -685,7 +685,7 @@ COMMENT ON COLUMN dispecerpol.timeinsert IS 'Čas vložení záznamu';
 
 
 --
--- TOC entry 3069 (class 0 OID 0)
+-- TOC entry 3068 (class 0 OID 0)
 -- Dependencies: 199
 -- Name: COLUMN dispecerpol.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -694,7 +694,7 @@ COMMENT ON COLUMN dispecerpol.timemodify IS 'Čas poslední změny záznamu';
 
 
 --
--- TOC entry 3070 (class 0 OID 0)
+-- TOC entry 3069 (class 0 OID 0)
 -- Dependencies: 199
 -- Name: COLUMN dispecerpol.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -729,7 +729,7 @@ CREATE TABLE email (
 ALTER TABLE email OWNER TO postgres;
 
 --
--- TOC entry 3071 (class 0 OID 0)
+-- TOC entry 3070 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: TABLE email; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -738,7 +738,7 @@ COMMENT ON TABLE email IS 'Email - tabulka obsahuje emailovou komunikaci mezi ap
 
 
 --
--- TOC entry 3072 (class 0 OID 0)
+-- TOC entry 3071 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: COLUMN email.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -747,7 +747,7 @@ COMMENT ON COLUMN email.id IS 'Identifikátor';
 
 
 --
--- TOC entry 3073 (class 0 OID 0)
+-- TOC entry 3072 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: COLUMN email.idakt; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -756,7 +756,7 @@ COMMENT ON COLUMN email.idakt IS 'ID na tabulku aktivity - cizi klic';
 
 
 --
--- TOC entry 3074 (class 0 OID 0)
+-- TOC entry 3073 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: COLUMN email.idcest; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -765,7 +765,7 @@ COMMENT ON COLUMN email.idcest IS 'ID na tabulku cesty - cizi klic';
 
 
 --
--- TOC entry 3075 (class 0 OID 0)
+-- TOC entry 3074 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: COLUMN email.idrez; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -774,7 +774,7 @@ COMMENT ON COLUMN email.idrez IS 'ID na tabulku rezervaci - cizi klic';
 
 
 --
--- TOC entry 3076 (class 0 OID 0)
+-- TOC entry 3075 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: COLUMN email.iducast; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -783,7 +783,7 @@ COMMENT ON COLUMN email.iducast IS 'ID na tabulku ucastniku - cizi klic';
 
 
 --
--- TOC entry 3077 (class 0 OID 0)
+-- TOC entry 3076 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: COLUMN email.idoso; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -792,7 +792,7 @@ COMMENT ON COLUMN email.idoso IS 'ID na tabulku osob - cizi klic';
 
 
 --
--- TOC entry 3078 (class 0 OID 0)
+-- TOC entry 3077 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: COLUMN email.smer; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -801,7 +801,7 @@ COMMENT ON COLUMN email.smer IS '0=odchozí email, 1=příchozí email';
 
 
 --
--- TOC entry 3079 (class 0 OID 0)
+-- TOC entry 3078 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: COLUMN email.email; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -810,7 +810,7 @@ COMMENT ON COLUMN email.email IS 'Email odesilatele nebo příjemce';
 
 
 --
--- TOC entry 3080 (class 0 OID 0)
+-- TOC entry 3079 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: COLUMN email.predmet; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -819,7 +819,7 @@ COMMENT ON COLUMN email.predmet IS 'Předmět emailu';
 
 
 --
--- TOC entry 3081 (class 0 OID 0)
+-- TOC entry 3080 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: COLUMN email.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -828,7 +828,7 @@ COMMENT ON COLUMN email.popis IS 'Popis log';
 
 
 --
--- TOC entry 3082 (class 0 OID 0)
+-- TOC entry 3081 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: COLUMN email.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -837,7 +837,7 @@ COMMENT ON COLUMN email.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 3083 (class 0 OID 0)
+-- TOC entry 3082 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: COLUMN email.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -846,7 +846,7 @@ COMMENT ON COLUMN email.platido IS 'Plati DO';
 
 
 --
--- TOC entry 3084 (class 0 OID 0)
+-- TOC entry 3083 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: COLUMN email.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -855,7 +855,7 @@ COMMENT ON COLUMN email.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 3085 (class 0 OID 0)
+-- TOC entry 3084 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: COLUMN email.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -864,7 +864,7 @@ COMMENT ON COLUMN email.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 3086 (class 0 OID 0)
+-- TOC entry 3085 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: COLUMN email.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -899,7 +899,7 @@ CREATE TABLE log (
 ALTER TABLE log OWNER TO postgres;
 
 --
--- TOC entry 3087 (class 0 OID 0)
+-- TOC entry 3086 (class 0 OID 0)
 -- Dependencies: 201
 -- Name: TABLE log; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -908,7 +908,7 @@ COMMENT ON TABLE log IS 'Log - tabulka logujici aktivity nad ruznymi tabulkami';
 
 
 --
--- TOC entry 3088 (class 0 OID 0)
+-- TOC entry 3087 (class 0 OID 0)
 -- Dependencies: 201
 -- Name: COLUMN log.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -917,7 +917,7 @@ COMMENT ON COLUMN log.id IS 'Identifikátor';
 
 
 --
--- TOC entry 3089 (class 0 OID 0)
+-- TOC entry 3088 (class 0 OID 0)
 -- Dependencies: 201
 -- Name: COLUMN log.tblid; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -926,7 +926,7 @@ COMMENT ON COLUMN log.tblid IS 'Jedinečný identifikátory záznamu v tabulce';
 
 
 --
--- TOC entry 3090 (class 0 OID 0)
+-- TOC entry 3089 (class 0 OID 0)
 -- Dependencies: 201
 -- Name: COLUMN log.tblname; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -935,7 +935,7 @@ COMMENT ON COLUMN log.tblname IS 'Název tabulky, do které patří identifikát
 
 
 --
--- TOC entry 3091 (class 0 OID 0)
+-- TOC entry 3090 (class 0 OID 0)
 -- Dependencies: 201
 -- Name: COLUMN log.idakt; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -944,7 +944,7 @@ COMMENT ON COLUMN log.idakt IS 'ID na tabulku aktivity - cizi klic';
 
 
 --
--- TOC entry 3092 (class 0 OID 0)
+-- TOC entry 3091 (class 0 OID 0)
 -- Dependencies: 201
 -- Name: COLUMN log.idzdr; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -953,7 +953,7 @@ COMMENT ON COLUMN log.idzdr IS 'ID na tabulku zdroje - cizi klic';
 
 
 --
--- TOC entry 3093 (class 0 OID 0)
+-- TOC entry 3092 (class 0 OID 0)
 -- Dependencies: 201
 -- Name: COLUMN log.idcest; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -962,7 +962,7 @@ COMMENT ON COLUMN log.idcest IS 'ID na tabulku cesty - cizi klic';
 
 
 --
--- TOC entry 3094 (class 0 OID 0)
+-- TOC entry 3093 (class 0 OID 0)
 -- Dependencies: 201
 -- Name: COLUMN log.idrez; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -971,7 +971,7 @@ COMMENT ON COLUMN log.idrez IS 'ID na tabulku rezervaci - cizi klic';
 
 
 --
--- TOC entry 3095 (class 0 OID 0)
+-- TOC entry 3094 (class 0 OID 0)
 -- Dependencies: 201
 -- Name: COLUMN log.iducast; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -980,7 +980,7 @@ COMMENT ON COLUMN log.iducast IS 'ID na tabulku ucastniku - cizi klic';
 
 
 --
--- TOC entry 3096 (class 0 OID 0)
+-- TOC entry 3095 (class 0 OID 0)
 -- Dependencies: 201
 -- Name: COLUMN log.idoso; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -989,7 +989,7 @@ COMMENT ON COLUMN log.idoso IS 'ID na tabulku osob - cizi klic';
 
 
 --
--- TOC entry 3097 (class 0 OID 0)
+-- TOC entry 3096 (class 0 OID 0)
 -- Dependencies: 201
 -- Name: COLUMN log.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -998,7 +998,7 @@ COMMENT ON COLUMN log.popis IS 'Popis log';
 
 
 --
--- TOC entry 3098 (class 0 OID 0)
+-- TOC entry 3097 (class 0 OID 0)
 -- Dependencies: 201
 -- Name: COLUMN log.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1007,7 +1007,7 @@ COMMENT ON COLUMN log.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 3099 (class 0 OID 0)
+-- TOC entry 3098 (class 0 OID 0)
 -- Dependencies: 201
 -- Name: COLUMN log.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1016,7 +1016,7 @@ COMMENT ON COLUMN log.platido IS 'Plati DO';
 
 
 --
--- TOC entry 3100 (class 0 OID 0)
+-- TOC entry 3099 (class 0 OID 0)
 -- Dependencies: 201
 -- Name: COLUMN log.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1025,7 +1025,7 @@ COMMENT ON COLUMN log.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 3101 (class 0 OID 0)
+-- TOC entry 3100 (class 0 OID 0)
 -- Dependencies: 201
 -- Name: COLUMN log.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1034,7 +1034,7 @@ COMMENT ON COLUMN log.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 3102 (class 0 OID 0)
+-- TOC entry 3101 (class 0 OID 0)
 -- Dependencies: 201
 -- Name: COLUMN log.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1067,7 +1067,7 @@ CREATE TABLE osoba (
 ALTER TABLE osoba OWNER TO postgres;
 
 --
--- TOC entry 3103 (class 0 OID 0)
+-- TOC entry 3102 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: TABLE osoba; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1077,7 +1077,7 @@ COMMENT ON TABLE osoba IS 'Seznam osob
 
 
 --
--- TOC entry 3104 (class 0 OID 0)
+-- TOC entry 3103 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: COLUMN osoba.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1086,7 +1086,7 @@ COMMENT ON COLUMN osoba.id IS 'Identifikátor';
 
 
 --
--- TOC entry 3105 (class 0 OID 0)
+-- TOC entry 3104 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: COLUMN osoba.name; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1095,7 +1095,7 @@ COMMENT ON COLUMN osoba.name IS 'Jméno osoby - uživatele';
 
 
 --
--- TOC entry 3106 (class 0 OID 0)
+-- TOC entry 3105 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: COLUMN osoba.password; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1104,7 +1104,7 @@ COMMENT ON COLUMN osoba.password IS 'Heslo osoby-uživatele uloženo v SHA-256';
 
 
 --
--- TOC entry 3107 (class 0 OID 0)
+-- TOC entry 3106 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: COLUMN osoba.extid; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1113,7 +1113,7 @@ COMMENT ON COLUMN osoba.extid IS 'ID na externí tabulku s uživatelskými daty'
 
 
 --
--- TOC entry 3108 (class 0 OID 0)
+-- TOC entry 3107 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: COLUMN osoba.komentar; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1122,7 +1122,7 @@ COMMENT ON COLUMN osoba.komentar IS 'Komentar k volnemu pouziti';
 
 
 --
--- TOC entry 3109 (class 0 OID 0)
+-- TOC entry 3108 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: COLUMN osoba.skupina; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1131,7 +1131,7 @@ COMMENT ON COLUMN osoba.skupina IS 'Skupina oprávnění pro JdbcRealmAktivity';
 
 
 --
--- TOC entry 3110 (class 0 OID 0)
+-- TOC entry 3109 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: COLUMN osoba.email; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1140,7 +1140,7 @@ COMMENT ON COLUMN osoba.email IS 'Emailova schranka osoby';
 
 
 --
--- TOC entry 3111 (class 0 OID 0)
+-- TOC entry 3110 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: COLUMN osoba.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1149,7 +1149,7 @@ COMMENT ON COLUMN osoba.popis IS 'Prijmeni, jmeno, titul';
 
 
 --
--- TOC entry 3112 (class 0 OID 0)
+-- TOC entry 3111 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: COLUMN osoba.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1158,7 +1158,7 @@ COMMENT ON COLUMN osoba.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 3113 (class 0 OID 0)
+-- TOC entry 3112 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: COLUMN osoba.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1167,7 +1167,7 @@ COMMENT ON COLUMN osoba.platido IS 'Plati DO';
 
 
 --
--- TOC entry 3114 (class 0 OID 0)
+-- TOC entry 3113 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: COLUMN osoba.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1176,7 +1176,7 @@ COMMENT ON COLUMN osoba.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 3115 (class 0 OID 0)
+-- TOC entry 3114 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: COLUMN osoba.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1185,7 +1185,7 @@ COMMENT ON COLUMN osoba.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 3116 (class 0 OID 0)
+-- TOC entry 3115 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: COLUMN osoba.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1216,7 +1216,7 @@ CREATE TABLE rezervace (
 ALTER TABLE rezervace OWNER TO postgres;
 
 --
--- TOC entry 3117 (class 0 OID 0)
+-- TOC entry 3116 (class 0 OID 0)
 -- Dependencies: 203
 -- Name: TABLE rezervace; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1225,7 +1225,7 @@ COMMENT ON TABLE rezervace IS 'Rezervace - tabulka rezervaci';
 
 
 --
--- TOC entry 3118 (class 0 OID 0)
+-- TOC entry 3117 (class 0 OID 0)
 -- Dependencies: 203
 -- Name: COLUMN rezervace.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1234,7 +1234,7 @@ COMMENT ON COLUMN rezervace.id IS 'Identifikátor';
 
 
 --
--- TOC entry 3119 (class 0 OID 0)
+-- TOC entry 3118 (class 0 OID 0)
 -- Dependencies: 203
 -- Name: COLUMN rezervace.idakt; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1243,7 +1243,7 @@ COMMENT ON COLUMN rezervace.idakt IS 'Identifikátor aktivity - cizi klic (muze 
 
 
 --
--- TOC entry 3120 (class 0 OID 0)
+-- TOC entry 3119 (class 0 OID 0)
 -- Dependencies: 203
 -- Name: COLUMN rezervace.idcest; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1252,7 +1252,7 @@ COMMENT ON COLUMN rezervace.idcest IS 'Identifikátor cesty - cizi klic (muze by
 
 
 --
--- TOC entry 3121 (class 0 OID 0)
+-- TOC entry 3120 (class 0 OID 0)
 -- Dependencies: 203
 -- Name: COLUMN rezervace.idzdr; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1261,7 +1261,7 @@ COMMENT ON COLUMN rezervace.idzdr IS 'Identifikátor rezervovaneho zdroje - cizi
 
 
 --
--- TOC entry 3122 (class 0 OID 0)
+-- TOC entry 3121 (class 0 OID 0)
 -- Dependencies: 203
 -- Name: COLUMN rezervace.komentar; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1270,7 +1270,7 @@ COMMENT ON COLUMN rezervace.komentar IS 'Komentar k volnemu pouziti';
 
 
 --
--- TOC entry 3123 (class 0 OID 0)
+-- TOC entry 3122 (class 0 OID 0)
 -- Dependencies: 203
 -- Name: COLUMN rezervace.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1279,7 +1279,7 @@ COMMENT ON COLUMN rezervace.popis IS 'Popis rezervace';
 
 
 --
--- TOC entry 3124 (class 0 OID 0)
+-- TOC entry 3123 (class 0 OID 0)
 -- Dependencies: 203
 -- Name: COLUMN rezervace.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1288,7 +1288,7 @@ COMMENT ON COLUMN rezervace.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 3125 (class 0 OID 0)
+-- TOC entry 3124 (class 0 OID 0)
 -- Dependencies: 203
 -- Name: COLUMN rezervace.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1297,7 +1297,7 @@ COMMENT ON COLUMN rezervace.platido IS 'Plati DO';
 
 
 --
--- TOC entry 3126 (class 0 OID 0)
+-- TOC entry 3125 (class 0 OID 0)
 -- Dependencies: 203
 -- Name: COLUMN rezervace.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1306,7 +1306,7 @@ COMMENT ON COLUMN rezervace.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 3127 (class 0 OID 0)
+-- TOC entry 3126 (class 0 OID 0)
 -- Dependencies: 203
 -- Name: COLUMN rezervace.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1315,7 +1315,7 @@ COMMENT ON COLUMN rezervace.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 3128 (class 0 OID 0)
+-- TOC entry 3127 (class 0 OID 0)
 -- Dependencies: 203
 -- Name: COLUMN rezervace.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1330,7 +1330,6 @@ COMMENT ON COLUMN rezervace.usermodify IS 'Uzivatel, ktery posledni modifikoval 
 
 CREATE TABLE schvaleni (
     id uuid NOT NULL,
-    idtypschv uuid NOT NULL,
     idoso uuid NOT NULL,
     idcest uuid,
     iducast uuid,
@@ -1342,14 +1341,15 @@ CREATE TABLE schvaleni (
     platido _platido,
     timeinsert _timeinsert,
     timemodify _timemodify,
-    usermodify _uzivatel
+    usermodify _uzivatel,
+    uroven integer DEFAULT 0 NOT NULL
 );
 
 
 ALTER TABLE schvaleni OWNER TO postgres;
 
 --
--- TOC entry 3129 (class 0 OID 0)
+-- TOC entry 3128 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: TABLE schvaleni; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1358,7 +1358,7 @@ COMMENT ON TABLE schvaleni IS 'Tabulka schvalovatelu cesty, uživatelů a rezerv
 
 
 --
--- TOC entry 3130 (class 0 OID 0)
+-- TOC entry 3129 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: COLUMN schvaleni.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1367,17 +1367,7 @@ COMMENT ON COLUMN schvaleni.id IS 'Identifikátor';
 
 
 --
--- TOC entry 3131 (class 0 OID 0)
--- Dependencies: 204
--- Name: COLUMN schvaleni.idtypschv; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN schvaleni.idtypschv IS 'ID typu schvalovatele-ciselnik typu schvalovatelu
-(nemá význam, nahradily ji tabulk ydispečerů a zástupců)';
-
-
---
--- TOC entry 3132 (class 0 OID 0)
+-- TOC entry 3130 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: COLUMN schvaleni.idoso; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1386,7 +1376,7 @@ COMMENT ON COLUMN schvaleni.idoso IS 'ID osoby schvalovatele z tabulky osoby';
 
 
 --
--- TOC entry 3133 (class 0 OID 0)
+-- TOC entry 3131 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: COLUMN schvaleni.idcest; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1395,7 +1385,7 @@ COMMENT ON COLUMN schvaleni.idcest IS 'ID cesty, kterou schvalovatel schvaluje';
 
 
 --
--- TOC entry 3134 (class 0 OID 0)
+-- TOC entry 3132 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: COLUMN schvaleni.iducast; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1404,7 +1394,7 @@ COMMENT ON COLUMN schvaleni.iducast IS 'ID - odkaz na tabulku účastníků cest
 
 
 --
--- TOC entry 3135 (class 0 OID 0)
+-- TOC entry 3133 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: COLUMN schvaleni.idrez; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1413,7 +1403,7 @@ COMMENT ON COLUMN schvaleni.idrez IS 'ID - odkaz na tabulku rezervaci';
 
 
 --
--- TOC entry 3136 (class 0 OID 0)
+-- TOC entry 3134 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: COLUMN schvaleni.stav; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1424,7 +1414,7 @@ COMMENT ON COLUMN schvaleni.stav IS '0=nezpracováno
 
 
 --
--- TOC entry 3137 (class 0 OID 0)
+-- TOC entry 3135 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: COLUMN schvaleni.komentar; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1433,7 +1423,7 @@ COMMENT ON COLUMN schvaleni.komentar IS 'Komentar k volnemu pouziti';
 
 
 --
--- TOC entry 3138 (class 0 OID 0)
+-- TOC entry 3136 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: COLUMN schvaleni.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1442,7 +1432,7 @@ COMMENT ON COLUMN schvaleni.popis IS 'Popis zdroje';
 
 
 --
--- TOC entry 3139 (class 0 OID 0)
+-- TOC entry 3137 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: COLUMN schvaleni.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1451,7 +1441,7 @@ COMMENT ON COLUMN schvaleni.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 3140 (class 0 OID 0)
+-- TOC entry 3138 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: COLUMN schvaleni.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1460,7 +1450,7 @@ COMMENT ON COLUMN schvaleni.platido IS 'Plati DO';
 
 
 --
--- TOC entry 3141 (class 0 OID 0)
+-- TOC entry 3139 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: COLUMN schvaleni.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1469,7 +1459,7 @@ COMMENT ON COLUMN schvaleni.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 3142 (class 0 OID 0)
+-- TOC entry 3140 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: COLUMN schvaleni.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1478,12 +1468,24 @@ COMMENT ON COLUMN schvaleni.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 3143 (class 0 OID 0)
+-- TOC entry 3141 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: COLUMN schvaleni.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
 
 COMMENT ON COLUMN schvaleni.usermodify IS 'Uzivatel, ktery posledni modifikoval zaznam.';
+
+
+--
+-- TOC entry 3142 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: COLUMN schvaleni.uroven; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN schvaleni.uroven IS 'Uroven schvaleni
+0=žádná
+1=zástupce
+2=vedoucí';
 
 
 --
@@ -1507,7 +1509,7 @@ CREATE TABLE skupina (
 ALTER TABLE skupina OWNER TO postgres;
 
 --
--- TOC entry 3144 (class 0 OID 0)
+-- TOC entry 3143 (class 0 OID 0)
 -- Dependencies: 205
 -- Name: TABLE skupina; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1516,7 +1518,7 @@ COMMENT ON TABLE skupina IS 'Seznam skupin oprávnění pro JdbcRealmAktivity';
 
 
 --
--- TOC entry 3145 (class 0 OID 0)
+-- TOC entry 3144 (class 0 OID 0)
 -- Dependencies: 205
 -- Name: COLUMN skupina.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1525,7 +1527,7 @@ COMMENT ON COLUMN skupina.id IS 'Identifikátor';
 
 
 --
--- TOC entry 3146 (class 0 OID 0)
+-- TOC entry 3145 (class 0 OID 0)
 -- Dependencies: 205
 -- Name: COLUMN skupina.name; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1534,7 +1536,7 @@ COMMENT ON COLUMN skupina.name IS 'Jméno osoby - uživatele';
 
 
 --
--- TOC entry 3147 (class 0 OID 0)
+-- TOC entry 3146 (class 0 OID 0)
 -- Dependencies: 205
 -- Name: COLUMN skupina.skupina; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1543,7 +1545,7 @@ COMMENT ON COLUMN skupina.skupina IS 'Skupina oprávnění pro JdbcRealmAktivity
 
 
 --
--- TOC entry 3148 (class 0 OID 0)
+-- TOC entry 3147 (class 0 OID 0)
 -- Dependencies: 205
 -- Name: COLUMN skupina.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1552,7 +1554,7 @@ COMMENT ON COLUMN skupina.popis IS 'Popis skupiny';
 
 
 --
--- TOC entry 3149 (class 0 OID 0)
+-- TOC entry 3148 (class 0 OID 0)
 -- Dependencies: 205
 -- Name: COLUMN skupina.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1561,7 +1563,7 @@ COMMENT ON COLUMN skupina.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 3150 (class 0 OID 0)
+-- TOC entry 3149 (class 0 OID 0)
 -- Dependencies: 205
 -- Name: COLUMN skupina.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1570,7 +1572,7 @@ COMMENT ON COLUMN skupina.platido IS 'Plati DO';
 
 
 --
--- TOC entry 3151 (class 0 OID 0)
+-- TOC entry 3150 (class 0 OID 0)
 -- Dependencies: 205
 -- Name: COLUMN skupina.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1579,7 +1581,7 @@ COMMENT ON COLUMN skupina.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 3152 (class 0 OID 0)
+-- TOC entry 3151 (class 0 OID 0)
 -- Dependencies: 205
 -- Name: COLUMN skupina.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1588,7 +1590,7 @@ COMMENT ON COLUMN skupina.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 3153 (class 0 OID 0)
+-- TOC entry 3152 (class 0 OID 0)
 -- Dependencies: 205
 -- Name: COLUMN skupina.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1616,7 +1618,7 @@ CREATE TABLE typaktivity (
 ALTER TABLE typaktivity OWNER TO postgres;
 
 --
--- TOC entry 3154 (class 0 OID 0)
+-- TOC entry 3153 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: TABLE typaktivity; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1627,7 +1629,7 @@ COMMENT ON TABLE typaktivity IS 'Číselník typů aktivity
 
 
 --
--- TOC entry 3155 (class 0 OID 0)
+-- TOC entry 3154 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: COLUMN typaktivity.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1636,7 +1638,7 @@ COMMENT ON COLUMN typaktivity.id IS 'ID typu aktivity';
 
 
 --
--- TOC entry 3156 (class 0 OID 0)
+-- TOC entry 3155 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: COLUMN typaktivity.typakt; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1645,7 +1647,7 @@ COMMENT ON COLUMN typaktivity.typakt IS 'Typ aktivity';
 
 
 --
--- TOC entry 3157 (class 0 OID 0)
+-- TOC entry 3156 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: COLUMN typaktivity.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1654,7 +1656,7 @@ COMMENT ON COLUMN typaktivity.popis IS 'Popis typu aktivity';
 
 
 --
--- TOC entry 3158 (class 0 OID 0)
+-- TOC entry 3157 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: COLUMN typaktivity.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1663,7 +1665,7 @@ COMMENT ON COLUMN typaktivity.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 3159 (class 0 OID 0)
+-- TOC entry 3158 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: COLUMN typaktivity.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1672,7 +1674,7 @@ COMMENT ON COLUMN typaktivity.platido IS 'Plati DO';
 
 
 --
--- TOC entry 3160 (class 0 OID 0)
+-- TOC entry 3159 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: COLUMN typaktivity.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1681,7 +1683,7 @@ COMMENT ON COLUMN typaktivity.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 3161 (class 0 OID 0)
+-- TOC entry 3160 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: COLUMN typaktivity.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1690,7 +1692,7 @@ COMMENT ON COLUMN typaktivity.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 3162 (class 0 OID 0)
+-- TOC entry 3161 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: COLUMN typaktivity.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1718,7 +1720,7 @@ CREATE TABLE typschv (
 ALTER TABLE typschv OWNER TO postgres;
 
 --
--- TOC entry 3163 (class 0 OID 0)
+-- TOC entry 3162 (class 0 OID 0)
 -- Dependencies: 207
 -- Name: TABLE typschv; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1733,7 +1735,7 @@ D - dispecer';
 
 
 --
--- TOC entry 3164 (class 0 OID 0)
+-- TOC entry 3163 (class 0 OID 0)
 -- Dependencies: 207
 -- Name: COLUMN typschv.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1742,7 +1744,7 @@ COMMENT ON COLUMN typschv.id IS 'ID typu schvalovani';
 
 
 --
--- TOC entry 3165 (class 0 OID 0)
+-- TOC entry 3164 (class 0 OID 0)
 -- Dependencies: 207
 -- Name: COLUMN typschv.typschv; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1757,7 +1759,7 @@ D - dispecer';
 
 
 --
--- TOC entry 3166 (class 0 OID 0)
+-- TOC entry 3165 (class 0 OID 0)
 -- Dependencies: 207
 -- Name: COLUMN typschv.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1766,7 +1768,7 @@ COMMENT ON COLUMN typschv.popis IS 'Popis typu schvalovani';
 
 
 --
--- TOC entry 3167 (class 0 OID 0)
+-- TOC entry 3166 (class 0 OID 0)
 -- Dependencies: 207
 -- Name: COLUMN typschv.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1775,7 +1777,7 @@ COMMENT ON COLUMN typschv.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 3168 (class 0 OID 0)
+-- TOC entry 3167 (class 0 OID 0)
 -- Dependencies: 207
 -- Name: COLUMN typschv.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1784,7 +1786,7 @@ COMMENT ON COLUMN typschv.platido IS 'Plati DO';
 
 
 --
--- TOC entry 3169 (class 0 OID 0)
+-- TOC entry 3168 (class 0 OID 0)
 -- Dependencies: 207
 -- Name: COLUMN typschv.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1793,7 +1795,7 @@ COMMENT ON COLUMN typschv.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 3170 (class 0 OID 0)
+-- TOC entry 3169 (class 0 OID 0)
 -- Dependencies: 207
 -- Name: COLUMN typschv.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1802,7 +1804,7 @@ COMMENT ON COLUMN typschv.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 3171 (class 0 OID 0)
+-- TOC entry 3170 (class 0 OID 0)
 -- Dependencies: 207
 -- Name: COLUMN typschv.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1830,7 +1832,7 @@ CREATE TABLE typucast (
 ALTER TABLE typucast OWNER TO postgres;
 
 --
--- TOC entry 3172 (class 0 OID 0)
+-- TOC entry 3171 (class 0 OID 0)
 -- Dependencies: 208
 -- Name: TABLE typucast; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1840,7 +1842,7 @@ COMMENT ON TABLE typucast IS 'Číselník typů ucatniku
 
 
 --
--- TOC entry 3173 (class 0 OID 0)
+-- TOC entry 3172 (class 0 OID 0)
 -- Dependencies: 208
 -- Name: COLUMN typucast.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1849,7 +1851,7 @@ COMMENT ON COLUMN typucast.id IS 'ID typu ucatnika';
 
 
 --
--- TOC entry 3174 (class 0 OID 0)
+-- TOC entry 3173 (class 0 OID 0)
 -- Dependencies: 208
 -- Name: COLUMN typucast.typucast; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1858,7 +1860,7 @@ COMMENT ON COLUMN typucast.typucast IS 'Typ ucatnika 0 - ridic 1 - spolujezdec 2
 
 
 --
--- TOC entry 3175 (class 0 OID 0)
+-- TOC entry 3174 (class 0 OID 0)
 -- Dependencies: 208
 -- Name: COLUMN typucast.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1867,7 +1869,7 @@ COMMENT ON COLUMN typucast.popis IS 'Popis typu ucatnika';
 
 
 --
--- TOC entry 3176 (class 0 OID 0)
+-- TOC entry 3175 (class 0 OID 0)
 -- Dependencies: 208
 -- Name: COLUMN typucast.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1876,7 +1878,7 @@ COMMENT ON COLUMN typucast.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 3177 (class 0 OID 0)
+-- TOC entry 3176 (class 0 OID 0)
 -- Dependencies: 208
 -- Name: COLUMN typucast.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1885,7 +1887,7 @@ COMMENT ON COLUMN typucast.platido IS 'Plati DO';
 
 
 --
--- TOC entry 3178 (class 0 OID 0)
+-- TOC entry 3177 (class 0 OID 0)
 -- Dependencies: 208
 -- Name: COLUMN typucast.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1894,7 +1896,7 @@ COMMENT ON COLUMN typucast.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 3179 (class 0 OID 0)
+-- TOC entry 3178 (class 0 OID 0)
 -- Dependencies: 208
 -- Name: COLUMN typucast.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1903,7 +1905,7 @@ COMMENT ON COLUMN typucast.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 3180 (class 0 OID 0)
+-- TOC entry 3179 (class 0 OID 0)
 -- Dependencies: 208
 -- Name: COLUMN typucast.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1934,7 +1936,7 @@ CREATE TABLE typzdroje (
 ALTER TABLE typzdroje OWNER TO postgres;
 
 --
--- TOC entry 3181 (class 0 OID 0)
+-- TOC entry 3180 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: TABLE typzdroje; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1948,7 +1950,7 @@ COMMENT ON TABLE typzdroje IS 'Číselník typů zdrojů
 
 
 --
--- TOC entry 3182 (class 0 OID 0)
+-- TOC entry 3181 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: COLUMN typzdroje.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1957,7 +1959,7 @@ COMMENT ON COLUMN typzdroje.id IS 'ID typu zdroje';
 
 
 --
--- TOC entry 3183 (class 0 OID 0)
+-- TOC entry 3182 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: COLUMN typzdroje.typzdr; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1966,7 +1968,7 @@ COMMENT ON COLUMN typzdroje.typzdr IS 'Typ zdroje';
 
 
 --
--- TOC entry 3184 (class 0 OID 0)
+-- TOC entry 3183 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: COLUMN typzdroje.cesta; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1975,7 +1977,7 @@ COMMENT ON COLUMN typzdroje.cesta IS 'Zdroj je mozne pouzit na cestu 0/1 (pesky,
 
 
 --
--- TOC entry 3185 (class 0 OID 0)
+-- TOC entry 3184 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: COLUMN typzdroje.rezervace; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1984,7 +1986,7 @@ COMMENT ON COLUMN typzdroje.rezervace IS 'Zdroj je mozne rezervovat 0/1';
 
 
 --
--- TOC entry 3186 (class 0 OID 0)
+-- TOC entry 3185 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: COLUMN typzdroje.osoba; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1993,7 +1995,7 @@ COMMENT ON COLUMN typzdroje.osoba IS 'Zdroj je osoba 0/1 - hodnota se vyuziva u 
 
 
 --
--- TOC entry 3187 (class 0 OID 0)
+-- TOC entry 3186 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: COLUMN typzdroje.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2002,7 +2004,7 @@ COMMENT ON COLUMN typzdroje.popis IS 'Popis typu zdroje';
 
 
 --
--- TOC entry 3188 (class 0 OID 0)
+-- TOC entry 3187 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: COLUMN typzdroje.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2011,7 +2013,7 @@ COMMENT ON COLUMN typzdroje.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 3189 (class 0 OID 0)
+-- TOC entry 3188 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: COLUMN typzdroje.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2020,7 +2022,7 @@ COMMENT ON COLUMN typzdroje.platido IS 'Plati DO';
 
 
 --
--- TOC entry 3190 (class 0 OID 0)
+-- TOC entry 3189 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: COLUMN typzdroje.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2029,7 +2031,7 @@ COMMENT ON COLUMN typzdroje.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 3191 (class 0 OID 0)
+-- TOC entry 3190 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: COLUMN typzdroje.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2038,7 +2040,7 @@ COMMENT ON COLUMN typzdroje.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 3192 (class 0 OID 0)
+-- TOC entry 3191 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: COLUMN typzdroje.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2068,7 +2070,7 @@ CREATE TABLE ucastnik (
 ALTER TABLE ucastnik OWNER TO postgres;
 
 --
--- TOC entry 3193 (class 0 OID 0)
+-- TOC entry 3192 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: TABLE ucastnik; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2077,7 +2079,7 @@ COMMENT ON TABLE ucastnik IS 'ucastnik - tabulka ucastniku';
 
 
 --
--- TOC entry 3194 (class 0 OID 0)
+-- TOC entry 3193 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: COLUMN ucastnik.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2086,7 +2088,7 @@ COMMENT ON COLUMN ucastnik.id IS 'Identifikátor';
 
 
 --
--- TOC entry 3195 (class 0 OID 0)
+-- TOC entry 3194 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: COLUMN ucastnik.idoso; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2095,7 +2097,7 @@ COMMENT ON COLUMN ucastnik.idoso IS 'Identifikátor osoby - cizi klic';
 
 
 --
--- TOC entry 3196 (class 0 OID 0)
+-- TOC entry 3195 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: COLUMN ucastnik.idtypucast; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2104,7 +2106,7 @@ COMMENT ON COLUMN ucastnik.idtypucast IS 'Odkaz na ciselnik typu ucatniku';
 
 
 --
--- TOC entry 3197 (class 0 OID 0)
+-- TOC entry 3196 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: COLUMN ucastnik.idcest; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2113,7 +2115,7 @@ COMMENT ON COLUMN ucastnik.idcest IS 'Odkaz na cestu';
 
 
 --
--- TOC entry 3198 (class 0 OID 0)
+-- TOC entry 3197 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: COLUMN ucastnik.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2122,7 +2124,7 @@ COMMENT ON COLUMN ucastnik.popis IS 'Popis cesty';
 
 
 --
--- TOC entry 3199 (class 0 OID 0)
+-- TOC entry 3198 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: COLUMN ucastnik.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2131,7 +2133,7 @@ COMMENT ON COLUMN ucastnik.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 3200 (class 0 OID 0)
+-- TOC entry 3199 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: COLUMN ucastnik.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2140,7 +2142,7 @@ COMMENT ON COLUMN ucastnik.platido IS 'Plati DO';
 
 
 --
--- TOC entry 3201 (class 0 OID 0)
+-- TOC entry 3200 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: COLUMN ucastnik.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2149,7 +2151,7 @@ COMMENT ON COLUMN ucastnik.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 3202 (class 0 OID 0)
+-- TOC entry 3201 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: COLUMN ucastnik.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2158,7 +2160,7 @@ COMMENT ON COLUMN ucastnik.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 3203 (class 0 OID 0)
+-- TOC entry 3202 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: COLUMN ucastnik.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2190,7 +2192,7 @@ CREATE TABLE zdroj (
 ALTER TABLE zdroj OWNER TO postgres;
 
 --
--- TOC entry 3204 (class 0 OID 0)
+-- TOC entry 3203 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: TABLE zdroj; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2199,7 +2201,7 @@ COMMENT ON TABLE zdroj IS 'Zdroj - tabulka zdroju, vozidla a ostatni';
 
 
 --
--- TOC entry 3205 (class 0 OID 0)
+-- TOC entry 3204 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: COLUMN zdroj.id; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2208,7 +2210,7 @@ COMMENT ON COLUMN zdroj.id IS 'Identifikátor';
 
 
 --
--- TOC entry 3206 (class 0 OID 0)
+-- TOC entry 3205 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: COLUMN zdroj.idtypzdr; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2217,7 +2219,7 @@ COMMENT ON COLUMN zdroj.idtypzdr IS 'Identifikátor typu zdroje - cizi klic';
 
 
 --
--- TOC entry 3207 (class 0 OID 0)
+-- TOC entry 3206 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: COLUMN zdroj.idoso; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2226,7 +2228,7 @@ COMMENT ON COLUMN zdroj.idoso IS 'Identifikátor osoby, svazane s vozidlem - vet
 
 
 --
--- TOC entry 3208 (class 0 OID 0)
+-- TOC entry 3207 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: COLUMN zdroj.spz; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2235,7 +2237,7 @@ COMMENT ON COLUMN zdroj.spz IS 'SPZ vozidla';
 
 
 --
--- TOC entry 3209 (class 0 OID 0)
+-- TOC entry 3208 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: COLUMN zdroj.komentar; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2244,7 +2246,7 @@ COMMENT ON COLUMN zdroj.komentar IS 'Komentar k volnemu pouziti';
 
 
 --
--- TOC entry 3210 (class 0 OID 0)
+-- TOC entry 3209 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: COLUMN zdroj.kapacita; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2253,7 +2255,7 @@ COMMENT ON COLUMN zdroj.kapacita IS 'Kapacita zdroje (pocet cestujicich, kapacit
 
 
 --
--- TOC entry 3211 (class 0 OID 0)
+-- TOC entry 3210 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: COLUMN zdroj.popis; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2262,7 +2264,7 @@ COMMENT ON COLUMN zdroj.popis IS 'Popis zdroje';
 
 
 --
--- TOC entry 3212 (class 0 OID 0)
+-- TOC entry 3211 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: COLUMN zdroj.platiod; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2271,7 +2273,7 @@ COMMENT ON COLUMN zdroj.platiod IS 'Plati Od';
 
 
 --
--- TOC entry 3213 (class 0 OID 0)
+-- TOC entry 3212 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: COLUMN zdroj.platido; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2280,7 +2282,7 @@ COMMENT ON COLUMN zdroj.platido IS 'Plati DO';
 
 
 --
--- TOC entry 3214 (class 0 OID 0)
+-- TOC entry 3213 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: COLUMN zdroj.timeinsert; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2289,7 +2291,7 @@ COMMENT ON COLUMN zdroj.timeinsert IS 'Cas vlozeni zaznamu';
 
 
 --
--- TOC entry 3215 (class 0 OID 0)
+-- TOC entry 3214 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: COLUMN zdroj.timemodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2298,7 +2300,7 @@ COMMENT ON COLUMN zdroj.timemodify IS 'Cas posledni zmeny zaznamu';
 
 
 --
--- TOC entry 3216 (class 0 OID 0)
+-- TOC entry 3215 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: COLUMN zdroj.usermodify; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -2307,7 +2309,7 @@ COMMENT ON COLUMN zdroj.usermodify IS 'Uzivatel, ktery posledni modifikoval zazn
 
 
 --
--- TOC entry 2994 (class 0 OID 24689)
+-- TOC entry 2993 (class 0 OID 24689)
 -- Dependencies: 196
 -- Data for Name: aktivity; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2317,14 +2319,13 @@ INSERT INTO aktivity (id, idtypakt, idoso, komentar, popis, platiod, platido, ti
 
 
 --
--- TOC entry 2995 (class 0 OID 24695)
+-- TOC entry 2994 (class 0 OID 24695)
 -- Dependencies: 197
 -- Data for Name: cesta; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 INSERT INTO cesta (id, idtypzdr, idoso, komentar, zaloha, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('1399ebfc-87d2-4267-a7ef-0fd55f601e99', 'c2d29867-3d0b-d497-9191-18a9d8ee7800', '8b24fa34-03aa-4a82-bfeb-bb044d252be8', 'Praha', 100.00, 'Jednání na MV ČR', '2017-01-01 00:00:00', '2100-12-31 00:00:00', '2017-06-12 22:33:13.684', '2017-06-12 22:33:13.684', 'postgres');
 INSERT INTO cesta (id, idtypzdr, idoso, komentar, zaloha, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('5816840e-fe8b-4ef7-83c5-8c6658083a70', '823ca1d8-60dd-4f59-99e7-76138e997cb9', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'Veřejné zakázky IT', NULL, 'Brno', '2017-07-24 07:00:00', '2017-07-24 17:00:00', '2017-07-17 15:26:08.774', '2017-07-17 15:27:26.017', 'postgres');
-INSERT INTO cesta (id, idtypzdr, idoso, komentar, zaloha, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('af00fd57-be6e-4aef-87b5-5561af73d717', '823ca1d8-60dd-4f59-99e7-76138e997cb9', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'Školení veřejných zakázek', NULL, 'Brno', '2017-07-24 07:00:00', '2017-07-24 17:00:00', '2017-07-17 15:29:13.861', '2017-07-17 15:31:13.777', 'postgres');
 INSERT INTO cesta (id, idtypzdr, idoso, komentar, zaloha, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('851d99ef-58b7-4921-87bf-32e7c9875823', '823ca1d8-60dd-4f59-99e7-76138e997cb9', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'Test - Jičín', NULL, 'Jičín', '2017-07-18 07:00:00', '2017-07-18 17:00:00', '2017-07-17 16:30:24.191', '2017-07-17 16:30:58.146', 'postgres');
 INSERT INTO cesta (id, idtypzdr, idoso, komentar, zaloha, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('a8bea246-d7c2-4ead-8609-65bdbe032e7d', '823ca1d8-60dd-4f59-99e7-76138e997cb9', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'Školení GDPR', NULL, 'Brno', '2017-07-27 07:00:00', '2017-07-27 17:00:00', '2017-07-19 10:31:47.968', '2017-07-19 10:33:44.473', 'postgres');
 INSERT INTO cesta (id, idtypzdr, idoso, komentar, zaloha, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('d00a95e6-81b3-4d12-8520-e8e7bd8edb49', '823ca1d8-60dd-4f59-99e7-76138e997cb9', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'Euro víkend - návštěva hradu', NULL, 'Krakow', '2017-07-30 07:00:00', '2017-07-30 17:00:00', '2017-07-19 16:36:29.263', '2017-07-19 16:55:19.303', 'postgres');
@@ -2337,13 +2338,14 @@ INSERT INTO cesta (id, idtypzdr, idoso, komentar, zaloha, popis, platiod, platid
 Oslava narozenin', 0, 'Plzeň', '2017-08-15 12:00:00', '2017-08-15 17:00:00', '2017-08-07 17:29:08.512', '2017-08-07 17:29:44', 'postgres');
 INSERT INTO cesta (id, idtypzdr, idoso, komentar, zaloha, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('7b7a3a62-fc9b-4ba6-a85b-36ce313b28b6', '823ca1d8-60dd-4f59-99e7-76138e997cb9', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'GDPR Návštěva  a konzultace', NULL, 'Olomouc', '2017-07-20 07:00:00', '2017-07-21 17:00:00', '2017-07-17 16:57:51.569', '2017-09-22 13:49:54.765', 'postgres');
 INSERT INTO cesta (id, idtypzdr, idoso, komentar, zaloha, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('70c51e7f-9cd7-48b6-9c35-65836d42ba05', '823ca1d8-60dd-4f59-99e7-76138e997cb9', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'Příprava semináře', NULL, 'Krnov', '2018-02-09 07:10:00', '2018-02-09 17:10:00', '2017-07-17 16:21:35.97', '2018-02-09 14:12:47.178443', 'postgres');
-INSERT INTO cesta (id, idtypzdr, idoso, komentar, zaloha, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('11b1a3a1-0314-4e21-8537-8a206eda4e48', '823ca1d8-60dd-4f59-99e7-76138e997cb9', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'Seminář', 500, 'Ostrava', '2018-03-20 07:00:00', '2018-03-25 17:00:00', '2017-07-17 16:29:10.052', '2018-03-20 16:08:45.534298', 'postgres');
 INSERT INTO cesta (id, idtypzdr, idoso, komentar, zaloha, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('b2d1500b-06fa-4e28-b572-2fbf7c705adc', '823ca1d8-60dd-4f59-99e7-76138e997cb9', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'Odvoz hnoje', 20, 'Láryšov', '2018-03-24 11:04:00', '2018-03-24 11:30:00', '2018-03-21 12:17:01.523601', '2018-03-28 19:26:32.369848', 'postgres');
-INSERT INTO cesta (id, idtypzdr, idoso, komentar, zaloha, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('87e56165-22d6-46bd-9c5e-bf7c7e0e28a1', '823ca1d8-60dd-4f59-99e7-76138e997cb9', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'Výlet do Polska', 1000, 'Poznaň', '2018-03-24 07:00:00', '2018-03-24 17:00:00', '2018-03-21 12:02:03.495237', '2018-04-03 20:56:38.850642', 'postgres');
+INSERT INTO cesta (id, idtypzdr, idoso, komentar, zaloha, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('11b1a3a1-0314-4e21-8537-8a206eda4e48', '823ca1d8-60dd-4f59-99e7-76138e997cb9', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'Seminář', 500, 'Ostrava', '2018-03-20 07:00:00', '2018-03-25 17:00:00', '2017-07-17 16:29:10.052', '2018-04-04 22:44:07.649299', 'postgres');
+INSERT INTO cesta (id, idtypzdr, idoso, komentar, zaloha, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('af00fd57-be6e-4aef-87b5-5561af73d717', '823ca1d8-60dd-4f59-99e7-76138e997cb9', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'Školení veřejných zakázek', NULL, 'Brno', '2017-07-24 07:00:00', '2017-07-24 17:00:00', '2017-07-17 15:29:13.861', '2018-04-04 22:47:51.503445', 'postgres');
+INSERT INTO cesta (id, idtypzdr, idoso, komentar, zaloha, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('87e56165-22d6-46bd-9c5e-bf7c7e0e28a1', '823ca1d8-60dd-4f59-99e7-76138e997cb9', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'Výlet do Polska', 1000, 'Poznaň', '2018-03-24 07:00:00', '2018-03-24 17:00:00', '2018-03-21 12:02:03.495237', '2018-04-04 23:43:49.820657', 'postgres');
 
 
 --
--- TOC entry 2996 (class 0 OID 24701)
+-- TOC entry 2995 (class 0 OID 24701)
 -- Dependencies: 198
 -- Data for Name: dispecerhl; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2410,18 +2412,18 @@ INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod
 INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('68ff85d0-f90c-469f-bd06-837b6e276294', '89627179-4a44-445f-8d36-e75c3fb5c91d', '68c11075-ff60-45a3-818e-4f4d0be9ea8f', '823ca1d8-60dd-4f59-99e7-76138e997cb9', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 19:19:00.560353', '2018-03-28 19:21:13.681942', 'postgres');
 INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('1989b6a7-5450-488a-b5c2-095d06bb5183', '718dfe2a-aea7-4525-a550-d4358c09fa15', '68c11075-ff60-45a3-818e-4f4d0be9ea8f', '823ca1d8-60dd-4f59-99e7-76138e997cb9', '68ff85d0-f90c-469f-bd06-837b6e276294', NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 19:19:00.560353', '2018-03-28 19:21:13.681942', 'postgres');
 INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('62698bd9-386f-4203-b0b7-2583ad0dc429', 'dcb31c8c-51f1-404a-9691-e6d16aa296b5', '68c11075-ff60-45a3-818e-4f4d0be9ea8f', '823ca1d8-60dd-4f59-99e7-76138e997cb9', '68ff85d0-f90c-469f-bd06-837b6e276294', NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 19:21:13.681942', '2018-03-28 19:21:13.681942', 'postgres');
-INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('734607fa-4c7e-4692-bb4b-7a2020760e32', '8b24fa34-03aa-4a82-bfeb-bb044d252be8', '11c78229-8f45-4011-a70a-8b176a590bb8', 'ac94579b-b602-4994-87b4-d0ebfc3f4dda', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-04-03 22:16:21.293664', '2018-04-03 22:21:43.036157', 'postgres');
-INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('a5efdbf6-be94-4f86-a37c-98e7a2fad7b8', '89627179-4a44-445f-8d36-e75c3fb5c91d', '11c78229-8f45-4011-a70a-8b176a590bb8', 'ac94579b-b602-4994-87b4-d0ebfc3f4dda', '734607fa-4c7e-4692-bb4b-7a2020760e32', NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-04-03 22:16:21.293664', '2018-04-03 22:21:43.036157', 'postgres');
-INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', '89627179-4a44-445f-8d36-e75c3fb5c91d', '11c78229-8f45-4011-a70a-8b176a590bb8', 'ac94579b-b602-4994-87b4-d0ebfc3f4dda', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 19:24:33.670004', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('65158cc6-b919-4722-8626-a581ae96aa31', '89b7cdf7-33b9-45aa-a63f-ca7cd8f29af0', '11c78229-8f45-4011-a70a-8b176a590bb8', 'ac94579b-b602-4994-87b4-d0ebfc3f4dda', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 21:00:55.114286', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('71e76853-cc47-46b7-b4cf-e9c1f88ab6af', '4a3ef679-87d0-479b-995e-1218296efc5b', '11c78229-8f45-4011-a70a-8b176a590bb8', 'ac94579b-b602-4994-87b4-d0ebfc3f4dda', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 21:15:04.023588', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('254119fd-ae81-4d1e-86c9-f3513eff3b7b', 'dcb31c8c-51f1-404a-9691-e6d16aa296b5', '11c78229-8f45-4011-a70a-8b176a590bb8', 'ac94579b-b602-4994-87b4-d0ebfc3f4dda', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 21:31:17.149315', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('d7af3a3e-ad91-4875-82aa-72666b8c9850', 'dcb31c8c-51f1-404a-9691-e6d16aa296b5', '11c78229-8f45-4011-a70a-8b176a590bb8', 'ac94579b-b602-4994-87b4-d0ebfc3f4dda', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 19:25:22.971796', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('317c90ed-e9c5-49f3-9306-d827b931e969', 'ad0308dc-53e2-4ede-9f61-7afc9a72739a', '11c78229-8f45-4011-a70a-8b176a590bb8', 'ac94579b-b602-4994-87b4-d0ebfc3f4dda', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 21:00:55.114286', '2018-03-30 00:15:15.511831', 'postgres');
+INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('734607fa-4c7e-4692-bb4b-7a2020760e32', '8b24fa34-03aa-4a82-bfeb-bb044d252be8', '11c78229-8f45-4011-a70a-8b176a590bb8', 'ac94579b-b602-4994-87b4-d0ebfc3f4dda', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-04-03 22:16:21.293664', '2018-04-05 00:03:58.186209', 'postgres');
+INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('a5efdbf6-be94-4f86-a37c-98e7a2fad7b8', '89627179-4a44-445f-8d36-e75c3fb5c91d', '11c78229-8f45-4011-a70a-8b176a590bb8', 'ac94579b-b602-4994-87b4-d0ebfc3f4dda', '734607fa-4c7e-4692-bb4b-7a2020760e32', NULL, '2018-01-01 00:00:00', '2018-04-01 00:00:00', '2018-04-03 22:16:21.293664', '2018-04-05 00:03:58.186209', 'postgres');
+INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', '89627179-4a44-445f-8d36-e75c3fb5c91d', '11c78229-8f45-4011-a70a-8b176a590bb8', 'ac94579b-b602-4994-87b4-d0ebfc3f4dda', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 19:24:33.670004', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('65158cc6-b919-4722-8626-a581ae96aa31', '89b7cdf7-33b9-45aa-a63f-ca7cd8f29af0', '11c78229-8f45-4011-a70a-8b176a590bb8', 'ac94579b-b602-4994-87b4-d0ebfc3f4dda', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 21:00:55.114286', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('71e76853-cc47-46b7-b4cf-e9c1f88ab6af', '4a3ef679-87d0-479b-995e-1218296efc5b', '11c78229-8f45-4011-a70a-8b176a590bb8', 'ac94579b-b602-4994-87b4-d0ebfc3f4dda', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 21:15:04.023588', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('254119fd-ae81-4d1e-86c9-f3513eff3b7b', 'dcb31c8c-51f1-404a-9691-e6d16aa296b5', '11c78229-8f45-4011-a70a-8b176a590bb8', 'ac94579b-b602-4994-87b4-d0ebfc3f4dda', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 21:31:17.149315', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('d7af3a3e-ad91-4875-82aa-72666b8c9850', 'dcb31c8c-51f1-404a-9691-e6d16aa296b5', '11c78229-8f45-4011-a70a-8b176a590bb8', 'ac94579b-b602-4994-87b4-d0ebfc3f4dda', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 19:25:22.971796', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerhl (id, idoso, idtypschv, idtypzdr, iddisphl, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('317c90ed-e9c5-49f3-9306-d827b931e969', 'ad0308dc-53e2-4ede-9f61-7afc9a72739a', '11c78229-8f45-4011-a70a-8b176a590bb8', 'ac94579b-b602-4994-87b4-d0ebfc3f4dda', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 21:00:55.114286', '2018-04-04 23:39:19.14992', 'postgres');
 
 
 --
--- TOC entry 2997 (class 0 OID 24713)
+-- TOC entry 2996 (class 0 OID 24713)
 -- Dependencies: 199
 -- Data for Name: dispecerpol; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2434,37 +2436,40 @@ INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, ti
 INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('72f8841b-3ad4-471b-847e-55c1ae0c19bf', '68ff85d0-f90c-469f-bd06-837b6e276294', NULL, '8f677b81-a268-4c6a-8387-c7b9518ed514', NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 19:19:00.560353', '2018-03-28 19:21:13.681942', 'postgres');
 INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('95be8aea-a6e5-4f66-939f-3da7147b7aae', '68ff85d0-f90c-469f-bd06-837b6e276294', NULL, '3f3ce6c7-e433-45b9-b75f-994e1df2c7c6', NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 19:19:00.560353', '2018-03-28 19:21:13.681942', 'postgres');
 INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('ffefb8ae-08ce-4042-a248-1d395f4c9b15', '68ff85d0-f90c-469f-bd06-837b6e276294', NULL, '99529a46-dae0-4992-9e44-0915ced80fe4', NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 19:19:00.560353', '2018-03-28 19:21:13.681942', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('75da3b30-49ea-4e65-b261-cefde16361ce', '734607fa-4c7e-4692-bb4b-7a2020760e32', '9960cbb8-db3a-4dfc-9292-fab189f9040e', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-04-03 22:17:46.651651', '2018-04-03 22:21:43.036157', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('cf232a18-2b70-495d-9d01-5812364a853b', '734607fa-4c7e-4692-bb4b-7a2020760e32', 'f3cdcde5-1a1d-4902-9c65-f01658b889c9', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-04-03 22:21:43.036157', '2018-04-03 22:21:43.036157', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('af22845b-91fd-4315-96c7-536a32e21df5', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', 'dcb31c8c-51f1-404a-9691-e6d16aa296b5', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 21:15:04.023588', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('9a9ea2ac-3f6b-4506-bd82-f2f449aa9bd9', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', '7d6e24cd-e8d6-4b8d-ac97-6ea60f1601cb', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 21:31:17.149315', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('86926a22-eee1-47be-8ecf-3c51abd85224', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', '268c3b06-cc67-46b5-89ad-7c203e7181a6', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 21:31:17.149315', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('ccb4c19a-cf14-4017-934f-ef4141149e11', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('932cf38b-f0db-401d-960d-d693ed1374c7', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('3f9ebada-55fe-43c4-ab7b-c7671e53c435', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('345812ff-1873-451e-b252-dfece3bde22d', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', '9960cbb8-db3a-4dfc-9292-fab189f9040e', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 19:24:33.670004', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('bec611bb-05b6-4447-bd6a-173e37e8e679', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', '8b24fa34-03aa-4a82-bfeb-bb044d252be8', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 19:24:33.670004', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('d27ef517-8f75-4c25-8479-2732f51dc33c', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('3abfe106-d506-4daa-8167-86307f1dfd4c', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('c6b69cc2-a092-4dd5-bcad-9442d4ef63ea', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('aba848bb-f7fd-47d7-9409-f92ebb1a1f2c', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('9492b32f-9f55-43a4-a642-d025d82771fa', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('165896a1-e298-41fd-af2e-0ba7790edb06', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('ea10106a-4b41-4ff7-aba9-59bd74182d5d', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('fca2b3d5-1d0d-44af-abd8-a31fd75d6904', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('21b27ab6-7b0f-4995-9fb2-c880f77de4d0', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('d33b83ce-e799-4ed1-8c83-2f66160e970c', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('55c87109-80e0-43ee-bb99-a14d95f6e226', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('bce2399f-4f32-4caf-a704-1fd301945602', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('5fe11155-1a83-4bb0-b16e-f9de644b4378', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('87780b5b-d747-4613-9930-61e7e9704d21', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('9b5a71ec-73ad-4b40-9c78-37ef96fb0afb', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('b2392bf7-0d6b-4063-bc53-1442e75b17e1', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
-INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('2bb118ef-b505-4cd9-a6b7-5bfc7177319a', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-03-30 00:15:15.511831', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('af22845b-91fd-4315-96c7-536a32e21df5', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', 'dcb31c8c-51f1-404a-9691-e6d16aa296b5', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 21:15:04.023588', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('9a9ea2ac-3f6b-4506-bd82-f2f449aa9bd9', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', '7d6e24cd-e8d6-4b8d-ac97-6ea60f1601cb', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 21:31:17.149315', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('86926a22-eee1-47be-8ecf-3c51abd85224', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', '268c3b06-cc67-46b5-89ad-7c203e7181a6', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 21:31:17.149315', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('ccb4c19a-cf14-4017-934f-ef4141149e11', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('932cf38b-f0db-401d-960d-d693ed1374c7', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('3f9ebada-55fe-43c4-ab7b-c7671e53c435', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('345812ff-1873-451e-b252-dfece3bde22d', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', '9960cbb8-db3a-4dfc-9292-fab189f9040e', NULL, NULL, '2018-01-01 00:00:00', '2018-03-01 00:00:00', '2018-03-28 19:24:33.670004', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('bec611bb-05b6-4447-bd6a-173e37e8e679', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', '8b24fa34-03aa-4a82-bfeb-bb044d252be8', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-28 19:24:33.670004', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('d27ef517-8f75-4c25-8479-2732f51dc33c', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('3abfe106-d506-4daa-8167-86307f1dfd4c', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('c6b69cc2-a092-4dd5-bcad-9442d4ef63ea', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('75da3b30-49ea-4e65-b261-cefde16361ce', '734607fa-4c7e-4692-bb4b-7a2020760e32', '9960cbb8-db3a-4dfc-9292-fab189f9040e', NULL, NULL, '2018-01-01 00:00:00', '2017-11-01 00:00:00', '2018-04-03 22:17:46.651651', '2018-04-05 00:03:58.186209', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('aba848bb-f7fd-47d7-9409-f92ebb1a1f2c', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('9492b32f-9f55-43a4-a642-d025d82771fa', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('165896a1-e298-41fd-af2e-0ba7790edb06', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('ea10106a-4b41-4ff7-aba9-59bd74182d5d', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('fca2b3d5-1d0d-44af-abd8-a31fd75d6904', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('21b27ab6-7b0f-4995-9fb2-c880f77de4d0', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('d33b83ce-e799-4ed1-8c83-2f66160e970c', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('55c87109-80e0-43ee-bb99-a14d95f6e226', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('bce2399f-4f32-4caf-a704-1fd301945602', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('5fe11155-1a83-4bb0-b16e-f9de644b4378', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('87780b5b-d747-4613-9930-61e7e9704d21', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('9b5a71ec-73ad-4b40-9c78-37ef96fb0afb', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('cf232a18-2b70-495d-9d01-5812364a853b', '734607fa-4c7e-4692-bb4b-7a2020760e32', 'f3cdcde5-1a1d-4902-9c65-f01658b889c9', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-04-03 22:21:43.036157', '2018-04-05 00:03:58.186209', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('80d4a135-fbac-4075-9cd8-fd684d32864d', '734607fa-4c7e-4692-bb4b-7a2020760e32', 'dcb31c8c-51f1-404a-9691-e6d16aa296b5', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-04-04 22:46:32.107902', '2018-04-05 00:03:58.186209', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('b2392bf7-0d6b-4063-bc53-1442e75b17e1', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('2bb118ef-b505-4cd9-a6b7-5bfc7177319a', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', NULL, NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-03-30 00:08:32.487337', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('89871124-75f2-4b3c-9d01-3d449424e952', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', '565b2abc-810d-41cc-9a71-7031907263bf', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-04-04 22:45:38.985095', '2018-04-04 23:39:19.14992', 'postgres');
+INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('4c928b58-2a76-4916-ab46-342fd14ab447', 'afb3bf05-af0b-4e90-afd3-3f28dcb1fde7', '28af01c3-3e29-4a3e-ab25-be6a5dc2b0f2', NULL, NULL, '2018-01-01 00:00:00', '2100-01-01 00:00:00', '2018-04-04 22:45:38.985095', '2018-04-04 23:39:19.14992', 'postgres');
 
 
 --
--- TOC entry 2998 (class 0 OID 24725)
+-- TOC entry 2997 (class 0 OID 24725)
 -- Dependencies: 200
 -- Data for Name: email; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2472,7 +2477,7 @@ INSERT INTO dispecerpol (id, iddisphl, idoso, idzdr, popis, platiod, platido, ti
 
 
 --
--- TOC entry 2999 (class 0 OID 24732)
+-- TOC entry 2998 (class 0 OID 24732)
 -- Dependencies: 201
 -- Data for Name: log; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2481,7 +2486,7 @@ INSERT INTO log (id, tblid, tblname, idakt, idzdr, idcest, idrez, iducast, idoso
 
 
 --
--- TOC entry 3000 (class 0 OID 24738)
+-- TOC entry 2999 (class 0 OID 24738)
 -- Dependencies: 202
 -- Data for Name: osoba; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2729,7 +2734,7 @@ INSERT INTO osoba (id, name, password, extid, komentar, skupina, email, popis, p
 
 
 --
--- TOC entry 3001 (class 0 OID 24746)
+-- TOC entry 3000 (class 0 OID 24746)
 -- Dependencies: 203
 -- Data for Name: rezervace; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2740,46 +2745,49 @@ INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, plati
 INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('a709ff84-0d13-40ec-acdf-5ddb9183ee56', 'c2d29867-3d0b-d497-9191-18a9d8ee7830', '851d99ef-58b7-4921-87bf-32e7c9875823', 'a04baad7-09b9-4153-8d89-7ffd3341d023', NULL, NULL, '2018-02-15 13:42:00', '2018-02-22 21:23:00', '2017-07-17 16:30:52.87', '2018-02-15 20:58:44.886497', 'postgres');
 INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('9754c291-18d8-4e50-a9be-f2e767a19ddb', 'c2d29867-3d0b-d497-9191-18a9d8ee7830', '5816840e-fe8b-4ef7-83c5-8c6658083a70', '8f677b81-a268-4c6a-8387-c7b9518ed514', NULL, NULL, '2018-02-15 13:42:00', '2018-02-22 21:23:00', '2017-07-17 15:27:04.229', '2018-02-15 20:58:44.886497', 'postgres');
 INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('e5b77be0-7e51-4dd0-87ad-df674f286c3a', 'c2d29867-3d0b-d497-9191-18a9d8ee7830', 'd2133c13-6df8-4e3b-994c-fd83782a3d2a', '99529a46-dae0-4992-9e44-0915ced80fe4', NULL, NULL, '2018-02-15 13:42:00', '2018-02-22 21:23:00', '2017-07-17 17:04:38.781', '2018-02-15 20:58:44.886497', 'postgres');
-INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('c2ed3031-5455-4643-82a1-1f3c58dc08c9', 'c2d29867-3d0b-d497-9191-18a9d8ee7830', 'af00fd57-be6e-4aef-87b5-5561af73d717', 'a04baad7-09b9-4153-8d89-7ffd3341d023', NULL, NULL, '2018-02-15 13:42:00', '2018-02-22 21:23:00', '2017-07-17 15:30:23.173', '2018-02-15 20:58:44.886497', 'postgres');
 INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('0de9ea60-c3ca-49ab-b0f1-d435750af708', 'c2d29867-3d0b-d497-9191-18a9d8ee7830', 'd00a95e6-81b3-4d12-8520-e8e7bd8edb49', '99529a46-dae0-4992-9e44-0915ced80fe4', NULL, NULL, '2018-02-15 13:42:00', '2018-02-22 21:23:00', '2017-07-20 14:23:54.408', '2018-02-15 20:58:44.886497', 'postgres');
 INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('0c5b673a-8602-458d-8936-12d7d42ea608', 'c2d29867-3d0b-d497-9191-18a9d8ee7830', '70c51e7f-9cd7-48b6-9c35-65836d42ba05', '99529a46-dae0-4992-9e44-0915ced80fe4', NULL, NULL, '2018-02-15 13:42:00', '2018-02-22 21:23:00', '2017-07-17 16:23:43.377', '2018-02-15 20:58:44.886497', 'postgres');
 INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('3a839613-c3aa-4509-861c-01328fe11c24', 'c2d29867-3d0b-d497-9191-18a9d8ee7830', '7ddd944a-c488-4932-aab3-d0ea0fab98e0', '99529a46-dae0-4992-9e44-0915ced80fe4', NULL, NULL, '2018-02-15 13:42:00', '2018-02-22 21:23:00', '2017-07-20 14:23:18.493', '2018-02-15 20:58:44.886497', 'postgres');
 INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('2db96fcb-0a30-4049-b738-9f7b5df17602', 'c2d29867-3d0b-d497-9191-18a9d8ee7830', 'a8bea246-d7c2-4ead-8609-65bdbe032e7d', '08518a36-2ba2-43df-a882-ee95539a86a4', NULL, NULL, '2018-02-15 13:42:00', '2018-02-22 21:23:00', '2017-07-19 10:32:40.784', '2018-02-15 20:58:44.886497', 'postgres');
 INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('6c6231cd-a0c6-4f43-8921-923c2929d22c', 'c2d29867-3d0b-d497-9191-18a9d8ee7830', 'd00a95e6-81b3-4d12-8520-e8e7bd8edb49', '32297651-b39e-4eb6-9bd6-2777cfcb1ba3', NULL, NULL, '2018-02-15 13:42:00', '2018-02-22 21:23:00', '2017-07-20 14:21:30.44', '2018-02-15 20:58:44.886497', 'postgres');
 INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('3f039f72-e179-4369-a029-b400d4b13de8', 'c2d29867-3d0b-d497-9191-18a9d8ee7830', 'd00a95e6-81b3-4d12-8520-e8e7bd8edb49', 'a04baad7-09b9-4153-8d89-7ffd3341d023', NULL, NULL, '2018-02-15 13:42:00', '2018-02-22 21:23:00', '2017-07-20 14:21:22.871', '2018-02-15 20:58:44.886497', 'postgres');
-INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('5b182c6c-36d9-4c31-8d32-9587ee19fd20', 'c2d29867-3d0b-d497-9191-18a9d8ee7830', '11b1a3a1-0314-4e21-8537-8a206eda4e48', 'e09f2a43-a6cb-4453-9263-90d8b62f285b', NULL, NULL, '2018-03-20 07:00:00', '2018-03-25 17:00:00', '2018-03-20 16:08:45.633304', '2018-03-20 16:08:45.633304', 'postgres');
 INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('00beab89-b041-45fe-8d68-c28eb879f51b', 'c2d29867-3d0b-d497-9191-18a9d8ee7830', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', '29c7d88d-d1a5-49cb-bb68-1fa0323c0f47', NULL, NULL, '2018-03-24 11:04:00', '2018-03-24 11:30:00', '2018-03-21 12:17:01.558603', '2018-03-28 19:26:32.369848', 'postgres');
-INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('98962673-477c-4768-b7b7-630b9cc5c9cc', 'c2d29867-3d0b-d497-9191-18a9d8ee7830', '87e56165-22d6-46bd-9c5e-bf7c7e0e28a1', '08518a36-2ba2-43df-a882-ee95539a86a4', NULL, NULL, '2018-03-24 07:00:00', '2018-03-24 17:00:00', '2018-03-21 12:02:03.90326', '2018-04-03 20:56:38.850642', 'postgres');
-INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('06fc42a5-5067-4d0d-a503-4da1fb42ea1d', 'c2d29867-3d0b-d497-9191-18a9d8ee7830', '87e56165-22d6-46bd-9c5e-bf7c7e0e28a1', 'e09f2a43-a6cb-4453-9263-90d8b62f285b', NULL, NULL, '2018-03-24 07:00:00', '2018-03-24 17:00:00', '2018-03-21 12:02:03.90926', '2018-04-03 20:56:38.850642', 'postgres');
+INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('5b182c6c-36d9-4c31-8d32-9587ee19fd20', 'c2d29867-3d0b-d497-9191-18a9d8ee7830', '11b1a3a1-0314-4e21-8537-8a206eda4e48', 'e09f2a43-a6cb-4453-9263-90d8b62f285b', NULL, NULL, '2018-03-20 07:00:00', '2018-03-25 17:00:00', '2018-03-20 16:08:45.633304', '2018-04-04 22:44:07.649299', 'postgres');
+INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('c2ed3031-5455-4643-82a1-1f3c58dc08c9', 'c2d29867-3d0b-d497-9191-18a9d8ee7830', 'af00fd57-be6e-4aef-87b5-5561af73d717', 'a04baad7-09b9-4153-8d89-7ffd3341d023', NULL, NULL, '2018-02-15 13:42:00', '2018-02-22 21:23:00', '2017-07-17 15:30:23.173', '2018-04-04 22:47:51.503445', 'postgres');
+INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('98962673-477c-4768-b7b7-630b9cc5c9cc', 'c2d29867-3d0b-d497-9191-18a9d8ee7830', '87e56165-22d6-46bd-9c5e-bf7c7e0e28a1', '08518a36-2ba2-43df-a882-ee95539a86a4', NULL, NULL, '2018-03-24 07:00:00', '2018-03-24 17:00:00', '2018-03-21 12:02:03.90326', '2018-04-04 23:43:49.820657', 'postgres');
+INSERT INTO rezervace (id, idakt, idcest, idzdr, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('06fc42a5-5067-4d0d-a503-4da1fb42ea1d', 'c2d29867-3d0b-d497-9191-18a9d8ee7830', '87e56165-22d6-46bd-9c5e-bf7c7e0e28a1', 'e09f2a43-a6cb-4453-9263-90d8b62f285b', NULL, NULL, '2018-03-24 07:00:00', '2018-03-24 17:00:00', '2018-03-21 12:02:03.90926', '2018-04-04 23:43:49.820657', 'postgres');
 
 
 --
--- TOC entry 3002 (class 0 OID 24752)
+-- TOC entry 3001 (class 0 OID 24752)
 -- Dependencies: 204
 -- Data for Name: schvaleni; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO schvaleni (id, idtypschv, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('68dbf86e-02c3-4164-bae9-0561bf03b43e', '11c78229-8f45-4011-a70a-8b176a590bb8', '89627179-4a44-445f-8d36-e75c3fb5c91d', '5816840e-fe8b-4ef7-83c5-8c6658083a70', '5e501da3-3c40-44cc-9af2-1b4a588c76fa', '9754c291-18d8-4e50-a9be-f2e767a19ddb', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:43:12 CEST 2018', NULL, '2018-04-03 23:43:12.051', '2018-04-03 23:43:12.051', '2018-04-03 23:43:12.052', '2018-04-03 23:43:21.192942', 'postgres');
-INSERT INTO schvaleni (id, idtypschv, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('2fd4ef86-9d34-4d67-b7f3-db25a60348e1', '11c78229-8f45-4011-a70a-8b176a590bb8', '89627179-4a44-445f-8d36-e75c3fb5c91d', '5816840e-fe8b-4ef7-83c5-8c6658083a70', '1affc7af-6ea2-4b5c-90d8-88bbf65b3315', '9754c291-18d8-4e50-a9be-f2e767a19ddb', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:43:49 CEST 2018', NULL, '2018-04-03 23:43:49.687', '2018-04-03 23:43:49.687', '2018-04-03 23:43:49.687', '2018-04-03 23:43:53.520725', 'postgres');
-INSERT INTO schvaleni (id, idtypschv, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('935fcb24-d74d-4c8a-9f30-3bea5f9fdb43', '11c78229-8f45-4011-a70a-8b176a590bb8', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'af00fd57-be6e-4aef-87b5-5561af73d717', 'c743be80-c404-448a-a6a6-2a0ce1125e75', 'c2ed3031-5455-4643-82a1-1f3c58dc08c9', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:43:53 CEST 2018', NULL, '2018-04-03 23:43:53.522', '2018-04-03 23:43:53.522', '2018-04-03 23:43:53.522', '2018-04-03 23:43:54.080428', 'postgres');
-INSERT INTO schvaleni (id, idtypschv, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('4511db1f-927b-437d-b8d9-5dac69fa983d', '11c78229-8f45-4011-a70a-8b176a590bb8', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'af00fd57-be6e-4aef-87b5-5561af73d717', 'c4e15c5c-0a75-4115-978a-0c9f4d9aad0a', 'c2ed3031-5455-4643-82a1-1f3c58dc08c9', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:43:54 CEST 2018', NULL, '2018-04-03 23:43:54.081', '2018-04-03 23:43:54.081', '2018-04-03 23:43:54.081', '2018-04-03 23:43:54.662845', 'postgres');
-INSERT INTO schvaleni (id, idtypschv, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('1936d27c-7161-4275-8a1d-b24edcd59906', '11c78229-8f45-4011-a70a-8b176a590bb8', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'd00a95e6-81b3-4d12-8520-e8e7bd8edb49', 'e086795a-8674-47cd-9b22-a7b1e1258e2c', '0de9ea60-c3ca-49ab-b0f1-d435750af708', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:51:59 CEST 2018', NULL, '2018-04-03 23:51:59.827', '2018-04-03 23:51:59.827', '2018-04-03 23:51:59.827', '2018-04-03 23:51:59.853405', 'postgres');
-INSERT INTO schvaleni (id, idtypschv, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('e3bce809-4293-4c1c-90f2-0e65a7463881', '11c78229-8f45-4011-a70a-8b176a590bb8', '89627179-4a44-445f-8d36-e75c3fb5c91d', '7ddd944a-c488-4932-aab3-d0ea0fab98e0', '20e0d460-896e-4ed5-8ede-5e87a79924bb', '3a839613-c3aa-4509-861c-01328fe11c24', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:51:59 CEST 2018', NULL, '2018-04-03 23:51:59.855', '2018-04-03 23:51:59.855', '2018-04-03 23:51:59.855', '2018-04-03 23:51:59.860294', 'postgres');
-INSERT INTO schvaleni (id, idtypschv, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('a23f671a-6607-4837-a011-82adef36c26e', '11c78229-8f45-4011-a70a-8b176a590bb8', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'd00a95e6-81b3-4d12-8520-e8e7bd8edb49', '8d56d0de-075b-4357-b0c5-57ba92e22b16', '0de9ea60-c3ca-49ab-b0f1-d435750af708', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:51:59 CEST 2018', NULL, '2018-04-03 23:51:59.861', '2018-04-03 23:51:59.861', '2018-04-03 23:51:59.861', '2018-04-03 23:51:59.867927', 'postgres');
-INSERT INTO schvaleni (id, idtypschv, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('3536ad8a-e0cb-428c-ad8f-8b06c63e027e', '11c78229-8f45-4011-a70a-8b176a590bb8', '89627179-4a44-445f-8d36-e75c3fb5c91d', '7ddd944a-c488-4932-aab3-d0ea0fab98e0', '20e0d460-896e-4ed5-8ede-5e87a79924bb', '3a839613-c3aa-4509-861c-01328fe11c24', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:52:05 CEST 2018', NULL, '2018-04-03 23:52:05.491', '2018-04-03 23:52:05.491', '2018-04-03 23:52:05.491', '2018-04-03 23:52:05.496886', 'postgres');
-INSERT INTO schvaleni (id, idtypschv, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('495047c7-aa5d-49b4-bbca-9b5a7399cf99', '11c78229-8f45-4011-a70a-8b176a590bb8', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', '485af81e-626e-4a4b-bdf8-54730913b269', '00beab89-b041-45fe-8d68-c28eb879f51b', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:52:50 CEST 2018', NULL, '2018-04-03 23:52:50.727', '2018-04-03 23:52:50.727', '2018-04-03 23:52:50.727', '2018-04-03 23:52:50.737401', 'postgres');
-INSERT INTO schvaleni (id, idtypschv, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('e83da591-53dc-4e88-a62e-8d2a89ac6fa0', '11c78229-8f45-4011-a70a-8b176a590bb8', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', 'c1c2c41c-f733-4549-a82d-d6d94c88728a', '00beab89-b041-45fe-8d68-c28eb879f51b', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:52:50 CEST 2018', NULL, '2018-04-03 23:52:50.738', '2018-04-03 23:52:50.738', '2018-04-03 23:52:50.738', '2018-04-03 23:52:50.742253', 'postgres');
-INSERT INTO schvaleni (id, idtypschv, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('0c457fe0-d8db-41d7-ba3c-fd9813a35a2f', '11c78229-8f45-4011-a70a-8b176a590bb8', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', '4f8b3beb-7483-4518-9c66-c1568347cbc2', '00beab89-b041-45fe-8d68-c28eb879f51b', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:52:50 CEST 2018', NULL, '2018-04-03 23:52:50.743', '2018-04-03 23:52:50.743', '2018-04-03 23:52:50.743', '2018-04-03 23:52:50.748706', 'postgres');
-INSERT INTO schvaleni (id, idtypschv, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('76d9734b-3be8-4d57-860a-e068911761c8', '11c78229-8f45-4011-a70a-8b176a590bb8', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', '485af81e-626e-4a4b-bdf8-54730913b269', '00beab89-b041-45fe-8d68-c28eb879f51b', 2, 'Schválení: ANONYMOUS Tue Apr 03 23:55:04 CEST 2018', NULL, '2018-04-03 23:55:04.317', '2018-04-03 23:55:04.317', '2018-04-03 23:55:04.317', '2018-04-03 23:55:04.332247', 'postgres');
-INSERT INTO schvaleni (id, idtypschv, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('f2a0cbf5-839b-4215-b040-7ae701d43cc6', '11c78229-8f45-4011-a70a-8b176a590bb8', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', 'c1c2c41c-f733-4549-a82d-d6d94c88728a', '00beab89-b041-45fe-8d68-c28eb879f51b', 2, 'Schválení: ANONYMOUS Tue Apr 03 23:55:04 CEST 2018', NULL, '2018-04-03 23:55:04.333', '2018-04-03 23:55:04.333', '2018-04-03 23:55:04.333', '2018-04-03 23:55:04.338129', 'postgres');
-INSERT INTO schvaleni (id, idtypschv, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('9d3fb89d-dae9-4ec9-913b-73b396b3cfec', '11c78229-8f45-4011-a70a-8b176a590bb8', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', '4f8b3beb-7483-4518-9c66-c1568347cbc2', '00beab89-b041-45fe-8d68-c28eb879f51b', 2, 'Schválení: ANONYMOUS Tue Apr 03 23:55:04 CEST 2018', NULL, '2018-04-03 23:55:04.339', '2018-04-03 23:55:04.339', '2018-04-03 23:55:04.339', '2018-04-03 23:55:04.343686', 'postgres');
-INSERT INTO schvaleni (id, idtypschv, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('4c1884d1-2b2f-489f-a23c-c595fe430b05', '11c78229-8f45-4011-a70a-8b176a590bb8', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', '4f8b3beb-7483-4518-9c66-c1568347cbc2', '00beab89-b041-45fe-8d68-c28eb879f51b', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:58:11 CEST 2018', NULL, '2018-04-03 23:58:11.878', '2018-04-03 23:58:11.878', '2018-04-03 23:58:11.878', '2018-04-03 23:58:11.88597', 'postgres');
-INSERT INTO schvaleni (id, idtypschv, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('9c3aa3a1-99ca-4b63-91e9-afaf3ebdbdca', '11c78229-8f45-4011-a70a-8b176a590bb8', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', '485af81e-626e-4a4b-bdf8-54730913b269', '00beab89-b041-45fe-8d68-c28eb879f51b', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:58:11 CEST 2018', NULL, '2018-04-03 23:58:11.886', '2018-04-03 23:58:11.886', '2018-04-03 23:58:11.886', '2018-04-03 23:58:11.891316', 'postgres');
-INSERT INTO schvaleni (id, idtypschv, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('82a7e4b3-5454-4e36-b4ff-89f870e1253c', '11c78229-8f45-4011-a70a-8b176a590bb8', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', 'c1c2c41c-f733-4549-a82d-d6d94c88728a', '00beab89-b041-45fe-8d68-c28eb879f51b', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:58:11 CEST 2018', NULL, '2018-04-03 23:58:11.891', '2018-04-03 23:58:11.891', '2018-04-03 23:58:11.892', '2018-04-03 23:58:11.896066', 'postgres');
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('68dbf86e-02c3-4164-bae9-0561bf03b43e', '89627179-4a44-445f-8d36-e75c3fb5c91d', '5816840e-fe8b-4ef7-83c5-8c6658083a70', '5e501da3-3c40-44cc-9af2-1b4a588c76fa', '9754c291-18d8-4e50-a9be-f2e767a19ddb', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:43:12 CEST 2018', NULL, '2018-04-03 23:43:12.051', '2018-04-03 23:43:12.051', '2018-04-03 23:43:12.052', '2018-04-03 23:43:21.192942', 'postgres', 0);
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('2fd4ef86-9d34-4d67-b7f3-db25a60348e1', '89627179-4a44-445f-8d36-e75c3fb5c91d', '5816840e-fe8b-4ef7-83c5-8c6658083a70', '1affc7af-6ea2-4b5c-90d8-88bbf65b3315', '9754c291-18d8-4e50-a9be-f2e767a19ddb', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:43:49 CEST 2018', NULL, '2018-04-03 23:43:49.687', '2018-04-03 23:43:49.687', '2018-04-03 23:43:49.687', '2018-04-03 23:43:53.520725', 'postgres', 0);
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('935fcb24-d74d-4c8a-9f30-3bea5f9fdb43', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'af00fd57-be6e-4aef-87b5-5561af73d717', 'c743be80-c404-448a-a6a6-2a0ce1125e75', 'c2ed3031-5455-4643-82a1-1f3c58dc08c9', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:43:53 CEST 2018', NULL, '2018-04-03 23:43:53.522', '2018-04-03 23:43:53.522', '2018-04-03 23:43:53.522', '2018-04-03 23:43:54.080428', 'postgres', 0);
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('4511db1f-927b-437d-b8d9-5dac69fa983d', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'af00fd57-be6e-4aef-87b5-5561af73d717', 'c4e15c5c-0a75-4115-978a-0c9f4d9aad0a', 'c2ed3031-5455-4643-82a1-1f3c58dc08c9', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:43:54 CEST 2018', NULL, '2018-04-03 23:43:54.081', '2018-04-03 23:43:54.081', '2018-04-03 23:43:54.081', '2018-04-03 23:43:54.662845', 'postgres', 0);
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('1936d27c-7161-4275-8a1d-b24edcd59906', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'd00a95e6-81b3-4d12-8520-e8e7bd8edb49', 'e086795a-8674-47cd-9b22-a7b1e1258e2c', '0de9ea60-c3ca-49ab-b0f1-d435750af708', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:51:59 CEST 2018', NULL, '2018-04-03 23:51:59.827', '2018-04-03 23:51:59.827', '2018-04-03 23:51:59.827', '2018-04-03 23:51:59.853405', 'postgres', 0);
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('e3bce809-4293-4c1c-90f2-0e65a7463881', '89627179-4a44-445f-8d36-e75c3fb5c91d', '7ddd944a-c488-4932-aab3-d0ea0fab98e0', '20e0d460-896e-4ed5-8ede-5e87a79924bb', '3a839613-c3aa-4509-861c-01328fe11c24', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:51:59 CEST 2018', NULL, '2018-04-03 23:51:59.855', '2018-04-03 23:51:59.855', '2018-04-03 23:51:59.855', '2018-04-03 23:51:59.860294', 'postgres', 0);
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('a23f671a-6607-4837-a011-82adef36c26e', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'd00a95e6-81b3-4d12-8520-e8e7bd8edb49', '8d56d0de-075b-4357-b0c5-57ba92e22b16', '0de9ea60-c3ca-49ab-b0f1-d435750af708', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:51:59 CEST 2018', NULL, '2018-04-03 23:51:59.861', '2018-04-03 23:51:59.861', '2018-04-03 23:51:59.861', '2018-04-03 23:51:59.867927', 'postgres', 0);
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('3536ad8a-e0cb-428c-ad8f-8b06c63e027e', '89627179-4a44-445f-8d36-e75c3fb5c91d', '7ddd944a-c488-4932-aab3-d0ea0fab98e0', '20e0d460-896e-4ed5-8ede-5e87a79924bb', '3a839613-c3aa-4509-861c-01328fe11c24', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:52:05 CEST 2018', NULL, '2018-04-03 23:52:05.491', '2018-04-03 23:52:05.491', '2018-04-03 23:52:05.491', '2018-04-03 23:52:05.496886', 'postgres', 0);
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('495047c7-aa5d-49b4-bbca-9b5a7399cf99', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', '485af81e-626e-4a4b-bdf8-54730913b269', '00beab89-b041-45fe-8d68-c28eb879f51b', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:52:50 CEST 2018', NULL, '2018-04-03 23:52:50.727', '2018-04-03 23:52:50.727', '2018-04-03 23:52:50.727', '2018-04-03 23:52:50.737401', 'postgres', 0);
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('e83da591-53dc-4e88-a62e-8d2a89ac6fa0', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', 'c1c2c41c-f733-4549-a82d-d6d94c88728a', '00beab89-b041-45fe-8d68-c28eb879f51b', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:52:50 CEST 2018', NULL, '2018-04-03 23:52:50.738', '2018-04-03 23:52:50.738', '2018-04-03 23:52:50.738', '2018-04-03 23:52:50.742253', 'postgres', 0);
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('0c457fe0-d8db-41d7-ba3c-fd9813a35a2f', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', '4f8b3beb-7483-4518-9c66-c1568347cbc2', '00beab89-b041-45fe-8d68-c28eb879f51b', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:52:50 CEST 2018', NULL, '2018-04-03 23:52:50.743', '2018-04-03 23:52:50.743', '2018-04-03 23:52:50.743', '2018-04-03 23:52:50.748706', 'postgres', 0);
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('76d9734b-3be8-4d57-860a-e068911761c8', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', '485af81e-626e-4a4b-bdf8-54730913b269', '00beab89-b041-45fe-8d68-c28eb879f51b', 2, 'Schválení: ANONYMOUS Tue Apr 03 23:55:04 CEST 2018', NULL, '2018-04-03 23:55:04.317', '2018-04-03 23:55:04.317', '2018-04-03 23:55:04.317', '2018-04-03 23:55:04.332247', 'postgres', 0);
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('f2a0cbf5-839b-4215-b040-7ae701d43cc6', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', 'c1c2c41c-f733-4549-a82d-d6d94c88728a', '00beab89-b041-45fe-8d68-c28eb879f51b', 2, 'Schválení: ANONYMOUS Tue Apr 03 23:55:04 CEST 2018', NULL, '2018-04-03 23:55:04.333', '2018-04-03 23:55:04.333', '2018-04-03 23:55:04.333', '2018-04-03 23:55:04.338129', 'postgres', 0);
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('9d3fb89d-dae9-4ec9-913b-73b396b3cfec', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', '4f8b3beb-7483-4518-9c66-c1568347cbc2', '00beab89-b041-45fe-8d68-c28eb879f51b', 2, 'Schválení: ANONYMOUS Tue Apr 03 23:55:04 CEST 2018', NULL, '2018-04-03 23:55:04.339', '2018-04-03 23:55:04.339', '2018-04-03 23:55:04.339', '2018-04-03 23:55:04.343686', 'postgres', 0);
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('4c1884d1-2b2f-489f-a23c-c595fe430b05', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', '4f8b3beb-7483-4518-9c66-c1568347cbc2', '00beab89-b041-45fe-8d68-c28eb879f51b', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:58:11 CEST 2018', NULL, '2018-04-03 23:58:11.878', '2018-04-03 23:58:11.878', '2018-04-03 23:58:11.878', '2018-04-03 23:58:11.88597', 'postgres', 0);
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('9c3aa3a1-99ca-4b63-91e9-afaf3ebdbdca', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', '485af81e-626e-4a4b-bdf8-54730913b269', '00beab89-b041-45fe-8d68-c28eb879f51b', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:58:11 CEST 2018', NULL, '2018-04-03 23:58:11.886', '2018-04-03 23:58:11.886', '2018-04-03 23:58:11.886', '2018-04-03 23:58:11.891316', 'postgres', 0);
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('82a7e4b3-5454-4e36-b4ff-89f870e1253c', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', 'c1c2c41c-f733-4549-a82d-d6d94c88728a', '00beab89-b041-45fe-8d68-c28eb879f51b', 1, 'Schválení: ANONYMOUS Tue Apr 03 23:58:11 CEST 2018', NULL, '2018-04-03 23:58:11.891', '2018-04-03 23:58:11.891', '2018-04-03 23:58:11.892', '2018-04-03 23:58:11.896066', 'postgres', 0);
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('237c573a-b277-4b47-b788-56ba479e7d39', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'af00fd57-be6e-4aef-87b5-5561af73d717', '34fdcc9c-a830-447c-bb93-477b2fecd29a', NULL, 2, 'Schválení: ANONYMOUS', ' Wed Apr 04 22:48:50 CEST 2018', '2018-04-04 22:48:50.313', '2018-04-04 22:48:50.313', '2018-04-04 22:48:57.890261', '2018-04-04 22:48:57.890261', 'postgres', 1);
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('7af6b2b8-5d96-4263-91c0-efc8da3ed8ec', '89627179-4a44-445f-8d36-e75c3fb5c91d', '11b1a3a1-0314-4e21-8537-8a206eda4e48', 'c1b6a676-dca8-4b75-a27a-7ec1b4a33ecb', NULL, 2, 'Schválení: ANONYMOUS', ' Wed Apr 04 23:05:16 CEST 2018', '2018-04-04 23:05:16.284', '2018-04-04 23:05:16.284', '2018-04-04 23:05:16.288934', '2018-04-04 23:05:16.288934', 'postgres', 2);
+INSERT INTO schvaleni (id, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido, timeinsert, timemodify, usermodify, uroven) VALUES ('d02fea36-491e-413c-bc65-a55fefeeea01', '89627179-4a44-445f-8d36-e75c3fb5c91d', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', '485af81e-626e-4a4b-bdf8-54730913b269', NULL, 2, 'Schválení: ANONYMOUS', ' Wed Apr 04 23:05:16 CEST 2018', '2018-04-04 23:05:16.3', '2018-04-04 23:05:16.3', '2018-04-04 23:05:16.301098', '2018-04-04 23:05:16.301098', 'postgres', 1);
 
 
 --
--- TOC entry 3003 (class 0 OID 24759)
+-- TOC entry 3002 (class 0 OID 24759)
 -- Dependencies: 205
 -- Data for Name: skupina; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2789,7 +2797,7 @@ INSERT INTO skupina (id, name, skupina, popis, platiod, platido, timeinsert, tim
 
 
 --
--- TOC entry 3004 (class 0 OID 24765)
+-- TOC entry 3003 (class 0 OID 24765)
 -- Dependencies: 206
 -- Data for Name: typaktivity; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2799,7 +2807,7 @@ INSERT INTO typaktivity (id, typakt, popis, platiod, platido, timeinsert, timemo
 
 
 --
--- TOC entry 3005 (class 0 OID 24771)
+-- TOC entry 3004 (class 0 OID 24771)
 -- Dependencies: 207
 -- Data for Name: typschv; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2812,7 +2820,7 @@ INSERT INTO typschv (id, typschv, popis, platiod, platido, timeinsert, timemodif
 
 
 --
--- TOC entry 3006 (class 0 OID 24778)
+-- TOC entry 3005 (class 0 OID 24778)
 -- Dependencies: 208
 -- Data for Name: typucast; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2828,7 +2836,7 @@ INSERT INTO typucast (id, typucast, popis, platiod, platido, timeinsert, timemod
 
 
 --
--- TOC entry 3007 (class 0 OID 24784)
+-- TOC entry 3006 (class 0 OID 24784)
 -- Dependencies: 209
 -- Data for Name: typzdroje; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2842,7 +2850,7 @@ INSERT INTO typzdroje (id, typzdr, cesta, rezervace, osoba, popis, platiod, plat
 
 
 --
--- TOC entry 3008 (class 0 OID 24790)
+-- TOC entry 3007 (class 0 OID 24790)
 -- Dependencies: 210
 -- Data for Name: ucastnik; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2852,8 +2860,6 @@ INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, ti
 INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('5e501da3-3c40-44cc-9af2-1b4a588c76fa', '8b24fa34-03aa-4a82-bfeb-bb044d252be8', '0c6c51fb-6308-4796-8d63-f9c0136f7537', '5816840e-fe8b-4ef7-83c5-8c6658083a70', NULL, '2017-07-17 15:26:08.711', '2017-07-17 15:26:08.711', '2017-07-17 15:26:46.366', '2017-07-17 15:27:26.719', 'postgres');
 INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('1affc7af-6ea2-4b5c-90d8-88bbf65b3315', '9960cbb8-db3a-4dfc-9292-fab189f9040e', '0c6c51fb-6308-4796-8d63-f9c0136f7537', '5816840e-fe8b-4ef7-83c5-8c6658083a70', NULL, '2017-07-17 15:26:08.711', '2017-07-17 15:26:08.711', '2017-07-17 15:26:46.366', '2017-07-17 15:27:26.766', 'postgres');
 INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('858155c6-5b0a-415a-b181-b57ebbd31398', '89627179-4a44-445f-8d36-e75c3fb5c91d', '0c6c51fb-6308-4796-8d63-f9c0136f7537', '5816840e-fe8b-4ef7-83c5-8c6658083a70', NULL, '2017-07-17 15:26:08.711', '2017-07-17 15:26:08.711', '2017-07-17 15:26:46.366', '2017-07-17 15:27:26.813', 'postgres');
-INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('c4e15c5c-0a75-4115-978a-0c9f4d9aad0a', '9960cbb8-db3a-4dfc-9292-fab189f9040e', '0c6c51fb-6308-4796-8d63-f9c0136f7537', 'af00fd57-be6e-4aef-87b5-5561af73d717', NULL, '2017-07-17 15:26:08.711', '2017-07-17 15:26:08.711', '2017-07-17 15:29:57.795', '2017-07-17 15:31:13.84', 'postgres');
-INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('c743be80-c404-448a-a6a6-2a0ce1125e75', '8b24fa34-03aa-4a82-bfeb-bb044d252be8', '0c6c51fb-6308-4796-8d63-f9c0136f7537', 'af00fd57-be6e-4aef-87b5-5561af73d717', NULL, '2017-07-17 15:26:08.711', '2017-07-17 15:26:08.711', '2017-07-17 15:29:57.795', '2017-07-17 15:31:13.886', 'postgres');
 INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('2fbb86c3-c8cb-49d0-ac68-8a17443497c9', '89627179-4a44-445f-8d36-e75c3fb5c91d', '0c6c51fb-6308-4796-8d63-f9c0136f7537', '70c51e7f-9cd7-48b6-9c35-65836d42ba05', NULL, '2017-01-01 16:20:35.811', '2100-12-31 16:20:35.811', '2017-07-17 16:21:36.033', '2017-07-17 16:24:16.034', 'postgres');
 INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('61dbb8b9-8719-41ed-8b8a-0a1509ea25e2', '8b24fa34-03aa-4a82-bfeb-bb044d252be8', '0c6c51fb-6308-4796-8d63-f9c0136f7537', '70c51e7f-9cd7-48b6-9c35-65836d42ba05', NULL, '2017-07-17 16:21:35.922', '2017-07-17 16:21:35.922', '2017-07-17 16:23:34.343', '2017-07-17 16:24:18.53', 'postgres');
 INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('afa95c0c-7e34-44e5-a5c9-0c42145f2e56', '9960cbb8-db3a-4dfc-9292-fab189f9040e', '0c6c51fb-6308-4796-8d63-f9c0136f7537', '70c51e7f-9cd7-48b6-9c35-65836d42ba05', NULL, '2017-07-17 16:21:35.922', '2017-07-17 16:21:35.922', '2017-07-17 16:23:34.343', '2017-07-17 16:24:19.716', 'postgres');
@@ -2871,18 +2877,24 @@ INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, ti
 INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('519ab10f-ddc2-4888-8644-d04519c04f62', '89627179-4a44-445f-8d36-e75c3fb5c91d', '0c6c51fb-6308-4796-8d63-f9c0136f7537', '97d19489-5aee-447d-bef8-d429dcc5dd2d', NULL, '2017-01-01 15:52:27.438', '2100-12-31 15:52:27.438', '2017-07-31 15:54:32.883', '2017-07-31 15:55:08.268', 'postgres');
 INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('6b1f3323-e84e-4e1b-8bec-c8de09dd3601', '89627179-4a44-445f-8d36-e75c3fb5c91d', '0c6c51fb-6308-4796-8d63-f9c0136f7537', 'fea46dc4-b947-432f-a4bd-591e8c31c807', NULL, '2017-01-01 17:24:48.977', '2100-12-31 17:24:48.977', '2017-08-07 17:28:30.73', '2017-08-07 17:29:08.712', 'postgres');
 INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('a170bd6d-69e6-4a65-b2f2-9e7fcae0527a', '40c4cb3e-e4b0-4151-8668-404a273f20e9', '0c6c51fb-6308-4796-8d63-f9c0136f7537', '7b7a3a62-fc9b-4ba6-a85b-36ce313b28b6', NULL, '2017-07-20 07:00:00', '2017-07-20 17:00:00', '2017-09-22 13:49:34.418', '2017-09-22 13:49:55.219', 'postgres');
-INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('d1886082-e0a2-4176-875a-014f1c8ee069', '89627179-4a44-445f-8d36-e75c3fb5c91d', '0c6c51fb-6308-4796-8d63-f9c0136f7537', '11b1a3a1-0314-4e21-8537-8a206eda4e48', NULL, '2017-01-01 16:28:31.887', '2100-12-31 16:28:31.887', '2017-07-17 16:29:10.1', '2018-03-20 16:08:45.630304', 'postgres');
 INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('c1c2c41c-f733-4549-a82d-d6d94c88728a', 'f3cdcde5-1a1d-4902-9c65-f01658b889c9', '0c6c51fb-6308-4796-8d63-f9c0136f7537', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', NULL, '2018-03-24 11:04:00', '2018-03-24 11:30:00', '2018-03-21 12:21:17.083218', '2018-03-28 19:26:32.369848', 'postgres');
 INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('4f8b3beb-7483-4518-9c66-c1568347cbc2', '8b24fa34-03aa-4a82-bfeb-bb044d252be8', '0c6c51fb-6308-4796-8d63-f9c0136f7537', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', NULL, '2018-03-24 11:04:00', '2018-03-24 11:30:00', '2018-03-28 19:26:32.369848', '2018-03-28 19:26:32.369848', 'postgres');
 INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('485af81e-626e-4a4b-bdf8-54730913b269', '9960cbb8-db3a-4dfc-9292-fab189f9040e', '0c6c51fb-6308-4796-8d63-f9c0136f7537', 'b2d1500b-06fa-4e28-b572-2fbf7c705adc', NULL, '2018-03-24 11:04:00', '2018-03-24 11:30:00', '2018-03-28 19:26:32.369848', '2018-03-28 19:26:32.369848', 'postgres');
-INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('bbe26a73-56c2-4c9e-9edf-f412349de74d', '89627179-4a44-445f-8d36-e75c3fb5c91d', '15deaa1b-e534-417d-b771-02778d28b9df', '87e56165-22d6-46bd-9c5e-bf7c7e0e28a1', NULL, '2018-01-01 00:00:00.781', '2100-01-01 00:00:00.781', '2018-03-21 12:02:03.89826', '2018-04-03 20:56:38.850642', 'postgres');
-INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('b8b81b94-f32b-4145-be85-37ed1b003e24', '02af2a3b-c5b5-46dc-abb2-4298eeb26541', '0c6c51fb-6308-4796-8d63-f9c0136f7537', '87e56165-22d6-46bd-9c5e-bf7c7e0e28a1', NULL, '2018-03-24 07:00:00', '2018-03-24 17:00:00', '2018-03-21 12:02:03.90226', '2018-04-03 20:56:38.850642', 'postgres');
-INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('88ff27e3-1e93-4c43-97a0-06972f19d69d', '9960cbb8-db3a-4dfc-9292-fab189f9040e', '0c6c51fb-6308-4796-8d63-f9c0136f7537', '87e56165-22d6-46bd-9c5e-bf7c7e0e28a1', NULL, '2018-03-24 07:00:00', '2018-03-24 17:00:00', '2018-03-28 19:26:49.932607', '2018-04-03 20:56:38.850642', 'postgres');
-INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('4b3c9f8a-8316-404a-b8c4-276208baec34', '8b24fa34-03aa-4a82-bfeb-bb044d252be8', '0c6c51fb-6308-4796-8d63-f9c0136f7537', '87e56165-22d6-46bd-9c5e-bf7c7e0e28a1', NULL, '2018-03-24 07:00:00', '2018-03-24 17:00:00', '2018-04-03 20:56:38.850642', '2018-04-03 20:56:38.850642', 'postgres');
+INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('88ff27e3-1e93-4c43-97a0-06972f19d69d', '9960cbb8-db3a-4dfc-9292-fab189f9040e', '0c6c51fb-6308-4796-8d63-f9c0136f7537', '87e56165-22d6-46bd-9c5e-bf7c7e0e28a1', NULL, '2018-03-24 07:00:00', '2018-03-24 17:00:00', '2018-03-28 19:26:49.932607', '2018-04-04 23:43:49.820657', 'postgres');
+INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('4b3c9f8a-8316-404a-b8c4-276208baec34', '8b24fa34-03aa-4a82-bfeb-bb044d252be8', '0c6c51fb-6308-4796-8d63-f9c0136f7537', '87e56165-22d6-46bd-9c5e-bf7c7e0e28a1', NULL, '2018-03-24 07:00:00', '2018-03-24 17:00:00', '2018-04-03 20:56:38.850642', '2018-04-04 23:43:49.820657', 'postgres');
+INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('d1886082-e0a2-4176-875a-014f1c8ee069', '89627179-4a44-445f-8d36-e75c3fb5c91d', '0c6c51fb-6308-4796-8d63-f9c0136f7537', '11b1a3a1-0314-4e21-8537-8a206eda4e48', NULL, '2017-01-01 16:28:31.887', '2100-12-31 16:28:31.887', '2017-07-17 16:29:10.1', '2018-04-04 22:44:07.649299', 'postgres');
+INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('c1b6a676-dca8-4b75-a27a-7ec1b4a33ecb', '565b2abc-810d-41cc-9a71-7031907263bf', '0c6c51fb-6308-4796-8d63-f9c0136f7537', '11b1a3a1-0314-4e21-8537-8a206eda4e48', NULL, '2018-03-20 07:00:00', '2018-03-25 17:00:00', '2018-04-04 22:44:07.649299', '2018-04-04 22:44:07.649299', 'postgres');
+INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('b343eebc-a6a9-4210-b440-209dbd16e8c1', '28af01c3-3e29-4a3e-ab25-be6a5dc2b0f2', '0c6c51fb-6308-4796-8d63-f9c0136f7537', '11b1a3a1-0314-4e21-8537-8a206eda4e48', NULL, '2018-03-20 07:00:00', '2018-03-25 17:00:00', '2018-04-04 22:44:07.649299', '2018-04-04 22:44:07.649299', 'postgres');
+INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('89bb9781-a5a5-4895-984b-e45ac730be68', '4a3ef679-87d0-479b-995e-1218296efc5b', '0c6c51fb-6308-4796-8d63-f9c0136f7537', '11b1a3a1-0314-4e21-8537-8a206eda4e48', NULL, '2018-03-20 07:00:00', '2018-03-25 17:00:00', '2018-04-04 22:44:07.649299', '2018-04-04 22:44:07.649299', 'postgres');
+INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('c4e15c5c-0a75-4115-978a-0c9f4d9aad0a', '9960cbb8-db3a-4dfc-9292-fab189f9040e', '0c6c51fb-6308-4796-8d63-f9c0136f7537', 'af00fd57-be6e-4aef-87b5-5561af73d717', NULL, '2017-07-17 15:26:08.711', '2017-07-17 15:26:08.711', '2017-07-17 15:29:57.795', '2018-04-04 22:47:51.503445', 'postgres');
+INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('c743be80-c404-448a-a6a6-2a0ce1125e75', '8b24fa34-03aa-4a82-bfeb-bb044d252be8', '0c6c51fb-6308-4796-8d63-f9c0136f7537', 'af00fd57-be6e-4aef-87b5-5561af73d717', NULL, '2017-07-17 15:26:08.711', '2017-07-17 15:26:08.711', '2017-07-17 15:29:57.795', '2018-04-04 22:47:51.503445', 'postgres');
+INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('34fdcc9c-a830-447c-bb93-477b2fecd29a', 'dcb31c8c-51f1-404a-9691-e6d16aa296b5', '0c6c51fb-6308-4796-8d63-f9c0136f7537', 'af00fd57-be6e-4aef-87b5-5561af73d717', NULL, '2017-07-24 07:00:00', '2017-07-24 17:00:00', '2018-04-04 22:47:51.503445', '2018-04-04 22:47:51.503445', 'postgres');
+INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('bbe26a73-56c2-4c9e-9edf-f412349de74d', '89627179-4a44-445f-8d36-e75c3fb5c91d', '15deaa1b-e534-417d-b771-02778d28b9df', '87e56165-22d6-46bd-9c5e-bf7c7e0e28a1', NULL, '2018-01-01 00:00:00.781', '2100-01-01 00:00:00.781', '2018-03-21 12:02:03.89826', '2018-04-04 23:43:49.820657', 'postgres');
+INSERT INTO ucastnik (id, idoso, idtypucast, idcest, popis, platiod, platido, timeinsert, timemodify, usermodify) VALUES ('b8b81b94-f32b-4145-be85-37ed1b003e24', '02af2a3b-c5b5-46dc-abb2-4298eeb26541', '0c6c51fb-6308-4796-8d63-f9c0136f7537', '87e56165-22d6-46bd-9c5e-bf7c7e0e28a1', NULL, '2018-03-24 07:00:00', '2018-03-24 17:00:00', '2018-03-21 12:02:03.90226', '2018-04-04 23:43:49.820657', 'postgres');
 
 
 --
--- TOC entry 3009 (class 0 OID 24796)
+-- TOC entry 3008 (class 0 OID 24796)
 -- Dependencies: 211
 -- Data for Name: zdroj; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2929,7 +2941,7 @@ ALTER TABLE ONLY skupina
 
 
 --
--- TOC entry 2758 (class 2606 OID 24805)
+-- TOC entry 2759 (class 2606 OID 24805)
 -- Name: aktivity primaryid; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2938,7 +2950,7 @@ ALTER TABLE ONLY aktivity
 
 
 --
--- TOC entry 2762 (class 2606 OID 24807)
+-- TOC entry 2763 (class 2606 OID 24807)
 -- Name: cesta primaryidcest; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2947,7 +2959,7 @@ ALTER TABLE ONLY cesta
 
 
 --
--- TOC entry 2768 (class 2606 OID 24809)
+-- TOC entry 2769 (class 2606 OID 24809)
 -- Name: dispecerhl primaryiddisphl; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2956,7 +2968,7 @@ ALTER TABLE ONLY dispecerhl
 
 
 --
--- TOC entry 2773 (class 2606 OID 24813)
+-- TOC entry 2774 (class 2606 OID 24813)
 -- Name: dispecerpol primaryiddisppol; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2965,7 +2977,7 @@ ALTER TABLE ONLY dispecerpol
 
 
 --
--- TOC entry 2779 (class 2606 OID 24817)
+-- TOC entry 2780 (class 2606 OID 24817)
 -- Name: email primaryidemail; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2974,7 +2986,7 @@ ALTER TABLE ONLY email
 
 
 --
--- TOC entry 2784 (class 2606 OID 24819)
+-- TOC entry 2785 (class 2606 OID 24819)
 -- Name: log primaryidlog; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2983,7 +2995,7 @@ ALTER TABLE ONLY log
 
 
 --
--- TOC entry 2788 (class 2606 OID 24821)
+-- TOC entry 2789 (class 2606 OID 24821)
 -- Name: osoba primaryidoso; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2992,7 +3004,7 @@ ALTER TABLE ONLY osoba
 
 
 --
--- TOC entry 2794 (class 2606 OID 24823)
+-- TOC entry 2795 (class 2606 OID 24823)
 -- Name: rezervace primaryidrez; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3001,7 +3013,7 @@ ALTER TABLE ONLY rezervace
 
 
 --
--- TOC entry 2796 (class 2606 OID 24825)
+-- TOC entry 2797 (class 2606 OID 24825)
 -- Name: schvaleni primaryidschv; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3064,7 +3076,7 @@ ALTER TABLE ONLY zdroj
 
 
 --
--- TOC entry 2785 (class 1259 OID 24838)
+-- TOC entry 2786 (class 1259 OID 24838)
 -- Name: OsobaExtId; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3072,8 +3084,8 @@ CREATE INDEX "OsobaExtId" ON osoba USING btree (extid);
 
 
 --
--- TOC entry 3217 (class 0 OID 0)
--- Dependencies: 2785
+-- TOC entry 3216 (class 0 OID 0)
+-- Dependencies: 2786
 -- Name: INDEX "OsobaExtId"; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -3081,7 +3093,7 @@ COMMENT ON INDEX "OsobaExtId" IS 'Externí ID';
 
 
 --
--- TOC entry 2786 (class 1259 OID 24839)
+-- TOC entry 2787 (class 1259 OID 24839)
 -- Name: OsobaName; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3089,8 +3101,8 @@ CREATE INDEX "OsobaName" ON osoba USING btree (name);
 
 
 --
--- TOC entry 3218 (class 0 OID 0)
--- Dependencies: 2786
+-- TOC entry 3217 (class 0 OID 0)
+-- Dependencies: 2787
 -- Name: INDEX "OsobaName"; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -3106,7 +3118,7 @@ CREATE INDEX "SkupinaName" ON skupina USING btree (name);
 
 
 --
--- TOC entry 3219 (class 0 OID 0)
+-- TOC entry 3218 (class 0 OID 0)
 -- Dependencies: 2802
 -- Name: INDEX "SkupinaName"; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3115,7 +3127,7 @@ COMMENT ON INDEX "SkupinaName" IS 'Jméno uživatele-osoby skupiny práv pro Jdb
 
 
 --
--- TOC entry 2763 (class 1259 OID 24841)
+-- TOC entry 2764 (class 1259 OID 24841)
 -- Name: disphl-iddisphl; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3123,8 +3135,8 @@ CREATE INDEX "disphl-iddisphl" ON dispecerhl USING btree (iddisphl);
 
 
 --
--- TOC entry 3220 (class 0 OID 0)
--- Dependencies: 2763
+-- TOC entry 3219 (class 0 OID 0)
+-- Dependencies: 2764
 -- Name: INDEX "disphl-iddisphl"; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -3132,7 +3144,7 @@ COMMENT ON INDEX "disphl-iddisphl" IS 'Index přes iddisphl na nadřízeného di
 
 
 --
--- TOC entry 2764 (class 1259 OID 24842)
+-- TOC entry 2765 (class 1259 OID 24842)
 -- Name: disphl-idoso; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3140,8 +3152,8 @@ CREATE INDEX "disphl-idoso" ON dispecerhl USING btree (idoso);
 
 
 --
--- TOC entry 3221 (class 0 OID 0)
--- Dependencies: 2764
+-- TOC entry 3220 (class 0 OID 0)
+-- Dependencies: 2765
 -- Name: INDEX "disphl-idoso"; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -3149,7 +3161,7 @@ COMMENT ON INDEX "disphl-idoso" IS 'Index přes idoso';
 
 
 --
--- TOC entry 2765 (class 1259 OID 24843)
+-- TOC entry 2766 (class 1259 OID 24843)
 -- Name: disphl-idtypschv; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3157,8 +3169,8 @@ CREATE INDEX "disphl-idtypschv" ON dispecerhl USING btree (idtypschv);
 
 
 --
--- TOC entry 3222 (class 0 OID 0)
--- Dependencies: 2765
+-- TOC entry 3221 (class 0 OID 0)
+-- Dependencies: 2766
 -- Name: INDEX "disphl-idtypschv"; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -3166,7 +3178,7 @@ COMMENT ON INDEX "disphl-idtypschv" IS 'Podle ID typu schvalovatele';
 
 
 --
--- TOC entry 2766 (class 1259 OID 24844)
+-- TOC entry 2767 (class 1259 OID 24844)
 -- Name: disphl-idtypzdr; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3174,8 +3186,8 @@ CREATE INDEX "disphl-idtypzdr" ON dispecerhl USING btree (idtypzdr);
 
 
 --
--- TOC entry 3223 (class 0 OID 0)
--- Dependencies: 2766
+-- TOC entry 3222 (class 0 OID 0)
+-- Dependencies: 2767
 -- Name: INDEX "disphl-idtypzdr"; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -3183,7 +3195,7 @@ COMMENT ON INDEX "disphl-idtypzdr" IS 'Podle ID typu zdroje';
 
 
 --
--- TOC entry 2769 (class 1259 OID 24847)
+-- TOC entry 2770 (class 1259 OID 24847)
 -- Name: disppol-iddisphl; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3191,8 +3203,8 @@ CREATE INDEX "disppol-iddisphl" ON dispecerpol USING btree (iddisphl);
 
 
 --
--- TOC entry 3224 (class 0 OID 0)
--- Dependencies: 2769
+-- TOC entry 3223 (class 0 OID 0)
+-- Dependencies: 2770
 -- Name: INDEX "disppol-iddisphl"; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -3200,7 +3212,7 @@ COMMENT ON INDEX "disppol-iddisphl" IS 'Index přes iddisphl';
 
 
 --
--- TOC entry 2770 (class 1259 OID 24848)
+-- TOC entry 2771 (class 1259 OID 24848)
 -- Name: disppol-idoso; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3208,8 +3220,8 @@ CREATE INDEX "disppol-idoso" ON dispecerpol USING btree (idoso);
 
 
 --
--- TOC entry 3225 (class 0 OID 0)
--- Dependencies: 2770
+-- TOC entry 3224 (class 0 OID 0)
+-- Dependencies: 2771
 -- Name: INDEX "disppol-idoso"; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -3217,7 +3229,7 @@ COMMENT ON INDEX "disppol-idoso" IS 'Index přes idoso';
 
 
 --
--- TOC entry 2771 (class 1259 OID 24849)
+-- TOC entry 2772 (class 1259 OID 24849)
 -- Name: disppol-idzdr; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3225,8 +3237,8 @@ CREATE INDEX "disppol-idzdr" ON dispecerpol USING btree (idzdr);
 
 
 --
--- TOC entry 3226 (class 0 OID 0)
--- Dependencies: 2771
+-- TOC entry 3225 (class 0 OID 0)
+-- Dependencies: 2772
 -- Name: INDEX "disppol-idzdr"; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -3242,7 +3254,7 @@ CREATE INDEX "fki_Zdroj-idoso" ON zdroj USING btree (idoso);
 
 
 --
--- TOC entry 2774 (class 1259 OID 24853)
+-- TOC entry 2775 (class 1259 OID 24853)
 -- Name: fki_email-idcest; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3250,7 +3262,7 @@ CREATE INDEX "fki_email-idcest" ON email USING btree (idcest);
 
 
 --
--- TOC entry 2775 (class 1259 OID 24854)
+-- TOC entry 2776 (class 1259 OID 24854)
 -- Name: fki_email-idoso; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3258,7 +3270,7 @@ CREATE INDEX "fki_email-idoso" ON email USING btree (idoso);
 
 
 --
--- TOC entry 2776 (class 1259 OID 24855)
+-- TOC entry 2777 (class 1259 OID 24855)
 -- Name: fki_email-idrez; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3266,7 +3278,7 @@ CREATE INDEX "fki_email-idrez" ON email USING btree (idrez);
 
 
 --
--- TOC entry 2777 (class 1259 OID 24856)
+-- TOC entry 2778 (class 1259 OID 24856)
 -- Name: fki_email-iducast; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3274,7 +3286,7 @@ CREATE INDEX "fki_email-iducast" ON email USING btree (iducast);
 
 
 --
--- TOC entry 2789 (class 1259 OID 24857)
+-- TOC entry 2790 (class 1259 OID 24857)
 -- Name: fki_idakt; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3282,7 +3294,7 @@ CREATE INDEX fki_idakt ON rezervace USING btree (idakt DESC);
 
 
 --
--- TOC entry 2790 (class 1259 OID 24858)
+-- TOC entry 2791 (class 1259 OID 24858)
 -- Name: fki_idcest; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3290,7 +3302,7 @@ CREATE INDEX fki_idcest ON rezervace USING btree (idcest DESC);
 
 
 --
--- TOC entry 2759 (class 1259 OID 24859)
+-- TOC entry 2760 (class 1259 OID 24859)
 -- Name: fki_idoso; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3306,7 +3318,7 @@ CREATE INDEX fki_idosouca ON ucastnik USING btree (idoso DESC);
 
 
 --
--- TOC entry 2756 (class 1259 OID 24861)
+-- TOC entry 2757 (class 1259 OID 24861)
 -- Name: fki_idownerakt; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3322,7 +3334,7 @@ CREATE INDEX fki_idtypucastuca ON ucastnik USING btree (idtypucast);
 
 
 --
--- TOC entry 2760 (class 1259 OID 24863)
+-- TOC entry 2761 (class 1259 OID 24863)
 -- Name: fki_idtypzdrces; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3338,7 +3350,7 @@ CREATE INDEX fki_idtypzdrzdr ON zdroj USING btree (idtypzdr);
 
 
 --
--- TOC entry 2791 (class 1259 OID 24865)
+-- TOC entry 2792 (class 1259 OID 24865)
 -- Name: fki_idzdr; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3346,7 +3358,7 @@ CREATE INDEX fki_idzdr ON rezervace USING btree (idzdr DESC);
 
 
 --
--- TOC entry 2780 (class 1259 OID 24866)
+-- TOC entry 2781 (class 1259 OID 24866)
 -- Name: fki_log-idoso; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3354,7 +3366,7 @@ CREATE INDEX "fki_log-idoso" ON log USING btree (idoso);
 
 
 --
--- TOC entry 2781 (class 1259 OID 24867)
+-- TOC entry 2782 (class 1259 OID 24867)
 -- Name: fki_log-idrez; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3362,7 +3374,7 @@ CREATE INDEX "fki_log-idrez" ON log USING btree (idrez);
 
 
 --
--- TOC entry 2782 (class 1259 OID 24868)
+-- TOC entry 2783 (class 1259 OID 24868)
 -- Name: fki_log-iducast; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3370,7 +3382,7 @@ CREATE INDEX "fki_log-iducast" ON log USING btree (iducast);
 
 
 --
--- TOC entry 2792 (class 1259 OID 24869)
+-- TOC entry 2793 (class 1259 OID 24869)
 -- Name: fki_paltioddo; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3394,7 +3406,7 @@ CREATE INDEX "fki_ucast-idoso" ON ucastnik USING btree (idoso);
 
 
 --
--- TOC entry 2797 (class 1259 OID 24872)
+-- TOC entry 2798 (class 1259 OID 24872)
 -- Name: schv-idcest; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3402,8 +3414,8 @@ CREATE INDEX "schv-idcest" ON schvaleni USING btree (idcest);
 
 
 --
--- TOC entry 3227 (class 0 OID 0)
--- Dependencies: 2797
+-- TOC entry 3226 (class 0 OID 0)
+-- Dependencies: 2798
 -- Name: INDEX "schv-idcest"; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -3411,7 +3423,7 @@ COMMENT ON INDEX "schv-idcest" IS 'ID cesty';
 
 
 --
--- TOC entry 2798 (class 1259 OID 24873)
+-- TOC entry 2799 (class 1259 OID 24873)
 -- Name: schv-idoso; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3419,8 +3431,8 @@ CREATE INDEX "schv-idoso" ON schvaleni USING btree (idoso);
 
 
 --
--- TOC entry 3228 (class 0 OID 0)
--- Dependencies: 2798
+-- TOC entry 3227 (class 0 OID 0)
+-- Dependencies: 2799
 -- Name: INDEX "schv-idoso"; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -3428,7 +3440,7 @@ COMMENT ON INDEX "schv-idoso" IS 'Index přes idoso';
 
 
 --
--- TOC entry 2799 (class 1259 OID 24874)
+-- TOC entry 2800 (class 1259 OID 24874)
 -- Name: schv-idrez; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3436,29 +3448,12 @@ CREATE INDEX "schv-idrez" ON schvaleni USING btree (idrez);
 
 
 --
--- TOC entry 3229 (class 0 OID 0)
--- Dependencies: 2799
+-- TOC entry 3228 (class 0 OID 0)
+-- Dependencies: 2800
 -- Name: INDEX "schv-idrez"; Type: COMMENT; Schema: public; Owner: postgres
 --
 
 COMMENT ON INDEX "schv-idrez" IS 'Index přes idrez';
-
-
---
--- TOC entry 2800 (class 1259 OID 24875)
--- Name: schv-idtypschv; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX "schv-idtypschv" ON schvaleni USING btree (idtypschv);
-
-
---
--- TOC entry 3230 (class 0 OID 0)
--- Dependencies: 2800
--- Name: INDEX "schv-idtypschv"; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON INDEX "schv-idtypschv" IS 'Podle ID typu schvalovatele';
 
 
 --
@@ -3470,7 +3465,7 @@ CREATE INDEX "schv-iducast" ON schvaleni USING btree (iducast);
 
 
 --
--- TOC entry 3231 (class 0 OID 0)
+-- TOC entry 3229 (class 0 OID 0)
 -- Dependencies: 2801
 -- Name: INDEX "schv-iducast"; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3479,7 +3474,7 @@ COMMENT ON INDEX "schv-iducast" IS 'Index podle cizího klíče - id účastník
 
 
 --
--- TOC entry 2857 (class 2620 OID 24877)
+-- TOC entry 2856 (class 2620 OID 24877)
 -- Name: aktivity settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3487,8 +3482,8 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON aktivity FOR EACH ROW EX
 
 
 --
--- TOC entry 3232 (class 0 OID 0)
--- Dependencies: 2857
+-- TOC entry 3230 (class 0 OID 0)
+-- Dependencies: 2856
 -- Name: TRIGGER settimemodify ON aktivity; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -3496,7 +3491,7 @@ COMMENT ON TRIGGER settimemodify ON aktivity IS 'Nastavi cas posledni modifikace
 
 
 --
--- TOC entry 2867 (class 2620 OID 24878)
+-- TOC entry 2866 (class 2620 OID 24878)
 -- Name: typaktivity settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3504,8 +3499,8 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON typaktivity FOR EACH ROW
 
 
 --
--- TOC entry 3233 (class 0 OID 0)
--- Dependencies: 2867
+-- TOC entry 3231 (class 0 OID 0)
+-- Dependencies: 2866
 -- Name: TRIGGER settimemodify ON typaktivity; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -3513,7 +3508,7 @@ COMMENT ON TRIGGER settimemodify ON typaktivity IS 'Nastavi cas posledni modifik
 
 
 --
--- TOC entry 2870 (class 2620 OID 24879)
+-- TOC entry 2869 (class 2620 OID 24879)
 -- Name: typzdroje settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3521,8 +3516,8 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON typzdroje FOR EACH ROW E
 
 
 --
--- TOC entry 3234 (class 0 OID 0)
--- Dependencies: 2870
+-- TOC entry 3232 (class 0 OID 0)
+-- Dependencies: 2869
 -- Name: TRIGGER settimemodify ON typzdroje; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -3530,7 +3525,7 @@ COMMENT ON TRIGGER settimemodify ON typzdroje IS 'Nastavi cas posledni modifikac
 
 
 --
--- TOC entry 2872 (class 2620 OID 24880)
+-- TOC entry 2871 (class 2620 OID 24880)
 -- Name: zdroj settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3538,7 +3533,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON zdroj FOR EACH ROW EXECU
 
 
 --
--- TOC entry 2858 (class 2620 OID 24881)
+-- TOC entry 2857 (class 2620 OID 24881)
 -- Name: cesta settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3546,7 +3541,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON cesta FOR EACH ROW EXECU
 
 
 --
--- TOC entry 2871 (class 2620 OID 24882)
+-- TOC entry 2870 (class 2620 OID 24882)
 -- Name: ucastnik settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3554,7 +3549,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON ucastnik FOR EACH ROW EX
 
 
 --
--- TOC entry 2869 (class 2620 OID 24883)
+-- TOC entry 2868 (class 2620 OID 24883)
 -- Name: typucast settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3562,8 +3557,8 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON typucast FOR EACH ROW EX
 
 
 --
--- TOC entry 3235 (class 0 OID 0)
--- Dependencies: 2869
+-- TOC entry 3233 (class 0 OID 0)
+-- Dependencies: 2868
 -- Name: TRIGGER settimemodify ON typucast; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -3571,7 +3566,7 @@ COMMENT ON TRIGGER settimemodify ON typucast IS 'Nastavi cas posledni modifikace
 
 
 --
--- TOC entry 2868 (class 2620 OID 24884)
+-- TOC entry 2867 (class 2620 OID 24884)
 -- Name: typschv settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3579,8 +3574,8 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON typschv FOR EACH ROW EXE
 
 
 --
--- TOC entry 3236 (class 0 OID 0)
--- Dependencies: 2868
+-- TOC entry 3234 (class 0 OID 0)
+-- Dependencies: 2867
 -- Name: TRIGGER settimemodify ON typschv; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -3588,7 +3583,7 @@ COMMENT ON TRIGGER settimemodify ON typschv IS 'Nastavi cas posledni modifikace 
 
 
 --
--- TOC entry 2864 (class 2620 OID 24885)
+-- TOC entry 2863 (class 2620 OID 24885)
 -- Name: rezervace settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3596,7 +3591,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON rezervace FOR EACH ROW E
 
 
 --
--- TOC entry 2863 (class 2620 OID 24886)
+-- TOC entry 2862 (class 2620 OID 24886)
 -- Name: osoba settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3604,7 +3599,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON osoba FOR EACH ROW EXECU
 
 
 --
--- TOC entry 2865 (class 2620 OID 24887)
+-- TOC entry 2864 (class 2620 OID 24887)
 -- Name: schvaleni settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3612,7 +3607,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON schvaleni FOR EACH ROW E
 
 
 --
--- TOC entry 2866 (class 2620 OID 24888)
+-- TOC entry 2865 (class 2620 OID 24888)
 -- Name: skupina settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3620,7 +3615,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON skupina FOR EACH ROW EXE
 
 
 --
--- TOC entry 2859 (class 2620 OID 24889)
+-- TOC entry 2858 (class 2620 OID 24889)
 -- Name: dispecerhl settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3628,7 +3623,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON dispecerhl FOR EACH ROW 
 
 
 --
--- TOC entry 2862 (class 2620 OID 24892)
+-- TOC entry 2861 (class 2620 OID 24892)
 -- Name: log settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3636,7 +3631,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON log FOR EACH ROW EXECUTE
 
 
 --
--- TOC entry 2861 (class 2620 OID 24893)
+-- TOC entry 2860 (class 2620 OID 24893)
 -- Name: email settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3644,7 +3639,7 @@ CREATE TRIGGER settimemodify BEFORE INSERT OR UPDATE ON email FOR EACH ROW EXECU
 
 
 --
--- TOC entry 2860 (class 2620 OID 24894)
+-- TOC entry 2859 (class 2620 OID 24894)
 -- Name: dispecerpol settimemodify; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3661,7 +3656,7 @@ ALTER TABLE ONLY aktivity
 
 
 --
--- TOC entry 3237 (class 0 OID 0)
+-- TOC entry 3235 (class 0 OID 0)
 -- Dependencies: 2823
 -- Name: CONSTRAINT "aktivity-idoso" ON aktivity; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3679,7 +3674,7 @@ ALTER TABLE ONLY aktivity
 
 
 --
--- TOC entry 3238 (class 0 OID 0)
+-- TOC entry 3236 (class 0 OID 0)
 -- Dependencies: 2824
 -- Name: CONSTRAINT "aktivity-idtypakt" ON aktivity; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3697,7 +3692,7 @@ ALTER TABLE ONLY cesta
 
 
 --
--- TOC entry 3239 (class 0 OID 0)
+-- TOC entry 3237 (class 0 OID 0)
 -- Dependencies: 2825
 -- Name: CONSTRAINT "cesta-idoso" ON cesta; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3724,7 +3719,7 @@ ALTER TABLE ONLY dispecerhl
 
 
 --
--- TOC entry 3240 (class 0 OID 0)
+-- TOC entry 3238 (class 0 OID 0)
 -- Dependencies: 2827
 -- Name: CONSTRAINT "disphl-iddisphl" ON dispecerhl; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3742,7 +3737,7 @@ ALTER TABLE ONLY dispecerhl
 
 
 --
--- TOC entry 3241 (class 0 OID 0)
+-- TOC entry 3239 (class 0 OID 0)
 -- Dependencies: 2828
 -- Name: CONSTRAINT "disphl-idoso" ON dispecerhl; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3760,7 +3755,7 @@ ALTER TABLE ONLY dispecerhl
 
 
 --
--- TOC entry 3242 (class 0 OID 0)
+-- TOC entry 3240 (class 0 OID 0)
 -- Dependencies: 2829
 -- Name: CONSTRAINT "disphl-idtypschv" ON dispecerhl; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3778,7 +3773,7 @@ ALTER TABLE ONLY dispecerhl
 
 
 --
--- TOC entry 3243 (class 0 OID 0)
+-- TOC entry 3241 (class 0 OID 0)
 -- Dependencies: 2830
 -- Name: CONSTRAINT "disphl-idtypzdr" ON dispecerhl; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3796,7 +3791,7 @@ ALTER TABLE ONLY dispecerpol
 
 
 --
--- TOC entry 3244 (class 0 OID 0)
+-- TOC entry 3242 (class 0 OID 0)
 -- Dependencies: 2831
 -- Name: CONSTRAINT "disppol-idoso" ON dispecerpol; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3814,7 +3809,7 @@ ALTER TABLE ONLY dispecerpol
 
 
 --
--- TOC entry 3245 (class 0 OID 0)
+-- TOC entry 3243 (class 0 OID 0)
 -- Dependencies: 2832
 -- Name: CONSTRAINT "disppol-idzdr" ON dispecerpol; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3841,7 +3836,7 @@ ALTER TABLE ONLY email
 
 
 --
--- TOC entry 3246 (class 0 OID 0)
+-- TOC entry 3244 (class 0 OID 0)
 -- Dependencies: 2834
 -- Name: CONSTRAINT "email-idcest" ON email; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3859,7 +3854,7 @@ ALTER TABLE ONLY email
 
 
 --
--- TOC entry 3247 (class 0 OID 0)
+-- TOC entry 3245 (class 0 OID 0)
 -- Dependencies: 2835
 -- Name: CONSTRAINT "email-idoso" ON email; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3877,7 +3872,7 @@ ALTER TABLE ONLY email
 
 
 --
--- TOC entry 3248 (class 0 OID 0)
+-- TOC entry 3246 (class 0 OID 0)
 -- Dependencies: 2836
 -- Name: CONSTRAINT "email-idrez" ON email; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3895,7 +3890,7 @@ ALTER TABLE ONLY email
 
 
 --
--- TOC entry 3249 (class 0 OID 0)
+-- TOC entry 3247 (class 0 OID 0)
 -- Dependencies: 2837
 -- Name: CONSTRAINT "email-iducast" ON email; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3922,7 +3917,7 @@ ALTER TABLE ONLY log
 
 
 --
--- TOC entry 3250 (class 0 OID 0)
+-- TOC entry 3248 (class 0 OID 0)
 -- Dependencies: 2839
 -- Name: CONSTRAINT "log-idcest" ON log; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3940,7 +3935,7 @@ ALTER TABLE ONLY log
 
 
 --
--- TOC entry 3251 (class 0 OID 0)
+-- TOC entry 3249 (class 0 OID 0)
 -- Dependencies: 2840
 -- Name: CONSTRAINT "log-idoso" ON log; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3958,7 +3953,7 @@ ALTER TABLE ONLY log
 
 
 --
--- TOC entry 3252 (class 0 OID 0)
+-- TOC entry 3250 (class 0 OID 0)
 -- Dependencies: 2841
 -- Name: CONSTRAINT "log-idrez" ON log; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3976,7 +3971,7 @@ ALTER TABLE ONLY log
 
 
 --
--- TOC entry 3253 (class 0 OID 0)
+-- TOC entry 3251 (class 0 OID 0)
 -- Dependencies: 2842
 -- Name: CONSTRAINT "log-iducast" ON log; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -3994,7 +3989,7 @@ ALTER TABLE ONLY log
 
 
 --
--- TOC entry 3254 (class 0 OID 0)
+-- TOC entry 3252 (class 0 OID 0)
 -- Dependencies: 2843
 -- Name: CONSTRAINT "log-idzdr" ON log; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -4012,7 +4007,7 @@ ALTER TABLE ONLY rezervace
 
 
 --
--- TOC entry 3255 (class 0 OID 0)
+-- TOC entry 3253 (class 0 OID 0)
 -- Dependencies: 2844
 -- Name: CONSTRAINT "rez-idakt" ON rezervace; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -4030,7 +4025,7 @@ ALTER TABLE ONLY rezervace
 
 
 --
--- TOC entry 3256 (class 0 OID 0)
+-- TOC entry 3254 (class 0 OID 0)
 -- Dependencies: 2845
 -- Name: CONSTRAINT "rez-idcest" ON rezervace; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -4048,7 +4043,7 @@ ALTER TABLE ONLY rezervace
 
 
 --
--- TOC entry 3257 (class 0 OID 0)
+-- TOC entry 3255 (class 0 OID 0)
 -- Dependencies: 2846
 -- Name: CONSTRAINT "rez-idzdr" ON rezervace; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -4066,7 +4061,7 @@ ALTER TABLE ONLY schvaleni
 
 
 --
--- TOC entry 3258 (class 0 OID 0)
+-- TOC entry 3256 (class 0 OID 0)
 -- Dependencies: 2847
 -- Name: CONSTRAINT "schv-idcest" ON schvaleni; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -4084,7 +4079,7 @@ ALTER TABLE ONLY schvaleni
 
 
 --
--- TOC entry 3259 (class 0 OID 0)
+-- TOC entry 3257 (class 0 OID 0)
 -- Dependencies: 2848
 -- Name: CONSTRAINT "schv-idoso" ON schvaleni; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -4102,26 +4097,7 @@ ALTER TABLE ONLY schvaleni
 
 
 --
--- TOC entry 2850 (class 2606 OID 25040)
--- Name: schvaleni schv-idtypschv; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY schvaleni
-    ADD CONSTRAINT "schv-idtypschv" FOREIGN KEY (idtypschv) REFERENCES typschv(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- TOC entry 3260 (class 0 OID 0)
--- Dependencies: 2850
--- Name: CONSTRAINT "schv-idtypschv" ON schvaleni; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON CONSTRAINT "schv-idtypschv" ON schvaleni IS 'Odkaz na tabulku typschv
-(nemá již význam - úrovně se určují dispečery a jejich zástupci)';
-
-
---
--- TOC entry 2851 (class 2606 OID 25077)
+-- TOC entry 2850 (class 2606 OID 25077)
 -- Name: schvaleni schv-iducast; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4130,8 +4106,8 @@ ALTER TABLE ONLY schvaleni
 
 
 --
--- TOC entry 3261 (class 0 OID 0)
--- Dependencies: 2851
+-- TOC entry 3258 (class 0 OID 0)
+-- Dependencies: 2850
 -- Name: CONSTRAINT "schv-iducast" ON schvaleni; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -4139,7 +4115,7 @@ COMMENT ON CONSTRAINT "schv-iducast" ON schvaleni IS 'Odkaz na tabulku ucastnik'
 
 
 --
--- TOC entry 2852 (class 2606 OID 25050)
+-- TOC entry 2851 (class 2606 OID 25050)
 -- Name: ucastnik ucast-idcest; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4148,8 +4124,8 @@ ALTER TABLE ONLY ucastnik
 
 
 --
--- TOC entry 3262 (class 0 OID 0)
--- Dependencies: 2852
+-- TOC entry 3259 (class 0 OID 0)
+-- Dependencies: 2851
 -- Name: CONSTRAINT "ucast-idcest" ON ucastnik; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -4157,7 +4133,7 @@ COMMENT ON CONSTRAINT "ucast-idcest" ON ucastnik IS 'Cizí klíč na tabulku ces
 
 
 --
--- TOC entry 2853 (class 2606 OID 25055)
+-- TOC entry 2852 (class 2606 OID 25055)
 -- Name: ucastnik ucast-idoso; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4166,8 +4142,8 @@ ALTER TABLE ONLY ucastnik
 
 
 --
--- TOC entry 3263 (class 0 OID 0)
--- Dependencies: 2853
+-- TOC entry 3260 (class 0 OID 0)
+-- Dependencies: 2852
 -- Name: CONSTRAINT "ucast-idoso" ON ucastnik; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -4175,7 +4151,7 @@ COMMENT ON CONSTRAINT "ucast-idoso" ON ucastnik IS 'Odkaz na tabulku osoba';
 
 
 --
--- TOC entry 2854 (class 2606 OID 25060)
+-- TOC entry 2853 (class 2606 OID 25060)
 -- Name: ucastnik ucast-idtypucast; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4184,8 +4160,8 @@ ALTER TABLE ONLY ucastnik
 
 
 --
--- TOC entry 3264 (class 0 OID 0)
--- Dependencies: 2854
+-- TOC entry 3261 (class 0 OID 0)
+-- Dependencies: 2853
 -- Name: CONSTRAINT "ucast-idtypucast" ON ucastnik; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -4193,7 +4169,7 @@ COMMENT ON CONSTRAINT "ucast-idtypucast" ON ucastnik IS 'Odkaz na ciselnik typu 
 
 
 --
--- TOC entry 2855 (class 2606 OID 25065)
+-- TOC entry 2854 (class 2606 OID 25065)
 -- Name: zdroj zdroj-idoso; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4202,8 +4178,8 @@ ALTER TABLE ONLY zdroj
 
 
 --
--- TOC entry 3265 (class 0 OID 0)
--- Dependencies: 2855
+-- TOC entry 3262 (class 0 OID 0)
+-- Dependencies: 2854
 -- Name: CONSTRAINT "zdroj-idoso" ON zdroj; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -4211,7 +4187,7 @@ COMMENT ON CONSTRAINT "zdroj-idoso" ON zdroj IS 'Odkaz na tabulku osob';
 
 
 --
--- TOC entry 2856 (class 2606 OID 25070)
+-- TOC entry 2855 (class 2606 OID 25070)
 -- Name: zdroj zdroj-idtypzdr; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4220,8 +4196,8 @@ ALTER TABLE ONLY zdroj
 
 
 --
--- TOC entry 3266 (class 0 OID 0)
--- Dependencies: 2856
+-- TOC entry 3263 (class 0 OID 0)
+-- Dependencies: 2855
 -- Name: CONSTRAINT "zdroj-idtypzdr" ON zdroj; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -4229,7 +4205,7 @@ COMMENT ON CONSTRAINT "zdroj-idtypzdr" ON zdroj IS 'Odkaz na typ zdroje - cizi k
 
 
 --
--- TOC entry 3017 (class 0 OID 0)
+-- TOC entry 3016 (class 0 OID 0)
 -- Dependencies: 6
 -- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
@@ -4237,7 +4213,7 @@ COMMENT ON CONSTRAINT "zdroj-idtypzdr" ON zdroj IS 'Odkaz na typ zdroje - cizi k
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2018-04-04 00:03:12
+-- Completed on 2018-04-05 00:14:36
 
 --
 -- PostgreSQL database dump complete

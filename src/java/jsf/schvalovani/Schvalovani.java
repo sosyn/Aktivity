@@ -7,6 +7,7 @@ package jsf.schvalovani;
 
 import ejb.LoginUser;
 import entity.Osoba;
+import entity.Schvaleni;
 import entity.Ucastnik;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -279,14 +280,14 @@ public class Schvalovani implements Serializable {
 
     public void schvalit() {
         for (Ucastnik uc : this.selUcastnici) {
-            ejbUcastnikFacade.insSchvaleni(this.osoba, uc, 1);
+            ejbUcastnikFacade.insSchvaleni(this.osoba, uc, 1, ejbUcastnikFacade.urovenOsobaUcastnik(this.osoba, uc));
         }
         this.selUcastnici = new ArrayList<>();
     }
 
     public void zamitnout() {
         for (Ucastnik uc : this.selUcastnici) {
-            ejbUcastnikFacade.insSchvaleni(this.osoba, uc, 2);
+            ejbUcastnikFacade.insSchvaleni(this.osoba, uc, 2, ejbUcastnikFacade.urovenOsobaUcastnik(this.osoba, uc));
         }
         this.selUcastnici = new ArrayList<>();
     }
@@ -305,11 +306,42 @@ public class Schvalovani implements Serializable {
 
     public String iconSchvalovani(Ucastnik ucastnik) {
         String iconFile = "/images/Otaznik.png";
+        int[] stav = stavSchvaleni(ucastnik);
+        switch (stav[0]) {
+            case 1:
+                iconFile = "/images/Thumbs up.png";
+                break;
+            case 2:
+                iconFile = "/images/Thumbs down.png";
+                break;
+        }
         return iconFile;
     }
 
     public String iconDispecer(Ucastnik ucastnik) {
-        String iconFile = "/images/Boss.png";
+        String iconFile = "/images/Help.png";
+        int uroven = ejbUcastnikFacade.urovenOsobaUcastnik(this.osoba, ucastnik);
+        switch (uroven) {
+            case 1:
+                iconFile = "/images/Zastupce.png";
+                break;
+            case 2:
+                iconFile = "/images/Boss.png";
+                break;
+        }
         return iconFile;
+    }
+
+    private int[] stavSchvaleni(Ucastnik ucastnik) {
+        int[] stav = {0, 0};
+        Date lastDate = null;
+        for (Schvaleni schv : ucastnik.getSchvList()) {
+            if (lastDate == null || lastDate.before(schv.getPlatiod())) {
+                lastDate = schv.getPlatiod();
+                stav[0] = schv.getStav();
+                stav[1] = schv.getUroven();
+            }
+        }
+        return stav;
     }
 }

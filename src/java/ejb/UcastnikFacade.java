@@ -14,8 +14,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -65,10 +67,9 @@ public class UcastnikFacade extends AbstractFacade<Ucastnik> {
         StringBuilder selUc = new StringBuilder(
                 "SELECT * "
                 + "FROM ucastnik uc "
-                + "     LEFT JOIN dispecerpol dp ON uc.idoso=dp.idoso "
+                + "     LEFT JOIN dispecerpol dp ON uc.idoso=dp.idoso AND uc.platiod<=dp.platido AND uc.platido>=dp.platiod "
                 + "     LEFT JOIN dispecerhl dh ON dp.iddisphl=dh.id OR dp.iddisphl=dh.iddisphl "
-                + "WHERE "
-        );
+                + "WHERE ");
         selUc.append("dh.idoso='")
                 .append(((Osoba) prop.get("osoba")).getId())
                 .append("' ");
@@ -116,6 +117,7 @@ public class UcastnikFacade extends AbstractFacade<Ucastnik> {
                     .append("') ");
         }
         selUc.append("ORDER BY uc.platiod");
+        System.out.println("selUc=" + selUc.toString());
         Query q = em.createNativeQuery(selUc.toString(), Ucastnik.class);
         List<Ucastnik> listUc = q.getResultList();
         return new ArrayList<>(listUc);
@@ -130,21 +132,21 @@ public class UcastnikFacade extends AbstractFacade<Ucastnik> {
 //        return rl;
     }
 
-    public void insSchvaleni(Osoba osoba, Ucastnik uc, int stav) {
+    public void insSchvaleni(Osoba osoba, Ucastnik uc, int stav, int vedZast) {
         String insSchvaleni
                 = "INSERT INTO aktivity.public.schvaleni "
-                + "(id, idtypschv, idoso, idcest, iducast, idrez, stav, komentar, popis, platiod, platido) "
-                + "VALUES (?::uuid, ?::uuid, ?::uuid, ?::uuid, ?::uuid, ?::uuid, ?, ?, ?, ?, ?)";
+                + "(id, idoso, idcest, iducast, idrez, stav, komentar, uroven, popis, platiod, platido) "
+                + "VALUES (?::uuid, ?::uuid, ?::uuid, ?::uuid, ?::uuid, ?, ?, ?, ?, ?, ?)";
         Date datum = new Date();
         Schvaleni schv = new Schvaleni();
         schv.setNewEntity(true);
-        schv.setIdtypschv(uc.getIdoso().getDispecerpolList().get(0).getIddisphl().getIdtypschv());
         schv.setIdoso(osoba);
         schv.setIdcest(uc.getIdcest());
         schv.setIducast(uc);
         // schv.setIdrez(null);
         schv.setStav(stav);
         schv.setKomentar("Schválení: " + osoba.getPopis());
+        schv.setUroven(vedZast);
         schv.setPopis(" " + datum);
         schv.setPlatiod(datum);
         schv.setPlatido(datum);
@@ -152,13 +154,13 @@ public class UcastnikFacade extends AbstractFacade<Ucastnik> {
 //        em.persist(schv);
         Query q = em.createNativeQuery(insSchvaleni)
                 .setParameter(1, schv.getId())
-                .setParameter(2, schv.getIdoso().getDispecerpolList().get(0).getIddisphl().getIdtypschv())
-                .setParameter(3, schv.getIdoso() == null ? null : schv.getIdoso().getId())
-                .setParameter(4, schv.getIdcest() == null ? null : schv.getIdcest().getId())
-                .setParameter(5, schv.getIducast() == null ? null : schv.getIducast().getId())
-                .setParameter(6, schv.getIdrez() == null ? null : schv.getIdrez().getId())
-                .setParameter(7, schv.getStav())
-                .setParameter(8, schv.getKomentar())
+                .setParameter(2, schv.getIdoso() == null ? null : schv.getIdoso().getId())
+                .setParameter(3, schv.getIdcest() == null ? null : schv.getIdcest().getId())
+                .setParameter(4, schv.getIducast() == null ? null : schv.getIducast().getId())
+                .setParameter(5, schv.getIdrez() == null ? null : schv.getIdrez().getId())
+                .setParameter(6, schv.getStav())
+                .setParameter(7, schv.getKomentar())
+                .setParameter(8, schv.getUroven())
                 .setParameter(9, schv.getPopis())
                 .setParameter(10, schv.getPlatiod())
                 .setParameter(11, schv.getPlatido());
@@ -167,5 +169,34 @@ public class UcastnikFacade extends AbstractFacade<Ucastnik> {
         } catch (Exception e) {
             throw e;
         }
+    }
+
+    public int urovenOsobaUcastnik(Osoba osoba, Ucastnik uc) {
+        int uroven = 0;
+        String selUroven
+                = "SELECT dh.id,dh.iddisphl "
+                + "FROM dispecerhl dh LEFT JOIN dispecerpol dp ON dh.id=dp.iddisphl OR dh.iddisphl=dp.iddisphl "
+                + "WHERE dh.idoso=?  AND dp.idoso= ?  AND dp.platido>=? AND dp.platiod<=? "
+                + "ORDER BY dh.iddisphl ASC LIMIT 1";
+        Query q = em.createNativeQuery(selUroven)
+                .setParameter(1, osoba.getId())
+                .setParameter(2, uc.getIdoso().getId())
+                .setParameter(3, uc.getPlatiod())
+                .setParameter(4, uc.getPlatido());
+        try {
+            Object[] result = (Object[]) q.getSingleResult();
+            if (result instanceof Object[]) {
+                if (result[1] == null) {
+                    uroven = 2;
+                } else {
+                    uroven = 1;
+                }
+            }
+        } catch (NoResultException e) {
+            uroven = 0;
+        } catch (Exception e) {
+            throw e;
+        }
+        return uroven;
     }
 }
