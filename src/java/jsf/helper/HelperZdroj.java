@@ -39,7 +39,7 @@ public class HelperZdroj implements Serializable {
     private ejb.ZdrojeFacade zdrojeFacade;
     private Zdroj selectedZdr = null;
     private ArrayList<Zdroj> zdrojList = null;
-    private ArrayList<Zdroj> selectedZdroje = null;
+    private ArrayList<Zdroj> selectedZdroje = new ArrayList<>();
 
     private Cesta cesta = null;
     private Rezervace selectedRez = null;
@@ -47,12 +47,19 @@ public class HelperZdroj implements Serializable {
     Date platiOd = new Date();
     Date platiDo = new Date();
 
+    public void initHelperZdroj() {
+        zdrojList = new ArrayList<>(zdrojeFacade.findAll());
+        this.selectedZdr = null;
+        selectedZdroje = new ArrayList<>();
+    }
+
     public void initHelperZdroj(Cesta cesta) {
         this.cesta = cesta;
         zdrojList = new ArrayList<>(zdrojeFacade.findAccesibleZdrojList(cesta));
         this.platiOd = cesta.getPlatiod();
         this.platiDo = cesta.getPlatido();
         this.selectedZdr = null;
+        this.selectedZdroje = new ArrayList<>();
     }
 
     /**
@@ -113,6 +120,7 @@ public class HelperZdroj implements Serializable {
     public void setSelectedZdroje(ArrayList<Zdroj> selectedZdroje) {
         this.selectedZdroje = selectedZdroje;
     }
+
     /**
      * @return the selectedRez
      */
@@ -141,6 +149,9 @@ public class HelperZdroj implements Serializable {
 
     public void submitSelectedZdr() {
         RequestContext.getCurrentInstance().closeDialog(this.selectedZdr);
+    }
+    public void submitSelectedZdroje() {
+        RequestContext.getCurrentInstance().closeDialog(this.selectedZdroje);
     }
 
     public void cancelSelectedZdr() {

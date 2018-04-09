@@ -20,16 +20,18 @@
                         <f:facet name="header">
                             <h:outputText value="Popis:"/>
                         </f:facet>
-                        <p:cellEditor>
-                            <f:facet name="output">
-                                <h:outputText value="#{item.idzdr.popis}" />
-                            </f:facet>
-                            <f:facet name="input">
-                                <p:selectOneMenu id="dispZdr" value="#{item.idzdr}" converter="#{JSFConverterZdroj}" filter="true" disabled="#{not daoDispecer.dispecerPol.newEntity}" >
-                                    <f:selectItems value="#{dispecerForm.zdrojList}" var="zdroj" itemLabel="#{zdroj.popis}" itemValue="#{zdroj}"  />      
-                                </p:selectOneMenu>
-                            </f:facet>
-                        </p:cellEditor>
+                        <h:outputText value="#{item.idzdr.popis}" />
+                        <!--                        <p:cellEditor>
+                                                    <f:facet name="output">
+                                                        <h:outputText value="#{item.idzdr.popis}" />
+                                                    </f:facet>
+                                                    <f:facet name="input">
+                                                        <p:selectOneMenu id="dispZdr" value="#{item.idzdr}" converter="#{JSFConverterZdroj}" filter="true" disabled="#{not daoDispecer.dispecerPol.newEntity}" >
+                                                            <f:selectItems value="#{dispecerForm.zdrojList}" var="zdroj" itemLabel="#{zdroj.popis}" itemValue="#{zdroj}"  />      
+                                                        </p:selectOneMenu>
+                                                    </f:facet>
+                                                </p:cellEditor>
+                        -->
                     </p:column>
                     <p:column sortBy="#{item.platiod}" width="80">
                         <f:facet name="header">
@@ -68,8 +70,10 @@
                 </p:dataTable>
             </p:column>
             <p:column >
-                <p:commandButton id="DispZdrNew" value="Nový" action="#{dispecerForm.dispPolNew}" disabled="#{!dispecerForm.isButtonDispZdrEnabled('new')}" update=":growl :dispecerForm:DispZdrDataTable" icon="fa fa-file-o" rendered="#{dispecerForm.gridDispZdr}" />
-                <p:commandButton id="DispZdrDel" value="Smazat"  action="#{dispecerForm.dispPolDel}" disabled="#{!dispecerForm.isButtonDispZdrEnabled('delete')}"  update=":growl :dispecerForm:DispZdrDataTable"  icon="fa fa-remove" rendered="#{dispecerForm.gridDispZdr}" >
+                <p:commandButton id="DispZdrNew" value="Nový" action="#{dispecerForm.dispPolZdrNew}" disabled="#{!dispecerForm.isButtonDispPolZdrEnabled('new')}" update=":growl :dispecerForm:DispZdrDataTable" icon="fa fa-file-o" rendered="#{dispecerForm.gridDispZdr}" >
+                    <p:ajax event="dialogReturn" listener="#{dispecerForm.addDispPolZdr}"  update=":growl :dispecerForm:DispZdrDataTable" />                                        
+                </p:commandButton>
+                <p:commandButton id="DispZdrDel" value="Smazat"  action="#{dispecerForm.dispPolZdrDel}" disabled="#{!dispecerForm.isButtonDispPolZdrEnabled('delete')}"  update=":growl :dispecerForm:DispZdrDataTable"  icon="fa fa-remove" rendered="#{dispecerForm.gridDispZdr}" >
                     <p:confirm  header="Žádám potvrzení" message="Opravdu smazat záznam o spravovaném zdroji?" icon="ui-icon-alert" />
                 </p:commandButton>
                 <p:confirmDialog header="Potvrďte volbu:" global="true" showEffect="fade" hideEffect="fade">

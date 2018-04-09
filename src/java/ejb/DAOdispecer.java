@@ -8,6 +8,7 @@ package ejb;
 import entity.Dispecerhl;
 import entity.Dispecerpol;
 import entity.Osoba;
+import entity.Zdroj;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
@@ -25,7 +26,7 @@ import jsf.util.JsfUtil;
 //@Stateful
 /**
  * !!! POZOR !!! persitence tridy funguje POUZE pokud je v tabulce "dispecerihl"
- * alespon 1 veta Jinak relace dispecerhl.idsiphl > dispecerhl.id konci
+ * alespon 1 veta Jinak relace dispecerhl.iddisphl > dispecerhl.id konci
  * nedefinovanou chybou a nedari se pridat zaznam ASI musi byt ve vsech
  * tabulkach pri startu veta ???
  */
@@ -38,7 +39,7 @@ public class DAOdispecer implements Serializable {
 
     @EJB
     private ejb.LogFacade ejbLogFacade;
-    
+
     @EJB
     private ejb.DispecerHlFacade ejbDispHlFacade;
     private Dispecerhl dispecerHl = null;
@@ -47,9 +48,10 @@ public class DAOdispecer implements Serializable {
 
     private boolean dispeceriAzastupci = false;
     private Dispecerhl zastupce = null;
+    private ArrayList<Dispecerhl> zastListDel = null;
 
-    @EJB
-    private ejb.DispecerPolFacade ejbDispPolFacade;
+//    @EJB
+//    private ejb.DispecerPolFacade ejbDispPolFacade;
     private Dispecerpol dispecerPol = null;
     private ArrayList<Dispecerpol> dPolListDel = null;
 
@@ -57,7 +59,6 @@ public class DAOdispecer implements Serializable {
     void initDAOdispecer() {
         System.out.println("initDAOdispecer()");
     }
-
 
     /**
      * @return the dispecerHl
@@ -99,8 +100,9 @@ public class DAOdispecer implements Serializable {
 
     public ArrayList<Dispecerhl> refreshDispecerHlList() {
         this.dispecerHlList = new ArrayList<>(this.ejbDispHlFacade.findAllDispAZast(this.dispeceriAzastupci));
-        this.dHlListDel=new ArrayList<>();
-        this.dPolListDel=new ArrayList<>();
+        this.dHlListDel = new ArrayList<>();
+        this.dPolListDel = new ArrayList<>();
+        this.zastListDel = new ArrayList<>();
         return dispecerHlList;
     }
 
@@ -124,7 +126,6 @@ public class DAOdispecer implements Serializable {
     public void setZastupce(Dispecerhl zastupce) {
         this.zastupce = zastupce;
     }
-
 
     /**
      * @return the dispecerPol
@@ -164,12 +165,12 @@ public class DAOdispecer implements Serializable {
     }
 
     public void dispHlSave() {
-        this.ejbDispHlFacade.saveDispecerHl(this.dispecerHl, this.dHlListDel ,this.dPolListDel );
-        this.dispecerHl=this.ejbDispHlFacade.find(this.dispecerHl.getId());
+        this.ejbDispHlFacade.saveDispecerHl(this.dispecerHl, this.dHlListDel, this.dPolListDel);
+        this.dispecerHl = this.ejbDispHlFacade.find(this.dispecerHl.getId());
         this.dispecerHl.setNewEntity(false);
-        this.dHlListDel=new ArrayList<>();
-        this.dPolListDel=new ArrayList<>();
-        
+        this.dHlListDel = new ArrayList<>();
+        this.dPolListDel = new ArrayList<>();
+
 //        if (this.getDispecerHl().isNewEntity()) {
 //            dispHlPersist(JsfUtil.PersistAction.CREATE);
 //        } else {
@@ -200,16 +201,16 @@ public class DAOdispecer implements Serializable {
                     this.getDispecerHl().setNewEntity(false);
                     this.ejbDispHlFacade.create(this.dispecerHl);
                     this.dispecerHlList.add(this.dispecerHl);
-                    ejbLogFacade.log(this.dispecerHl.getId(),"dispecerhl", "Add dispečer: "+this.dispecerHl.getIdoso().getPopis());
+                    ejbLogFacade.log(this.dispecerHl.getId(), "dispecerhl", "Add dispečer: " + this.dispecerHl.getIdoso().getPopis());
                     break;
                 case UPDATE:
                     this.ejbDispHlFacade.edit(this.dispecerHl);
-                    ejbLogFacade.log(this.dispecerHl.getId(),"dispecerhl", "Modify dispečer: "+this.dispecerHl.getIdoso().getPopis());
+                    ejbLogFacade.log(this.dispecerHl.getId(), "dispecerhl", "Modify dispečer: " + this.dispecerHl.getIdoso().getPopis());
                     break;
                 case DELETE:
                     this.ejbDispHlFacade.remove(this.dispecerHl);
-                    ejbLogFacade.log(this.dispecerHl.getId(),"dispecerhl", "Del dispečer: "+this.dispecerHl.getIdoso().getPopis());
-                    this.dispecerHl=null;
+                    ejbLogFacade.log(this.dispecerHl.getId(), "dispecerhl", "Del dispečer: " + this.dispecerHl.getIdoso().getPopis());
+                    this.dispecerHl = null;
                     break;
             }
         }
@@ -267,7 +268,7 @@ public class DAOdispecer implements Serializable {
 // Cast PERSISTENCE pro polozky dispecera
 //----------------------------------------------    
     public void dispPolNew() {
-        this.dispecerPol=new Dispecerpol();
+        this.dispecerPol = new Dispecerpol();
         // Dosadit dispecera, který bude mít polozku na starosti
         this.dispecerPol.setIddisphl(dispecerHl);
         this.dispecerPol.setNewEntity(true);
@@ -282,7 +283,6 @@ public class DAOdispecer implements Serializable {
 
     public void addDispPolOso(ArrayList<Osoba> osoby) {
         Dispecerpol dispPol;
-        //TODO: Dodelat defaultni typ ucastnika
         for (Osoba osoba : osoby) {
             dispPol = new Dispecerpol();
             dispPol.setNewEntity(true);
@@ -294,4 +294,36 @@ public class DAOdispecer implements Serializable {
             this.dispecerHl.getDispecerPolList().add(dispPol);
         }
     }
+
+    public void addDispPolZdr(ArrayList<Zdroj> zdroje) {
+        Dispecerpol dispPol;
+        //TODO: Dodelat defaultni typ ucastnika
+        for (Zdroj zdroj : zdroje) {
+            dispPol = new Dispecerpol();
+            dispPol.setNewEntity(true);
+            dispPol.setIddisphl(this.dispecerHl);
+            dispPol.setIdzdr(zdroj);
+            dispPol.setPopis(zdroj.getPopis());
+            dispPol.setPlatiod(this.dispecerHl.getPlatiod());
+            dispPol.setPlatido(this.dispecerHl.getPlatido());
+            this.dispecerHl.getDispecerPolList().add(dispPol);
+        }
+    }
+
+    public void addZastupce(ArrayList<Osoba> osoby) {
+        Dispecerhl zastupce;
+        for (Osoba osoba : osoby) {
+            zastupce = new Dispecerhl();
+            zastupce.setNewEntity(true);
+            // Dosadit dispecera, jehoz bude zaznam zastupcem
+            zastupce.setIddisphl(dispecerHl);
+            zastupce.setIdtypschv(dispecerHl.getIdtypschv());
+            zastupce.setIdtypzdr(dispecerHl.getIdtypzdr());
+            zastupce.setIdoso(osoba);
+            zastupce.setPlatiod(dispecerHl.getPlatiod());
+            zastupce.setPlatido(dispecerHl.getPlatido());
+            this.dispecerHl.getZastupciList().add(zastupce);
+        }
+    }
+
 }

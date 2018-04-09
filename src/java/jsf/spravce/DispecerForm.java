@@ -198,10 +198,21 @@ public class DispecerForm implements Serializable {
      */
     public String zastupceNew() {
         String zastupci = null;
-        this.daoDispecer.zastNew();
+//        this.daoDispecer.zastNew();
+        helperOsoba.initHelperOsoby();
+        RequestContext.getCurrentInstance()
+                .openDialog("/helper/helperOsoba", getDialogOptions(), null);
         return zastupci;
     }
+    public void addZastupce(SelectEvent selectEvent) {
+        ArrayList<Osoba> osoby = (ArrayList<Osoba>) selectEvent.getObject();
+        if (osoby == null) {
+            return;
+        }
+        this.daoDispecer.addZastupce(osoby);
+    }
 
+    
     /**
      * Nepouziva se
      *
@@ -315,15 +326,32 @@ public class DispecerForm implements Serializable {
         }
         return isZdr;
     }
-// Osoby
 
+    /**
+     * Metoda nachysta promenne pro vykresleni okna helperu
+     *
+     * @return
+     */
+    public Map<String, Object> getDialogOptions() {
+        Map<String, Object> options = new HashMap<>();
+        options.put("modal", true);
+        options.put("resizable", true);
+        options.put("maximizable", true);
+        options.put("draggable", true);
+        options.put("height", "650");
+        options.put("contentHeight", "700");
+        options.put("closeOnEscape", true);
+        return options;
+    }
+
+// Osoby
     /**
      * Kontrola dostupnosti tlacitek
      *
      * @param param
      * @return
      */
-    public boolean isButtonDispOsoEnabled(String param) {
+    public boolean isButtonDispPolOsoEnabled(String param) {
         switch (param) {
             case "new":
                 return true;
@@ -348,6 +376,12 @@ public class DispecerForm implements Serializable {
 //        this.daoDispecer.dispPolNew();
         return dispOso;
     }
+
+    /**
+     * Metoda naplni seznam osob z helperu
+     *
+     * @param selectEvent - udalost, ktera nese navratovou hodnotu z Helperu
+     */
     public void addDispPolOso(SelectEvent selectEvent) {
         ArrayList<Osoba> osoby = (ArrayList<Osoba>) selectEvent.getObject();
         if (osoby == null) {
@@ -355,12 +389,13 @@ public class DispecerForm implements Serializable {
         }
         this.daoDispecer.addDispPolOso(osoby);
     }
+
     /**
      * Nepouziva se
      *
      * @return
      */
-    public String dispPolEdit() {
+    public String dispPolOsoEdit() {
         String dispPol = null;
         return dispPol;
     }
@@ -371,7 +406,7 @@ public class DispecerForm implements Serializable {
      *
      * @return
      */
-    public String dispPolDel() {
+    public String dispPolOsoDel() {
         try {
             this.daoDispecer.dispPolDel();
             JsfUtil.addSuccessMessage("Záznam byl úspěšně smazán.");
@@ -403,7 +438,7 @@ public class DispecerForm implements Serializable {
      * @param param
      * @return
      */
-    public boolean isButtonDispZdrEnabled(String param) {
+    public boolean isButtonDispPolZdrEnabled(String param) {
         switch (param) {
             case "new":
                 return true;
@@ -420,10 +455,26 @@ public class DispecerForm implements Serializable {
      *
      * @return dispPol
      */
-    public String dispZdrNew() {
+    public String dispPolZdrNew() {
         String dispZdr = null;
-        this.daoDispecer.dispPolNew();
+//        this.daoDispecer.dispPolNew();
+        helperZdroj.initHelperZdroj();
+        RequestContext.getCurrentInstance()
+                .openDialog("/helper/helperZdroje", getDialogOptions(), null);
         return dispZdr;
+    }
+
+    /**
+     * Metoda naplni seznam osob z helperu
+     *
+     * @param selectEvent - udalost, ktera nese navratovou hodnotu z Helperu
+     */
+    public void addDispPolZdr(SelectEvent selectEvent) {
+        ArrayList<Zdroj> zdroje = (ArrayList<Zdroj>) selectEvent.getObject();
+        if (zdroje == null) {
+            return;
+        }
+        this.daoDispecer.addDispPolZdr(zdroje);
     }
 
     /**
@@ -431,7 +482,7 @@ public class DispecerForm implements Serializable {
      *
      * @return
      */
-    public String dispZdrEdit() {
+    public String dispPolZdrEdit() {
         String dispZdr = null;
         return dispZdr;
     }
@@ -442,7 +493,7 @@ public class DispecerForm implements Serializable {
      *
      * @return
      */
-    public String dispZdrDel() {
+    public String dispPolZdrDel() {
         try {
             this.daoDispecer.dispPolDel();
             JsfUtil.addSuccessMessage("Záznam byl úspěšně smazán.");
@@ -467,15 +518,4 @@ public class DispecerForm implements Serializable {
         return null;
     }
 
-    public Map<String, Object> getDialogOptions() {
-        Map<String, Object> options = new HashMap<>();
-        options.put("modal", true);
-        options.put("resizable", true);
-        options.put("maximizable", true);
-        options.put("draggable", true);
-        options.put("height", "650");
-        options.put("contentHeight", "700");
-        options.put("closeOnEscape", true);
-        return options;
-    }
 }

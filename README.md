@@ -3,6 +3,8 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XLI. V helperech dodělat PlatiOd-PlatiDo - filtry na platné záznamy a u zdrojů vybrat pouze vhodné typy
+     ve formuláři dispečerů dodělat mazaání zástupců. osob a zdrojů
 XL. Formulář dispečerů je předěláván na helper - dodaldit a nakonfigurovat zdroje
 XXXIX. Dodělat ikony schvalování - omezit oprávnění na spuštění schvalování  (začínám v tom mit zmatek)
 XXXVIII. Započaty práce na ikonách schvalování - dodělat stavy rovnou do věty schvalovani       
