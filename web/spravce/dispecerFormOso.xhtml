@@ -14,7 +14,7 @@
         <p:row> 
             <p:column>
                 <p:dataTable id="DispPolDataTable" value="#{daoDispecer.dispecerHl.dispecerPolList}" var="item" selectionMode="single" selection="#{daoDispecer.dispecerPol}" rowKey="#{item.id}" editable="true" editMode="cell" rendered="#{dispecerForm.gridDispOso}"  scrollable="true" scrollHeight="450">
-                    <p:ajax event="rowSelect" update=":dispecerForm:DispPolNew :dispecerForm:DispPolDel" />
+                    <p:ajax event="rowSelect" update=":dispecerForm:DispPolOsoNew :dispecerForm:DispPolOsoDel" />
 
                     <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains" width="200">
                         <f:facet name="header">
@@ -68,8 +68,10 @@
                 </p:dataTable>
             </p:column>
             <p:column >
-                <p:commandButton id="DispPolNew" value="Nový" action="#{dispecerForm.dispPolNew}" disabled="#{!dispecerForm.isButtonDispOsoEnabled('new')}" update=":growl :dispecerForm:DispPolDataTable" icon="fa fa-file-o" rendered="#{dispecerForm.gridDispOso}" /> 
-                <p:commandButton id="DispPolDel" value="Smazat"  action="#{dispecerForm.dispPolDel}" disabled="#{!dispecerForm.isButtonDispOsoEnabled('delete')}"  update=":growl :dispecerForm:DispPolDataTable"  icon="fa fa-remove" rendered="#{dispecerForm.gridDispOso}" >
+                <p:commandButton id="DispPolOsoNew" value="Nový" action="#{dispecerForm.dispPolOsoNew}" disabled="#{!dispecerForm.isButtonDispOsoEnabled('new')}" update=":growl :dispecerForm:DispPolDataTable" icon="fa fa-file-o" rendered="#{dispecerForm.gridDispOso}" >
+                    <p:ajax event="dialogReturn" listener="#{dispecerForm.addDispPolOso}"  update=":growl :dispecerForm:DispPolDataTable" />                                        
+                </p:commandButton> 
+                <p:commandButton id="DispPolOsoDel" value="Smazat"  action="#{dispecerForm.dispPolDel}" disabled="#{!dispecerForm.isButtonDispOsoEnabled('delete')}"  update=":growl :dispecerForm:DispPolDataTable"  icon="fa fa-remove" rendered="#{dispecerForm.gridDispOso}" >
                     <p:confirm  header="Žádám potvrzení" message="Opravdu smazat záznam o podřízené osobě?" icon="ui-icon-alert" />
                 </p:commandButton>
                 <p:confirmDialog header="Potvrďte volbu:" global="true" showEffect="fade" hideEffect="fade">

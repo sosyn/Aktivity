@@ -6,14 +6,19 @@
 package jsf.spravce;
 
 import ejb.DAOdispecer;
+import entity.Dispecerpol;
 import entity.Osoba;
 import entity.Typschv;
+import entity.Typucast;
 import entity.Typzdroje;
+import entity.Ucastnik;
 import entity.Zdroj;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -22,7 +27,11 @@ import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import jsf.helper.HelperOsoba;
+import jsf.helper.HelperZdroj;
 import jsf.util.JsfUtil;
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -45,6 +54,11 @@ public class DispecerForm implements Serializable {
     private ejb.OsobaFacade ejbOsobaFacade;
     @EJB
     private ejb.ZdrojeFacade ejbZdrojeFacade;
+
+    @Inject
+    HelperOsoba helperOsoba;
+    @Inject
+    HelperZdroj helperZdroj;
 
     private ArrayList<Typzdroje> typZdrList = null;
     private ArrayList<Typschv> typSchvList = null;
@@ -230,8 +244,8 @@ public class DispecerForm implements Serializable {
     }
 
     /**
-     * Ulozit cely formular
-     * ActionEvent event
+     * Ulozit cely formular ActionEvent event
+     *
      * @return
      */
     public String save() {
@@ -250,7 +264,7 @@ public class DispecerForm implements Serializable {
             if (cause != null) {
                 msg = cause.getLocalizedMessage();
             }
-            if (msg!= null && msg.length() > 0) {
+            if (msg != null && msg.length() > 0) {
                 JsfUtil.addErrorMessage(msg);
             } else {
                 JsfUtil.addErrorMessage(ex, "Chyba uložení dat");
@@ -302,6 +316,7 @@ public class DispecerForm implements Serializable {
         return isZdr;
     }
 // Osoby
+
     /**
      * Kontrola dostupnosti tlacitek
      *
@@ -325,12 +340,21 @@ public class DispecerForm implements Serializable {
      *
      * @return dispPol
      */
-    public String dispPolNew() {
+    public String dispPolOsoNew() {
         String dispOso = null;
-        this.daoDispecer.dispPolNew();
+        helperOsoba.initHelperOsoby();
+        RequestContext.getCurrentInstance()
+                .openDialog("/helper/helperOsoba", getDialogOptions(), null);
+//        this.daoDispecer.dispPolNew();
         return dispOso;
     }
-
+    public void addDispPolOso(SelectEvent selectEvent) {
+        ArrayList<Osoba> osoby = (ArrayList<Osoba>) selectEvent.getObject();
+        if (osoby == null) {
+            return;
+        }
+        this.daoDispecer.addDispPolOso(osoby);
+    }
     /**
      * Nepouziva se
      *
@@ -373,8 +397,6 @@ public class DispecerForm implements Serializable {
     }
 
 // Zdroje
-
-
     /**
      * Kontrola dostupnosti tlacitek
      *
@@ -443,5 +465,17 @@ public class DispecerForm implements Serializable {
             JsfUtil.validationFailed();
         }
         return null;
-    }    
+    }
+
+    public Map<String, Object> getDialogOptions() {
+        Map<String, Object> options = new HashMap<>();
+        options.put("modal", true);
+        options.put("resizable", true);
+        options.put("maximizable", true);
+        options.put("draggable", true);
+        options.put("height", "650");
+        options.put("contentHeight", "700");
+        options.put("closeOnEscape", true);
+        return options;
+    }
 }

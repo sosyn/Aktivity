@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head><title>Zdroje</title></h:head>    
+    <h:body>
+        <h:form id="formHelperZdr" style="font-size: 12px;">
+            <p:panel>
+                <p:dataTable value="#{helperZdroj.zdrojList}" var="item" selection="#{helperZdroj.selectedZdr}" rowKey="#{item.id}" scrollable="true" scrollHeight="430">
+                    <f:facet name="header">
+                        Zdroje
+                    </f:facet>
+                    <p:column selectionMode="single" style="width:16px;text-align:center"/>
+                    <p:column sortBy="#{item.popis}"  filterBy="#{item.popis}" filterMatchMode="contains">
+                        <f:facet name="header" >
+                            <h:outputText value="Popis"/>
+                        </f:facet>
+                        <h:outputText value="#{item.popis}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.spz}"  filterBy="#{item.spz}" filterMatchMode="contains">
+                        <f:facet name="header" >
+                            <h:outputText value="SPZ"/>
+                        </f:facet>
+                        <h:outputText value="#{item.spz}"/>
+                    </p:column>
+                    <p:column >
+                        <f:facet name="header" >
+                            <h:outputText value="O/K" title="Obsazeno/Kapacita"/>
+                        </f:facet>
+                        <h:outputText value="#{item.obsazeno}/#{item.kapacita}" title="Obsazeno/Kapacita"/>
+                    </p:column>
+                    <p:column >
+                        <f:facet name="header" >
+                            <h:outputText value="Rezervace"/>
+                        </f:facet>
+                        <p:orderList id="orderListRez" value="#{helperZdroj.getRezervaceList(item)}" var="rez" rendered="#{helperZdroj.getRezervaceList(item).size()>0}" itemValue="#{rez}" itemLabel="#{rez}" controlsLocation="none" >
+                            <p:ajax event="select" listener="#{helperZdroj.showDetailRez(rez)}"/>
+                            <h:outputText styleClass="ui-icon ui-icon-search"/> 
+                            <h:outputText value="#{rez.platiod}-#{rez.platido} #{rez.komentar}" />
+                        </p:orderList>
+                    </p:column>
+                </p:dataTable>
+                <f:facet name="footer">
+                    <p:commandButton id="btnHZdrOK" value="OK"  actionListener="#{helperZdroj.submitSelectedZdr}" icon="fa fa-check" />
+                    <p:commandButton id="btnHZdrCancel" value="Zpět" actionListener="#{helperZdroj.cancelSelectedZdr}"  icon="fa fa-window-close"/>
+                </f:facet>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>

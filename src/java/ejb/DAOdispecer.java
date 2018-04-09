@@ -7,6 +7,7 @@ package ejb;
 
 import entity.Dispecerhl;
 import entity.Dispecerpol;
+import entity.Osoba;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
@@ -277,5 +278,20 @@ public class DAOdispecer implements Serializable {
 
     public void dispPolDel() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void addDispPolOso(ArrayList<Osoba> osoby) {
+        Dispecerpol dispPol;
+        //TODO: Dodelat defaultni typ ucastnika
+        for (Osoba osoba : osoby) {
+            dispPol = new Dispecerpol();
+            dispPol.setNewEntity(true);
+            dispPol.setIddisphl(this.dispecerHl);
+            dispPol.setIdoso(osoba);
+            dispPol.setPopis(osoba.getPopis());
+            dispPol.setPlatiod(this.dispecerHl.getPlatiod());
+            dispPol.setPlatido(this.dispecerHl.getPlatido());
+            this.dispecerHl.getDispecerPolList().add(dispPol);
+        }
     }
 }

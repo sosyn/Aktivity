@@ -41,6 +41,11 @@ public class HelperOsoba implements Serializable {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
+    public void initHelperOsoby() {
+        this.osobyList = new ArrayList<>(this.ejbOsobaFacade.findAll());
+        this.selectedOsoba = null;
+        this.selectedOsoby = null;
+    }
     public void initHelperOsoby(Cesta cesta) {
         this.osobyList = new ArrayList<>(this.ejbOsobaFacade.findAccesibleOsobaList(cesta));
         this.selectedOsoba = null;
