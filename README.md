@@ -3,8 +3,9 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XLII. Tabulky formulářů dipečera byly doplněny o "delete" funkce a optimalizováno jejich ukládání, je potřeba dořešit možnost záznam smazat (byl-li použit někde ve schvalování)
 XLI. V helperech dodělat PlatiOd-PlatiDo - filtry na platné záznamy a u zdrojů vybrat pouze vhodné typy
-     ve formuláři dispečerů dodělat mazaání zástupců. osob a zdrojů
+     ve formuláři dispečerů dodělat mazání zástupců. osob a zdrojů
 XL. Formulář dispečerů je předěláván na helper - dodaldit a nakonfigurovat zdroje
 XXXIX. Dodělat ikony schvalování - omezit oprávnění na spuštění schvalování  (začínám v tom mit zmatek)
 XXXVIII. Započaty práce na ikonách schvalování - dodělat stavy rovnou do věty schvalovani       

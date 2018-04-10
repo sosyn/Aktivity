@@ -73,13 +73,7 @@
                 <p:commandButton id="DispZdrNew" value="Nový" action="#{dispecerForm.dispPolZdrNew}" disabled="#{!dispecerForm.isButtonDispPolZdrEnabled('new')}" update=":growl :dispecerForm:DispZdrDataTable" icon="fa fa-file-o" rendered="#{dispecerForm.gridDispZdr}" >
                     <p:ajax event="dialogReturn" listener="#{dispecerForm.addDispPolZdr}"  update=":growl :dispecerForm:DispZdrDataTable" />                                        
                 </p:commandButton>
-                <p:commandButton id="DispZdrDel" value="Smazat"  action="#{dispecerForm.dispPolZdrDel}" disabled="#{!dispecerForm.isButtonDispPolZdrEnabled('delete')}"  update=":growl :dispecerForm:DispZdrDataTable"  icon="fa fa-remove" rendered="#{dispecerForm.gridDispZdr}" >
-                    <p:confirm  header="Žádám potvrzení" message="Opravdu smazat záznam o spravovaném zdroji?" icon="ui-icon-alert" />
-                </p:commandButton>
-                <p:confirmDialog header="Potvrďte volbu:" global="true" showEffect="fade" hideEffect="fade">
-                    <p:commandButton value="Ano" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                    <p:commandButton value="Ne" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                </p:confirmDialog>                            
+                <p:commandButton id="DispZdrDel" value="Smazat"  action="#{daoDispecer.dispPolDel}" disabled="#{!dispecerForm.isButtonDispPolZdrEnabled('delete')}"  update=":growl :dispecerForm:DispZdrDataTable"  icon="fa fa-remove" rendered="#{dispecerForm.gridDispZdr}" />
             </p:column>
 
         </p:row>

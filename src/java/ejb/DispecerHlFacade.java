@@ -81,13 +81,15 @@ public class DispecerHlFacade extends AbstractFacade<Dispecerhl> {
      * @param dispecerhl
      * @param dispHlDel
      * @param dispPolDel
+     * @param zastupciDel
      * @return
      */
-    public boolean saveDispecerHl(Dispecerhl dispecerhl, ArrayList<Dispecerhl> dispHlDel, ArrayList<Dispecerpol> dispPolDel) {
+    public boolean saveDispecerHl(Dispecerhl dispecerhl, ArrayList<Dispecerhl> dispHlDel, ArrayList<Dispecerpol> dispPolDel, ArrayList<Dispecerhl> zastupciDel) {
         try {
             saveDispHl(dispecerhl);
             saveDispHlList(dispecerhl.getZastupciList());
             saveDispHlList(dispHlDel);
+            saveDispHlList(zastupciDel);
             saveDispPolList(dispecerhl.getDispecerPolList());
             saveDispPolList(dispPolDel);
         } catch (Exception e) {
@@ -118,6 +120,8 @@ public class DispecerHlFacade extends AbstractFacade<Dispecerhl> {
                     .setParameter(1, dispecerhl.getId());
         }
 //            em.getTransaction().begin();
+        dispecerhl.setNewEntity(false);
+        dispecerhl.setDelEntity(false);
         q.setFlushMode(FlushModeType.COMMIT);
         try {
             q.executeUpdate();
@@ -165,6 +169,8 @@ public class DispecerHlFacade extends AbstractFacade<Dispecerhl> {
                         .setParameter(1, dpol.getId());
             }
 //            em.getTransaction().begin();
+            dpol.setNewEntity(false);
+            dpol.setDelEntity(false);
             q.setFlushMode(FlushModeType.COMMIT);
             try {
                 q.executeUpdate();

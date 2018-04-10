@@ -165,17 +165,11 @@ public class DAOdispecer implements Serializable {
     }
 
     public void dispHlSave() {
-        this.ejbDispHlFacade.saveDispecerHl(this.dispecerHl, this.dHlListDel, this.dPolListDel);
+        this.ejbDispHlFacade.saveDispecerHl(this.dispecerHl, this.dHlListDel, this.dPolListDel, this.zastListDel);
         this.dispecerHl = this.ejbDispHlFacade.find(this.dispecerHl.getId());
         this.dispecerHl.setNewEntity(false);
         this.dHlListDel = new ArrayList<>();
         this.dPolListDel = new ArrayList<>();
-
-//        if (this.getDispecerHl().isNewEntity()) {
-//            dispHlPersist(JsfUtil.PersistAction.CREATE);
-//        } else {
-//            dispHlPersist(JsfUtil.PersistAction.UPDATE);
-//        }
     }
 
     public void dispHlDelete() {
@@ -241,28 +235,21 @@ public class DAOdispecer implements Serializable {
         this.dispecerHl.getZastupciList().add(this.zastupce);
     }
 
-    public void zastEdit() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    /**
+     * Bylo by dobre overit, jestli tento zastupce dispecera nekdy neco
+     * neschvalova - pak by nemel byt smazan Vymazani zastupce ze seznamu
+     * !!!POZOR!!! dodelat kontrolu na jiz pouzity zaznam - ten nelze smazat- uz
+     * se s nim pracovalo
+     *
+     */
     public void zastDel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!this.zastupce.isNewEntity()) {
+            this.zastupce.setDelEntity(true);
+            this.zastListDel.add(zastupce);
+        }
+        this.dispecerHl.getZastupciList().remove(this.zastupce);
     }
 
-    public void zastSave() {
-        for (Dispecerhl zast : this.dispecerHl.getZastupciList()) {
-            if (zast.getIdoso() != null) {
-                zast.setIdtypschv(dispecerHl.getIdtypschv());
-                zast.setIdtypzdr(dispecerHl.getIdtypzdr());
-                if (zast.isNewEntity()) {
-                    zast.setNewEntity(false);
-                    this.ejbDispHlFacade.create(zast);
-                } else {
-                    this.ejbDispHlFacade.edit(zast);
-                }
-            }
-        }
-    }
 
 //----------------------------------------------
 // Cast PERSISTENCE pro polozky dispecera
@@ -278,7 +265,12 @@ public class DAOdispecer implements Serializable {
     }
 
     public void dispPolDel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!this.dispecerPol.isNewEntity()) {
+            this.dispecerPol.setDelEntity(true);
+            this.dPolListDel.add(this.dispecerPol);
+        }
+        this.dispecerHl.getDispecerPolList().remove(this.dispecerPol);
+        
     }
 
     public void addDispPolOso(ArrayList<Osoba> osoby) {

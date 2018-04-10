@@ -171,88 +171,6 @@ public class DispecerForm implements Serializable {
             this.daoDispecer.getDispecerHl().setPlatiod(this.daoDispecer.getDispecerHl().getPlatido());
         }
     }
-// Zastupce
-
-    /**
-     * Metody pro zastupce
-     *
-     * @param param
-     * @return
-     */
-    public boolean isButtonZastEnabled(String param) {
-        switch (param) {
-            case "new":
-                return true;
-            case "edit":
-                return this.daoDispecer.getZastupce() != null;
-            case "delete":
-                return this.daoDispecer.getZastupce() != null;
-        }
-        return true;
-    }
-
-    /**
-     * Generovani noveho zastupce dispecera
-     *
-     * @return
-     */
-    public String zastupceNew() {
-        String zastupci = null;
-//        this.daoDispecer.zastNew();
-        helperOsoba.initHelperOsoby();
-        RequestContext.getCurrentInstance()
-                .openDialog("/helper/helperOsoba", getDialogOptions(), null);
-        return zastupci;
-    }
-    public void addZastupce(SelectEvent selectEvent) {
-        ArrayList<Osoba> osoby = (ArrayList<Osoba>) selectEvent.getObject();
-        if (osoby == null) {
-            return;
-        }
-        this.daoDispecer.addZastupce(osoby);
-    }
-
-    
-    /**
-     * Nepouziva se
-     *
-     * @return
-     */
-    public String zastupceEdit() {
-        String zastupci = null;
-        return zastupci;
-    }
-
-    /**
-     * Vymazani zastupce ze seznamu !!!POZOR!!! dodelat kontrolu na jiz pouzity
-     * zaznam - ten nelze smazat- uz se s nim pracovalo
-     *
-     * @return
-     */
-    public String zastupceDel() {
-        try {
-            this.daoDispecer.zastDel();
-            JsfUtil.addSuccessMessage("Záznam byl úspěšně smazán.");
-        } catch (EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-            String msg = "";
-            Throwable cause = ex.getCause();
-            if (cause != null) {
-                msg = cause.getLocalizedMessage();
-            }
-            if (msg.length() > 0) {
-                JsfUtil.addErrorMessage(msg);
-            } else {
-                JsfUtil.addErrorMessage(ex, "Chyba uložení dat");
-            }
-            JsfUtil.validationFailed();
-        } catch (Exception ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-            JsfUtil.addErrorMessage(ex, "Chyba zpracování");
-            JsfUtil.validationFailed();
-        }
-        return null;
-    }
 
     /**
      * Ulozit cely formular ActionEvent event
@@ -338,10 +256,47 @@ public class DispecerForm implements Serializable {
         options.put("resizable", true);
         options.put("maximizable", true);
         options.put("draggable", true);
-        options.put("height", "650");
+        options.put("height", "670");
         options.put("contentHeight", "700");
         options.put("closeOnEscape", true);
         return options;
+    }
+
+// Zastupce
+    /**
+     * Metody pro zastupce
+     *
+     * @param param
+     * @return
+     */
+    public boolean isButtonZastEnabled(String param) {
+        switch (param) {
+            case "new":
+                return true;
+            case "edit":
+                return this.daoDispecer.getZastupce() != null;
+            case "delete":
+                return this.daoDispecer.getZastupce() != null;
+        }
+        return true;
+    }
+
+    /**
+     * Generovani noveho zastupce dispecera
+     *
+     */
+    public void zastupceNew() {
+        helperOsoba.initHelperOsoby();
+        RequestContext.getCurrentInstance()
+                .openDialog("/helper/helperOsoba", getDialogOptions(), null);
+    }
+
+    public void addZastupce(SelectEvent selectEvent) {
+        ArrayList<Osoba> osoby = (ArrayList<Osoba>) selectEvent.getObject();
+        if (osoby == null) {
+            return;
+        }
+        this.daoDispecer.addZastupce(osoby);
     }
 
 // Osoby
@@ -366,15 +321,11 @@ public class DispecerForm implements Serializable {
     /**
      * Generovani nove polozky spravovane dispecerem
      *
-     * @return dispPol
      */
-    public String dispPolOsoNew() {
-        String dispOso = null;
+    public void dispPolOsoNew() {
         helperOsoba.initHelperOsoby();
         RequestContext.getCurrentInstance()
                 .openDialog("/helper/helperOsoba", getDialogOptions(), null);
-//        this.daoDispecer.dispPolNew();
-        return dispOso;
     }
 
     /**
@@ -388,47 +339,6 @@ public class DispecerForm implements Serializable {
             return;
         }
         this.daoDispecer.addDispPolOso(osoby);
-    }
-
-    /**
-     * Nepouziva se
-     *
-     * @return
-     */
-    public String dispPolOsoEdit() {
-        String dispPol = null;
-        return dispPol;
-    }
-
-    /**
-     * Smaze zaznam o spravovane polozce dispecerem !!!POZOR!!! dodelat kontrolu
-     * na jiz pouzity zaznam - ten nelze smazat- uz se s nim pracovalo
-     *
-     * @return
-     */
-    public String dispPolOsoDel() {
-        try {
-            this.daoDispecer.dispPolDel();
-            JsfUtil.addSuccessMessage("Záznam byl úspěšně smazán.");
-        } catch (EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-            String msg = "";
-            Throwable cause = ex.getCause();
-            if (cause != null) {
-                msg = cause.getLocalizedMessage();
-            }
-            if (msg.length() > 0) {
-                JsfUtil.addErrorMessage(msg);
-            } else {
-                JsfUtil.addErrorMessage(ex, "Chyba uložení dat");
-            }
-            JsfUtil.validationFailed();
-        } catch (Exception ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-            JsfUtil.addErrorMessage(ex, "Chyba zpracování");
-            JsfUtil.validationFailed();
-        }
-        return null;
     }
 
 // Zdroje
@@ -453,15 +363,11 @@ public class DispecerForm implements Serializable {
     /**
      * Generovani nove polozky spravovane dispecerem
      *
-     * @return dispPol
      */
-    public String dispPolZdrNew() {
-        String dispZdr = null;
-//        this.daoDispecer.dispPolNew();
+    public void dispPolZdrNew() {
         helperZdroj.initHelperZdroj();
         RequestContext.getCurrentInstance()
                 .openDialog("/helper/helperZdroje", getDialogOptions(), null);
-        return dispZdr;
     }
 
     /**
@@ -476,46 +382,4 @@ public class DispecerForm implements Serializable {
         }
         this.daoDispecer.addDispPolZdr(zdroje);
     }
-
-    /**
-     * Nepouziva se
-     *
-     * @return
-     */
-    public String dispPolZdrEdit() {
-        String dispZdr = null;
-        return dispZdr;
-    }
-
-    /**
-     * Smaze zaznam o spravovane polozce dispecerem !!!POZOR!!! dodelat kontrolu
-     * na jiz pouzity zaznam - ten nelze smazat- uz se s nim pracovalo
-     *
-     * @return
-     */
-    public String dispPolZdrDel() {
-        try {
-            this.daoDispecer.dispPolDel();
-            JsfUtil.addSuccessMessage("Záznam byl úspěšně smazán.");
-        } catch (EJBException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-            String msg = "";
-            Throwable cause = ex.getCause();
-            if (cause != null) {
-                msg = cause.getLocalizedMessage();
-            }
-            if (msg.length() > 0) {
-                JsfUtil.addErrorMessage(msg);
-            } else {
-                JsfUtil.addErrorMessage(ex, "Chyba uložení dat");
-            }
-            JsfUtil.validationFailed();
-        } catch (Exception ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-            JsfUtil.addErrorMessage(ex, "Chyba zpracování");
-            JsfUtil.validationFailed();
-        }
-        return null;
-    }
-
 }
