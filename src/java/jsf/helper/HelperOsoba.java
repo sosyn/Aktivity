@@ -10,6 +10,7 @@ import entity.Osoba;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -47,7 +48,12 @@ public class HelperOsoba implements Serializable {
         this.selectedOsoby = null;
     }
     public void initHelperOsoby(Cesta cesta) {
-        this.osobyList = new ArrayList<>(this.ejbOsobaFacade.findAccesibleOsobaList(cesta));
+        this.osobyList = new ArrayList<>(this.ejbOsobaFacade.findOsobyWhereCestaList(cesta));
+        this.selectedOsoba = null;
+        this.selectedOsoby = null;
+    }
+    public void initHelperOsoby(Date platiOd,Date platiDo, Osoba vyloucenaOsoba ) {
+        this.osobyList = new ArrayList<>(this.ejbOsobaFacade.findOsobyWhereOdDoList(platiOd, platiDo, vyloucenaOsoba));
         this.selectedOsoba = null;
         this.selectedOsoby = null;
     }

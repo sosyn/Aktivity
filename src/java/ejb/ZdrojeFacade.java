@@ -7,7 +7,6 @@ package ejb;
 
 import entity.Cesta;
 import entity.EntitySuperClass_;
-import entity.Osoba;
 import entity.Rezervace;
 import entity.TypZdrojeEnum;
 import entity.Typzdroje_;

@@ -57,7 +57,7 @@ public class OsobaFacade extends AbstractFacade<Osoba> {
         return getEntityManager().createQuery(cq).getResultList();
     }
 
-    public List<Osoba> findAccesibleOsobaList(Cesta cesta) {
+    public List<Osoba> findOsobyWhereCestaList(Cesta cesta) {
         javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         javax.persistence.criteria.CriteriaQuery cq = cb.createQuery();
         javax.persistence.criteria.Root<Osoba> osobaRoot = cq.from(Osoba.class);
@@ -89,4 +89,33 @@ public class OsobaFacade extends AbstractFacade<Osoba> {
 
         return getEntityManager().createQuery(cq).getResultList();
     }
+
+    public List<Osoba> findOsobyWhereOdDoList(Date platiOd, Date platiDo, Osoba osoba) {
+        javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+        javax.persistence.criteria.CriteriaQuery cq = cb.createQuery();
+        javax.persistence.criteria.Root<Osoba> osobaRoot = cq.from(Osoba.class);
+        cq.select(osobaRoot);
+        // Vyloucit osobu
+        Path<UUID> pathNoOsoba = osobaRoot.get(EntitySuperClass_.id);
+        Predicate prediNoOsoba = null;
+        if (osoba != null) {
+            prediNoOsoba = cb.notEqual(pathNoOsoba, osoba.getId());
+        }
+        Path<Date> pathPlatiOd = osobaRoot.get(EntitySuperClass_.platiod);
+        Path<Date> pathPlatiDo = osobaRoot.get(EntitySuperClass_.platido);
+        Predicate prediPlatiOdDo = cb.and(
+                cb.or(cb.isNull(pathPlatiOd), cb.not(cb.greaterThan(pathPlatiOd, platiDo))),
+                cb.or(cb.isNull(pathPlatiDo), cb.greaterThanOrEqualTo(pathPlatiDo, platiOd))
+        );
+        Predicate prediWhere = prediPlatiOdDo;
+        if (prediNoOsoba != null) {
+            prediWhere = cb.and(prediNoOsoba, prediPlatiOdDo);
+
+        }
+        cq.where(prediWhere);
+        cq.orderBy(cb.asc(osobaRoot.get(EntitySuperClass_.popis)));
+
+        return getEntityManager().createQuery(cq).getResultList();
+    }
+
 }

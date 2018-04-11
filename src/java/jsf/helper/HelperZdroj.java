@@ -7,6 +7,8 @@ package jsf.helper;
 
 import entity.Cesta;
 import entity.Rezervace;
+import entity.TypZdrojeEnum;
+import entity.Typzdroje;
 import entity.Zdroj;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -58,6 +60,23 @@ public class HelperZdroj implements Serializable {
         zdrojList = new ArrayList<>(zdrojeFacade.findAccesibleZdrojList(cesta));
         this.platiOd = cesta.getPlatiod();
         this.platiDo = cesta.getPlatido();
+        this.selectedZdr = null;
+        this.selectedZdroje = new ArrayList<>();
+    }
+
+    public void initHelperZdroj(Date platiOd, Date platiDo, Typzdroje typZdroje) {
+        TypZdrojeEnum typZdrojeEnum = TypZdrojeEnum.VOZIDLO;
+        if (typZdroje != null) {
+            for (TypZdrojeEnum tze : TypZdrojeEnum.values()) {
+                if (tze.getId() == typZdroje.getTypzdr()) {
+                    typZdrojeEnum = tze;
+                    break;
+                }
+            }
+        }
+        zdrojList = new ArrayList<>(zdrojeFacade.findAllWhereTypZdroje(typZdrojeEnum, platiOd, platiDo));
+        this.platiOd = platiOd;
+        this.platiDo = platiDo;
         this.selectedZdr = null;
         this.selectedZdroje = new ArrayList<>();
     }
@@ -150,6 +169,7 @@ public class HelperZdroj implements Serializable {
     public void submitSelectedZdr() {
         RequestContext.getCurrentInstance().closeDialog(this.selectedZdr);
     }
+
     public void submitSelectedZdroje() {
         RequestContext.getCurrentInstance().closeDialog(this.selectedZdroje);
     }

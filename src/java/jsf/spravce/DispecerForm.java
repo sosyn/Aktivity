@@ -16,6 +16,7 @@ import entity.Zdroj;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -286,7 +287,8 @@ public class DispecerForm implements Serializable {
      *
      */
     public void zastupceNew() {
-        helperOsoba.initHelperOsoby();
+        // Predplnit platnymi daty a vyloucit osobu dispecera (nemuze byt sam sobe zastupcem)
+        helperOsoba.initHelperOsoby(daoDispecer.getDispecerHl().getPlatiod(),daoDispecer.getDispecerHl().getPlatido(),daoDispecer.getDispecerHl().getIdoso());
         RequestContext.getCurrentInstance()
                 .openDialog("/helper/helperOsoba", getDialogOptions(), null);
     }
@@ -323,7 +325,8 @@ public class DispecerForm implements Serializable {
      *
      */
     public void dispPolOsoNew() {
-        helperOsoba.initHelperOsoby();
+        // Predplnit HelperOsoba platnymi daty a vyloucit osobu dispecera, nemuze sam sobe delat dispecink
+        helperOsoba.initHelperOsoby(daoDispecer.getDispecerHl().getPlatiod(),daoDispecer.getDispecerHl().getPlatido(),daoDispecer.getDispecerHl().getIdoso());
         RequestContext.getCurrentInstance()
                 .openDialog("/helper/helperOsoba", getDialogOptions(), null);
     }
@@ -365,7 +368,7 @@ public class DispecerForm implements Serializable {
      *
      */
     public void dispPolZdrNew() {
-        helperZdroj.initHelperZdroj();
+        helperZdroj.initHelperZdroj(daoDispecer.getDispecerHl().getPlatiod(), daoDispecer.getDispecerHl().getPlatido(), daoDispecer.getDispecerHl().getIdtypzdr());
         RequestContext.getCurrentInstance()
                 .openDialog("/helper/helperZdroje", getDialogOptions(), null);
     }

@@ -3,7 +3,9 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
-XLII. Tabulky formulářů dipečera byly doplněny o "delete" funkce a optimalizováno jejich ukládání, je potřeba dořešit možnost záznam smazat (byl-li použit někde ve schvalování)
+XLIII. Doladěny výběry dat do Helperů, zbývá dodělat níže uvedené úkoly
+XLII. Tabulky formulářů dipečera byly doplněny o "delete" funkce a optimalizováno jejich ukládání, je potřeba dořešit možnost záznam smazat 
+(byl-li použit někde ve schvalování - smzat nelze)
 XLI. V helperech dodělat PlatiOd-PlatiDo - filtry na platné záznamy a u zdrojů vybrat pouze vhodné typy
      ve formuláři dispečerů dodělat mazání zástupců. osob a zdrojů
 XL. Formulář dispečerů je předěláván na helper - dodaldit a nakonfigurovat zdroje
