@@ -3,12 +3,14 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XLIV. Vyčištěna databáze od starých záznamů, 
+    - ucastnik nemá správně platiod - platido hodnoty zdedene z cesty - opravit
 XLIII. Doladěny výběry dat do Helperů, zbývá dodělat níže uvedené úkoly
 XLII. Tabulky formulářů dipečera byly doplněny o "delete" funkce a optimalizováno jejich ukládání, je potřeba dořešit možnost záznam smazat 
-(byl-li použit někde ve schvalování - smzat nelze)
+(byl-li použit někde ve schvalování - smazat nelze)
 XLI. V helperech dodělat PlatiOd-PlatiDo - filtry na platné záznamy a u zdrojů vybrat pouze vhodné typy
      ve formuláři dispečerů dodělat mazání zástupců. osob a zdrojů
-XL. Formulář dispečerů je předěláván na helper - dodaldit a nakonfigurovat zdroje
+XL. Formulář dispečerů je předěláván na helper - doladit a nakonfigurovat zdroje
 XXXIX. Dodělat ikony schvalování - omezit oprávnění na spuštění schvalování  (začínám v tom mit zmatek)
 XXXVIII. Započaty práce na ikonách schvalování - dodělat stavy rovnou do věty schvalovani       
 XXXVII. Editace SQL dotazu výběru účastníků - UcastnikFacade - dodělat - výběr rolí zástupce a vedoucí (do xhtml)       
