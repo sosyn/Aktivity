@@ -3,6 +3,7 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XLIV. Vyčištěna databáze od starých záznamů
 XLIII. Doladěny výběry dat do Helperů, zbývá dodělat níže uvedené úkoly
 XLII. Tabulky formulářů dipečera byly doplněny o "delete" funkce a optimalizováno jejich ukládání, je potřeba dořešit možnost záznam smazat 
 (byl-li použit někde ve schvalování - smzat nelze)
