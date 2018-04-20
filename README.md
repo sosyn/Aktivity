@@ -3,6 +3,7 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XLV. Příprava na tisk průvodky JSON se bude muset "vydřít" na základě  jednotlivých členů třídy
 XLIV. Vyčištěna databáze od starých záznamů, 
     - ucastnik nemá správně platiod - platido hodnoty zdedene z cesty - opravit
 XLIII. Doladěny výběry dat do Helperů, zbývá dodělat níže uvedené úkoly
