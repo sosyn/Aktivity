@@ -1,0 +1,6 @@
+--
+-- TOC entry 3013 (class 1262 OID 25094)
+-- Name: aktivity; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE aktivity WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'Czech_Czechia.1250' LC_CTYPE = 'Czech_Czechia.1250';

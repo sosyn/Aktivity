@@ -26,6 +26,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONObject;
 
 /**
  *
@@ -141,6 +142,18 @@ public class Cesty implements Serializable {
     }
 
     public void printPruvodka() {
+        if (this.cesta==null) {return;}
+        JSONObject jsonRoot=new JSONObject("{\"CESTA\":\"\"}")
+                .put("UUID", cesta.getId())
+                .put("komentar", cesta.getKomentar())
+                .put("popis", cesta.getPopis())
+                .put("zaloha", cesta.getZaloha())
+                .put("platiod", cesta.getPlatiod())
+                .put("platido", cesta.getPlatido());
+        
+        System.out.println(" jsonRoot: "+jsonRoot.toString(2));
+        if (true) {return;}
+        
         BufferedInputStream fis = null;
         OutputStream out = null;
         String filename = "c:\\temp\\IBM_Application_Release_and_Deployment_for_Dummies_0.pdf";
