@@ -3,6 +3,8 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XLVI. Vytvořen JSON objekt pomoci JSON-P z JavyEE (GlassFish) pro třídu "entity.Cesta" 
+      - pokračovat s tvorbou "Příkazu k jízdě" v Jasper
 XLV. Příprava na tisk průvodky JSON se bude muset "vydřít" na základě  jednotlivých členů třídy
 XLIV. Vyčištěna databáze od starých záznamů, 
     - ucastnik nemá správně platiod - platido hodnoty zdedene z cesty - opravit

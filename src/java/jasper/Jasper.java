@@ -5,10 +5,6 @@
  */
 package jasper;
 
-import entity.Cesta;
-import entity.Ucastnik;
-import org.json.JSONObject;
-
 /**
  *
  * @author sosyn
@@ -24,14 +20,5 @@ public class Jasper {
      * @param args
      */
     public static void main(String[] args){
-        Cesta cesta=new Cesta();
-        Ucastnik uc=new Ucastnik();
-        Ucastnik uc1=new Ucastnik();
-        JSONObject jsonRoot=new JSONObject(cesta);
-        jsonRoot.append("Ucastnici", new JSONObject(uc) );
-        jsonRoot.append("Ucastnici", new JSONObject(uc1) );
-        
-        System.out.println(jsonRoot.toString());
     }
-    
 }
