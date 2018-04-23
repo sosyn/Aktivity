@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.text.DateFormat;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -33,18 +33,17 @@ public class JsonUtil {
     public static String getJsonCesta(Cesta cesta) {
         StringWriter stringWriter = new StringWriter();
         JsonObjectBuilder jsonRoot = Json.createObjectBuilder();
-        JsonObjectBuilder jsonCesta = Json.createObjectBuilder();
-        JsonObjectBuilder jsonUcObj = Json.createObjectBuilder();
-        JsonObjectBuilder jsonRezObj = Json.createObjectBuilder();
+        JsonObjectBuilder jsonUcObj;
+        JsonObjectBuilder jsonRezObj;
         JsonArrayBuilder jsonUcArr = Json.createArrayBuilder();
         JsonArrayBuilder jsonRezArr = Json.createArrayBuilder();
         if (cesta == null) {
             jsonRoot.add("Cesta", "NULL");
             return jsonRoot.build().toString();
         }
-        jsonCesta.add("cesta-UUID", jsonString(cesta.getId()))
-                .add("cesta-komentar", jsonString(cesta.getKomentar()))
+        jsonRoot.add("cesta-UUID", jsonString(cesta.getId()))
                 .add("cesta-popis", jsonString(cesta.getPopis()))
+                .add("cesta-komentar", jsonString(cesta.getKomentar()))
                 .add("cesta-zaloha", cesta.getZaloha())
                 .add("cesta-platiod", jsonString(cesta.getPlatiod()))
                 .add("cesta-platido", jsonString(cesta.getPlatido()))
@@ -57,7 +56,15 @@ public class JsonUtil {
                     .add("ucastnik-platiod", jsonString(ucastnik.getPlatiod()))
                     .add("ucastnik-platido", jsonString(ucastnik.getPlatido()))
                     .add("ucastnik-osoba-popis", jsonString(ucastnik.getIdoso().getPopis()))
-                    .add("ucastnik-osoba-komentar", jsonString(ucastnik.getIdoso().getKomentar()));
+                    .add("ucastnik-osoba-komentar", jsonString(ucastnik.getIdoso().getKomentar()))
+                    .add("ucastnik-schvaleni-stav", 0)
+                    .add("ucastnik-schvaleni-uroven", 0)
+                    .add("ucastnik-schvaleni-popis", " ")
+                    .add("ucastnik-schvaleni-komentar", " ")
+                    .add("ucastnik-schvaleni-platiod", " ")
+                    .add("ucastnik-schvaleni-platido", " ")
+                    .add("ucastnik-schvaleni-osoba-popis", " ")
+                    .add("ucastnik-schvaleni-osoba-komentar", " ");
             if (ucastnik.getSchvList() != null && !ucastnik.getSchvList().isEmpty()) {
                 Schvaleni schvaleni = ucastnik.getSchvList().get(ucastnik.getSchvList().size() - 1);
                 jsonUcObj.add("ucastnik-schvaleni-stav", schvaleni.getStav())
@@ -79,7 +86,16 @@ public class JsonUtil {
                     .add("rezervace-popis", jsonString(rezervace.getPopis()))
                     .add("rezervace-komentar", jsonString(rezervace.getKomentar()))
                     .add("rezervace-zdroj-popis", jsonString(rezervace.getIdzdr().getPopis()))
-                    .add("rezervace-zdroj-komentar", jsonString(rezervace.getIdzdr().getKomentar()));
+                    .add("rezervace-zdroj-komentar", jsonString(rezervace.getIdzdr().getKomentar()))
+                    .add("rezervace-zdroj-spz", jsonString(rezervace.getIdzdr().getSpz()))
+                    .add("rezervace-schvaleni-stav", 0)
+                    .add("rezervace-schvaleni-uroven", 0)
+                    .add("rezervace-schvaleni-popis", " ")
+                    .add("rezervace-schvaleni-komentar", " ")
+                    .add("rezervace-schvaleni-platiod", " ")
+                    .add("rezervace-schvaleni-platido", " ")
+                    .add("rezervace-schvaleni-osoba-popis", " ")
+                    .add("rezervace-schvaleni-osoba-komentar", " ");
             if (rezervace.getSchvList() != null && !rezervace.getSchvList().isEmpty()) {
                 Schvaleni schvaleni = rezervace.getSchvList().get(rezervace.getSchvList().size() - 1);
                 jsonRezObj.add("rezervace-schvaleni-stav", schvaleni.getStav())
@@ -94,7 +110,6 @@ public class JsonUtil {
             jsonRezArr.add(jsonRezObj);
         }
         // Zapsani do hlavniho JSON kmene
-        jsonRoot.add("CESTA", jsonCesta);
         jsonRoot.add("UCASTNICI", jsonUcArr);
         jsonRoot.add("REZERVACE", jsonRezArr);
         // Zapis do retezce 
@@ -103,9 +118,9 @@ public class JsonUtil {
             File outFile;
 //            outFile = new File(System.getenv("TEMP") + "\\Cesta.json");
             outFile = File.createTempFile("cesta", ".json", new File(System.getenv("TEMP")));
-            FileWriter fw = new FileWriter(outFile);
-            fw.write(stringWriter.toString());
-            fw.close();
+            try (FileWriter fw = new FileWriter(outFile)) {
+                fw.write(stringWriter.toString());
+            }
         } catch (IOException ex) {
             Logger.getLogger(JsonUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -118,10 +133,17 @@ public class JsonUtil {
             return "";
         }
         if (obj instanceof String) {
+            try {
+//                byte[] pole=((String) obj).getBytes("UTF-8");
+                byte[] pole=((String) obj).getBytes("cp1250");
+                obj = new String(pole,"UTF-8");
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(JsonUtil.class.getName()).log(Level.SEVERE, null, ex);
+            }
             strBuilder.append(obj);
         }
         if (obj instanceof Date) {
-            SimpleDateFormat sdt=new SimpleDateFormat("dd.MM.yyyy hh:mm",Locale.getDefault());
+            SimpleDateFormat sdt = new SimpleDateFormat("dd.MM.yyyy hh:mm", Locale.getDefault());
             strBuilder.append(sdt.format(obj));
         }
         if (obj instanceof UUID) {
