@@ -13,7 +13,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -57,7 +56,15 @@ public class JsonUtil {
                     .add("ucastnik-platiod", jsonString(ucastnik.getPlatiod()))
                     .add("ucastnik-platido", jsonString(ucastnik.getPlatido()))
                     .add("ucastnik-osoba-popis", jsonString(ucastnik.getIdoso().getPopis()))
-                    .add("ucastnik-osoba-komentar", jsonString(ucastnik.getIdoso().getKomentar()));
+                    .add("ucastnik-osoba-komentar", jsonString(ucastnik.getIdoso().getKomentar()))
+                    .add("ucastnik-schvaleni-stav", 0)
+                    .add("ucastnik-schvaleni-uroven", 0)
+                    .add("ucastnik-schvaleni-popis", " ")
+                    .add("ucastnik-schvaleni-komentar", "Před zpracováním")
+                    .add("ucastnik-schvaleni-platiod", " ")
+                    .add("ucastnik-schvaleni-platido", " ")
+                    .add("ucastnik-schvaleni-osoba-popis", " ")
+                    .add("ucastnik-schvaleni-osoba-komentar", " ");
             if (ucastnik.getSchvList() != null && !ucastnik.getSchvList().isEmpty()) {
                 Schvaleni schvaleni = ucastnik.getSchvList().get(ucastnik.getSchvList().size() - 1);
                 jsonUcObj.add("ucastnik-schvaleni-stav", schvaleni.getStav())
@@ -79,7 +86,15 @@ public class JsonUtil {
                     .add("rezervace-popis", jsonString(rezervace.getPopis()))
                     .add("rezervace-komentar", jsonString(rezervace.getKomentar()))
                     .add("rezervace-zdroj-popis", jsonString(rezervace.getIdzdr().getPopis()))
-                    .add("rezervace-zdroj-komentar", jsonString(rezervace.getIdzdr().getKomentar()));
+                    .add("rezervace-zdroj-komentar", jsonString(rezervace.getIdzdr().getKomentar()))
+                    .add("rezervace-schvaleni-stav", 0)
+                    .add("rezervace-schvaleni-uroven", 0)
+                    .add("rezervace-schvaleni-popis", " ")
+                    .add("rezervace-schvaleni-komentar", " ")
+                    .add("rezervace-schvaleni-platiod", " ")
+                    .add("rezervace-schvaleni-platido", " ")
+                    .add("rezervace-schvaleni-osoba-popis", " ")
+                    .add("rezervace-schvaleni-osoba-komentar", " ");
             if (rezervace.getSchvList() != null && !rezervace.getSchvList().isEmpty()) {
                 Schvaleni schvaleni = rezervace.getSchvList().get(rezervace.getSchvList().size() - 1);
                 jsonRezObj.add("rezervace-schvaleni-stav", schvaleni.getStav())
@@ -121,7 +136,7 @@ public class JsonUtil {
             strBuilder.append(obj);
         }
         if (obj instanceof Date) {
-            SimpleDateFormat sdt=new SimpleDateFormat("dd.MM.yyyy hh:mm",Locale.getDefault());
+            SimpleDateFormat sdt = new SimpleDateFormat("dd.MM.yyyy hh:mm", Locale.getDefault());
             strBuilder.append(sdt.format(obj));
         }
         if (obj instanceof UUID) {

@@ -3,6 +3,9 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XLVII. Vytvořena testovací šablona .jrxml v Tibco Jasper - nefungují subTabulky (subData) - vyřešit
+        - ošetřit řetězce Win1250 > UTF-8 - naprogramovat převody
+        - vyhozena knihovna JSON - využiji JSON z JavaEE
 XLVI. Vytvořen JSON objekt pomoci JSON-P z JavyEE (GlassFish) pro třídu "entity.Cesta" 
       - pokračovat s tvorbou "Příkazu k jízdě" v Jasper
 XLV. Příprava na tisk průvodky JSON se bude muset "vydřít" na základě  jednotlivých členů třídy
