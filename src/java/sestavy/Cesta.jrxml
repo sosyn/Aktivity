@@ -242,7 +242,7 @@
 			</staticText>
 			<image>
 				<reportElement x="0" y="0" width="160" height="70" uuid="c527d378-c7b1-44da-bef9-4cef45037edc"/>
-				<imageExpression><![CDATA["E:/NetBeansProjects/Aktivity/web/images/logotyp_obecny_bar.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["D:/NetBeansProjects/Aktivity/web/images/logotyp_obecny_bar.jpg"]]></imageExpression>
 			</image>
 			<line>
 				<reportElement x="0" y="80" width="802" height="1" uuid="c718a8e8-303b-4b3c-a56d-2df011734905"/>
@@ -259,13 +259,6 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{cesta-UUID}]]></textFieldExpression>
 			</textField>
-			<componentElement>
-				<reportElement stretchType="ElementGroupHeight" x="553" y="35" width="136" height="45" uuid="834e184a-fcda-4f4c-a326-c7a1a46ee083"/>
-				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="true" checksumRequired="false" evaluationTime="Report">
-					<jr:codeExpression><![CDATA[$F{cesta-UUID}]]></jr:codeExpression>
-					<jr:applicationIdentifierExpression><![CDATA[$F{cesta-UUID}]]></jr:applicationIdentifierExpression>
-				</jr:barbecue>
-			</componentElement>
 		</band>
 	</title>
 	<pageHeader>
