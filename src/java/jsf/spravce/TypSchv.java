@@ -33,6 +33,7 @@ import jsf.util.JsfUtil.PersistAction;
 @SessionScoped
 public class TypSchv implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
 
     @EJB
@@ -50,7 +51,7 @@ public class TypSchv implements Serializable {
         {"Zástupce vedoucího odboru", "VOZ"},
         {"Zástupce vedoucího oddělení", "VOddZ"},
         {"Dispečer", "D"},
-        {"Ostatní", " "}    
+        {"Ostatní", " "}
     };
 
     @PostConstruct
@@ -114,7 +115,7 @@ public class TypSchv implements Serializable {
         this.typSchvList = typSchvList;
     }
 
-        /**
+    /**
      * @return the typZdrCis
      */
     public Object[][] getTypSchvCis() {

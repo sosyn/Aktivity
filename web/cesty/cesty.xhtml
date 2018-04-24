@@ -64,7 +64,7 @@
                             <p:commandButton id="CestaNew" value="Nová" action="#{cesty.newCesta()}"  icon="fa fa-file-o" ajax="false" />
                             <p:commandButton id="CestaEdit" value="Edituj" action="#{cesty.editCesta()}" disabled="#{cesty.cesty.size()==0 || cesty.cesta==null}" icon="fa fa-edit" ajax="false" />
                             <p:commandButton id="CestaDel" value="Smazat" disabled="#{cesty.cesty.size()==0 || cesty.cesta==null}" icon="fa fa-remove" ajax="false" />
-                            <p:commandButton  id="CestaTiskPruvodka" value="Průvodka" action="#{cesty.printPruvodka}" icon="fa fa-id-card-o" ajax="false" />
+                            <p:commandButton  id="CestaTiskPruvodka" value="Průvodka" action="#{cesty.printPruvodka}" disabled="#{cesty.cesty.size()==0 || cesty.cesta==null}" icon="fa fa-id-card-o" ajax="false" />
                         </h:form>
                     </p:layoutUnit>
                 </p:layout>

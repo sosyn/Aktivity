@@ -13,13 +13,14 @@ import java.util.Calendar;
  *
  * @author Ivo
  */
-public class KalendarColumn implements Serializable{
+public class KalendarColumn implements Serializable {
 
+    private static final long serialVersionUID = 1L;
 //    private Calendar cal = Calendar.getInstance(Locale.getDefault());
     private Date platiOd = new Date();
     private Date platiDo = new Date();
     private int status = Calendar.DAY_OF_MONTH;
-    
+
     public KalendarColumn(Date platiOd, Date platiDo, int status) {
         this.platiOd = platiOd;
         this.platiDo = platiDo;
@@ -58,7 +59,6 @@ public class KalendarColumn implements Serializable{
         return String.format("%1$td.%1$tm.%1$tY", platiOd);
     }
 
-    
     /**
      * @return the headerOdDo
      */
@@ -66,7 +66,6 @@ public class KalendarColumn implements Serializable{
         return String.format("%1$tR-%2$tR", platiOd, platiDo);
     }
 
-    
     /**
      * @return the status
      */

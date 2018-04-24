@@ -33,6 +33,7 @@ import org.primefaces.context.RequestContext;
 @SessionScoped
 public class HelperZdroj implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
 
 //    @EJB

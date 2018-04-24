@@ -8,9 +8,8 @@ package jsf.cesty;
 import ejb.LoginUser;
 import entity.Cesta;
 import entity.Osoba;
+import jasper.Jasper;
 import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -18,9 +17,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -30,13 +27,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JsonDataSource;
-import net.sf.jasperreports.engine.util.JRLoader;
 
 /**
  *
@@ -46,18 +36,23 @@ import net.sf.jasperreports.engine.util.JRLoader;
 @SessionScoped
 public class Cesty implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
     private Date platiOd = new Date();
     private Date platiDo = new Date();
+    String jsonCesta;
 
     @EJB
     private ejb.CestaFacade ejbCestaFacade;
     @Inject
     LoginUser loginUser;
-    Osoba osoba = null;
     @Inject
     CestaForm cestaForm;
+    @Inject
+    Jasper jasperRun;
 
+    Osoba osoba = null;
     private Cesta cesta = null;
     private ArrayList<Cesta> cesty = new ArrayList<>();
 
@@ -152,30 +147,10 @@ public class Cesty implements Serializable {
     }
 
     public void printPruvodka() {
-        String jsonCesta = json.JsonUtil.getJsonCesta(this.cesta);
-        System.out.println(" Cesta as JSON: " + jsonCesta);
-
-        try {
-            //Load compiled jasper report that we created on first section.
-            JasperReport report = (JasperReport) JRLoader.loadObject(new File("d:\\NetBeansProjects\\Aktivity\\src\\java\\sestavy\\Cesta.jasper"));
-            //Convert json string to byte array.
-            ByteArrayInputStream jsonDataStream = new ByteArrayInputStream(jsonCesta.getBytes());
-            //Create json datasource from json stream
-            JsonDataSource ds = new JsonDataSource(jsonDataStream);
-            //Create HashMap to add report parameters
-            Map parameters = new HashMap();
-            //Add title parameter. Make sure the key is same name as what you named the parameters in jasper report.
-            parameters.put("title", "Jasper PDF Cesta");
-            parameters.put("name", "Name");
-            parameters.put("value", "Value");
-            //Create Jasper Print object passing report, parameter json data source.
-            JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, ds);
-            //Export and save pdf to file
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "d:\\NetBeansProjects\\Aktivity\\src\\java\\sestavy\\CestaPDF.PDF");
-        } catch (JRException ex) {
-            Logger.getLogger(Cesty.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        jsonCesta = json.JsonUtil.getJsonCesta(this.cesta);
+        System.out.println("Cesta as JSON: " + jsonCesta);
+        jasperRun.setJsonCesta(jsonCesta);
+        jasperRun.run();
         if (true) {
             return;
         }

@@ -28,6 +28,7 @@ import org.primefaces.event.RowEditEvent;
 @SessionScoped
 public class Dispeceri implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     @Inject
     DAOdispecer daoDispecer;
 

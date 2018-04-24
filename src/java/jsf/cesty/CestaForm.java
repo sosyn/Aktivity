@@ -38,6 +38,7 @@ import org.primefaces.event.SelectEvent;
 @SessionScoped
 public class CestaForm implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     @EJB
     private ejb.CestaFacade ejbCestaFacade;
     @EJB

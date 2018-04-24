@@ -30,6 +30,8 @@ import javax.json.JsonObjectBuilder;
  */
 public class JsonUtil {
 
+    private static final long serialVersionUID = 1L;
+
     public static String getJsonCesta(Cesta cesta) {
         StringWriter stringWriter = new StringWriter();
         JsonObjectBuilder jsonRoot = Json.createObjectBuilder();
@@ -133,10 +135,13 @@ public class JsonUtil {
             return "";
         }
         if (obj instanceof String) {
+            byte[] pole;
             try {
-//                byte[] pole=((String) obj).getBytes("UTF-8");
-                byte[] pole=((String) obj).getBytes("cp1250");
-                obj = new String(pole,"UTF-8");
+                pole = ((String) obj).getBytes();
+//                pole = ((String) obj).getBytes("UTF-8");
+//                pole = ((String) obj).getBytes("cp1250");
+//                obj = new String(pole, "cp1250");
+                obj = new String(pole, "UTF-8");
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(JsonUtil.class.getName()).log(Level.SEVERE, null, ex);
             }

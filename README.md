@@ -3,6 +3,12 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XLX.- Chyba na straně GlassFishe - nutné nastavit parametr: "org.jboss.weld.serialization.beanIdentifierIndexOptimization" = false
+      https://stackoverflow.com/questions/36104833/org-jboss-weld-exceptions-illegalstateexception-weld-000227-after-every-change/37455290#37455290
+    - Je nutné také nstavit proměnnou : "private static final long serialVersionUID = 1L;"   u všech Serializable objektů
+    - blbne převod cp1250 na UTF-8 (Jasper tvrdí, že to není UTF-8)
+    - naplněna knihovna (LIB) "Jasper651" o nutné .JAR souboryx podle vzoru:
+      https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports/6.5.1
 XLIX. - je nutné stáhnout hromady knihoven z Apache, Spring, ...
 XLVIII. Vytvořen funkční vzor Cesta.jrxml v Tibco Jasper - subData už fungují - musí být vnořené objekty
         - ošetření řetězce z Win1250 > UTF-8

@@ -34,6 +34,7 @@ import org.primefaces.event.SelectEvent;
 @SessionScoped
 public class RezOnLine implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     @EJB
     private ejb.CestaFacade ejbCestaFacade;
     @EJB
@@ -116,23 +117,22 @@ public class RezOnLine implements Serializable {
 
     }
 
-
     public void eventZdrInfo(Zdroj zdr) {
-            this.zdroj = zdr;
+        this.zdroj = zdr;
 
-            Map<String, Object> options = new HashMap<String, Object>();
-            options.put("modal", true);
-            options.put("resizable", true);
-            options.put("draggable", true);
-            options.put("width", 800);
-            options.put("height", 500);
-            options.put("contentWidth", "100%");
-            options.put("contentHeight", "100%");
-            options.put("closable", true);
+        Map<String, Object> options = new HashMap<String, Object>();
+        options.put("modal", true);
+        options.put("resizable", true);
+        options.put("draggable", true);
+        options.put("width", 800);
+        options.put("height", 500);
+        options.put("contentWidth", "100%");
+        options.put("contentHeight", "100%");
+        options.put("closable", true);
 //                    options.put("includeViewParams", true);
 //                    options.put("headerElement", "customheader");
-            options.put("maximizable", true);
-            RequestContext.getCurrentInstance().openDialog("/rezervace/zdrDetail", options, null);
+        options.put("maximizable", true);
+        RequestContext.getCurrentInstance().openDialog("/rezervace/zdrDetail", options, null);
 
     }
 

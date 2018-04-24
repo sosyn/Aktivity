@@ -29,19 +29,17 @@ import jsf.util.JsfUtil.PersistAction;
 /**
  *
  * @author Ivo
- * 
- * Pripojeni na externi aplikaci IS VERA
- * -------------------------------------
- * Pripojovaci retezec: jdbc:oracle:thin:@192.168.3.76:1521:vera
- * Uzivatel: vera
- * Heslo: vera
- * Schema: vera
- * 
+ *
+ * Pripojeni na externi aplikaci IS VERA -------------------------------------
+ * Pripojovaci retezec: jdbc:oracle:thin:@192.168.3.76:1521:vera Uzivatel: vera
+ * Heslo: vera Schema: vera
+ *
  */
 @Named("osoby")
 @SessionScoped
 public class Osoby implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
 
     @EJB

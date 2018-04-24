@@ -6,17 +6,13 @@
 package jsf.spravce;
 
 import ejb.DAOdispecer;
-import entity.Dispecerpol;
 import entity.Osoba;
 import entity.Typschv;
-import entity.Typucast;
 import entity.Typzdroje;
-import entity.Ucastnik;
 import entity.Zdroj;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -42,6 +38,7 @@ import org.primefaces.event.SelectEvent;
 @SessionScoped
 public class DispecerForm implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
 
     @Inject
@@ -288,7 +285,7 @@ public class DispecerForm implements Serializable {
      */
     public void zastupceNew() {
         // Predplnit platnymi daty a vyloucit osobu dispecera (nemuze byt sam sobe zastupcem)
-        helperOsoba.initHelperOsoby(daoDispecer.getDispecerHl().getPlatiod(),daoDispecer.getDispecerHl().getPlatido(),daoDispecer.getDispecerHl().getIdoso());
+        helperOsoba.initHelperOsoby(daoDispecer.getDispecerHl().getPlatiod(), daoDispecer.getDispecerHl().getPlatido(), daoDispecer.getDispecerHl().getIdoso());
         RequestContext.getCurrentInstance()
                 .openDialog("/helper/helperOsoba", getDialogOptions(), null);
     }
@@ -326,7 +323,7 @@ public class DispecerForm implements Serializable {
      */
     public void dispPolOsoNew() {
         // Predplnit HelperOsoba platnymi daty a vyloucit osobu dispecera, nemuze sam sobe delat dispecink
-        helperOsoba.initHelperOsoby(daoDispecer.getDispecerHl().getPlatiod(),daoDispecer.getDispecerHl().getPlatido(),daoDispecer.getDispecerHl().getIdoso());
+        helperOsoba.initHelperOsoby(daoDispecer.getDispecerHl().getPlatiod(), daoDispecer.getDispecerHl().getPlatido(), daoDispecer.getDispecerHl().getIdoso());
         RequestContext.getCurrentInstance()
                 .openDialog("/helper/helperOsoba", getDialogOptions(), null);
     }

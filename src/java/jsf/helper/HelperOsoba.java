@@ -32,6 +32,7 @@ import org.primefaces.context.RequestContext;
 @SessionScoped
 public class HelperOsoba implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
 
     @EJB
@@ -47,16 +48,19 @@ public class HelperOsoba implements Serializable {
         this.selectedOsoba = null;
         this.selectedOsoby = null;
     }
+
     public void initHelperOsoby(Cesta cesta) {
         this.osobyList = new ArrayList<>(this.ejbOsobaFacade.findOsobyWhereCestaList(cesta));
         this.selectedOsoba = null;
         this.selectedOsoby = null;
     }
-    public void initHelperOsoby(Date platiOd,Date platiDo, Osoba vyloucenaOsoba ) {
+
+    public void initHelperOsoby(Date platiOd, Date platiDo, Osoba vyloucenaOsoba) {
         this.osobyList = new ArrayList<>(this.ejbOsobaFacade.findOsobyWhereOdDoList(platiOd, platiDo, vyloucenaOsoba));
         this.selectedOsoba = null;
         this.selectedOsoby = null;
     }
+
     /**
      * @return the cal
      */

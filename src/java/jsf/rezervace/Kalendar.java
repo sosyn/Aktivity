@@ -22,6 +22,7 @@ import javax.enterprise.context.SessionScoped;
 @SessionScoped
 public class Kalendar implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     static final int COLUMNS_DEFAULT = 5;
     static final int COLUMNS_MAX = 5;
 

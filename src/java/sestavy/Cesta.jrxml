@@ -240,10 +240,6 @@
 				</textElement>
 				<text><![CDATA[Příkaz k jízdě]]></text>
 			</staticText>
-			<image>
-				<reportElement x="0" y="0" width="160" height="70" uuid="c527d378-c7b1-44da-bef9-4cef45037edc"/>
-				<imageExpression><![CDATA["D:/NetBeansProjects/Aktivity/web/images/logotyp_obecny_bar.jpg"]]></imageExpression>
-			</image>
 			<line>
 				<reportElement x="0" y="80" width="802" height="1" uuid="c718a8e8-303b-4b3c-a56d-2df011734905"/>
 			</line>
