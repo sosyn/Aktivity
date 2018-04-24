@@ -157,7 +157,7 @@ public class Cesty implements Serializable {
 
         try {
             //Load compiled jasper report that we created on first section.
-            JasperReport report = (JasperReport) JRLoader.loadObject(new File("e:\\NetBeansProjects\\Aktivity\\src\\java\\sestavy\\Cesta.jasper"));
+            JasperReport report = (JasperReport) JRLoader.loadObject(new File("d:\\NetBeansProjects\\Aktivity\\src\\java\\sestavy\\Cesta.jasper"));
             //Convert json string to byte array.
             ByteArrayInputStream jsonDataStream = new ByteArrayInputStream(jsonCesta.getBytes());
             //Create json datasource from json stream
@@ -171,7 +171,7 @@ public class Cesty implements Serializable {
             //Create Jasper Print object passing report, parameter json data source.
             JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, ds);
             //Export and save pdf to file
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "e:\\NetBeansProjects\\Aktivity\\src\\java\\sestavy\\CestaPDF.PDF");
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "d:\\NetBeansProjects\\Aktivity\\src\\java\\sestavy\\CestaPDF.PDF");
         } catch (JRException ex) {
             Logger.getLogger(Cesty.class.getName()).log(Level.SEVERE, null, ex);
         }

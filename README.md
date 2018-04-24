@@ -3,6 +3,7 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XLIX. - je nutné stáhnout hromady knihoven z Apache, Spring, ...
 XLVIII. Vytvořen funkční vzor Cesta.jrxml v Tibco Jasper - subData už fungují - musí být vnořené objekty
         - ošetření řetězce z Win1250 > UTF-8
         - je nutné stáhnout hromady knihoven z Apache, Spring, ...
