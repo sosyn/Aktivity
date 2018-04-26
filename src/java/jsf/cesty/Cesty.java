@@ -12,7 +12,6 @@ import jasper.Jasper;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;

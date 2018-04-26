@@ -137,6 +137,7 @@ public class JsonUtil {
 
     private static String jsonString(Object obj) {
         StringBuilder strBuilder = new StringBuilder();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
         if (obj == null) {
             return "";
         }

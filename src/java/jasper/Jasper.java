@@ -10,7 +10,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -55,7 +54,7 @@ public class Jasper implements Serializable {
 
     public void makePdf() {
         try {
-            File sourceFile = new File("e:\\NetBeansProjects\\Aktivity\\src\\java\\sestavy\\Cesta.jasper");
+            File sourceFile = new File("d:\\NetBeansProjects\\Aktivity\\src\\java\\sestavy\\Cesta.jasper");
             File destFile = new File(sourceFile.getParent(), sourceFile.getName() + ".pdf");
 
             //Load compiled jasper report that we created on first section.
@@ -70,7 +69,6 @@ public class Jasper implements Serializable {
             parameters.put("title", "Jasper PDF Cesta");
             parameters.put("name", "Ivo");
             parameters.put("value", "Sosýn");
-            // parameters.put(JRParameter.REPORT_LOCALE,new Locale("cs_CZ"));
             //Create Jasper Print object passing report, parameter json data source.
             JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, ds);
             //Export and save pdf to file
