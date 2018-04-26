@@ -9,24 +9,16 @@ import ejb.LoginUser;
 import entity.Cesta;
 import entity.Osoba;
 import jasper.Jasper;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -150,43 +142,40 @@ public class Cesty implements Serializable {
         jsonCesta = json.JsonUtil.getJsonCesta(this.cesta);
         System.out.println("Cesta as JSON: " + jsonCesta);
         jasperRun.setJsonCesta(jsonCesta);
-        jasperRun.run();
-        if (true) {
-            return;
-        }
+        jasperRun.start();
 
-        BufferedInputStream fis = null;
-        OutputStream out = null;
-        String filename = "c:\\temp\\IBM_Application_Release_and_Deployment_for_Dummies_0.pdf";
-        byte[] bytes = new byte[1000];
-        try {
-            FacesContext fc = FacesContext.getCurrentInstance();
-            HttpServletResponse response = (HttpServletResponse) fc.getExternalContext().getResponse();
-            out = response.getOutputStream();
-            fis = new BufferedInputStream(new FileInputStream(filename));
-            response.setContentType("application/octet-stream");
-            response.setContentType("application/pdf");
-            response.addHeader("Content-Disposition", "attachment; filename=\"Pruvodka.pdf\"");
-            while (fis.read(bytes) != -1) {
-                out.write(bytes);
-            }
-            out.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(Cesty.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception e) {
-            Logger.getLogger(Cesty.class.getName()).log(Level.SEVERE, null, e);
-        }
-        try {
-            if (out != null) {
-                out.close();
-            }
-            if (fis != null) {
-                fis.close();
-            }
-            FacesContext.getCurrentInstance().responseComplete();
-        } catch (IOException e) {
-            Logger.getLogger(Cesty.class.getName()).log(Level.SEVERE, null, e);
-        }
+//        BufferedInputStream fis = null;
+//        OutputStream out = null;
+//        String filename = "c:\\temp\\IBM_Application_Release_and_Deployment_for_Dummies_0.pdf";
+//        byte[] bytes = new byte[1000];
+//        try {
+//            FacesContext fc = FacesContext.getCurrentInstance();
+//            HttpServletResponse response = (HttpServletResponse) fc.getExternalContext().getResponse();
+//            out = response.getOutputStream();
+//            fis = new BufferedInputStream(new FileInputStream(filename));
+//            response.setContentType("application/octet-stream");
+//            response.setContentType("application/pdf");
+//            response.addHeader("Content-Disposition", "attachment; filename=\"Pruvodka.pdf\"");
+//            while (fis.read(bytes) != -1) {
+//                out.write(bytes);
+//            }
+//            out.flush();
+//        } catch (IOException ex) {
+//            Logger.getLogger(Cesty.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (Exception e) {
+//            Logger.getLogger(Cesty.class.getName()).log(Level.SEVERE, null, e);
+//        }
+//        try {
+//            if (out != null) {
+//                out.close();
+//            }
+//            if (fis != null) {
+//                fis.close();
+//            }
+//            FacesContext.getCurrentInstance().responseComplete();
+//        } catch (IOException e) {
+//            Logger.getLogger(Cesty.class.getName()).log(Level.SEVERE, null, e);
+//        }
     }
 
     public String newCesta() {

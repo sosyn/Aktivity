@@ -9,11 +9,13 @@ import com.lowagie.text.pdf.PdfWriter;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -51,7 +53,7 @@ public class Jasper extends Thread {
     @Override
     public void run() {
         try {
-            File sourceFile = new File("e:\\NetBeansProjects\\Aktivity\\src\\java\\sestavy\\Cesta.jasper");
+            File sourceFile = new File("d:\\NetBeansProjects\\Aktivity\\src\\java\\sestavy\\Cesta.jasper");
             File destFile = new File(sourceFile.getParent(), sourceFile.getName() + ".pdf");
 
             //Load compiled jasper report that we created on first section.
@@ -66,6 +68,7 @@ public class Jasper extends Thread {
             parameters.put("title", "Jasper PDF Cesta");
             parameters.put("name", "Ivo");
             parameters.put("value", "Sosýn");
+            parameters.put(JRParameter.REPORT_LOCALE,new Locale("cs_CZ"));
             //Create Jasper Print object passing report, parameter json data source.
             JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, ds);
             //Export and save pdf to file

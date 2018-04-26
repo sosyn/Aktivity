@@ -1,4 +1,4 @@
-/*
+/*Informatici MSK
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -9,9 +9,13 @@ import entity.Cesta;
 import entity.Rezervace;
 import entity.Schvaleni;
 import entity.Ucastnik;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -131,18 +135,44 @@ public class JsonUtil {
 
     private static String jsonString(Object obj) {
         StringBuilder strBuilder = new StringBuilder();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
         if (obj == null) {
             return "";
         }
-        if (obj instanceof String) {
+        if (obj instanceof String && ((String) obj).length() > 0) {
             byte[] pole;
             try {
                 pole = ((String) obj).getBytes();
 //                pole = ((String) obj).getBytes("UTF-8");
 //                pole = ((String) obj).getBytes("cp1250");
 //                obj = new String(pole, "cp1250");
-                obj = new String(pole, "UTF-8");
+//                obj = new String(pole, "UTF-8");
+//                obj = new String(pole);
+
+                baos.reset();
+//                baos.write(pole, 0, pole.length - 1);
+//                obj = baos.toString("UTF-8");
+                ByteArrayInputStream bais = new ByteArrayInputStream(pole);
+                InputStreamReader isr = new InputStreamReader(bais, "cp1250");
+                OutputStreamWriter osw = new OutputStreamWriter(baos, "UTF-8");
+                int read;
+                try {
+                    read = isr.read();
+                    while (read != -1) {
+                        osw.write(read);
+                        read = isr.read();
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(JsonUtil.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                bais.close();
+                isr.close();
+                osw.flush();
+                osw.close();
+                obj = baos.toString(" ");
             } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(JsonUtil.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
                 Logger.getLogger(JsonUtil.class.getName()).log(Level.SEVERE, null, ex);
             }
             strBuilder.append(obj);
