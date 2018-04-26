@@ -1,4 +1,4 @@
-/*
+/*Informatici MSK
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -9,10 +9,11 @@ import entity.Cesta;
 import entity.Rezervace;
 import entity.Schvaleni;
 import entity.Ucastnik;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,10 +31,8 @@ import javax.json.JsonObjectBuilder;
  */
 public class JsonUtil {
 
-    private static final long serialVersionUID = 1L;
-
-    public static String getJsonCesta(Cesta cesta) {
-        StringWriter stringWriter = new StringWriter();
+    
+    public static byte[] getJsonCesta(Cesta cesta) {
         JsonObjectBuilder jsonRoot = Json.createObjectBuilder();
         JsonObjectBuilder jsonUcObj;
         JsonObjectBuilder jsonRezObj;
@@ -41,7 +40,12 @@ public class JsonUtil {
         JsonArrayBuilder jsonRezArr = Json.createArrayBuilder();
         if (cesta == null) {
             jsonRoot.add("Cesta", "NULL");
-            return jsonRoot.build().toString();
+            try {
+                return jsonRoot.build().toString().getBytes("UTF-8");
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(JsonUtil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return jsonRoot.build().toString().getBytes();
         }
         jsonRoot.add("cesta-UUID", jsonString(cesta.getId()))
                 .add("cesta-popis", jsonString(cesta.getPopis()))
@@ -114,19 +118,21 @@ public class JsonUtil {
         // Zapsani do hlavniho JSON kmene
         jsonRoot.add("UCASTNICI", jsonUcArr);
         jsonRoot.add("REZERVACE", jsonRezArr);
+        // Zaverecny export do retezce      
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
         // Zapis do retezce 
-        Json.createWriter(stringWriter).writeObject(jsonRoot.build());
+        Json.createWriter(baos).writeObject(jsonRoot.build());
         try {
-            File outFile;
-//            outFile = new File(System.getenv("TEMP") + "\\Cesta.json");
-            outFile = File.createTempFile("cesta", ".json", new File(System.getenv("TEMP")));
-            try (FileWriter fw = new FileWriter(outFile)) {
-                fw.write(stringWriter.toString());
-            }
+            File outFile = File.createTempFile("cesta", ".json", new File(System.getenv("TEMP")));
+            FileOutputStream fos = new FileOutputStream(outFile);
+            fos.write(baos.toByteArray());
+            fos.close();
+//
         } catch (IOException ex) {
             Logger.getLogger(JsonUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return stringWriter.toString();
+
+        return baos.toByteArray();
     }
 
     private static String jsonString(Object obj) {
@@ -135,16 +141,6 @@ public class JsonUtil {
             return "";
         }
         if (obj instanceof String) {
-            byte[] pole;
-            try {
-                pole = ((String) obj).getBytes();
-//                pole = ((String) obj).getBytes("UTF-8");
-//                pole = ((String) obj).getBytes("cp1250");
-//                obj = new String(pole, "cp1250");
-                obj = new String(pole, "UTF-8");
-            } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(JsonUtil.class.getName()).log(Level.SEVERE, null, ex);
-            }
             strBuilder.append(obj);
         }
         if (obj instanceof Date) {

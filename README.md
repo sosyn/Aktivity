@@ -3,6 +3,8 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XLXI.- Konečně funguje tvorba PDF, ale chybí tam české znaky - doladit
+     - otevírat PDF nebo HTML v novém okně   
 XLX.- Chyba na straně GlassFishe - nutné nastavit parametr: "org.jboss.weld.serialization.beanIdentifierIndexOptimization" = false
       https://stackoverflow.com/questions/36104833/org-jboss-weld-exceptions-illegalstateexception-weld-000227-after-every-change/37455290#37455290
     - Je nutné také nstavit proměnnou : "private static final long serialVersionUID = 1L;"   u všech Serializable objektů

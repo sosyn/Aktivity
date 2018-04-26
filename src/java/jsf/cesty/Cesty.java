@@ -9,11 +9,10 @@ import ejb.LoginUser;
 import entity.Cesta;
 import entity.Osoba;
 import jasper.Jasper;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -37,11 +36,10 @@ import javax.servlet.http.HttpServletResponse;
 public class Cesty implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
     private Date platiOd = new Date();
     private Date platiDo = new Date();
-    String jsonCesta;
 
     @EJB
     private ejb.CestaFacade ejbCestaFacade;
@@ -49,12 +47,11 @@ public class Cesty implements Serializable {
     LoginUser loginUser;
     @Inject
     CestaForm cestaForm;
-    @Inject
-    Jasper jasperRun;
 
     Osoba osoba = null;
     private Cesta cesta = null;
     private ArrayList<Cesta> cesty = new ArrayList<>();
+    Jasper jasperRun = new Jasper();
 
     @PostConstruct
     void init() {
@@ -147,30 +144,40 @@ public class Cesty implements Serializable {
     }
 
     public void printPruvodka() {
+        byte[] jsonCesta;
         jsonCesta = json.JsonUtil.getJsonCesta(this.cesta);
-        System.out.println("Cesta as JSON: " + jsonCesta);
+//        try {
+//            System.out.println("Cesta as JSON: " + new String(jsonCesta, "UTF-8"));
+//        } catch (UnsupportedEncodingException ex) {
+//            Logger.getLogger(Cesty.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         jasperRun.setJsonCesta(jsonCesta);
-        jasperRun.run();
-        if (true) {
-            return;
-        }
+        jasperRun.makePdf();
+        byte[] html = jasperRun.getPdfAsByte();
 
-        BufferedInputStream fis = null;
+//        BufferedInputStream fis = null;
         OutputStream out = null;
-        String filename = "c:\\temp\\IBM_Application_Release_and_Deployment_for_Dummies_0.pdf";
-        byte[] bytes = new byte[1000];
+//        String filename = "c:\\temp\\IBM_Application_Release_and_Deployment_for_Dummies_0.pdf";
+//        byte[] bytes = new byte[1000];
+//        try {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpServletResponse response = (HttpServletResponse) fc.getExternalContext().getResponse();
+        response.reset();
+        response.setContentType("text/html; charset=UTF-8");
+        response.setDateHeader("Date", new Date().getTime());
+        response.setContentLength(html.length);
         try {
-            FacesContext fc = FacesContext.getCurrentInstance();
-            HttpServletResponse response = (HttpServletResponse) fc.getExternalContext().getResponse();
             out = response.getOutputStream();
-            fis = new BufferedInputStream(new FileInputStream(filename));
-            response.setContentType("application/octet-stream");
-            response.setContentType("application/pdf");
-            response.addHeader("Content-Disposition", "attachment; filename=\"Pruvodka.pdf\"");
-            while (fis.read(bytes) != -1) {
-                out.write(bytes);
-            }
-            out.flush();
+//            fis = new BufferedInputStream(new FileInputStream(filename));
+//            response.setContentType("application/octet-stream");
+//            response.setContentType("application/pdf");
+//            response.addHeader("Content-Disposition", "attachment; filename=\"Pruvodka.pdf\"");
+//            while (fis.read(bytes) != -1) {
+//                out.write(bytes);
+//            }
+            out.write(html);
+            //out.flush();
+
         } catch (IOException ex) {
             Logger.getLogger(Cesty.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e) {
@@ -180,10 +187,10 @@ public class Cesty implements Serializable {
             if (out != null) {
                 out.close();
             }
-            if (fis != null) {
-                fis.close();
-            }
-            FacesContext.getCurrentInstance().responseComplete();
+//            if (fis != null) {
+//                fis.close();
+//            }
+            FacesContext.getCurrentInstance().responseComplete();          
         } catch (IOException e) {
             Logger.getLogger(Cesty.class.getName()).log(Level.SEVERE, null, e);
         }
