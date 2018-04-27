@@ -42,6 +42,8 @@ public class Cesty implements Serializable {
 
     @EJB
     private ejb.CestaFacade ejbCestaFacade;
+    @EJB
+    Jasper jasperRun;
     @Inject
     LoginUser loginUser;
     @Inject
@@ -50,7 +52,6 @@ public class Cesty implements Serializable {
     Osoba osoba = null;
     private Cesta cesta = null;
     private ArrayList<Cesta> cesty = new ArrayList<>();
-    Jasper jasperRun = new Jasper();
 
     @PostConstruct
     void init() {
@@ -150,10 +151,10 @@ public class Cesty implements Serializable {
 //        } catch (UnsupportedEncodingException ex) {
 //            Logger.getLogger(Cesty.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-        jasperRun.setJsonCesta(jsonCesta);
-        jasperRun.makePdf();
-        byte[] html = jasperRun.getPdfAsByte();
-
+        byte[] html = jasperRun.makePdf(jsonCesta);
+        if (html == null || html.length < 100) {
+            return;
+        }
 //        BufferedInputStream fis = null;
         OutputStream out = null;
 //        String filename = "c:\\temp\\IBM_Application_Release_and_Deployment_for_Dummies_0.pdf";
@@ -189,7 +190,7 @@ public class Cesty implements Serializable {
 //            if (fis != null) {
 //                fis.close();
 //            }
-            FacesContext.getCurrentInstance().responseComplete();          
+            FacesContext.getCurrentInstance().responseComplete();
         } catch (IOException e) {
             Logger.getLogger(Cesty.class.getName()).log(Level.SEVERE, null, e);
         }
