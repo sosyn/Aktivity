@@ -9,11 +9,17 @@ import com.lowagie.text.pdf.PdfWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.AccessTimeout;
+import javax.ejb.ConcurrencyManagement;
+import static javax.ejb.ConcurrencyManagementType.CONTAINER;
+import javax.ejb.Lock;
+import javax.ejb.LockType;
+import javax.ejb.Singleton;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -31,36 +37,27 @@ import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
  *
  * @author sosyn
  */
-public class Jasper implements Serializable {
-
+@Singleton
+@ConcurrencyManagement(CONTAINER)
+@AccessTimeout(value = 8, unit = SECONDS)
+public class Jasper {
+    
     private static final long serialVersionUID = 1L;
-
-    private byte[] jsonCesta = new byte[]{};
-    private byte[] pdfAsByte = new byte[]{};
-
-    /**
-     * @param jsonCesta the jsonCesta to set
-     */
-    public void setJsonCesta(byte[] jsonCesta) {
-        this.jsonCesta = jsonCesta;
-    }
-
-    /**
-     * @return the pdfAsByte
-     */
-    public byte[] getPdfAsByte() {
-        return pdfAsByte;
-    }
-
-    public void makePdf() {
+    
+    @Lock(LockType.WRITE)
+    public byte[] makePdf(byte[] jsonCesta) {
+        byte[] pdfAsByte = new byte[]{};
+        if (jsonCesta == null || jsonCesta.length == 0) {
+            return pdfAsByte;
+        }
         try {
-            File sourceFile = new File("e:\\NetBeansProjects\\Aktivity\\src\\java\\sestavy\\Cesta.jasper");
+            File sourceFile = new File("d:\\NetBeansProjects\\Aktivity\\src\\java\\sestavy\\Cesta.jasper");
             File destFile = new File(sourceFile.getParent(), sourceFile.getName() + ".pdf");
 
             //Load compiled jasper report that we created on first section.
             JasperReport report = (JasperReport) JRLoader.loadObject(sourceFile);
             //Convert json string to byte array.
-            ByteArrayInputStream jsonDataStream = new ByteArrayInputStream(this.jsonCesta);
+            ByteArrayInputStream jsonDataStream = new ByteArrayInputStream(jsonCesta);
             //Create json datasource from json stream
             JsonDataSource ds = new JsonDataSource(jsonDataStream);
             //Create HashMap to add report parameters
@@ -93,10 +90,11 @@ public class Jasper implements Serializable {
             htmlExporter.setExporterOutput(new SimpleHtmlExporterOutput(baos));
             htmlExporter.exportReport();
 
-            this.pdfAsByte = baos.toByteArray();
+            pdfAsByte = baos.toByteArray();
             // System.out.println("this.pdfAsByte: " + new String(this.pdfAsByte, "UTF-8"));
         } catch (JRException ex) {
             Logger.getLogger(Jasper.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return pdfAsByte;
     }
 }
