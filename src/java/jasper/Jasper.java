@@ -66,6 +66,8 @@ public class Jasper {
             parameters.put("title", "Jasper PDF Cesta");
             parameters.put("name", "Ivo");
             parameters.put("value", "Sosýn");
+            parameters.put("urlResource", ClassLoader.getSystemClassLoader().getResource("logotyp_obecny_bar.jpg") );            
+            System.out.println("ClassLoader.getSystemClassLoader().getResource(\"logotyp_obecny_bar.jpg\"): "+ClassLoader.getSystemClassLoader().getResource("logotyp_obecny_bar.jpg") );
             //Create Jasper Print object passing report, parameter json data source.
             JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, ds);
             //Export and save pdf to file

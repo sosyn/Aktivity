@@ -143,7 +143,7 @@ public class Cesty implements Serializable {
         this.cesty = cesty;
     }
 
-    public void printPruvodka() {
+    public String printPruvodka() {
         byte[] jsonCesta;
         jsonCesta = json.JsonUtil.getJsonCesta(this.cesta);
 //        try {
@@ -153,7 +153,7 @@ public class Cesty implements Serializable {
 //        }
         byte[] html = jasperRun.makePdf(jsonCesta);
         if (html == null || html.length < 100) {
-            return;
+            return "cesty/cesty";
         }
 //        BufferedInputStream fis = null;
         OutputStream out = null;
@@ -194,6 +194,7 @@ public class Cesty implements Serializable {
         } catch (IOException e) {
             Logger.getLogger(Cesty.class.getName()).log(Level.SEVERE, null, e);
         }
+        return "/cesty/cesty";
     }
 
     public String newCesta() {
