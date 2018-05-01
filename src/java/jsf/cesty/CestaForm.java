@@ -265,7 +265,7 @@ public class CestaForm implements Serializable {
 //        } catch (RollbackException | HeuristicMixedException | HeuristicRollbackException | SecurityException | IllegalStateException | SystemException | NotSupportedException | NamingException ex) {
 //            Logger.getLogger(CestaForm.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-        return "/cesty/cesty";
+        return "/cesty/cesty?faces-redirect=true";
     }
 
 // ====

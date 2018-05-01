@@ -198,14 +198,14 @@ public class Cesty implements Serializable {
 
     public String newCesta() {
         if (cestaForm.newCesta(this.cesty)) {
-            return "/cesty/cestaForm";
+            return "/cesty/cestaForm?faces-redirect=true";
         }
         return null;
     }
 
     public String editCesta() {
         if (cestaForm.editCesta(this.cesta, this.cesty)) {
-            return "/cesty/cestaForm";
+            return "/cesty/cestaForm?faces-redirect=true";
         }
         return null;
     }

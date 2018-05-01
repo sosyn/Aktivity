@@ -3,6 +3,7 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XLXIII. V Cesta.xhtml a CestyForm.xhtml přidáno přesměrování na stránku za název stránky "?faces-redirect=true"  
 XLXII. - Jasper ukončuje session a odkládá ji a tím pádem zničí aplikaci. Je nutné tvorbu PDF dát do samostatného programu a formou parametrů a výsledného souboru to vyřešit. 
        - Jasper je vytvořen jako Singleton
 XLXI.- Konečně funguje tvorba PDF, ale chybí tam české znaky - doladit
