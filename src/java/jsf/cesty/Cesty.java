@@ -153,7 +153,7 @@ public class Cesty implements Serializable {
 //        }
         byte[] html = jasperRun.makePdf(jsonCesta);
         if (html == null || html.length < 100) {
-            return "cesty/cesty?faces-redirect=true";
+            return "cesty/cesty";
         }
 //        BufferedInputStream fis = null;
         OutputStream out = null;
@@ -194,7 +194,7 @@ public class Cesty implements Serializable {
         } catch (IOException e) {
             Logger.getLogger(Cesty.class.getName()).log(Level.SEVERE, null, e);
         }
-        return "/cesty/cesty?faces-redirect=true";
+        return "/cesty/cesty";
     }
 
     public String newCesta() {

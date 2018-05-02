@@ -244,14 +244,14 @@
 				<reportElement x="0" y="80" width="802" height="1" uuid="c718a8e8-303b-4b3c-a56d-2df011734905"/>
 			</line>
 			<staticText>
-				<reportElement x="490" y="25" width="51" height="20" uuid="d46a5494-c0f4-4a78-a223-ef653c3187a1"/>
+				<reportElement x="490" y="33" width="51" height="20" uuid="d46a5494-c0f4-4a78-a223-ef653c3187a1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12"/>
+					<font fontName="Times New Roman - Crimson" size="12"/>
 				</textElement>
 				<text><![CDATA[Číslo:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="550" y="0" width="251" height="35" uuid="5f5d6f4d-ff6a-4eda-9ea1-f9a54209a9c2"/>
+				<reportElement x="550" y="26" width="251" height="35" uuid="5f5d6f4d-ff6a-4eda-9ea1-f9a54209a9c2"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{cesta-UUID}]]></textFieldExpression>
 			</textField>
@@ -262,7 +262,7 @@
 			<textField>
 				<reportElement x="0" y="70" width="230" height="30" uuid="c55260f4-2a8f-4336-b61b-a9769bec27f4"/>
 				<textElement>
-					<font size="12"/>
+					<font fontName="Times New Roman - Crimson" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cesta-osoba-popis}]]></textFieldExpression>
 			</textField>
@@ -276,21 +276,21 @@
 			<staticText>
 				<reportElement x="0" y="50" width="90" height="21" uuid="096b431c-42f3-4500-982e-12896164a5b1"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font fontName="Times New Roman - Crimson" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Organizátor:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="230" y="0" width="40" height="20" uuid="7a29e2c3-5eff-443c-8b37-517c6c8947b7"/>
 				<textElement>
-					<font size="14"/>
+					<font fontName="Times New Roman - Crimson" size="14"/>
 				</textElement>
 				<text><![CDATA[Popis:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="450" y="0" width="40" height="20" uuid="71c99c3f-5723-4a9c-9b8a-2fb8f4566bd4"/>
 				<textElement>
-					<font size="14"/>
+					<font fontName="Times New Roman - Crimson" size="14"/>
 				</textElement>
 				<text><![CDATA[Účel:]]></text>
 			</staticText>
@@ -304,28 +304,28 @@
 			<staticText>
 				<reportElement x="0" y="0" width="31" height="23" uuid="c543d36b-2242-4eae-be54-a1a8222f3ff7"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font fontName="Times New Roman - Crimson" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Od:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="27" width="31" height="23" uuid="3f021076-4a6c-4277-9b74-d77c431e496e"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font fontName="Times New Roman - Crimson" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Do:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="30" y="0" width="180" height="26" uuid="bca0ca00-8df2-4bc3-a442-c87e0da2b335"/>
 				<textElement>
-					<font size="12"/>
+					<font fontName="Times New Roman - Crimson" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cesta-platiod}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="30" y="27" width="180" height="22" uuid="3e86f3fd-1f7d-4bdf-b44d-e9d422b5cd9b"/>
 				<textElement>
-					<font size="12"/>
+					<font fontName="Times New Roman - Crimson" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cesta-platido}]]></textFieldExpression>
 			</textField>
@@ -348,28 +348,6 @@
 					</datasetRun>
 					<jr:column width="54" uuid="10e190f4-2504-471b-87ba-7661f9de0d6d">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
-							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
-							<box>
-								<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-								<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
-								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-							</box>
-							<staticText>
-								<reportElement x="0" y="0" width="54" height="30" uuid="2c10588c-51ce-4040-b000-38083150aa5b"/>
-								<box>
-									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-									<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
-									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-								</box>
-								<textElement>
-									<font fontName="Times New Roman" size="14" isBold="true"/>
-								</textElement>
-								<text><![CDATA[Rezervované zdroje]]></text>
-							</staticText>
-						</jr:tableHeader>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="54" height="30" uuid="adfff5b3-5436-4783-83fe-e6f85e2a5436"/>
@@ -385,7 +363,6 @@
 					</jr:column>
 					<jr:column width="53" uuid="152412b6-13ae-4d73-a99b-bc28b848097f">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="53" height="30" uuid="7f92dc33-c5d2-4fe5-9516-8af425965207"/>
@@ -401,7 +378,6 @@
 					</jr:column>
 					<jr:column width="54" uuid="33e61843-3915-444d-9f6a-3b96b58afa78">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="54" height="30" uuid="0164adc4-7adb-4e1f-9e61-d4c6f7491e95"/>
@@ -417,7 +393,6 @@
 					</jr:column>
 					<jr:column width="53" uuid="6daa98ce-04dd-457f-bdb2-79e4b83fe88b">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="53" height="30" uuid="4fa8f906-a97d-4178-a0b8-a8d9404cd761"/>
@@ -433,7 +408,6 @@
 					</jr:column>
 					<jr:column width="54" uuid="2b7dc2e5-a890-4774-b098-3ba66965a1f9">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="54" height="30" uuid="2b68dd08-5232-444b-95a1-d14583d9ccc9"/>
@@ -449,7 +423,6 @@
 					</jr:column>
 					<jr:column width="53" uuid="534cdf6e-8252-4a4b-a382-267c074a038e">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="53" height="30" uuid="84e4c94c-42e6-4476-8039-8c419aa41b77"/>
@@ -465,7 +438,6 @@
 					</jr:column>
 					<jr:column width="54" uuid="c3adbd80-9d62-4d57-b450-6eb4f9372920">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="54" height="30" uuid="35c17cf8-91a0-439a-8ed9-c8cfc410c5a6"/>
@@ -481,7 +453,6 @@
 					</jr:column>
 					<jr:column width="53" uuid="a7e5ccea-ec58-43cf-adc9-6262a8d9b9dc">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="53" height="30" uuid="9556a96e-ae80-4ead-a735-ab0b549a3875"/>
@@ -497,7 +468,6 @@
 					</jr:column>
 					<jr:column width="53" uuid="521b33e9-0662-4552-abac-a1cdce1d37d6">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="53" height="30" uuid="7b22914b-92f5-4565-88f9-d674b38b3bcb"/>
@@ -513,7 +483,6 @@
 					</jr:column>
 					<jr:column width="53" uuid="9c9baa94-a93a-42a9-b40f-90a766ece771">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column10"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="53" height="30" uuid="8e26338b-d030-4b0d-a313-99d7db170420"/>
@@ -529,7 +498,6 @@
 					</jr:column>
 					<jr:column width="53" uuid="8d95eec3-ac9d-4c39-855a-6243846b50ea">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column11"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="53" height="30" uuid="21ab2465-c059-48fc-b080-47f657ad61af"/>
@@ -545,7 +513,6 @@
 					</jr:column>
 					<jr:column width="53" uuid="07714b63-780e-4307-ae12-d4e0c3463267">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column12"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="53" height="30" uuid="711ce82f-fcc6-48ee-a586-9ba30be064f5"/>
@@ -561,7 +528,6 @@
 					</jr:column>
 					<jr:column width="53" uuid="bf20a261-42e9-484b-aafc-1e9e3ba20b48">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column13"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="53" height="30" uuid="b4865bfb-0c55-4fd9-9c0d-53a569cbb42c"/>
@@ -577,7 +543,6 @@
 					</jr:column>
 					<jr:column width="54" uuid="8039c75b-0d4f-4cd9-b4db-d4625eeb79e6">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column14"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="54" height="30" uuid="c1087a91-27ac-49b1-8ff3-fc3bacf80872"/>
@@ -593,7 +558,6 @@
 					</jr:column>
 					<jr:column width="53" uuid="1b0f445d-5a5f-41fc-8fae-b30925cf27ff">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column15"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="53" height="30" uuid="8b8c8240-4973-4ba1-b147-15df1a2f7ce7"/>
@@ -705,7 +669,7 @@
 							<textField>
 								<reportElement x="0" y="0" width="55" height="30" uuid="39830dda-bb1f-417b-a051-7bb146a67d0c"/>
 								<textElement>
-									<font fontName="Times New Roman"/>
+									<font fontName="Times New Roman - Crimson"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{ucastnik-osoba-popis}]]></textFieldExpression>
 							</textField>
@@ -723,7 +687,7 @@
 							<textField>
 								<reportElement x="0" y="0" width="55" height="30" uuid="aeb0b74b-ce91-4973-9eb4-0d296eef802b"/>
 								<textElement>
-									<font fontName="Times New Roman"/>
+									<font fontName="Times New Roman - Crimson"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{ucastnik-osoba-komentar}]]></textFieldExpression>
 							</textField>

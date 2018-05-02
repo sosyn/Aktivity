@@ -51,7 +51,7 @@ public class Jasper {
             return pdfAsByte;
         }
         try {
-            File sourceFile = new File("d:\\NetBeansProjects\\Aktivity\\src\\java\\sestavy\\Cesta.jasper");
+            File sourceFile = new File("e:\\NetBeansProjects\\Aktivity\\src\\java\\sestavy\\Cesta.jasper");
             File destFile = new File(sourceFile.getParent(), sourceFile.getName() + ".pdf");
 
             //Load compiled jasper report that we created on first section.
