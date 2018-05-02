@@ -236,7 +236,7 @@
 			<staticText>
 				<reportElement stretchType="ContainerBottom" x="180" y="0" width="310" height="70" uuid="061faaac-4c66-48e8-8b62-b66e45434dad"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="36" isBold="true"/>
+					<font fontName="Times New Roman - Crimson" size="36" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Příkaz k jízdě]]></text>
 			</staticText>
@@ -269,7 +269,7 @@
 			<textField>
 				<reportElement x="230" y="21" width="220" height="79" uuid="69a3ea95-a9ca-41c0-b12b-11c476a18553"/>
 				<textElement>
-					<font size="12"/>
+					<font fontName="Times New Roman - Crimson" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cesta-popis}]]></textFieldExpression>
 			</textField>
@@ -297,7 +297,7 @@
 			<textField>
 				<reportElement x="450" y="21" width="350" height="79" uuid="b07590cf-d574-45fb-8f16-2e25936828f3"/>
 				<textElement>
-					<font size="12"/>
+					<font fontName="Times New Roman - Crimson" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cesta-komentar}]]></textFieldExpression>
 			</textField>
