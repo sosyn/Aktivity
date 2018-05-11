@@ -4,7 +4,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
-    <body>
+    <h:body>
         <ui:composition > 
             <p:layout>
                 <p:layoutUnit position="west" size="100">
@@ -16,9 +16,10 @@
                             <p:submenu label="Cesty" icon="fa fa-road">
                                 <p:column>
                                     <p:submenu label="Služební cesty">
-                                        <p:menuitem value="Moje vlastní" url="/faces/cesty/cesty.xhtml" icon="fa fa-user"  title="Cesty, kterých se účastním"/>
-                                        <p:menuitem value="Schvalování" url="/faces/schvalovani/schvalovani.xhtml" icon="fa fa-check-square-o" title="Schvalování cest podřízeným"/>
-                                        <p:menuitem value="Rezervace(interaktivní)" url="/faces/rezervace/rezervace.xhtml" icon="fa fa-car"  title="Přímá rezervace vozidla" />
+                                        <p:menuitem value="Vlastní cesty" url="/faces/cesty/cesty.xhtml" icon="fa fa-user"  title="Cesty, kterých jsem organizátor."/>
+                                        <p:menuitem value="Schvalování účastníků" url="/faces/schvalovani/schvalovani.xhtml" icon="fa fa-user-check" title="Schvalování cest podřízeným"/>
+                                        <p:menuitem value="Schvalování zdrojů" url="/faces/schvalovani/schvalovaniRez.xhtml" icon="fa fa-check-square-o" title="Schvalování rezervovaných zdrojů"/>
+                                        <p:menuitem value="Rezervace(interaktivní)" url="/faces/rezervace/rezervace.xhtml" icon="fa fa-car"  title="Přímá rezervace vozidla výběrem z kalendáře." />
                                     </p:submenu>
                                 </p:column>
                             </p:submenu>               
@@ -45,6 +46,6 @@
                 </p:layoutUnit>
             </p:layout>
         </ui:composition>	
-    </body>
+    </h:body>
 </html>
 
