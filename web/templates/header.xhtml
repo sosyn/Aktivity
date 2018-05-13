@@ -17,9 +17,9 @@
                                 <p:column>
                                     <p:submenu label="Služební cesty">
                                         <p:menuitem value="Vlastní cesty" url="/faces/cesty/cesty.xhtml" icon="fa fa-user"  title="Cesty, kterých jsem organizátor."/>
-                                        <p:menuitem value="Schvalování účastníků" url="/faces/schvalovani/schvalovani.xhtml" icon="fa fa-user-check" title="Schvalování cest podřízeným"/>
-                                        <p:menuitem value="Schvalování zdrojů" url="/faces/schvalovani/schvalovaniRez.xhtml" icon="fa fa-check-square-o" title="Schvalování rezervovaných zdrojů"/>
-                                        <p:menuitem value="Rezervace(interaktivní)" url="/faces/rezervace/rezervace.xhtml" icon="fa fa-car"  title="Přímá rezervace vozidla výběrem z kalendáře." />
+                                        <p:menuitem value="Rezervace vozidel" url="/faces/rezervace/rezervace.xhtml" icon="fa fa-tasks"  title="Přímá rezervace vozidla výběrem z kalendáře." />
+                                        <p:menuitem value="Schvalování účastníků" url="/faces/schvalovani/schvalovani.xhtml" icon="fa fa-users" title="Schvalování cest podřízeným"/>
+                                        <p:menuitem value="Schvalování vozidel" url="/faces/schvalovani/schvalovaniRez.xhtml" icon="fa fa-car" title="Schvalování rezervovaných vozidel"/>
                                     </p:submenu>
                                 </p:column>
                             </p:submenu>               
@@ -27,6 +27,10 @@
                             <p:submenu label="Zdroje" icon="fa fa-university"></p:submenu>               
                             <p:submenu label="Správce" icon="fa fa-list-ol" rendered="true"  >
                                 <p:column>
+                                    <p:submenu label="GDPR" >
+                                        <p:menuitem value="Subjekt údajů" title="Použití osobních dat subjektu údajů" />
+                                        <p:menuitem value="Konfigurace" title="Konfigurace přístupů k osobním údajům" />
+                                    </p:submenu>
                                     <p:submenu label="Seznamy" >
                                         <p:menuitem value="Osoby" url="/faces/spravce/osoby.xhtml" title="Číselník osob-uživatelů" />
                                         <p:menuitem value="Zdroje" url="/faces/spravce/zdroje.xhtml" title="Číselník zdrojů" />
