@@ -7,8 +7,8 @@ package jsf.schvalovani;
 
 import ejb.LoginUser;
 import entity.Osoba;
+import entity.Rezervace;
 import entity.Schvaleni;
-import entity.Ucastnik;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,14 +41,14 @@ public class SchvalovaniRez implements Serializable {
     private boolean platiOdDo = false;
 
     @EJB
-    private ejb.UcastnikFacade ejbUcastnikFacade;
+    private ejb.RezervaceFacade ejbRezervaceFacade;
     @Inject
     LoginUser loginUser;
     private Osoba osoba = null;
 
-    private Ucastnik ucastnik = null;
-    private ArrayList<Ucastnik> ucastnici = new ArrayList<>();
-    private ArrayList<Ucastnik> selUcastnici = new ArrayList<>();
+    private Rezervace rezervace = null;
+    private ArrayList<Rezervace> rezervaceArr = new ArrayList<>();
+    private ArrayList<Rezervace> selRezervace = new ArrayList<>();
 
     @PostConstruct
     void init() {
@@ -60,11 +60,11 @@ public class SchvalovaniRez implements Serializable {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     public void initUcastnici() {
-        this.ucastnici = ejbUcastnikFacade.findUcastnikyWhere(getProperties());
-        this.selUcastnici = new ArrayList<>();
-        if (!ucastnici.isEmpty()) {
-            this.setPlatiOd(getUcastnici().get(0).getPlatiod());
-            this.setPlatiDo(getUcastnici().get(getUcastnici().size() - 1).getPlatido());
+        this.setRezervaceArr(new ArrayList<>(ejbRezervaceFacade.findAll()));
+        this.selRezervace = new ArrayList<>();
+        if (!this.rezervaceArr.isEmpty()) {
+            this.setPlatiOd(this.getRezervaceArr().get(0).getPlatiod());
+            this.setPlatiDo(this.getRezervaceArr().get(this.getRezervaceArr().size() - 1).getPlatido());
         }
     }
 
@@ -111,48 +111,6 @@ public class SchvalovaniRez implements Serializable {
     }
 
     /**
-     * @return the ucastnik
-     */
-    public Ucastnik getUcastnik() {
-        return ucastnik;
-    }
-
-    /**
-     * @param ucastnik the ucastnik to set
-     */
-    public void setUcastnik(Ucastnik ucastnik) {
-        this.ucastnik = ucastnik;
-    }
-
-    /**
-     * @return the ucastnici
-     */
-    public ArrayList<Ucastnik> getUcastnici() {
-        return ucastnici;
-    }
-
-    /**
-     * @param ucastnici the ucastnici to set
-     */
-    public void setUcastnici(ArrayList<Ucastnik> ucastnici) {
-        this.ucastnici = ucastnici;
-    }
-
-    /**
-     * @return the selUcastnici
-     */
-    public ArrayList<Ucastnik> getSelUcastnici() {
-        return selUcastnici;
-    }
-
-    /**
-     * @param selUcastnici the selUcastnici to set
-     */
-    public void setSelUcastnici(ArrayList<Ucastnik> selUcastnici) {
-        this.selUcastnici = selUcastnici;
-    }
-
-    /**
      * @return the cal
      */
     public Calendar getCal() {
@@ -164,6 +122,48 @@ public class SchvalovaniRez implements Serializable {
      */
     public void setCal(Calendar cal) {
         this.cal = cal;
+    }
+
+    /**
+     * @return the rezervace
+     */
+    public Rezervace getRezervace() {
+        return rezervace;
+    }
+
+    /**
+     * @param rezervace the rezervace to set
+     */
+    public void setRezervace(Rezervace rezervace) {
+        this.rezervace = rezervace;
+    }
+
+    /**
+     * @return the rezervaceArr
+     */
+    public ArrayList<Rezervace> getRezervaceArr() {
+        return rezervaceArr;
+    }
+
+    /**
+     * @param rezervaceArr the rezervaceArr to set
+     */
+    public void setRezervaceArr(ArrayList<Rezervace> rezervaceArr) {
+        this.rezervaceArr = rezervaceArr;
+    }
+
+    /**
+     * @return the selRezervace
+     */
+    public ArrayList<Rezervace> getSelRezervace() {
+        return selRezervace;
+    }
+
+    /**
+     * @param selRezervace the selRezervace to set
+     */
+    public void setSelRezervace(ArrayList<Rezervace> selRezervace) {
+        this.selRezervace = selRezervace;
     }
 
     /**
@@ -280,34 +280,28 @@ public class SchvalovaniRez implements Serializable {
     }
 
     public void schvalit() {
-        for (Ucastnik uc : this.selUcastnici) {
-            ejbUcastnikFacade.insSchvaleni(this.osoba, uc, 1, ejbUcastnikFacade.urovenOsobaUcastnik(this.osoba, uc));
+        for (Rezervace rez : this.getSelRezervace()) {
         }
-        this.selUcastnici = new ArrayList<>();
+        this.selRezervace = new ArrayList<>();
     }
 
     public void zamitnout() {
-        for (Ucastnik uc : this.selUcastnici) {
-            ejbUcastnikFacade.insSchvaleni(this.osoba, uc, 2, ejbUcastnikFacade.urovenOsobaUcastnik(this.osoba, uc));
+        for (Rezervace rez : this.getSelRezervace()) {
         }
-        this.selUcastnici = new ArrayList<>();
+        this.selRezervace = new ArrayList<>();
     }
 
-    public void showDetail(Ucastnik ucast) {
-        this.setUcastnik(ucast);
+    public void onRezervaceSelect() {
+        System.out.println("onRezervaceSelect()");
     }
 
-    public void onUcastnikSelect() {
-        System.out.println("onUcastnikSelect()");
+    public void onRezervaceUnSelect() {
+        System.out.println("onRezervaceUnSelect()");
     }
 
-    public void onUcastnikUnSelect() {
-        System.out.println("onUcastnikUnSelect()");
-    }
-
-    public String iconSchvalovani(Ucastnik ucastnik) {
+    public String iconSchvalovani(Rezervace rez) {
         String iconFile = "/images/Otaznik.png";
-        int[] stav = stavSchvaleni(ucastnik);
+        int[] stav = stavSchvaleni(rez);
         switch (stav[0]) {
             case 1:
                 iconFile = "/images/Thumbs up.png";
@@ -319,9 +313,9 @@ public class SchvalovaniRez implements Serializable {
         return iconFile;
     }
 
-    public String iconDispecer(Ucastnik ucastnik) {
+    public String iconDispecer(Rezervace rez) {
         String iconFile = "/images/Help.png";
-        int uroven = ejbUcastnikFacade.urovenOsobaUcastnik(this.osoba, ucastnik);
+        int uroven = 0;
         switch (uroven) {
             case 1:
                 iconFile = "/images/Zastupce.png";
@@ -333,10 +327,10 @@ public class SchvalovaniRez implements Serializable {
         return iconFile;
     }
 
-    private int[] stavSchvaleni(Ucastnik ucastnik) {
+    private int[] stavSchvaleni(Rezervace rez) {
         int[] stav = {0, 0};
         Date lastDate = null;
-        for (Schvaleni schv : ucastnik.getSchvList()) {
+        for (Schvaleni schv : rez.getSchvList()) {
             if (lastDate == null || lastDate.before(schv.getPlatiod())) {
                 lastDate = schv.getPlatiod();
                 stav[0] = schv.getStav();

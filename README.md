@@ -3,7 +3,7 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
-XLXVI. Úprava menu, přidáno GDPR
+XLXVI. Úprava menu, přidáno GDPR, příprava třídy SchvalovaniRez.java
 XLXV. Započaty práce na Schvalování rezervací dispečerem  
 XLXIV. Do knihovny doplněn font Times New Roman - Crimson pro generování češtiny (.JAR files)
 XLXIII. V Cesta.xhtml a CestyForm.xhtml přidáno přesměrování na stránku za název stránky "?faces-redirect=true"  
