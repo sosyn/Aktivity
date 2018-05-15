@@ -33,7 +33,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/cesty/cesty.xhtml</welcome-file>
+        <welcome-file>faces/schvalovani/schvalovaniRez.xhtml</welcome-file>
     </welcome-file-list>
     <mime-mapping>
         <extension>eot</extension>

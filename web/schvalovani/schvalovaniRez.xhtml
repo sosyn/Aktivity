@@ -13,25 +13,25 @@
             <ui:define name="contens">
                 <p:layout fullPage="false">
                     <p:layoutUnit position="center" size="70%" >
-                        <h:form id="formSchvTbl">
-                            <p:dataTable id="tblSchv" value="#{schvalovani.ucastnici}" selection="#{schvalovani.selUcastnici}" rowKey="#{itemUcastnik.id}" var="itemUcastnik" scrollable="true" rowSelectMode="multiple">
-                                <p:ajax event="rowSelect" listener="#{schvalovani.onUcastnikSelect}" update=":formSchvPanel:fieldSetFiltry,:formSchvPanel:fieldSetButtons" />
-                                <p:ajax event="rowUnselect" listener="#{schvalovani.onUcastnikUnSelect}" update=":formSchvPanel:fieldSetFiltry,:formSchvPanel:fieldSetButtons" />                                
-                                <p:ajax event="rowSelectCheckbox" listener="#{schvalovani.onUcastnikSelect}" update=":formSchvPanel:fieldSetFiltry,:formSchvPanel:fieldSetButtons" />
-                                <p:ajax event="rowUnselectCheckbox" listener="#{schvalovani.onUcastnikUnSelect}" update=":formSchvPanel:fieldSetFiltry,:formSchvPanel:fieldSetButtons" />                                
+                        <h:form id="formSchvRe">
+                            <p:dataTable id="tblSchvRe" value="#{schvalovaniRez.rezervaceArr}" selection="#{schvalovaniRez.selRezervace}" rowKey="#{itemRez.id}" var="itemRez" scrollable="true" rowSelectMode="multiple">
+                                <p:ajax event="rowSelect" listener="#{schvalovaniRez.onRezervaceSelect}" update=":formSchvRePanel:fieldSetFiltry,:formSchvRePanel:fieldSetButtons" />
+                                <p:ajax event="rowUnselect" listener="#{schvalovaniRez.onRezervaceUnSelect}" update=":formSchvRePanel:fieldSetFiltry,:formSchvRePanel:fieldSetButtons" />                                
+                                <p:ajax event="rowSelectCheckbox" listener="#{schvalovaniRez.onRezervaceSelect}" update=":formSchvRePanel:fieldSetFiltry,:formSchvRePanel:fieldSetButtons" />
+                                <p:ajax event="rowUnselectCheckbox" listener="#{schvalovaniRez.onRezervaceUnSelect()}" update=":formSchvRePanel:fieldSetFiltry,:formSchvRePanel:fieldSetButtons" />                                
                                 <p:column selectionMode="multiple" style="width:16px;text-align:center" selectRow="false" />
                                 <p:column >
                                     <f:facet name="header" >
                                         <h:outputText value="Stav" title="Stav schválení dispečerem nebo zástupcem" />
                                     </f:facet>
-                                    <h:graphicImage value="#{schvalovani.iconDispecer(itemUcastnik)}" title="Postavení schvalovatele dispečer/zástupce." height="12" width="12" />/
-                                    <h:graphicImage value="#{schvalovani.iconSchvalovani(itemUcastnik)}" title="Stav schválení dispečerem(zástupcem)." height="12" width="12" />
+                                    <h:graphicImage value="#{schvalovaniRez.iconDispecer(itemRez)}" title="Postavení schvalovatele dispečer/zástupce." height="12" width="12" />/
+                                    <h:graphicImage value="#{schvalovaniRez.iconSchvalovani(itemRez)}" title="Stav schválení dispečerem(zástupcem)." height="12" width="12" />
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="Od"/>
                                     </f:facet>
-                                    <h:outputText value="#{itemUcastnik.platiod}">
+                                    <h:outputText value="#{itemRez.platiod}">
                                         <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
                                     </h:outputText>
                                 </p:column>
@@ -39,87 +39,93 @@
                                     <f:facet name="header">
                                         <h:outputText value="Do"/>
                                     </f:facet>
-                                    <h:outputText value="#{itemUcastnik.platido}">
+                                    <h:outputText value="#{itemRez.platido}">
                                         <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
                                     </h:outputText>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
+                                        <h:outputText value="Zdroj"/>
+                                    </f:facet>
+                                    <h:outputText value="#{itemRez.idzdr.popis}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Organizátor"/>
+                                    </f:facet>
+                                    <h:outputText value="#{itemRez.idcest.idoso.popis}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
                                         <h:outputText value="Místo"/>
                                     </f:facet>
-                                    <h:outputText value="#{itemUcastnik.idcest.popis}"/>
+                                    <h:outputText value="#{itemRez.idcest.popis}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="Účel"/>
                                     </f:facet>
-                                    <h:outputText value="#{itemUcastnik.idcest.komentar}"/>
+                                    <h:outputText value="#{itemRez.idcest.komentar}"/>
                                 </p:column>
-
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Účastník"/>
-                                    </f:facet>
-                                    <h:outputText value="#{itemUcastnik.idoso.popis}" />
-                                </p:column>
-
                                 <p:column  style="text-align: center;" >
                                     <f:facet name="header">
                                         <h:outputText value="Detail"/>
                                     </f:facet>
-                                    <p:commandButton ajax="true" actionListener="#{schvalovani.showDetail(itemUcastnik)}" update=":formSchvPanel:fieldSetDetail,:formSchvPanel:fieldSetButtons" icon="fa fa-eye" />
+                                    <p:commandButton ajax="true" actionListener="#{schvalovaniRez.showDetail(itemRez)}" update=":formSchvRePanel:fieldSetDetail,:formSchvRePanel:fieldSetButtons" icon="fa fa-eye" />
                                 </p:column>
                             </p:dataTable>
                         </h:form>
                     </p:layoutUnit>
                     <p:layoutUnit position="east" size="30%">
-                        <h:form id="formSchvPanel">
-                            <p:fieldset id="fieldSetButtons" legend="Akce:" toggleable="true" collapsed="#{schvalovani.selUcastnici.size()==0}" >
+                        <h:form id="formSchvRePanel">
+                            <p:fieldset id="fieldSetButtons" legend="Akce:" toggleable="true" collapsed="#{schvalovaniRez.selRezervace.size()==0}" >
                                 <h:panelGrid columns="1" cellpadding="2">
-                                    <p:commandButton value="Schválit" update=":formSchvTbl" disabled="#{schvalovani.selUcastnici.size()==0}"  actionListener="#{schvalovani.schvalit()}" />
-                                    <p:commandButton value="Zamítnout" update=":formSchvTbl" disabled="#{schvalovani.selUcastnici.size()==0}" actionListener="#{schvalovani.zamitnout()}" />
+                                    <p:commandButton value="Schválit" update=":formSchvRe" disabled="#{schvalovaniRez.selRezervace.size()==0}"  actionListener="#{schvalovaniRez.schvalit()}" />
+                                    <p:commandButton value="Zamítnout" update=":formSchvRe" disabled="#{schvalovaniRez.selRezervace.size()==0}" actionListener="#{schvalovaniRez.zamitnout()}" />
                                 </h:panelGrid>
                             </p:fieldset>
                             <p:fieldset id="fieldSetFiltry" legend="Filtry:" toggleable="true" collapsed="false" >
                                 <h:panelGrid columns="2" cellpadding="2">
                                     <p:outputLabel value="Role vedoucí:" class="right" />
-                                    <p:selectBooleanCheckbox value="#{schvalovani.vedouci}" />
+                                    <p:selectBooleanCheckbox value="#{schvalovaniRez.vedouci}" />
                                     <p:outputLabel value="zástupce:" class="right" />
-                                    <p:selectBooleanCheckbox value="#{schvalovani.zastupce}" />
+                                    <p:selectBooleanCheckbox value="#{schvalovaniRez.zastupce}" />
                                     <p:outputLabel value="Nezpracované:" class="right" />
-                                    <p:selectBooleanCheckbox value="#{schvalovani.nezpracovane}" />
+                                    <p:selectBooleanCheckbox value="#{schvalovaniRez.nezpracovane}" />
                                     <p:outputLabel value="Schválené:" class="right" />
-                                    <p:selectBooleanCheckbox value="#{schvalovani.schvalene}" />
+                                    <p:selectBooleanCheckbox value="#{schvalovaniRez.schvalene}" />
                                     <p:outputLabel value="Zamítnuté:" class="right" />
-                                    <p:selectBooleanCheckbox value="#{schvalovani.zamitnute}" />
+                                    <p:selectBooleanCheckbox value="#{schvalovaniRez.zamitnute}" />
                                     <p:outputLabel value="Datum:" class="right" />
-                                    <p:selectBooleanCheckbox value="#{schvalovani.platiOdDo}"  >
+                                    <p:selectBooleanCheckbox value="#{schvalovaniRez.platiOdDo}"  >
                                         <p:ajax update="platiOd platiDo"/>
                                     </p:selectBooleanCheckbox>
                                     <p:outputLabel for="platiOd" value="Od:" class="right" />
-                                    <p:calendar id="platiOd" value="#{schvalovani.platiOd}" pattern="dd.MM.yyyy" disabled="#{!schvalovani.platiOdDo}">
-                                        <p:ajax event="dateSelect" listener="#{schvalovani.onPlatiOdSelect}" update="platiOd,platiDo" />
+                                    <p:calendar id="platiOd" value="#{schvalovaniRez.platiOd}" pattern="dd.MM.yyyy" disabled="#{!schvalovaniRez.platiOdDo}">
+                                        <p:ajax event="dateSelect" listener="#{schvalovaniRez.onPlatiOdSelect}" update="platiOd,platiDo" />
                                     </p:calendar>
                                     <p:outputLabel for="platiDo" value="Do:"  class="right" />
-                                    <p:calendar id="platiDo" value="#{schvalovani.platiDo}" pattern="dd.MM.yyyy" disabled="#{!schvalovani.platiOdDo}">
-                                        <p:ajax event="dateSelect" listener="#{schvalovani.onPlatiDoSelect}" update="platiOd,platiDo" />
+                                    <p:calendar id="platiDo" value="#{schvalovaniRez.platiDo}" pattern="dd.MM.yyyy" disabled="#{!schvalovaniRez.platiOdDo}">
+                                        <p:ajax event="dateSelect" listener="#{schvalovaniRez.onPlatiDoSelect}" update="platiOd,platiDo" />
                                     </p:calendar>
                                 </h:panelGrid>
-                                <p:commandButton value="Vyber data podle filtru." update=":formSchvTbl" actionListener="#{schvalovani.initUcastnici}" />
+                                <p:commandButton value="Vyber data podle filtru." update=":formSchvRe" actionListener="#{schvalovaniRez.initRezervace}" />
                             </p:fieldset>
-                            <p:fieldset id="fieldSetDetail" legend="Detail cesty:" toggleable="true" collapsed="#{schvalovani.ucastnik==null}" >
+                            <p:fieldset id="fieldSetDetail" legend="Detail rezervace:" toggleable="true" collapsed="#{schvalovaniRez.rezervace==null}" >
                                 <h:panelGrid columns="2" cellpadding="2">
                                     <h:outputText value="Od:" class="right" />
-                                    <h:outputText value="#{schvalovani.ucastnik.platiod}"  />
+                                    <h:outputText value="#{schvalovaniRez.rezervace.platiod}"  />
                                     <h:outputText value="Do:" class="right" />
-                                    <h:outputText value="#{schvalovani.ucastnik.platido}" />
+                                    <h:outputText value="#{schvalovaniRez.rezervace.platido}" />
+                                    <h:outputText value="Zdroj:" class="right" />
+                                    <h:outputText value="#{schvalovaniRez.rezervace.idzdr.popis}" />
                                     <h:outputText value="Místo:" class="right" />
-                                    <h:outputText value="#{schvalovani.ucastnik.idcest.popis}" />
+                                    <h:outputText value="#{schvalovaniRez.rezervace.idcest.popis}" />
                                     <h:outputText value="Účel:" class="right" />
-                                    <h:outputText value="#{schvalovani.ucastnik.idcest.komentar}" />
-                                    <h:outputText value="Rezervace:" class="right" />
+                                    <h:outputText value="#{schvalovaniRez.rezervace.idcest.komentar}" />
+                                    <h:outputText value="Účastníci:" class="right" />
                                     <h:outputText value="N/A" />
-                                    <h:outputText value="Tabulka rezervovaných zdrojů" />
+                                    <h:outputText value="Tabulka účastníků:" />
                                 </h:panelGrid>
                             </p:fieldset>
                         </h:form>

@@ -3,7 +3,10 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
-XLXVI. Úprava menu, přidáno GDPR, příprava třídy SchvalovaniRez.java
+XLXVII. Schvalování zdrojů rozpracováno - je nutné:
+        - ve schvalování osob i zdrojů - omezit schvalování pokud to provedla nadřízená osoba
+        - při prvním vstupu do XHTML načíst data (bez ohledu na skutečnost, že data již dříve načtená byla)
+XLXVI. Úprava menu, přidáno GDPR, příprava třídy SchvalovaniRez.java --- GDPR nutno zcela nově naprogramovat.
 XLXV. Započaty práce na Schvalování rezervací dispečerem  
 XLXIV. Do knihovny doplněn font Times New Roman - Crimson pro generování češtiny (.JAR files)
 XLXIII. V Cesta.xhtml a CestyForm.xhtml přidáno přesměrování na stránku za název stránky "?faces-redirect=true"  
@@ -14,8 +17,8 @@ XLXI.- Konečně funguje tvorba PDF, ale chybí tam české znaky - doladit
 XLX.- Chyba na straně GlassFishe - nutné nastavit parametr: "org.jboss.weld.serialization.beanIdentifierIndexOptimization" = false
       https://stackoverflow.com/questions/36104833/org-jboss-weld-exceptions-illegalstateexception-weld-000227-after-every-change/37455290#37455290
     - Je nutné také nstavit proměnnou : "private static final long serialVersionUID = 1L;"   u všech Serializable objektů
-    - blbne převod cp1250 na UTF-8 (Jasper tvrdí, že to není UTF-8)
-    - naplněna knihovna (LIB) "Jasper651" o nutné .JAR souboryx podle vzoru:
+    - blbne převod cp1250 na UTF-8 (Jasper tvrdí, že to není UTF-8) - nutné nahrát český font do aplikace (viz. Times Ner Roman - Crimson)
+    - naplněna knihovna (LIB) "Jasper651" o nutné .JAR soubory podle vzoru:
       https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports/6.5.1
 XLIX. - je nutné stáhnout hromady knihoven z Apache, Spring, ...
 XLVIII. Vytvořen funkční vzor Cesta.jrxml v Tibco Jasper - subData už fungují - musí být vnořené objekty

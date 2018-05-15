@@ -56,7 +56,7 @@ public class Schvalovani implements Serializable {
         this.setOsoba(loginUser.getOsoba());
         initUcastnici();
     }
-
+  
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     public void initUcastnici() {
@@ -283,14 +283,14 @@ public class Schvalovani implements Serializable {
         for (Ucastnik uc : this.selUcastnici) {
             ejbUcastnikFacade.insSchvaleni(this.osoba, uc, 1, ejbUcastnikFacade.urovenOsobaUcastnik(this.osoba, uc));
         }
-        this.selUcastnici = new ArrayList<>();
+        initUcastnici();
     }
 
     public void zamitnout() {
         for (Ucastnik uc : this.selUcastnici) {
             ejbUcastnikFacade.insSchvaleni(this.osoba, uc, 2, ejbUcastnikFacade.urovenOsobaUcastnik(this.osoba, uc));
         }
-        this.selUcastnici = new ArrayList<>();
+        initUcastnici();
     }
 
     public void showDetail(Ucastnik ucast) {

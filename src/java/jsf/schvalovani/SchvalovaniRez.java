@@ -54,13 +54,13 @@ public class SchvalovaniRez implements Serializable {
     void init() {
         loginUser.initLoginUser();
         this.setOsoba(loginUser.getOsoba());
-        initUcastnici();
+        initRezervace();
     }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-    public void initUcastnici() {
-        this.setRezervaceArr(new ArrayList<>(ejbRezervaceFacade.findAll()));
+    public void initRezervace() {
+        this.rezervaceArr = ejbRezervaceFacade.findRezervaceWhere(getProperties());
         this.selRezervace = new ArrayList<>();
         if (!this.rezervaceArr.isEmpty()) {
             this.setPlatiOd(this.getRezervaceArr().get(0).getPlatiod());
@@ -71,7 +71,7 @@ public class SchvalovaniRez implements Serializable {
     private Properties getProperties() {
         Properties prop = new Properties();
         prop.put("osoba", this.osoba);
-        prop.put("nezpracovane", this.isNezpracovane());
+        prop.put("nezpracovane", this.nezpracovane);
         prop.put("schvalene", this.schvalene);
         prop.put("zamitnute", this.zamitnute);
         prop.put("vedouci", this.vedouci);
@@ -265,8 +265,8 @@ public class SchvalovaniRez implements Serializable {
     }
 
 ///////    
-    public void refreshUcatnici() {
-        System.out.println("onPlatiDoSelect()");
+    public void refreshRezervace() {
+        System.out.println("refreshRezervace()");
     }
 
     public void onPlatiOdSelect() {
@@ -281,14 +281,20 @@ public class SchvalovaniRez implements Serializable {
 
     public void schvalit() {
         for (Rezervace rez : this.getSelRezervace()) {
+            ejbRezervaceFacade.insSchvaleni(this.osoba, rez, 1, ejbRezervaceFacade.urovenOsobaRez(this.osoba, rez));
         }
-        this.selRezervace = new ArrayList<>();
+        initRezervace();
     }
 
     public void zamitnout() {
         for (Rezervace rez : this.getSelRezervace()) {
+            ejbRezervaceFacade.insSchvaleni(this.osoba, rez, 2, ejbRezervaceFacade.urovenOsobaRez(this.osoba, rez));
         }
-        this.selRezervace = new ArrayList<>();
+        initRezervace();
+    }
+
+    public void showDetail(Rezervace rez) {
+        this.setRezervace(rez);
     }
 
     public void onRezervaceSelect() {
@@ -315,7 +321,8 @@ public class SchvalovaniRez implements Serializable {
 
     public String iconDispecer(Rezervace rez) {
         String iconFile = "/images/Help.png";
-        int uroven = 0;
+            int uroven = ejbRezervaceFacade.urovenOsobaRez(this.osoba, rez);
+
         switch (uroven) {
             case 1:
                 iconFile = "/images/Zastupce.png";
