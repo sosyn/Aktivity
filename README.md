@@ -3,6 +3,7 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XLXVIII. Schvalování zdrojů - změna ikon
 XLXVII. Schvalování zdrojů rozpracováno - je nutné:
         - ve schvalování osob i zdrojů - omezit schvalování pokud to provedla nadřízená osoba
         - při prvním vstupu do XHTML načíst data (bez ohledu na skutečnost, že data již dříve načtená byla)

@@ -306,7 +306,7 @@ public class SchvalovaniRez implements Serializable {
     }
 
     public String iconSchvalovani(Rezervace rez) {
-        String iconFile = "/images/Otaznik.png";
+        String iconFile = "/images/BlueLine.png";
         int[] stav = stavSchvaleni(rez);
         switch (stav[0]) {
             case 1:
@@ -320,7 +320,7 @@ public class SchvalovaniRez implements Serializable {
     }
 
     public String iconDispecer(Rezervace rez) {
-        String iconFile = "/images/Help.png";
+        String iconFile = "/images/BlueLine.png";
             int uroven = ejbRezervaceFacade.urovenOsobaRez(this.osoba, rez);
 
         switch (uroven) {
