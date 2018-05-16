@@ -20,6 +20,8 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import jsf.helper.HelperZdroj;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -44,6 +46,9 @@ public class SchvalovaniRez implements Serializable {
     private ejb.RezervaceFacade ejbRezervaceFacade;
     @Inject
     LoginUser loginUser;
+    @Inject
+    HelperZdroj helperZdroj;
+
     private Osoba osoba = null;
 
     private Rezervace rezervace = null;
@@ -297,6 +302,12 @@ public class SchvalovaniRez implements Serializable {
         this.setRezervace(rez);
     }
 
+    public void changeZdroj(Rezervace rez) {
+        helperZdroj.initHelperZdroj(rez.getIdcest());
+        RequestContext.getCurrentInstance()
+                .openDialog("/helper/helperZdroj", null, null);
+    }
+
     public void onRezervaceSelect() {
         System.out.println("onRezervaceSelect()");
     }
@@ -321,8 +332,7 @@ public class SchvalovaniRez implements Serializable {
 
     public String iconDispecer(Rezervace rez) {
         String iconFile = "/images/BlueLine.png";
-            int uroven = ejbRezervaceFacade.urovenOsobaRez(this.osoba, rez);
-
+        int uroven = ejbRezervaceFacade.urovenOsobaRez(this.osoba, rez);
         switch (uroven) {
             case 1:
                 iconFile = "/images/Zastupce.png";
