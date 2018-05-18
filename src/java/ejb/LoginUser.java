@@ -11,11 +11,13 @@ import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
+import javax.inject.Named;
 
 /**
  *
  * @author Ivo
  */
+@Named("loginuser")
 @Stateless
 public class LoginUser {
 
