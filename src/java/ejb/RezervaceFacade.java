@@ -10,10 +10,12 @@ import entity.Osoba;
 import entity.Rezervace;
 import entity.Rezervace_;
 import entity.Schvaleni;
+import entity.Schvaleni_;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -222,5 +224,45 @@ public class RezervaceFacade extends AbstractFacade<Rezervace> {
             throw e;
         }
         return uroven;
+    }
+
+    public int lastSchvaleniRez(Rezervace rez) {
+        int uroven = 0;
+        String selUroven
+                = "SELECT sch.uroven "
+                + "FROM schvaleni sch "
+                + "WHERE sch.idrez=? "
+                + "ORDER BY sch.platiod DESC LIMIT 1 ";
+        Query q = em.createNativeQuery(selUroven)
+                .setParameter(1, rez.getId());
+        try {
+            Object result = (Object) q.getSingleResult();
+            if (result instanceof Object) {
+                uroven = (int) result;
+            }
+        } catch (NoResultException e) {
+            uroven = 0;
+        } catch (Exception e) {
+            throw e;
+        }
+        return uroven;
+    }
+
+    public List<Rezervace> getLastSchvaleniRez(Rezervace rez) {
+        javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+        javax.persistence.criteria.CriteriaQuery cq = cb.createQuery(Schvaleni.class);
+        javax.persistence.criteria.Root<Schvaleni> schRoot = cq.from(Schvaleni.class);
+        cq.select(schRoot);
+
+        Path pathIDRez = schRoot.get(Schvaleni_.idrez);
+
+        Predicate prediWhere = cb.equal(pathIDRez, rez);
+
+        cq.where(prediWhere);
+        cq.orderBy(cb.desc(schRoot.get(Schvaleni_.platiod)));
+
+        List<Rezervace> rl = getEntityManager().createQuery(cq).getResultList();
+
+        return rl;
     }
 }

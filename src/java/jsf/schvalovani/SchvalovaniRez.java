@@ -35,6 +35,7 @@ public class SchvalovaniRez implements Serializable {
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
     private Date platiOd = new Date();
     private Date platiDo = new Date();
+
     private boolean vedouci = true;
     private boolean zastupce = true;
     private boolean nezpracovane = true;
@@ -286,14 +287,18 @@ public class SchvalovaniRez implements Serializable {
 
     public void schvalit() {
         for (Rezervace rez : this.getSelRezervace()) {
-            ejbRezervaceFacade.insSchvaleni(this.osoba, rez, 1, ejbRezervaceFacade.urovenOsobaRez(this.osoba, rez));
+            if (mohuSchvalovat(rez)) {
+                ejbRezervaceFacade.insSchvaleni(this.osoba, rez, 1, ejbRezervaceFacade.urovenOsobaRez(this.osoba, rez));
+            }
         }
         initRezervace();
     }
 
     public void zamitnout() {
         for (Rezervace rez : this.getSelRezervace()) {
-            ejbRezervaceFacade.insSchvaleni(this.osoba, rez, 2, ejbRezervaceFacade.urovenOsobaRez(this.osoba, rez));
+            if (mohuSchvalovat(rez)) {
+                ejbRezervaceFacade.insSchvaleni(this.osoba, rez, 2, ejbRezervaceFacade.urovenOsobaRez(this.osoba, rez));
+            }
         }
         initRezervace();
     }
@@ -355,5 +360,18 @@ public class SchvalovaniRez implements Serializable {
             }
         }
         return stav;
+    }
+
+    public boolean mohuSchvalovat(Rezervace rez) {
+        boolean ret = true;
+        cal.setTime(new Date());
+        // Navysit cas rezervace o predstih 15 minut, aby se omezila moznost schvalovani na posledni chvili
+        cal.add(Calendar.MINUTE, 15);
+        int urovenOsoba = ejbRezervaceFacade.urovenOsobaRez(this.osoba, rez);
+        // Pri pomalem zpracovani je mozne vyuzit i funkci  stavSchvaleni(Rezervace rez)
+        int lastUrovenSchvRez = ejbRezervaceFacade.lastSchvaleniRez(rez);
+        // Aktualne prihlasena osoba musi mit vyssi uroven prava nez posledni schvalovatel
+        ret = (urovenOsoba >= lastUrovenSchvRez && rez.getPlatiod().after(cal.getTime()));
+        return ret;
     }
 }
