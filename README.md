@@ -3,6 +3,7 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XLXX. Do schvalovacích tabulek byly vloženy nadpisy 
 XLXIX. Schvalování zdrojů - vytvořena funkce na ne|lze editovat náhradu vozidla a ošetřen cyklus schválení a zamítnutí (zda-li osoba může)
 XLXVIII. Schvalování zdrojů - změna ikon
 XLXVII. Schvalování zdrojů rozpracováno - je nutné:

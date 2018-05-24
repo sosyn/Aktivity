@@ -15,6 +15,9 @@
                     <p:layoutUnit position="center" size="70%" >
                         <h:form id="formSchvRe">
                             <p:dataTable id="tblSchvRe" value="#{schvalovaniRez.rezervaceArr}" selection="#{schvalovaniRez.selRezervace}" rowKey="#{itemRez.id}" var="itemRez" scrollable="true" rowSelectMode="multiple">
+                                <f:facet name="header">
+                                    Schvalování rezervací vozidel
+                                </f:facet>
                                 <p:ajax event="rowSelect" listener="#{schvalovaniRez.onRezervaceSelect}" update=":formSchvRePanel:fieldSetFiltry,:formSchvRePanel:fieldSetButtons" />
                                 <p:ajax event="rowUnselect" listener="#{schvalovaniRez.onRezervaceUnSelect}" update=":formSchvRePanel:fieldSetFiltry,:formSchvRePanel:fieldSetButtons" />                                
                                 <p:ajax event="rowSelectCheckbox" listener="#{schvalovaniRez.onRezervaceSelect}" update=":formSchvRePanel:fieldSetFiltry,:formSchvRePanel:fieldSetButtons" />
