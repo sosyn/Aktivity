@@ -12,27 +12,32 @@
     <h:body>
         <ui:composition template = "/templates/templateMain.xhtml">	
             <ui:define name="contens">
-                <h:form id="dispecerForm" >
                     <p:panelGrid>
                         <!-- style="height:700px" -->
                         <p:row>
+                
                             <p:column id="dispHlCol" width="40%" >
-                                <ui:include src="dispecerFormDisp.xhtml" />
+                                <h:form id="dispecerFormHl" >
+                                    <ui:include src="dispecerFormDisp.xhtml" />
                                 <ui:include src="dispecerFormZast.xhtml" />
+                </h:form>
                             </p:column>
                             <p:column id="dispPolCol" width="700px">
+                <h:form id="dispecerFormPol" >
                                 <ui:include src="dispecerFormOso.xhtml"  />
                                 <ui:include src="dispecerFormZdr.xhtml" />
+                </h:form>
                             </p:column>
                         </p:row>
                         <p:row>
                             <p:column colspan="2" id="dispHlBtnCol">
+                <h:form id="dispecerFormBtn" >
                                 <p:commandButton id="dispecerOK" action="#{dispecerForm.save()}" value="OK" icon="fa fa-file-o" ajax="false" />
                                 <p:commandButton id="dispecerCancle" value="Zpět" action="#{dispecerForm.cancel()}" icon="fa fa-edit"  ajax="false" />
+                </h:form>
                             </p:column>                          
                         </p:row>
                     </p:panelGrid>
-                </h:form>
    
             </ui:define>
         </ui:composition>

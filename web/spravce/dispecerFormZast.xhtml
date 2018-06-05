@@ -14,7 +14,7 @@
         <p:row>
             <p:column>
                 <p:dataTable id="dataTableZast" value="#{daoDispecer.dispecerHl.zastupciList}" var="item" selectionMode="single" selection="#{daoDispecer.zastupce}" rowKey="#{item.id}" editable="true" editMode="cell" scrollable="true" scrollHeight="200" >
-                    <p:ajax event="rowSelect" update=":dispecerForm:ZastupceNew :dispecerForm:ZastupceDel" />
+                    <p:ajax event="rowSelect" update=":dispecerFormHl:ZastupceNew :dispecerFormHl:ZastupceDel" />
 
                     <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains" width="150">
                         <f:facet name="header">

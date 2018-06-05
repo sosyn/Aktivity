@@ -63,6 +63,12 @@
                                     <f:facet name="header">
                                         Účastníci
                                     </f:facet>
+                                    <p:column  >
+                                        <f:facet name="header" >
+                                            <h:outputText value="Schvalovatel"/>
+                                        </f:facet>
+                                        <h:graphicImage value="#{cestaForm.iconSchvaleni(itemUcast)}" title="Stav schválení účastníka nadřízeným." />
+                                    </p:column>
                                     <p:column sortBy="#{itemUcast.idoso.popis}"  filterBy="#{itemUcast.idoso.popis}" filterMatchMode="contains" >
                                         <f:facet name="header" >
                                             <h:outputText value="Účastník"/>

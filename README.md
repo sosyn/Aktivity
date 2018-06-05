@@ -3,8 +3,11 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XLXXI. Ve formuláři "vlastní cesty" byl přidán symbol, jestli byl účastník nebo zdroj schválen nabo neschválen
+   - ve schvalování je potřeba udělat refresh schvalované tabulky (zdroj nebo účastník) po schválení nebo zamítnutí - nepřekreslí se szmbol
+   - ve formuláři dispečera je potřeba udělat refresh pravé strany s výpisem buď zdroje nebo účastníka - hotovo - je nutné překreslit návratovou tabulku všech dispečerů
 XLXX. Do schvalovacích tabulek byly vloženy nadpisy 
-XLXIX. Schvalování zdrojů - vytvořena funkce na ne|lze editovat náhradu vozidla a ošetřen cyklus schválení a zamítnutí (zda-li osoba může)
+XLXIX. Schvalování zdrojů - vytvořena funkce na ne|lze editovat záměnu vozidla a ošetřen cyklus schválení a zamítnutí (zda-li osoba může)
 XLXVIII. Schvalování zdrojů - změna ikon
 XLXVII. Schvalování zdrojů rozpracováno - je nutné:
         - ve schvalování osob i zdrojů - omezit schvalování pokud to provedla nadřízená osoba

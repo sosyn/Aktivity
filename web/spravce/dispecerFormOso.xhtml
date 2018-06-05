@@ -14,7 +14,7 @@
         <p:row> 
             <p:column>
                 <p:dataTable id="DispPolDataTable" value="#{daoDispecer.dispecerHl.dispecerPolList}" var="item" selectionMode="single" selection="#{daoDispecer.dispecerPol}" rowKey="#{item.id}" editable="true" editMode="cell" rendered="#{dispecerForm.gridDispOso}"  scrollable="true" scrollHeight="450">
-                    <p:ajax event="rowSelect" update=":dispecerForm:DispPolOsoNew :dispecerForm:DispPolOsoDel" />
+                    <p:ajax event="rowSelect" update=":dispecerFormPol:DispPolOsoNew :dispecerFormPol:DispPolOsoDel" />
 
                     <p:column sortBy="#{item.idoso.popis}" filterBy="#{item.idoso.popis}" filterMatchMode="contains" width="200">
                         <f:facet name="header">
@@ -71,10 +71,10 @@
                 </p:dataTable>
             </p:column>
             <p:column >
-                <p:commandButton id="DispPolOsoNew" value="Nový" action="#{dispecerForm.dispPolOsoNew}" disabled="#{!dispecerForm.isButtonDispPolOsoEnabled('new')}" update=":growl :dispecerForm:DispPolDataTable" icon="fa fa-file-o" rendered="#{dispecerForm.gridDispOso}" >
-                    <p:ajax event="dialogReturn" listener="#{dispecerForm.addDispPolOso}"  update=":growl :dispecerForm:DispPolDataTable" />                                        
+                <p:commandButton id="DispPolOsoNew" value="Nový" action="#{dispecerForm.dispPolOsoNew}" disabled="#{!dispecerForm.isButtonDispPolOsoEnabled('new')}" update=":growl :dispecerFormPol:DispPolDataTable" icon="fa fa-file-o" rendered="#{dispecerForm.gridDispOso}" >
+                    <p:ajax event="dialogReturn" listener="#{dispecerForm.addDispPolOso}"  update=":growl :dispecerFormPol:DispPolDataTable" />                                        
                 </p:commandButton> 
-                <p:commandButton id="DispPolOsoDel" value="Smazat"  action="#{daoDispecer.dispPolDel}" disabled="#{!dispecerForm.isButtonDispPolOsoEnabled('delete')}"  update=":growl :dispecerForm:DispPolDataTable"  icon="fa fa-remove" rendered="#{dispecerForm.gridDispOso}" />
+                <p:commandButton id="DispPolOsoDel" value="Smazat"  action="#{daoDispecer.dispPolDel}" disabled="#{!dispecerForm.isButtonDispPolOsoEnabled('delete')}"  update=":growl :dispecerFormPol:DispPolDataTable"  icon="fa fa-remove" rendered="#{dispecerForm.gridDispOso}" />
             </p:column>
         </p:row> 
     </p:panelGrid>

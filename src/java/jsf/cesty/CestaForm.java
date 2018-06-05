@@ -9,6 +9,7 @@ import ejb.LoginUser;
 import entity.Cesta;
 import entity.Osoba;
 import entity.Rezervace;
+import entity.Schvaleni;
 import entity.Typucast;
 import entity.Typzdroje;
 import entity.Ucastnik;
@@ -16,6 +17,7 @@ import entity.Zdroj;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -305,6 +307,28 @@ public class CestaForm implements Serializable {
         this.getCesta().getUcastnikList().remove(this.ucastnik);
     }
 
+    public String iconSchvaleni(Ucastnik itemUcast) {
+        Date platnost = null;
+        int stav = 0;
+        String iconFile = "/images/BluePoint.png";
+        if (itemUcast != null && itemUcast instanceof Ucastnik) {
+            for (Schvaleni schv : itemUcast.getSchvList()) {
+                if (platnost == null || schv.getPlatiod().after(platnost)) {
+                    stav = schv.getStav();
+                }
+            }
+            switch (stav) {
+                case 1:
+                    iconFile = "/images/Thumbs up.png";
+                    break;
+                case 2:
+                    iconFile = "/images/Thumbs down.png";
+                    break;
+            }
+        }
+        return iconFile;
+    }
+
 // ====
 // Helper pro vyber zdroje k rezervaci
 //=====
@@ -329,20 +353,34 @@ public class CestaForm implements Serializable {
         this.getCesta().getRezervaceList().add(rezervace);
     }
 
-    public String iconDispecer(Rezervace itemRez) {
-        String iconFile = null;
-        if (itemRez != null && itemRez instanceof Rezervace) {
-            iconFile = "/images/Otaznik.png";
-        }
-        return iconFile;
-    }
-
     public void rezervaceDelete() {
         if (!this.rezervace.isNewEntity()) {
             this.rezervace.setDelEntity(true);
             this.rezervaceListDel.add(this.rezervace);
         }
         this.getCesta().getRezervaceList().remove(this.rezervace);
+    }
+
+    public String iconDispecer(Rezervace itemRez) {
+        Date platnost = null;
+        int stav = 0;
+        String iconFile = "/images/BluePoint.png";
+        if (itemRez != null && itemRez instanceof Rezervace) {
+            for (Schvaleni schv : itemRez.getSchvList()) {
+                if (platnost == null || schv.getPlatiod().after(platnost)) {
+                    stav = schv.getStav();
+                }
+            }
+            switch (stav) {
+                case 1:
+                    iconFile = "/images/Thumbs up.png";
+                    break;
+                case 2:
+                    iconFile = "/images/Thumbs down.png";
+                    break;
+            }
+        }
+        return iconFile;
     }
 
     public Map<String, Object> getDialogOptions() {
