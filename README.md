@@ -3,6 +3,7 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
+XLXXII. Byl změněn dotaz na pole cest - zohledněn výskyt účastníka v cestě jiného zřizovatele, třeba dodělat ještě filtr PlatiOd - PlatiDo
 XLXXI. Ve formuláři "vlastní cesty" byl přidán symbol, jestli byl účastník nebo zdroj schválen nabo neschválen
    - ve schvalování je potřeba udělat refresh schvalované tabulky (zdroj nebo účastník) po schválení nebo zamítnutí - nepřekreslí se szmbol
    - ve formuláři dispečera je potřeba udělat refresh pravé strany s výpisem buď zdroje nebo účastníka - hotovo - je nutné překreslit návratovou tabulku všech dispečerů

@@ -74,6 +74,21 @@ public class CestaFacade extends AbstractFacade<Cesta> {
 //        Query q = em.createNativeQuery(selCesty,Cesta.class).setParameter(1, osoba.getId());
         return q.getResultList();
     }
+    
+      public ArrayList<Cesta>  findCestyOsobaOrUcastnik(Osoba osoba) {
+        Query q = em.createNativeQuery("SELECT * FROM aktivity.public.cesta ce " +
+                                        "WHERE ce.idoso=?::uuid OR " +
+                                        "(SELECT count(*) FROM aktivity.public.ucastnik uc WHERE uc.idoso=?::uuid )>0 " +
+                                        "ORDER BY ce.platiod ASC ", Cesta.class)
+                .setParameter(1, osoba.getId())
+                .setParameter(2, osoba.getId());
+
+//            em.getTransaction().begin();
+        q.setFlushMode(FlushModeType.COMMIT);
+        List<Cesta> listRe = q.getResultList();
+
+        return new ArrayList<>(listRe);
+    }
 
     public boolean saveCestaList(ArrayList<Cesta> cestaList) {
         for (Cesta cestaLocal : cestaList) {
