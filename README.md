@@ -3,25 +3,26 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
-XLXXII. Byl změněn dotaz na pole cest - zohledněn výskyt účastníka v cestě jiného zřizovatele, třeba dodělat ještě filtr PlatiOd - PlatiDo
-XLXXI. Ve formuláři "vlastní cesty" byl přidán symbol, jestli byl účastník nebo zdroj schválen nabo neschválen
+LXIII. V tabulce cesty dodělány ve formuláři "cesty.xml" filtry na Platí Od-Do, účastník a vlastník - dodělat vazbu na výběr podkladových dat k zobrazení a přidat sloupec "Vlastník, účastník"
+LXII. Byl změněn dotaz na pole cest - zohledněn výskyt účastníka v cestě jiného zřizovatele, třeba dodělat ještě filtr PlatiOd - PlatiDo
+LXI. Ve formuláři "vlastní cesty" byl přidán symbol, jestli byl účastník nebo zdroj schválen nabo neschválen
    - ve schvalování je potřeba udělat refresh schvalované tabulky (zdroj nebo účastník) po schválení nebo zamítnutí - nepřekreslí se szmbol
    - ve formuláři dispečera je potřeba udělat refresh pravé strany s výpisem buď zdroje nebo účastníka - hotovo - je nutné překreslit návratovou tabulku všech dispečerů
-XLXX. Do schvalovacích tabulek byly vloženy nadpisy 
-XLXIX. Schvalování zdrojů - vytvořena funkce na ne|lze editovat záměnu vozidla a ošetřen cyklus schválení a zamítnutí (zda-li osoba může)
-XLXVIII. Schvalování zdrojů - změna ikon
-XLXVII. Schvalování zdrojů rozpracováno - je nutné:
+LX. Do schvalovacích tabulek byly vloženy nadpisy 
+LIX. Schvalování zdrojů - vytvořena funkce na ne|lze editovat záměnu vozidla a ošetřen cyklus schválení a zamítnutí (zda-li osoba může)
+LVIII. Schvalování zdrojů - změna ikon
+LVII. Schvalování zdrojů rozpracováno - je nutné:
         - ve schvalování osob i zdrojů - omezit schvalování pokud to provedla nadřízená osoba
         - při prvním vstupu do XHTML načíst data (bez ohledu na skutečnost, že data již dříve načtená byla)
-XLXVI. Úprava menu, přidáno GDPR, příprava třídy SchvalovaniRez.java --- GDPR nutno zcela nově naprogramovat.
-XLXV. Započaty práce na Schvalování rezervací dispečerem  
-XLXIV. Do knihovny doplněn font Times New Roman - Crimson pro generování češtiny (.JAR files)
-XLXIII. V Cesta.xhtml a CestyForm.xhtml přidáno přesměrování na stránku za název stránky "?faces-redirect=true"  
-XLXII. - Jasper ukončuje session a odkládá ji a tím pádem zničí aplikaci. Je nutné tvorbu PDF dát do samostatného programu a formou parametrů a výsledného souboru to vyřešit. 
+LVI. Úprava menu, přidáno GDPR, příprava třídy SchvalovaniRez.java --- GDPR nutno zcela nově naprogramovat.
+LV. Započaty práce na Schvalování rezervací dispečerem  
+LIV. Do knihovny doplněn font Times New Roman - Crimson pro generování češtiny (.JAR files)
+LIII. V Cesta.xhtml a CestyForm.xhtml přidáno přesměrování na stránku za název stránky "?faces-redirect=true"  
+LII. - Jasper ukončuje session a odkládá ji a tím pádem zničí aplikaci. Je nutné tvorbu PDF dát do samostatného programu a formou parametrů a výsledného souboru to vyřešit. 
        - Jasper je vytvořen jako Singleton
-XLXI.- Konečně funguje tvorba PDF, ale chybí tam české znaky - doladit
+LI.- Konečně funguje tvorba PDF, ale chybí tam české znaky - doladit
      - otevírat PDF nebo HTML v novém okně   
-XLX.- Chyba na straně GlassFishe - nutné nastavit parametr: "org.jboss.weld.serialization.beanIdentifierIndexOptimization" = false
+L.- Chyba na straně GlassFishe - nutné nastavit parametr: "org.jboss.weld.serialization.beanIdentifierIndexOptimization" = false
       https://stackoverflow.com/questions/36104833/org-jboss-weld-exceptions-illegalstateexception-weld-000227-after-every-change/37455290#37455290
     - Je nutné také nstavit proměnnou : "private static final long serialVersionUID = 1L;"   u všech Serializable objektů
     - blbne převod cp1250 na UTF-8 (Jasper tvrdí, že to není UTF-8) - nutné nahrát český font do aplikace (viz. Times Ner Roman - Crimson)

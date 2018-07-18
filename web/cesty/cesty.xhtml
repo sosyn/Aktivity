@@ -12,21 +12,15 @@
         <ui:composition template = "/templates/templateMain.xhtml">	
             <ui:define name="contens">
                 <p:layout fullPage="false">
-                    <p:layoutUnit position="north" size="50">
-                        <h:form id="platnostForm">
-                            <p:outputLabel for="platiOd" value="Od:" />
-                            <p:calendar id="platiOd" value="#{cesty.platiOd}" pattern="dd.MM.yyyy">
-                                <p:ajax event="dateSelect" listener="#{cesty.onPlatiOdSelect}" update="platiOd,platiDo" />
-                            </p:calendar>
-                            <p:outputLabel for="platiDo" value="Do:" />
-                            <p:calendar id="platiDo" value="#{cesty.platiDo}" pattern="dd.MM.yyyy">
-                                <p:ajax event="dateSelect" listener="#{cesty.onPlatiDoSelect}" update="platiOd,platiDo" />
-                            </p:calendar>
-                        </h:form>
-                    </p:layoutUnit>
-                    <p:layoutUnit position="center" size="50" >
+                    <!--
+                                        <p:layoutUnit position="north" size="50">
+                                            <h:form id="platnostForm">
+                                            </h:form>
+                                        </p:layoutUnit>
+                    -->
+                    <p:layoutUnit position="center" size="85%" >
                         <h:form id="formCesty">
-                            <p:dataTable id="cestyCesty" value="#{cesty.cesty}" selection="#{cesty.cesta}" rowKey="#{itemCesta.id}" var="itemCesta"  selectionMode="single">
+                            <p:dataTable id="tblCesty" value="#{cesty.cesty}" selection="#{cesty.cesta}" rowKey="#{itemCesta.id}" var="itemCesta"  selectionMode="single">
                                 <f:facet name="header">
                                     Moje pracovní cesty
                                 </f:facet>
@@ -63,12 +57,37 @@
                             </p:dataTable>
                         </h:form>
                     </p:layoutUnit>
-                    <p:layoutUnit position="east" size="100">
+                    <p:layoutUnit position="east" size="15%">
                         <h:form id="formBtn">
-                            <p:commandButton id="CestaNew" value="Nová" action="#{cesty.newCesta()}"  icon="fa fa-file-o" ajax="false" />
-                            <p:commandButton id="CestaEdit" value="Edituj" action="#{cesty.editCesta()}" disabled="#{cesty.cesty.size()==0 || cesty.cesta==null}" icon="fa fa-edit" ajax="false" />
-                            <p:commandButton id="CestaDel" value="Smazat" disabled="#{cesty.cesty.size()==0 || cesty.cesta==null}" icon="fa fa-remove" ajax="false" />
-                            <p:commandButton  id="CestaTiskPruvodka" value="Průvodka" action="#{cesty.printPruvodka}" disabled="#{cesty.cesty.size()==0 || cesty.cesta==null}" icon="fa fa-id-card-o" ajax="false" onclick="this.form.target = '_blank'" />
+                            <p:fieldset legend="Cesta:" >
+                                <h:panelGrid columns="1" >
+                                    <p:commandButton id="CestaNew" value="Nová" action="#{cesty.newCesta()}"  icon="fa fa-file-o" ajax="false" />
+                                    <p:commandButton id="CestaEdit" value="Edituj" action="#{cesty.editCesta()}" disabled="#{cesty.cesty.size()==0 || cesty.cesta==null}" icon="fa fa-edit" ajax="false" />
+                                    <p:commandButton id="CestaDel" value="Smazat" disabled="#{cesty.cesty.size()==0 || cesty.cesta==null}" icon="fa fa-remove" ajax="false" />
+                                    <p:commandButton  id="CestaTiskPruvodka" value="Průvodka" action="#{cesty.printPruvodka}" disabled="#{cesty.cesty.size()==0 || cesty.cesta==null}" icon="fa fa-id-card-o" ajax="false" onclick="this.form.target = '_blank'" />
+                                </h:panelGrid>
+                            </p:fieldset>
+
+                            <p:fieldset legend="Filtr:" >
+                                <h:panelGrid columns="2">
+                                    <p:outputLabel for="platiOd" value="Od:" />
+                                    <p:calendar id="platiOd" value="#{cesty.platiOd}" pattern="dd.MM.yyyy">
+                                        <p:ajax event="dateSelect" listener="#{cesty.onPlatiOdSelect}" update="platiOd,platiDo" />
+                                    </p:calendar>
+                                    <p:outputLabel for="platiDo" value="Do:" />
+                                    <p:calendar id="platiDo" value="#{cesty.platiDo}" pattern="dd.MM.yyyy">
+                                        <p:ajax event="dateSelect" listener="#{cesty.onPlatiDoSelect}" update="platiOd,platiDo" />
+                                    </p:calendar>
+                                    <p:outputLabel for="vlastnik" value="Vlastník:" />
+                                    <p:selectBooleanCheckbox id="vlastnik"  value="#{cesty.vlastnik}" valueChangeListener="#{cesty.onVlastnikClick}">
+                                        <p:ajax update=":formCesty:tblCesty" />
+                                    </p:selectBooleanCheckbox>
+                                    <p:outputLabel for="ucastnik" value="Účastník:" />
+                                    <p:selectBooleanCheckbox id="ucastnik"  value="#{cesty.ucastnik}" valueChangeListener="#{cesty.onUcastnikClick}">
+                                        <p:ajax update=":formCesty:tblCesty" />                                        
+                                    </p:selectBooleanCheckbox>
+                                </h:panelGrid>
+                            </p:fieldset>
                         </h:form>
                     </p:layoutUnit>
                 </p:layout>

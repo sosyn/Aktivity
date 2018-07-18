@@ -39,6 +39,9 @@ public class Cesty implements Serializable {
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
     private Date platiOd = new Date();
     private Date platiDo = new Date();
+    private boolean vlastnik=true;
+    private boolean ucastnik=false;
+    
 
     @EJB
     private ejb.CestaFacade ejbCestaFacade;
@@ -96,6 +99,40 @@ public class Cesty implements Serializable {
     }
 
     public void onPlatiDoSelect() {
+    }
+
+    /**
+     * @return the vlastnik
+     */
+    public boolean isVlastnik() {
+        return vlastnik;
+    }
+
+    /**
+     * @param vlastnik the vlastnik to set
+     */
+    public void setVlastnik(boolean vlastnik) {
+        this.vlastnik = vlastnik;
+    }
+    
+    public void onVlastnikClick() {
+        
+    }
+
+    /**
+     * @return the ucastnik
+     */
+    public boolean isUcastnik() {
+        return ucastnik;
+    }
+
+    /**
+     * @param ucastnik the ucastnik to set
+     */
+    public void setUcastnik(boolean ucastnik) {
+        this.ucastnik = ucastnik;
+    }
+    public void onUcastnikClick() {
     }
 
     /**
@@ -211,4 +248,5 @@ public class Cesty implements Serializable {
         }
         return null;
     }
+
 }
