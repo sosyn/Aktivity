@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -39,9 +40,9 @@ public class Cesty implements Serializable {
     private Calendar cal = Calendar.getInstance(Locale.getDefault());
     private Date platiOd = new Date();
     private Date platiDo = new Date();
-    private boolean vlastnik=true;
-    private boolean ucastnik=false;
-    
+    private boolean platiOdDo = true;
+    private boolean vlastnik = true;
+    private boolean ucastnik = false;
 
     @EJB
     private ejb.CestaFacade ejbCestaFacade;
@@ -60,6 +61,8 @@ public class Cesty implements Serializable {
     void init() {
         loginUser.initLoginUser();
         this.osoba = loginUser.getOsoba();
+        cal.add(Calendar.DAY_OF_MONTH, 7);
+        platiDo = cal.getTime();
     }
 
     // Add business logic below. (Right-click in editor and choose
@@ -96,9 +99,25 @@ public class Cesty implements Serializable {
         if (this.platiOd.after(this.platiDo)) {
             this.platiDo.setTime(platiOd.getTime());
         }
+        onFiltrEvent();
     }
 
     public void onPlatiDoSelect() {
+        onFiltrEvent();
+    }
+
+    /**
+     * @return the platiOdDo
+     */
+    public boolean isPlatiOdDo() {
+        return platiOdDo;
+    }
+
+    /**
+     * @param platiOdDo the platiOdDo to set
+     */
+    public void setPlatiOdDo(boolean platiOdDo) {
+        this.platiOdDo = platiOdDo;
     }
 
     /**
@@ -114,10 +133,6 @@ public class Cesty implements Serializable {
     public void setVlastnik(boolean vlastnik) {
         this.vlastnik = vlastnik;
     }
-    
-    public void onVlastnikClick() {
-        
-    }
 
     /**
      * @return the ucastnik
@@ -132,7 +147,16 @@ public class Cesty implements Serializable {
     public void setUcastnik(boolean ucastnik) {
         this.ucastnik = ucastnik;
     }
-    public void onUcastnikClick() {
+
+    private Properties getProperties() {
+        Properties prop = new Properties();
+        prop.put("osoba", this.osoba);
+        prop.put("vlastnik", this.vlastnik);
+        prop.put("ucastnik", this.ucastnik);
+        prop.put("platiOdDo", this.isPlatiOdDo());
+        prop.put("platiOd", this.platiOd);
+        prop.put("platiDo", this.platiDo);
+        return prop;
     }
 
     /**
@@ -140,6 +164,10 @@ public class Cesty implements Serializable {
      */
     public ejb.CestaFacade getEjbCestaFacade() {
         return ejbCestaFacade;
+    }
+
+    public void onFiltrEvent() {
+        getCesty();
     }
 
     /**
@@ -167,8 +195,7 @@ public class Cesty implements Serializable {
      * @return the cesty
      */
     public ArrayList<Cesta> getCesty() {
-        //this.cesty = new ArrayList<>(ejbCestaFacade.findCestyOsoba(this.osoba));
-        this.cesty = ejbCestaFacade.findCestyOsobaOrUcastnik(this.osoba);
+        this.cesty = ejbCestaFacade.findCesty(getProperties());
 //        if (this.cesty.isEmpty()) {
 //        }
         return cesty;

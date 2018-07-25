@@ -11,7 +11,9 @@ import entity.Osoba;
 import entity.Rezervace;
 import entity.Ucastnik;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
@@ -74,20 +76,61 @@ public class CestaFacade extends AbstractFacade<Cesta> {
 //        Query q = em.createNativeQuery(selCesty,Cesta.class).setParameter(1, osoba.getId());
         return q.getResultList();
     }
-    
-      public ArrayList<Cesta>  findCestyOsobaOrUcastnik(Osoba osoba) {
-        Query q = em.createNativeQuery("SELECT * FROM aktivity.public.cesta ce " +
-                                        "WHERE ce.idoso=?::uuid OR " +
-                                        "(SELECT count(*) FROM aktivity.public.ucastnik uc WHERE uc.idoso=?::uuid )>0 " +
-                                        "ORDER BY ce.platiod ASC ", Cesta.class)
-                .setParameter(1, osoba.getId())
-                .setParameter(2, osoba.getId());
 
+    public ArrayList<Cesta> findCesty(Properties prop) {
+        StringBuilder sb = new StringBuilder("SELECT * FROM aktivity.public.cesta ce WHERE ");
+
+        // Pokud neni definovana osoba, nebo neni definovan vztah k ceste [vlastnik|ucastnik] tak vrat prazdnou matici
+        if (((Osoba) prop.get("osoba") == null) || (!(boolean) prop.get("vlastnik") && !(boolean) prop.get("ucastnik"))) {
+            return new ArrayList<>();
+        }
+        // Pridat vyber vlastnika a|nebo ucastnika
+        sb.append(" ( ");
+        // Tvurce-vlastnik cesty
+        if ((boolean) prop.get("vlastnik")) {
+            sb.append("ce.idoso='").append(((Osoba) prop.get("osoba")).getId().toString()).append("' ");
+        } else {
+            sb.append(" false ");
+        }
+        sb.append(" OR ");
+        // Ucastnik cesty
+        if ((boolean) prop.get("ucastnik")) {
+            sb.append("(SELECT count(*) FROM aktivity.public.ucastnik uc WHERE uc.idoso='").append(((Osoba) prop.get("osoba")).getId().toString()).append("' )>0 ");
+        } else {
+            sb.append(" false ");
+        }
+        sb.append(" ) ");
+        if ((boolean) prop.get("platiOdDo")) {
+            // Pridat vyber podle platiOdDo
+            sb.append("AND ( ");
+            // Cesta zacala Od
+            if ((Date) prop.get("platiOd") != null) {
+                sb.append(" ce.platido>='").append(String.format("%1$td %1$tm %1$tY %1$tR", (Date) prop.get("platiOd"))).append("' ");
+            } else {
+                sb.append(" true ");
+            }
+            sb.append(" AND ");
+            // Cesta koncila Do
+            if ((Date) prop.get("platiDo") != null) {
+                sb.append(" ce.platiod<='").append(String.format("%1$td %1$tm %1$tY %1$tR", (Date) prop.get("platiDo"))).append("' ");
+            } else {
+                sb.append(" true ");
+            }
+            sb.append(" ) ");
+
+        }
+        // setridit podle data vzestupne
+        sb.append("ORDER BY ce.platiod ASC ");
+        System.out.println(" findCesty(Properties prop): " + sb.toString());
 //            em.getTransaction().begin();
+        Query q = em.createNativeQuery(sb.toString(),Cesta.class);
         q.setFlushMode(FlushModeType.COMMIT);
         List<Cesta> listRe = q.getResultList();
-
-        return new ArrayList<>(listRe);
+        ArrayList<Cesta> localCesty = new ArrayList<>();
+        for (Cesta cesta : listRe) {
+            localCesty.add(cesta);
+        }
+        return localCesty;
     }
 
     public boolean saveCestaList(ArrayList<Cesta> cestaList) {

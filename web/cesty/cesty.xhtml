@@ -68,26 +68,31 @@
                                 </h:panelGrid>
                             </p:fieldset>
 
-                            <p:fieldset legend="Filtr:" >
+                            <p:fieldset id="fsBtn" legend="Filtr:" >
                                 <h:panelGrid columns="2">
-                                    <p:outputLabel for="platiOd" value="Od:" />
-                                    <p:calendar id="platiOd" value="#{cesty.platiOd}" pattern="dd.MM.yyyy">
-                                        <p:ajax event="dateSelect" listener="#{cesty.onPlatiOdSelect}" update="platiOd,platiDo" />
-                                    </p:calendar>
-                                    <p:outputLabel for="platiDo" value="Do:" />
-                                    <p:calendar id="platiDo" value="#{cesty.platiDo}" pattern="dd.MM.yyyy">
-                                        <p:ajax event="dateSelect" listener="#{cesty.onPlatiDoSelect}" update="platiOd,platiDo" />
-                                    </p:calendar>
                                     <p:outputLabel for="vlastnik" value="Vlastník:" />
-                                    <p:selectBooleanCheckbox id="vlastnik"  value="#{cesty.vlastnik}" valueChangeListener="#{cesty.onVlastnikClick}">
+                                    <p:selectBooleanCheckbox id="vlastnik"  value="#{cesty.vlastnik}" valueChangeListener="#{cesty.onFiltrEvent}">
                                         <p:ajax update=":formCesty:tblCesty" />
                                     </p:selectBooleanCheckbox>
                                     <p:outputLabel for="ucastnik" value="Účastník:" />
-                                    <p:selectBooleanCheckbox id="ucastnik"  value="#{cesty.ucastnik}" valueChangeListener="#{cesty.onUcastnikClick}">
+                                    <p:selectBooleanCheckbox id="ucastnik"  value="#{cesty.ucastnik}" valueChangeListener="#{cesty.onFiltrEvent}">
                                         <p:ajax update=":formCesty:tblCesty" />                                        
                                     </p:selectBooleanCheckbox>
+                                    <p:outputLabel for="platiOdDo" value="Platnost:" />
+                                    <p:selectBooleanCheckbox id="platiOdDo"  value="#{cesty.platiOdDo}" valueChangeListener="#{cesty.onFiltrEvent}">
+                                        <p:ajax update=":formCesty:tblCesty, :formBtn:platiOd, :formBtn:platiDo " />                                        
+                                    </p:selectBooleanCheckbox>
+                                    <p:outputLabel for="platiOd" value="Od:"  />
+                                    <p:calendar id="platiOd" value="#{cesty.platiOd}" pattern="dd.MM.yyyy">
+                                        <p:ajax event="dateSelect" listener="#{cesty.onPlatiOdSelect}" update=":formCesty:tblCesty,platiOd,platiDo" disabled="#{cesty.platiOdDo==false}" />
+                                    </p:calendar>
+                                    <p:outputLabel for="platiDo" value="Do:" />
+                                    <p:calendar id="platiDo" value="#{cesty.platiDo}" pattern="dd.MM.yyyy">
+                                        <p:ajax event="dateSelect" listener="#{cesty.onPlatiDoSelect}" update=":formCesty:tblCesty,platiOd,platiDo" disabled="#{cesty.platiOdDo==false}" />
+                                    </p:calendar>
                                 </h:panelGrid>
                             </p:fieldset>
+                            
                         </h:form>
                     </p:layoutUnit>
                 </p:layout>
