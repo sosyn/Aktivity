@@ -105,14 +105,14 @@ public class CestaFacade extends AbstractFacade<Cesta> {
             sb.append("AND ( ");
             // Cesta zacala Od
             if ((Date) prop.get("platiOd") != null) {
-                sb.append(" ce.platido>='").append(String.format("%1$td %1$tm %1$tY %1$tR", (Date) prop.get("platiOd"))).append("' ");
+                sb.append(" ce.platido>='").append(String.format("%1$tY-%1$tm-%1$td", (Date) prop.get("platiOd"))).append("' ");
             } else {
                 sb.append(" true ");
             }
             sb.append(" AND ");
             // Cesta koncila Do
             if ((Date) prop.get("platiDo") != null) {
-                sb.append(" ce.platiod<='").append(String.format("%1$td %1$tm %1$tY %1$tR", (Date) prop.get("platiDo"))).append("' ");
+                sb.append(" ce.platiod<='").append(String.format("%1$tY-%1$tm-%1$td", (Date) prop.get("platiDo"))).append("' ");
             } else {
                 sb.append(" true ");
             }

@@ -65,11 +65,15 @@ public class OsobaFacade extends AbstractFacade<Osoba> {
         // Vyloucit jiz ucastniky, kteri jsou jiz jednou v ceste pridani
         Path<UUID> pathNoOsoba = osobaRoot.get(EntitySuperClass_.id);
         Predicate prediNoOsoba = null;
-        for (Ucastnik ucastnik : cesta.getUcastnikList()) {
-            if (prediNoOsoba == null) {
-                prediNoOsoba = cb.notEqual(pathNoOsoba, ucastnik.getIdoso().getId());
-            } else {
-                prediNoOsoba = cb.and(prediNoOsoba, cb.notEqual(pathNoOsoba, ucastnik.getIdoso().getId()));
+        if (cesta.getUcastnikList() != null && !cesta.getUcastnikList().isEmpty()) {
+            for (Ucastnik ucastnik : cesta.getUcastnikList()) {
+                if (ucastnik.getIdoso() != null) {
+                    if (prediNoOsoba == null) {
+                        prediNoOsoba = cb.notEqual(pathNoOsoba, ucastnik.getIdoso().getId());
+                    } else {
+                        prediNoOsoba = cb.and(prediNoOsoba, cb.notEqual(pathNoOsoba, ucastnik.getIdoso().getId()));
+                    }
+                }
             }
         }
 

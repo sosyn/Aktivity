@@ -3,6 +3,7 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
+LXV. Upraven dotaz na cesty, při nové cestě se do účastníků nepřednastaví jako osoba vlastník - při
 LXIV. Dotaz na matici cesty ve facadeCesty funguje omezeně, zkontrolovat formát dat Od Do a následné vykreslování by mnělo být u datumu také na zadání
 LXIII. V tabulce cesty dodělány ve formuláři "cesty.xml" filtry na Platí Od-Do, účastník a vlastník - dodělat vazbu na výběr podkladových dat k zobrazení a přidat sloupec "Vlastník, účastník"
 LXII. Byl změněn dotaz na pole cest - zohledněn výskyt účastníka v cestě jiného zřizovatele, třeba dodělat ještě filtr PlatiOd - PlatiDo

@@ -56,6 +56,7 @@ public class Cesty implements Serializable {
     Osoba osoba = null;
     private Cesta cesta = null;
     private ArrayList<Cesta> cesty = new ArrayList<>();
+    private boolean refreshCesty = true;
 
     @PostConstruct
     void init() {
@@ -148,26 +149,11 @@ public class Cesty implements Serializable {
         this.ucastnik = ucastnik;
     }
 
-    private Properties getProperties() {
-        Properties prop = new Properties();
-        prop.put("osoba", this.osoba);
-        prop.put("vlastnik", this.vlastnik);
-        prop.put("ucastnik", this.ucastnik);
-        prop.put("platiOdDo", this.isPlatiOdDo());
-        prop.put("platiOd", this.platiOd);
-        prop.put("platiDo", this.platiDo);
-        return prop;
-    }
-
     /**
      * @return the ejbCestaFacade
      */
     public ejb.CestaFacade getEjbCestaFacade() {
         return ejbCestaFacade;
-    }
-
-    public void onFiltrEvent() {
-        getCesty();
     }
 
     /**
@@ -195,7 +181,10 @@ public class Cesty implements Serializable {
      * @return the cesty
      */
     public ArrayList<Cesta> getCesty() {
-        this.cesty = ejbCestaFacade.findCesty(getProperties());
+        if (refreshCesty) {
+            this.cesty = ejbCestaFacade.findCesty(getProperties());
+            refreshCesty = false;
+        }
 //        if (this.cesty.isEmpty()) {
 //        }
         return cesty;
@@ -206,6 +195,22 @@ public class Cesty implements Serializable {
      */
     public void setCesty(ArrayList<Cesta> cesty) {
         this.cesty = cesty;
+    }
+
+    private Properties getProperties() {
+        Properties prop = new Properties();
+        prop.put("osoba", this.osoba);
+        prop.put("vlastnik", this.vlastnik);
+        prop.put("ucastnik", this.ucastnik);
+        prop.put("platiOdDo", this.platiOdDo);
+        prop.put("platiOd", this.platiOd);
+        prop.put("platiDo", this.platiDo);
+        return prop;
+    }
+
+    public void onFiltrEvent() {
+        refreshCesty = true;
+        getCesty();
     }
 
     public String printPruvodka() {
@@ -263,6 +268,7 @@ public class Cesty implements Serializable {
     }
 
     public String newCesta() {
+        refreshCesty = true;
         if (cestaForm.newCesta(this.cesty)) {
             return "/cesty/cestaForm?faces-redirect=true";
         }
@@ -270,6 +276,7 @@ public class Cesty implements Serializable {
     }
 
     public String editCesta() {
+        refreshCesty = true;
         if (cestaForm.editCesta(this.cesta, this.cesty)) {
             return "/cesty/cestaForm?faces-redirect=true";
         }
