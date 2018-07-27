@@ -365,7 +365,7 @@ public class CestaForm implements Serializable {
         Date platnost = null;
         int stav = 0;
         String iconFile = "/images/BluePoint.png";
-        if (itemRez != null && itemRez instanceof Rezervace) {
+        if (itemRez != null && itemRez instanceof Rezervace && itemRez.getSchvList()!=null && !itemRez.getSchvList().isEmpty() ) {
             for (Schvaleni schv : itemRez.getSchvList()) {
                 if (platnost == null || schv.getPlatiod().after(platnost)) {
                     stav = schv.getStav();
