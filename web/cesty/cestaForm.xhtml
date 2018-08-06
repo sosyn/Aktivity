@@ -14,7 +14,7 @@
             <ui:define name="contens">
                 <p:layout fullPage="false">
                     <h:form id="formCestaDetail"  >
-                        <p:layoutUnit position="west" size="400" >
+                        <p:layoutUnit position="west" >
                             <!-- <f:ajax event="blur" render=":cestaFormBtn"/> -->
                             <h2>Jednání:</h2>
                             <p>
@@ -56,7 +56,7 @@
                                                decimalSeparator="," thousandSeparator="." minValue="0" maxValue="1000000" />
                             </p>                         
                         </p:layoutUnit>
-                        <p:layoutUnit position="center">
+                        <p:layoutUnit position="center" size="900">
                             <h:messages id="errorMessages" style="color:red;margin:8px;" />
                             <p>
                                 <p:dataTable id="cestaUcastnici" value="#{cestaForm.cesta.ucastnikList}" var="itemUcast" selectionMode="single" selection="#{cestaForm.ucastnik}" rowKey="#{itemUcast.id}" editable="true" editMode="cell" style="width: 560px"  >
@@ -170,7 +170,7 @@
                             <p:commandButton value="Ano" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                             <p:commandButton value="Ne" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                         </p:confirmDialog>                            
-                        <p:layoutUnit position="south" size="1220">
+                        <p:layoutUnit position="south">
                             <p:commandButton id="cestaOK" action="#{cestaForm.saveCesta}" value="OK" icon="fa fa-file-o" ajax="false" />
                             <p:commandButton id="cestaCancle" value="Zpět" action="/cesty/cesty?faces-redirect=true" icon="fa fa-edit"  ajax="false" />
                             <p:commandButton  id="cestaTiskPruvodka" value="Průvodka"  icon="fa fa-id-card-o" ajax="false" disabled="true" />
