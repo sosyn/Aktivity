@@ -310,8 +310,9 @@ public class CestaForm implements Serializable {
     public String iconSchvaleni(Ucastnik itemUcast) {
         Date platnost = null;
         int stav = 0;
-        String iconFile = "/images/BluePoint.png";
-        if (itemUcast != null && itemUcast instanceof Ucastnik && itemUcast.getSchvList()!=null ) {
+        String iconFile = "/images/Wait.png";
+
+        if (itemUcast != null && itemUcast instanceof Ucastnik && itemUcast.getSchvList() != null) {
             for (Schvaleni schv : itemUcast.getSchvList()) {
                 if (platnost == null || schv.getPlatiod().after(platnost)) {
                     stav = schv.getStav();
@@ -364,8 +365,8 @@ public class CestaForm implements Serializable {
     public String iconDispecer(Rezervace itemRez) {
         Date platnost = null;
         int stav = 0;
-        String iconFile = "/images/BluePoint.png";
-        if (itemRez != null && itemRez instanceof Rezervace && itemRez.getSchvList()!=null && !itemRez.getSchvList().isEmpty() ) {
+        String iconFile = "/images/Wait.png";
+        if (itemRez != null && itemRez instanceof Rezervace && itemRez.getSchvList() != null && !itemRez.getSchvList().isEmpty()) {
             for (Schvaleni schv : itemRez.getSchvList()) {
                 if (platnost == null || schv.getPlatiod().after(platnost)) {
                     stav = schv.getStav();

@@ -67,7 +67,7 @@
                                         <f:facet name="header" >
                                             <h:outputText value="Schvalovatel"/>
                                         </f:facet>
-                                        <h:graphicImage value="#{cestaForm.iconSchvaleni(itemUcast)}" title="Stav schválení účastníka nadřízeným." />
+                                        <h:graphicImage value="#{cestaForm.iconSchvaleni(itemUcast)}" title="Stav schválení účastníka nadřízeným." rendered="#{cestaForm.iconSchvaleni(itemUcast)!=null}" />
                                     </p:column>
                                     <p:column sortBy="#{itemUcast.idoso.popis}"  filterBy="#{itemUcast.idoso.popis}" filterMatchMode="contains" >
                                         <f:facet name="header" >

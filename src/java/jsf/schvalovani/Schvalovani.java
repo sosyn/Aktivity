@@ -306,7 +306,7 @@ public class Schvalovani implements Serializable {
     }
 
     public String iconSchvalovani(Ucastnik ucastnik) {
-        String iconFile = "/images/BluePoint.png";
+        String iconFile = "/images/Pest.png";
         int[] stav = stavSchvaleni(ucastnik);
         switch (stav[0]) {
             case 1:
@@ -320,7 +320,7 @@ public class Schvalovani implements Serializable {
     }
 
     public String iconDispecer(Ucastnik ucastnik) {
-        String iconFile = "/images/BlueLine.png";
+        String iconFile = "/images/Pest.png";
         int uroven = ejbUcastnikFacade.urovenOsobaUcastnik(this.osoba, ucastnik);
         switch (uroven) {
             case 1:
