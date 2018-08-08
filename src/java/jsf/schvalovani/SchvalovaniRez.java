@@ -322,7 +322,7 @@ public class SchvalovaniRez implements Serializable {
     }
 
     public String iconSchvalovani(Rezervace rez) {
-        String iconFile = "/images/BlueLine.png";
+        String iconFile = "/images/Pest.png";
         int[] stav = stavSchvaleni(rez);
         switch (stav[0]) {
             case 1:
