@@ -9,6 +9,7 @@ import ejb.LoginUser;
 import entity.Osoba;
 import entity.Rezervace;
 import entity.Schvaleni;
+import entity.Zdroj;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,6 +23,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import jsf.helper.HelperZdroj;
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -307,10 +309,19 @@ public class SchvalovaniRez implements Serializable {
         this.setRezervace(rez);
     }
 
-    public void changeZdroj(Rezervace rez) {
+    public void selectZdroj(Rezervace rez) {
+        this.rezervace=rez;
         helperZdroj.initHelperZdroj(rez.getIdcest());
         RequestContext.getCurrentInstance()
                 .openDialog("/helper/helperZdroj", null, null);
+    }
+    public void changeZdroj(SelectEvent selectEvent) {
+        Zdroj zdroj = (Zdroj) selectEvent.getObject();
+        if (zdroj == null) {
+            return;
+        }
+        this.rezervace.setIdzdr(zdroj);
+        ejbRezervaceFacade.edit(this.rezervace);        
     }
 
     public void onRezervaceSelect() {

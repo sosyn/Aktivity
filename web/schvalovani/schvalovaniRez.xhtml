@@ -56,7 +56,9 @@
                                     <f:facet name="header">
                                         <h:outputText value="Změň zdroj"/>
                                     </f:facet>
-                                    <p:commandButton ajax="true" disabled="#{!schvalovaniRez.mohuSchvalovat(itemRez)}" actionListener="#{schvalovaniRez.changeZdroj(itemRez)}" update=":formSchvRePanel:fieldSetDetail,:formSchvRePanel:fieldSetButtons" icon="fa fa-exchange" />                                
+                                    <p:commandButton ajax="true" disabled="#{!schvalovaniRez.mohuSchvalovat(itemRez)}" actionListener="#{schvalovaniRez.selectZdroj(itemRez)}" update=":formSchvRePanel:fieldSetDetail,:formSchvRePanel:fieldSetButtons" icon="fa fa-exchange" >
+                                        <p:ajax event="dialogReturn" listener="#{schvalovaniRez.changeZdroj}" update="tblSchvRe" />
+                                    </p:commandButton>                                
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
