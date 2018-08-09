@@ -3,6 +3,7 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
+LXVIII. Ve formuláři cestaForm nefunguje výběr vozidla v případě, že je někde "ArrayList" s aktivní rezervací - zhasuje to na set matice rezervací (proč to chce ukládat a co???)
 LXVII. Doplněna ve schvalování rezervací záměna prostředku - ošetřit povolenou kapacitu na počet účastníků na cestě
 LXVI. Nové ikony Wait.png a Pest.png použity v rezervacích a cestách
 LXV. Upraven dotaz na cesty, při nové cestě se do účastníků nepřednastaví jako osoba vlastník - do účastníků by se měla nastavit defaultně "osoba" uživatele jako 1. záznam (fungovalo to) - zkontrolovat

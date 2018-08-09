@@ -155,16 +155,30 @@ public class HelperZdroj implements Serializable {
         this.selectedRez = selectedRez;
     }
 
+    /**
+     * @return the rezervaceList
+     */
+    public ArrayList<Rezervace> getRezervaceList() {
+        return rezervaceList;
+    }
+
+    /**
+     * @param rezervaceList the rezervaceList to set
+     */
+    public void setRezervaceList(ArrayList<Rezervace> rezervaceList) {
+        this.rezervaceList = rezervaceList;
+    }
+
     public ArrayList<Rezervace> getRezervaceList(Zdroj zdroj) {
-        rezervaceList = new ArrayList<>();
+        this.rezervaceList=new ArrayList<>();
         if (zdroj.getRezervaceList() != null) {
             for (Rezervace rez : zdroj.getRezervaceList()) {
                 if (rez.getPlatiod().before(this.platiDo) && rez.getPlatido().after(this.platiOd) && rez.getIdcest() != null) {
-                    rezervaceList.add(rez);
+                    getRezervaceList().add(rez);
                 }
             }
         }
-        return rezervaceList;
+        return getRezervaceList();
     }
 
     public void submitSelectedZdr() {

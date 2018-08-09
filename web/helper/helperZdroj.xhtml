@@ -8,7 +8,7 @@
     <h:body>
         <h:form id="formHelperZdroje" style="font-size: 12px;">
             <p:panel>
-                <p:dataTable value="#{helperZdroj.zdrojList}" var="item" selection="#{helperZdroj.selectedZdr}" rowKey="#{item.id}" scrollable="true" scrollHeight="430">
+                <p:dataTable value="#{helperZdroj.zdrojList}" var="item" selection="#{helperZdroj.selectedZdr}" rowKey="#{item.id}" scrollable="true" scrollHeight="430" resizableColumns="true">
                     <f:facet name="header">
                         Zdroje
                     </f:facet>
@@ -35,10 +35,19 @@
                         <f:facet name="header" >
                             <h:outputText value="Rezervace"/>
                         </f:facet>
-                        <p:orderList id="orderListRez" value="#{helperZdroj.getRezervaceList(item)}" var="rez" rendered="#{helperZdroj.getRezervaceList(item).size()>0}" itemValue="#{rez}" itemLabel="#{rez}" controlsLocation="none" >
+                        <p:orderList id="orderListRez" value="${helperZdroj.getRezervaceList(item)}" var="rez" rendered="#{helperZdroj.getRezervaceList(item).size()>0}" itemValue="#{rez}" controlsLocation="none" converter="#{JSFConverterRezervaceList}" >
                             <p:ajax event="select" listener="#{helperZdroj.showDetailRez(rez)}"/>
-                            <h:outputText styleClass="ui-icon ui-icon-search"/> 
-                            <h:outputText value="#{rez.platiod}-#{rez.platido} #{rez.komentar}" />
+                            <p:column>
+                                <h:outputText value="#{rez.platiod}"  >
+                                    <f:convertDateTime pattern = "dd.MM.yyyy HH:mm"/>
+                                </h:outputText>
+                                -
+                                <h:outputText value="#{rez.platido}" >
+                                    <f:convertDateTime pattern = "dd.MM.yyyy HH:mm"/>
+                                </h:outputText>
+                                <h:outputText value="#{rez.komentar}" />
+                                <h:outputText styleClass="ui-icon ui-icon-search"/> 
+                            </p:column>
                         </p:orderList>
                     </p:column>
                 </p:dataTable>

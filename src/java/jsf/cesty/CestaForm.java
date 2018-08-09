@@ -391,7 +391,8 @@ public class CestaForm implements Serializable {
         options.put("maximizable", true);
         options.put("draggable", true);
         options.put("height", "650");
-        options.put("contentHeight", "700");
+        options.put("contentHeight", "650");
+        options.put("width", "1000");
         options.put("closeOnEscape", true);
         return options;
     }
