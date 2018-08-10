@@ -3,6 +3,7 @@
 
 Rezervace zdrojů a cestovní příkazy
 ===================================
+LXIX. Opraven helpeZdroj - zobrazují se rezervace jako HTML text - DODĚLAT reakci na klik na rezervaci 
 LXVIII. Ve formuláři cestaForm nefunguje výběr vozidla v případě, že je někde "ArrayList" s aktivní rezervací - zhasuje to na set matice rezervací (proč to chce ukládat a co???)
 LXVII. Doplněna ve schvalování rezervací záměna prostředku - ošetřit povolenou kapacitu na počet účastníků na cestě
 LXVI. Nové ikony Wait.png a Pest.png použity v rezervacích a cestách

@@ -11,6 +11,7 @@ import entity.TypZdrojeEnum;
 import entity.Typzdroje;
 import entity.Zdroj;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -170,7 +171,7 @@ public class HelperZdroj implements Serializable {
     }
 
     public ArrayList<Rezervace> getRezervaceList(Zdroj zdroj) {
-        this.rezervaceList=new ArrayList<>();
+        this.rezervaceList = new ArrayList<>();
         if (zdroj.getRezervaceList() != null) {
             for (Rezervace rez : zdroj.getRezervaceList()) {
                 if (rez.getPlatiod().before(this.platiDo) && rez.getPlatido().after(this.platiOd) && rez.getIdcest() != null) {
@@ -179,6 +180,24 @@ public class HelperZdroj implements Serializable {
             }
         }
         return getRezervaceList();
+    }
+
+    public String getRezervaceHtml(Zdroj zdroj) {
+        StringBuffer sb = new StringBuffer();
+        java.text.SimpleDateFormat sdf=new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        if (zdroj.getRezervaceList() != null) {
+            for (Rezervace rez : zdroj.getRezervaceList()) {
+                if (rez.getPlatiod().before(this.platiDo) && rez.getPlatido().after(this.platiOd) && rez.getIdcest() != null) {
+                    sb.append("<div>" );
+                    sb.append(sdf.format(rez.getPlatiod())).append("-");
+                    sb.append(sdf.format(rez.getPlatido())).append("; ");
+                    sb.append(rez.getIdcest().getPopis()).append("; ");
+                    sb.append(rez.getIdcest().getKomentar().substring(0, Math.min(10, rez.getIdcest().getKomentar().length() ) ));
+                    sb.append("</div>" );                    
+                }
+            }
+        }
+        return sb.toString();
     }
 
     public void submitSelectedZdr() {
