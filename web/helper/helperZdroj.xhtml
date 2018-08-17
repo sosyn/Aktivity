@@ -6,9 +6,10 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head><title>Zdroje</title></h:head>    
     <h:body>
-        <h:form id="formHelperZdr" style="font-size: 12px;"> 
+        <h:form id="formHelperZdroje" style="font-size: 12px;" >
             <p:panel >
                 <p:dataTable value="#{helperZdroj.zdrojList}" var="item" selection="#{helperZdroj.selectedZdr}" rowKey="#{item.id}" scrollable="true" scrollHeight="460" scrollWidth="100%" resizableColumns="true">
+                    
                     <f:facet name="header">
                         Zdroje
                     </f:facet>
